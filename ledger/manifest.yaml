@@ -1,0 +1,128 @@
+# UCPlanar frozen-statement manifest.
+
+version: 1
+source_pin:
+  file: paper/ucplanar.tex
+  sha256: 783bbd7124b5e126c4d4976360b3c98b2ef9271db17dd16b2960a145dc34638d
+nodes:
+
+  - id: N-005
+    version: 2
+    kind: theorem
+    source: ucplanar.tex:380-385 (label theorem:counterexample)
+    file: UCPlanar/Frozen/Counterexample.lean
+    export: UCPlanar.Frozen.counterexample
+    state: SEALED
+    frozen_sha256: 5a2aefa742f9c58ee114547b1e2064ff5030ac444f8b6b09ee413d5a121b85a2
+    provider: UCPlanar.Frozen.counterexample
+    approved: "2026-09-12"
+  - id: N-004
+    version: 3
+    kind: theorem
+    source: ucplanar.tex:222-231 (label lemma:topological-lemma)
+    file: UCPlanar/Frozen/Topological.lean
+    export: UCPlanar.Frozen.topological
+    state: SEALED
+    frozen_sha256: 82aa4b8e23fb0807dcfbe6cbc11eda0fd233158fb1f0e3a2d77db416ec60a59c
+    provider: UCPlanar.Frozen.topological
+    approved: "2026-09-13"
+
+  - id: N-003
+    version: 4
+    kind: theorem
+    source: ucplanar.tex:187-190 (theorem:zero-case)
+    file: UCPlanar/Frozen/ZeroCase.lean
+    export: UCPlanar.Frozen.zeroCase
+    state: SEALED
+    frozen_sha256: a2fee61ce65034ca26acf3747605b6bc532f059c5db08c03268b1194bce30b87
+    provider: UCPlanar.Frozen.zeroCase
+    approved: "2026-09-13"
+
+  - id: N-002
+    version: 4
+    kind: theorem
+    source: ucplanar.tex:175-181 (theorem:uniformly-bounded)
+    file: UCPlanar/Frozen/UniformlyBounded.lean
+    export: UCPlanar.Frozen.uniformlyBounded
+    state: SEALED
+    frozen_sha256: c46a3d3a4639e9c5c9d469a8a4a28b085dd17056c69dc5c3837826e52d976927
+    provider: UCPlanar.Frozen.uniformlyBounded
+    approved: "2026-09-13"
+
+  - id: X-007
+    version: 1
+    kind: definition
+    source: ucplanar.tex:452-457 (the discrete Moser estimate cited in the proof of lemma:poly-approx)
+    file: UCPlanar/External/MoserEstimate.lean
+    export: UCPlanar.External.MoserEstimate
+    state: FROZEN
+    frozen_sha256: 65d1d17654f5eb1d715110bc927f3e16c4e5ccf1fd820e6656bfb82b97ce963c
+    provider: UCPlanar.External.MoserEstimate
+    approved: "2026-09-13"
+
+  - id: N-007
+    version: 4
+    kind: theorem
+    source: ucplanar.tex:438-445 (label lemma:poly-approx)
+    file: UCPlanar/Frozen/PolynomialApproximation.lean
+    export: UCPlanar.Frozen.polynomialApproximation
+    state: SEALED
+    frozen_sha256: 5e82de30a8fc23700081f1697771acf8e17320b8aa4ac3d9d93a9bccc4b81c94
+    provider: UCPlanar.Frozen.polynomialApproximation
+    approved: "2026-09-13"
+
+  - id: X-002
+    version: 2
+    kind: definition
+    source: ucplanar.tex:296-322 (Step 3 of section 3, the boundary cycle of the filled cluster)
+    file: UCPlanar/External/EdgeSplitting.lean
+    export: UCPlanar.External.EdgeSplitting
+    state: FROZEN
+    frozen_sha256: 346a7e4c708e0de758c33953a42d1a4bfb275e75084ec51d3cec8968602b0681
+    provider: UCPlanar.External.EdgeSplitting
+    approved: "2026-09-15"
+
+  - id: X-003
+    version: 2
+    kind: definition
+    source: ucplanar.tex:296-322 (Step 3 of section 3, the face walks along the frontier of a face)
+    file: UCPlanar/External/Unicoherence.lean
+    export: UCPlanar.External.Unicoherence
+    state: FROZEN
+    frozen_sha256: 005ea9d2a22424e69b3891a7b6eebdad1a50af7f6dac6e624b83a4ee9dbe4851
+    provider: UCPlanar.External.Unicoherence
+    approved: "2026-09-15"
+
+  - id: N-006
+    version: 5
+    kind: theorem
+    source: ucplanar.tex:468-480 (label prop:three-ball)
+    file: UCPlanar/Frozen/ThreeBall.lean
+    export: UCPlanar.Frozen.threeBall
+    state: SEALED
+    frozen_sha256: ff91e43c2eb27c6322b7a6246a223f54d42d0a56c370c4ca18d700988b3f49be
+    provider: UCPlanar.Frozen.threeBall
+    approved: "2026-09-16"
+
+  - id: N-008
+    version: 4
+    kind: theorem
+    source: ucplanar.tex:422-433 (label theorem:lower-bound)
+    file: UCPlanar/Frozen/PeriodicLowerBound.lean
+    export: UCPlanar.Frozen.periodicLowerBound
+    state: SEALED
+    frozen_sha256: 9722678e7a9c8e4d6e5e3e4a15e3b7bebbe901f255f3e317127bffe39abd8409
+    provider: UCPlanar.Frozen.periodicLowerBound
+    approved: "2026-09-16"
+
+  - id: N-001
+    version: 7
+    kind: theorem
+    source: ucplanar.tex:161-167 (theorem:liouville)
+    file: UCPlanar/Frozen/Liouville.lean
+    export: UCPlanar.Frozen.liouville
+    state: SEALED
+    frozen_sha256: ed35e14cb4364604613120a726ce4d6e2dcc50d5fc26b2e27eea42d147b152fc
+    provider: UCPlanar.Frozen.liouville
+    approved: "2026-09-16"
+
