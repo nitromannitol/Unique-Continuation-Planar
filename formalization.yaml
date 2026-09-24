@@ -1,0 +1,265 @@
+version: "v0.3"
+
+project:
+  name: "Unique-Continuation-Planar"
+  authors:
+    - "Ahmed Bou-Rabee"
+  license: "Apache-2.0"
+
+sources:
+  - title: "Unique continuation on planar graphs"
+    authors:
+      - "Ahmed Bou-Rabee"
+      - "William Cooperman"
+      - "Shirshendu Ganguly"
+    id: "doi:10.19086/da.144015"
+    url: "https://doi.org/10.19086/da.144015"
+    type: "article"
+    license: ""                 # TODO(author): the license under which the paper is published
+    author_contacted: "n/a"     # the formalizer is an author of the source
+    prior_work: ""
+
+status:
+  scope: >-
+    A Lean 4 / Mathlib formalization of every theorem, lemma and proposition of
+    the paper: the quantitative Liouville theorem for periodic conductances on
+    periodic plane graphs (Theorem 1.1), the exponential upper bound (Theorem
+    1.2), the zero case (Theorem 1.3), the topological lemma (Lemma 2.1), the
+    non-planar counterexample on the square lattice (Theorem 5.1), and the
+    exponential lower bound of the appendix with its polynomial approximation
+    lemma and three-ball proposition (Theorem A.1, Lemma A.2, Proposition
+    A.3).  SCOPE BOUNDARY: three results the paper cites from the literature
+    are stated as propositions in UCPlanar/External/ and are explicit
+    hypotheses of every theorem whose proof uses them: Janiszewski's theorem at
+    a point for the drawings of two finite edge sets (EdgeSplitting),
+    unicoherence of the sphere as connectedness of the frontier of a bounded
+    face (Unicoherence), and the discrete Moser estimate (MoserEstimate);
+    ASSUMPTIONS.md lists them with their Lean statements.  Two further cited
+    results, the bounded Liouville theorem for the periodic network and the
+    discrete Remez inequality, are proved here.  Not formalized: the survey of
+    related work and applications, the remark following Theorem 1.3, the
+    figures, and Step 1 of the proof of Theorem 1.3 (the reduction by deleting
+    and contracting finite edge-connected components), which the formalization
+    replaces by a direct proof on the periodic plane graph.  The main theorems
+    are stated in full in UCPlanar/MainTheorems.lean; all four are
+    additionally restated over a Mathlib-only vocabulary for the Lean
+    comparator (Audit/).
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms:
+    - "propext"
+    - "Classical.choice"
+    - "Quot.sound"
+  main_results:
+    - declaration: "UCPlanar.liouville"
+      file: "UCPlanar/MainTheorems.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "Audit/Liouville/comparator.json"
+      literature_dependencies:
+        - "Delmotte 1999, Proposition 5.3, the discrete Moser estimate (UCPlanar.External.MoserEstimate), hypothesis"
+        - "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3, Janiszewski's theorem (UCPlanar.External.EdgeSplitting), hypothesis"
+        - "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere (UCPlanar.External.Unicoherence), hypothesis"
+    - declaration: "UCPlanar.uniformlyBounded"
+      file: "UCPlanar/MainTheorems.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "Audit/UniformlyBounded/comparator.json"
+      literature_dependencies:
+        - "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3, Janiszewski's theorem (UCPlanar.External.EdgeSplitting), hypothesis"
+        - "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere (UCPlanar.External.Unicoherence), hypothesis"
+    - declaration: "UCPlanar.zeroCase"
+      file: "UCPlanar/MainTheorems.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "Audit/ZeroCase/comparator.json"
+      literature_dependencies:
+        - "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3, Janiszewski's theorem (UCPlanar.External.EdgeSplitting), hypothesis"
+        - "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere (UCPlanar.External.Unicoherence), hypothesis"
+    - declaration: "UCPlanar.counterexample"
+      file: "UCPlanar/MainTheorems.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "Audit/Counterexample/comparator.json"
+      literature_dependencies: []
+    - declaration: "UCPlanarAudit.liouville"
+      file: "Audit/Liouville/Solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "Audit/Liouville/comparator.json"
+      literature_dependencies: ["the same three hypotheses as UCPlanar.liouville, restated over the Mathlib-only vocabulary"]
+    - declaration: "UCPlanarAudit.uniformlyBounded"
+      file: "Audit/UniformlyBounded/Solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "Audit/UniformlyBounded/comparator.json"
+      literature_dependencies: ["the same two hypotheses as UCPlanar.uniformlyBounded, restated over the Mathlib-only vocabulary"]
+    - declaration: "UCPlanarAudit.zeroCase"
+      file: "Audit/ZeroCase/Solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "Audit/ZeroCase/comparator.json"
+      literature_dependencies: ["the same two hypotheses as UCPlanar.zeroCase, restated over the Mathlib-only vocabulary"]
+    - declaration: "UCPlanarAudit.counterexample"
+      file: "Audit/Counterexample/Solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "Audit/Counterexample/comparator.json"
+      literature_dependencies: []
+
+automation:
+  methods:
+    - method: "agent"
+      models:
+        - "claude-fable-5-1"
+        - "claude-opus-5"
+        - "claude-opus-5-5"
+        - "gpt-6-astra"
+        - "deepseek-v4.1-flash"
+        - "kimi-code/k3-256k"
+        - "glm-5.3"
+        - "glm-5.3-flash"
+      framework: >-
+        Claude Code (Anthropic) as the supervising harness and, through its
+        subagents, the main proving harness; Codex CLI (OpenAI) for
+        gpt-6-astra; Kimi Code CLI for kimi-code/k3-256k; scripted API agent
+        loops (glm_general.py) for the DeepSeek generals; scripted API
+        fan-outs (glm_lean.py, glm_ask.py) for the GLM models
+      tool_setup: >-
+        Lake builds under leanprover/lean4:v4.32.0 with Mathlib at revision
+        81a5d257c8e410db227a6665ed08f64fea08e997, Lattice-Probability at
+        commit bbe0b90 and schoenflies-lean at commit 05a43d29.  Division of
+        labour: claude-fable-5-1 (Claude Code), the supervising session, set up
+        the frozen-statement scaffold (2026-09-12), merged the agents'
+        branches and synchronized the documents; gpt-6-astra (Codex CLI,
+        reasoning ultra) wrote the first frozen statements and support
+        theorems and proved the non-planar counterexample (2026-09-12);
+        three deepseek-v4.1-flash generals (thinking low) wrote the polynomial
+        approximation support, the three-ball arithmetic, the density
+        transfer, the lower-bound chain and parts of the Liouville assembly on
+        separate branches (2026-09-12 to 2026-09-14), and a fourth wrote
+        PROOF.md and CERTIFICATE.md (2026-09-14/15); claude-opus-5, as Claude
+        Code subagents over 22 shifts (2026-09-13/14), wrote most of the
+        proofs and sealed Theorems 1.1, 1.2 and 1.3, the topological lemma,
+        the polynomial approximation lemma, the three-ball proposition and the
+        exponential lower bound, and later edited the README (2026-09-18);
+        kimi-code/k3-256k (Kimi Code CLI, thinking high) removed an unused
+        cited input, added the walk of a conductance network with a
+        Nash-Williams recurrence criterion, and proved the bounded Liouville
+        theorem for periodic networks and the discrete Remez inequality, which
+        had been cited inputs (2026-09-15/16); glm-5.3 and glm-5.3-flash
+        drafted compile-filtered proof candidates for short goals and audited
+        statements for the DeepSeek and Opus agents; claude-opus-5-5 wrote
+        ASSUMPTIONS.md and its generator, UCPlanar/MainTheorems.lean, the
+        comparator surface Audit/ and this release documentation
+        (2026-09-23).  A frozen-statement manifest (ledger/manifest.yaml) pins
+        each registered statement by the SHA-256 of its text, and the tools/
+        checkers verify the hashes, the axiom closure of every node, a
+        warning-free build, the paper anchors and quantifier order.  The Lean
+        comparator (leanprover/comparator) was run on all four Audit pairs on
+        2026-09-24, at commit 767bf10, and every pair passed with the Lean
+        kernel and again with the independent nanoda kernel; results and
+        reproduction steps are in Audit/COMPARATOR_RUNS.md.
+        .github/workflows/comparator.yml runs it on request.
+      cost:
+        wall_time: >-
+          about twelve days of calendar time (2026-09-12 to 2026-09-23), all
+          eight paper statements sealed by 2026-09-14 and the cited inputs
+          reduced to three by 2026-09-16; the comparator surface on 2026-09-23
+        spend_usd: "not tracked (subscription and API accounts)"
+        hardware: "a 20-thread Intel i9-9900X / 125 GB RAM Ubuntu machine"
+      prompting_notes: >-
+        Human-directed agent work, supervised by the author, who decided every
+        statement-level question.  Every statement was
+        pinned before its proof was attempted, and proofs were accepted only
+        through the manifest and axiom gates.
+  spend_usd: "not tracked (subscription and API accounts)"
+  notes: >-
+    All Lean code in this repository was written by the listed models under the
+    supervision of the author.  Every proof is checked by the Lean kernel and
+    Mathlib; the verified library contains no sorry and no custom axiom.  The
+    results the paper cites without proof enter as explicit hypotheses, not
+    axioms.  The Mathlib-only comparator challenge files
+    (Audit/*/Challenge.lean) each contain exactly one intentional
+    statement-level sorry (the theorem body), which is filled by the
+    corresponding Audit/*/Solution.lean.  The dependencies Lattice-Probability
+    and schoenflies-lean are separate formalizations, not written for this
+    repository.
+
+fidelity:
+  divergences: >-
+    The Lean statements transcribe paper/ucplanar.tex, which is
+    arXiv:2309.13728v2 with the corrections listed in
+    paper/CHANGES_FROM_ARXIV.md.  Step 1 of the proof of Theorem 1.3 is not
+    formalized, the statement being proved directly for the periodic plane
+    graph with the surrounding cycles supplied by the cited plane inputs.
+    Theorem 1.1 makes the density limit explicit, as a real number d with
+    1 - epsilon <= d.  The three cited results enter as hypotheses whose Lean
+    statements are in ASSUMPTIONS.md; that they render the cited theorems
+    faithfully is a reading, not a check.
+
+review:
+  status: "author-verified"
+  reviewers:
+    - "Ahmed Bou-Rabee"
+  notes: >-
+    Correctness of every proof is guaranteed by the Lean kernel and Mathlib (no
+    sorry, no custom axiom).  The author ruled on the statement-level
+    decisions recorded during development.  The statements were additionally
+    audited by GLM-5.3 auditors and by the Claude Opus 5 agents during
+    development.  This is not external peer review.
+
+alignment:
+  namespace: "UCPlanar"
+  statements:
+    - source: "Theorem 1.1 (theorem:liouville)"
+      lean: "UCPlanar.liouville"
+      module: "UCPlanar.MainTheorems"
+      status: "proved"
+      note: "Certified statement UCPlanar.Frozen.liouville (N-001). Comparator challenge Audit/Liouville/."
+    - source: "Theorem 1.2 (theorem:uniformly-bounded)"
+      lean: "UCPlanar.uniformlyBounded"
+      module: "UCPlanar.MainTheorems"
+      status: "proved"
+      note: "Certified statement UCPlanar.Frozen.uniformlyBounded (N-002). Comparator challenge Audit/UniformlyBounded/."
+    - source: "Theorem 1.3 (theorem:zero-case)"
+      lean: "UCPlanar.zeroCase"
+      module: "UCPlanar.MainTheorems"
+      status: "proved"
+      note: "Certified statement UCPlanar.Frozen.zeroCase (N-003). Comparator challenge Audit/ZeroCase/."
+    - source: "Theorem 5.1 (theorem:counterexample)"
+      lean: "UCPlanar.counterexample"
+      module: "UCPlanar.MainTheorems"
+      status: "proved"
+      note: "Certified statement UCPlanar.Frozen.counterexample (N-005). Comparator challenge Audit/Counterexample/."
+    - source: "Lemma 2.1 (lemma:topological-lemma)"
+      lean: "UCPlanar.Frozen.topological"
+      module: "UCPlanar.Frozen.Topological"
+      status: "proved"
+      note: "N-004."
+    - source: "Theorem A.1 (theorem:lower-bound), periodic form"
+      lean: "UCPlanar.Frozen.periodicLowerBound"
+      module: "UCPlanar.Frozen.PeriodicLowerBound"
+      status: "proved"
+      note: "N-008."
+    - source: "Lemma A.2 (lemma:poly-approx)"
+      lean: "UCPlanar.Frozen.polynomialApproximation"
+      module: "UCPlanar.Frozen.PolynomialApproximation"
+      status: "proved"
+      note: "N-007."
+    - source: "Proposition A.3 (prop:three-ball)"
+      lean: "UCPlanar.Frozen.threeBall"
+      module: "UCPlanar.Frozen.ThreeBall"
+      status: "proved"
+      note: "N-006."
+    - source: "Cited results (Janiszewski's theorem at a point, unicoherence of the sphere, the discrete Moser estimate)"
+      lean: "UCPlanar.External.*"
+      module: "UCPlanar.External"
+      status: "assumed"
+      note: "Explicit hypotheses of the theorems that use them; listed in ASSUMPTIONS.md."
+
+acknowledgements: >-
+  The paper is joint work with William Cooperman and Shirshendu Ganguly.
+  Built on Lean 4, Mathlib, Lake, the shared library Lattice-Probability, the
+  Schoenflies library schoenflies-lean of Alvaro Begue, and
+  leanprover/comparator.

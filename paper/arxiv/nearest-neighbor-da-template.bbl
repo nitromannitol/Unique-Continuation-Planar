@@ -1,0 +1,66 @@
+\begin{thebibliography}{BDCKY15}
+
+\bibitem[AKS23]{armstrong2023large}
+Scott Armstrong, Tuomo Kuusi, and Charles Smart.
+\newblock Large-scale analyticity and unique continuation for periodic elliptic
+  equations.
+\newblock {\em Comm. Pure Appl. Math.}, 76(1):73--113, 2023.
+
+\bibitem[BDCKY15]{MR3395463}
+Itai Benjamini, Hugo Duminil-Copin, Gady Kozma, and Ariel Yadin.
+\newblock Disorder, entropy and harmonic functions.
+\newblock {\em Ann. Probab.}, 43(5):2332--2373, 2015.
+
+\bibitem[BK05]{bourgain2005localization}
+Jean Bourgain and Carlos~E. Kenig.
+\newblock On localization in the continuous {A}nderson-{B}ernoulli model in
+  higher dimension.
+\newblock {\em Invent. Math.}, 161(2):389--426, 2005.
+
+\bibitem[BLMS22]{buhovsky2022discrete}
+Lev Buhovsky, Alexander Logunov, Eugenia Malinnikova, and Mikhail Sodin.
+\newblock A discrete harmonic function bounded on a large portion of {$\Bbb
+  Z^2$} is constant.
+\newblock {\em Duke Math. J.}, 171(6):1349--1378, 2022.
+
+\bibitem[BRCD23]{bou2023rigidity}
+Ahmed Bou-Rabee, William Cooperman, and Paul Dario.
+\newblock Rigidity of harmonic functions on the supercritical percolation
+  cluster.
+\newblock {\em arXiv preprint arXiv:2303.04736}, 2023.
+
+\bibitem[Del97]{MR1425544}
+T.~Delmotte.
+\newblock In\'{e}galit\'{e} de {H}arnack elliptique sur les graphes.
+\newblock {\em Colloq. Math.}, 72(1):19--37, 1997.
+
+\bibitem[Die17]{diestel2017graph}
+Reinhard Diestel.
+\newblock {\em Graph Theory}, volume 173 of {\em Graduate Texts in
+  Mathematics}.
+\newblock Springer, 5th edition, 2017.
+
+\bibitem[DS84]{Doyle_Snell_1984}
+Peter~G. Doyle and J.~Laurie Snell.
+\newblock {\em Random Walks and Electric Networks}.
+\newblock Carus Mathematical Monographs. Mathematical Association of America,
+  1984.
+
+\bibitem[DS20]{ding2020localization}
+Jian Ding and Charles Smart.
+\newblock Localization near the edge for the {A}nderson {B}ernoulli model on
+  the two dimensional lattice.
+\newblock {\em Invent. Math.}, 219(2):467--506, 2020.
+
+\bibitem[LZ22]{li2022anderson}
+Linjun Li and Lingfu Zhang.
+\newblock Anderson-{B}ernoulli localization on the three-dimensional lattice
+  and discrete unique continuation principle.
+\newblock {\em Duke Math. J.}, 171(2):327--415, 2022.
+
+\bibitem[Ser56]{MR0081415}
+James Serrin.
+\newblock On the {H}arnack inequality for linear elliptic equations.
+\newblock {\em J. Analyse Math.}, 4:292--308, 1955/56.
+
+\end{thebibliography}
