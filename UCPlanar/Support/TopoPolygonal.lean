@@ -39,6 +39,8 @@ noncomputable def edgeDrawing (E : UCPlanar.PlaneEmbedding G) (e : Sym2 V) (t : 
     Schoenflies.Plane :=
   if h : G.Adj e.out.1 e.out.2 then planeHomeo ((E.edge h).extend t) else 0
 
+/-- On an edge of `G`, `edgeDrawing` unfolds to the transported parametrization by the chosen
+ordered representative's arc. -/
 theorem edgeDrawing_eq (E : UCPlanar.PlaneEmbedding G) {e : Sym2 V} (he : e ∈ G.edgeSet) :
     edgeDrawing E e = fun t => planeHomeo ((E.edge (adj_out he)).extend t) := by
   funext t
@@ -88,13 +90,16 @@ noncomputable def edgeGraph (E : UCPlanar.PlaneEmbedding G) (T : Set (Sym2 V)) :
     rintro e x y ⟨heT, heG, a, b, rfl, rfl, -⟩
     exact ⟨a, ⟨s(a, b), heT, heG, by simp⟩, rfl⟩
 
+/-- The edge set of `edgeGraph E T` is exactly `T` restricted to the edges of `G`. -/
 @[simp] theorem edgeSet_edgeGraph (E : UCPlanar.PlaneEmbedding G) (T : Set (Sym2 V)) :
     E(edgeGraph E T) = {e | e ∈ T ∧ e ∈ G.edgeSet} := rfl
 
+/-- The vertex set of `edgeGraph E T` is the drawn endpoints of the edges of `T` in `G`. -/
 @[simp] theorem vertexSet_edgeGraph (E : UCPlanar.PlaneEmbedding G) (T : Set (Sym2 V)) :
     V(edgeGraph E T) =
       {q | ∃ z : V, (∃ e ∈ T, e ∈ G.edgeSet ∧ z ∈ e) ∧ q = planeHomeo (E.pos z)} := rfl
 
+/-- Unfolds the `IsLink` relation of `edgeGraph E T` to its defining condition. -/
 theorem isLink_edgeGraph_iff (E : UCPlanar.PlaneEmbedding G) (T : Set (Sym2 V))
     (e : Sym2 V) (x y : Schoenflies.Plane) :
     (edgeGraph E T).IsLink e x y ↔ e ∈ T ∧ e ∈ G.edgeSet ∧ ∃ a b : V, e = s(a, b) ∧

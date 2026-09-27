@@ -40,12 +40,15 @@ theorem abs_clamp_sub_clamp_le (a b : ℝ) :
 noncomputable def cutoff {V : Type*} (P : UCPlanar.PeriodicGraph V) (ρ τ : ℝ) : V → ℝ :=
   fun z => min (max ((τ - ‖P.pos z‖) / (τ - ρ)) 0) 1
 
+/-- The cutoff function `cutoff P ρ τ` is nonnegative everywhere. -/
 theorem cutoff_nonneg {V : Type*} (P : UCPlanar.PeriodicGraph V) (ρ τ : ℝ) (z : V) :
     0 ≤ cutoff P ρ τ z := le_min (le_max_right _ _) zero_le_one
 
+/-- The cutoff function `cutoff P ρ τ` is at most `1` everywhere. -/
 theorem cutoff_le_one {V : Type*} (P : UCPlanar.PeriodicGraph V) (ρ τ : ℝ) (z : V) :
     cutoff P ρ τ z ≤ 1 := min_le_right _ _
 
+/-- The cutoff equals `1` on the inner square `Q_ρ`. -/
 theorem cutoff_eq_one {V : Type*} (P : UCPlanar.PeriodicGraph V) {ρ τ : ℝ} (hρτ : ρ < τ)
     (hρ0 : 0 ≤ ρ) {z : V} (hz : z ∈ P.square ρ) : cutoff P ρ τ z = 1 := by
   have hn : ‖P.pos z‖ ≤ ρ := (mem_square_iff_norm P hρ0 z).mp hz
@@ -55,6 +58,7 @@ theorem cutoff_eq_one {V : Type*} (P : UCPlanar.PeriodicGraph V) {ρ τ : ℝ} (
   have h2 : (1:ℝ) ≤ max ((τ - ‖P.pos z‖) / (τ - ρ)) 0 := le_trans h1 (le_max_left _ _)
   exact min_eq_right h2
 
+/-- The cutoff equals `0` outside the outer square `Q_τ`. -/
 theorem cutoff_eq_zero {V : Type*} (P : UCPlanar.PeriodicGraph V) {ρ τ : ℝ} (hρτ : ρ < τ)
     (hτ0 : 0 ≤ τ) {z : V} (hz : z ∉ P.square τ) : cutoff P ρ τ z = 0 := by
   have hn : τ < ‖P.pos z‖ := by
@@ -66,6 +70,8 @@ theorem cutoff_eq_zero {V : Type*} (P : UCPlanar.PeriodicGraph V) {ρ τ : ℝ} 
   rw [cutoff, h2]
   exact min_eq_left zero_le_one
 
+/-- The cutoff is `1/(τ-ρ)`-Lipschitz in the drawing distance: if two vertices' drawings
+are within `D`, their cutoff values differ by at most `D/(τ-ρ)`. -/
 theorem cutoff_lipschitz {V : Type*} (P : UCPlanar.PeriodicGraph V) {ρ τ D : ℝ} (hρτ : ρ < τ)
     {z w : V} (hD : ‖P.pos z - P.pos w‖ ≤ D) :
     |cutoff P ρ τ z - cutoff P ρ τ w| ≤ D / (τ - ρ) := by

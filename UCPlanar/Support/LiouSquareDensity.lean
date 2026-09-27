@@ -22,6 +22,9 @@ set_option maxHeartbeats 1000000
 
 namespace UCPlanar.Support
 
+/-- **A metric ball sits inside a geometric square of linear radius.**  Using the graph's
+edge-length bound `D` from `exists_edge_bound`, every vertex within `n` steps of `o` has
+each coordinate within `‖P.pos o‖ + D·n` of the origin, along a shortest witnessing walk. -/
 theorem ball_subset_square_linear {V : Type*} (P : UCPlanar.PeriodicGraph V) :
     ∃ D : ℝ, 0 ≤ D ∧ ∀ (o : V) (n : ℕ), P.ball o n ⊆ P.square (‖P.pos o‖ + D * n) := by
   obtain ⟨D, hD0, hD⟩ := UCPlanar.Support.exists_edge_bound P
@@ -44,6 +47,9 @@ theorem ball_subset_square_linear {V : Type*} (P : UCPlanar.PeriodicGraph V) :
     abs_sub_abs_le_abs_sub _ _
   linarith
 
+/-- **A bound on the exceptional count gives a bound on the bounded-value density.**  If at
+most `t · S.card` vertices of `S` have `|f| > 1`, the density of `|f| ≤ 1` on `S` is at least
+`1 - t`, by splitting `S` into its filtered and non-filtered parts. -/
 theorem density_ge_of_exceptionalCount {V : Type*} (S : Finset V) (f : V → ℝ) (t : ℝ)
     (hcard : 0 < S.card) (h : (UCPlanar.exceptionalCount S f 1 : ℝ) ≤ t * S.card) :
     1 - t ≤ UCPlanar.boundedDensity S f 1 := by

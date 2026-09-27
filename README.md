@@ -260,7 +260,14 @@ networks and the discrete Remez inequality, which had been cited inputs, and
 removed an unused one.  GLM-5.3 and GLM-5.3-flash drafted short proof
 candidates and audited statements.  Claude Opus 5.5 wrote
 `UCPlanar/MainTheorems.lean`, the comparator surface in `Audit/`, and the
-release documentation.  The models, tooling, cost, and review status are
+release documentation.  In a final pass on 2026-09-26 and 2026-09-27, a Claude
+Opus 5.5 general in Claude Code and Claude Sonnet 5 subagents it dispatched
+proved further cited inputs and removed them as hypotheses of the main
+theorems, brought the comparator surface in line with the certified statements
+and re-ran the comparator, and named and documented the remaining helper
+lemmas; OpenAI's gpt-6-luna and gpt-5.6-luna, through Codex, were commissioned
+for some of those proofs, and everything kept was checked and gated.  The
+models, tooling, cost, and review status are
 disclosed in full in [`formalization.yaml`](formalization.yaml), following the
 [mathlib-initiative](https://github.com/mathlib-initiative/formalization.yaml)
 standard.

@@ -1,6 +1,9 @@
 /- The positive undirected network of Section 5. -/
 import UCPlanar.Support.CrossingWeights
 
+/-- For positive weights `a, b, t, d`, `crossingConductance` is a symmetric conductance on
+`crossingGraph`: it is positive exactly on the `crossingRelation` edges (via `outgoing_pos`) and
+vanishes off them (via `outgoing_zero`). -/
 theorem UCPlanar.Support.crossing_isCond (a b t d : ℝ)
     (ha : 0 < a) (hb : 0 < b) (ht : 0 < t) (hd : 0 < d) :
     LatticeProb.Network.IsCond UCPlanar.crossingGraph (UCPlanar.crossingConductance a b t d) := by

@@ -70,6 +70,9 @@ noncomputable def lineRestrict (q : MvPolynomial (Fin 2) ℝ) (t : ℝ) : Polyno
   MvPolynomial.aeval
     (fun i : Fin 2 => if i = 0 then (Polynomial.X : Polynomial ℝ) else Polynomial.C t) q
 
+/-- **Evaluating the line restriction agrees with evaluating the original polynomial on the
+line.**  `(lineRestrict q t).eval s` equals `q` evaluated at the point with first coordinate
+`s` and second coordinate `t`, by induction on `q` via `MvPolynomial.induction_on`. -/
 theorem lineRestrict_eval (q : MvPolynomial (Fin 2) ℝ) (t s : ℝ) :
     (lineRestrict q t).eval s
       = MvPolynomial.eval (fun i : Fin 2 => if i = 0 then s else t) q := by

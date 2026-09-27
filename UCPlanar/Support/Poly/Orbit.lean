@@ -58,6 +58,8 @@ theorem orbitPoly_eval_eq {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → 
 
 end UCPlanar.Support
 
+/-- The drawing of the orbit point `shift (a•e₁ + b•e₂) v` is `P.pos v` translated by
+`a` copies of the period along `e₁` and `b` copies along `e₂`. -/
 theorem pos_shift_orbit {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V) (a b : ℕ) :
     P.pos (P.shift ((a : ℤ) • UCPlanar.Support.e₁ + (b : ℤ) • UCPlanar.Support.e₂) v)
       = P.pos v + (a : ℝ) • P.period (fun i => ((UCPlanar.Support.e₁ : LatticeProb.Site 2) i : ℝ))
@@ -82,6 +84,8 @@ theorem polynomialApproximation_of_remainder {V : Type*} (P : UCPlanar.PeriodicG
     P.PolynomialApproximation R m v f α δ :=
   ⟨UCPlanar.Support.orbitPoly P f v m, UCPlanar.Support.orbitPoly_totalDegree_le P f v m, hrem⟩
 
+/-- When `a + b = 0`, `orbitCoord P f v a b` reduces to `f v`, so it is bounded by the
+sup norm of `f` over `Q_{3R}`. -/
 theorem mixedDiff_zero {V : Type*} (P : UCPlanar.PeriodicGraph V) (R : ℝ) (v : V) (f : V → ℝ)
     (a b : ℕ) (hab : a + b = 0)
     (hx : P.shift ((a : ℤ) • UCPlanar.Support.e₁ + (b : ℤ) • UCPlanar.Support.e₂) v

@@ -15,9 +15,12 @@ noncomputable def PeriodicGraph.diffWord {V : Type*} (P : PeriodicGraph V)
     (w : List (LatticeProb.Site 2)) (f : V → ℝ) : V → ℝ :=
   w.foldr (fun a g => P.diff a g) f
 
+/-- **The empty word's difference is the identity**: `P.diffWord [] f = f`. -/
 theorem PeriodicGraph.diffWord_nil {V : Type*} (P : PeriodicGraph V) (f : V → ℝ) :
     P.diffWord [] f = f := rfl
 
+/-- **Unfolding one letter of a word difference**: `P.diffWord (a :: w) f` is `P.diff a`
+applied to `P.diffWord w f`. -/
 theorem PeriodicGraph.diffWord_cons {V : Type*} (P : PeriodicGraph V)
     (a : LatticeProb.Site 2) (w : List (LatticeProb.Site 2)) (f : V → ℝ) :
     P.diffWord (a :: w) f = P.diff a (P.diffWord w f) := rfl

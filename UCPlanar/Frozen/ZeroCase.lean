@@ -4,6 +4,18 @@ import UCPlanar.Support.SurroundExists
 import UCPlanar.External.EdgeSplitting
 import UCPlanar.External.Unicoherence
 
+/-!
+# The zero-case step
+
+Proves `ucplanar.tex`'s `theorem:zero-case` outright: on a periodic plane graph, a harmonic
+function whose zero set has density at least `1 - ε` (for `ε` below a graph-dependent threshold
+`ε₀`) on a ball of radius `2n` vanishes identically on the half-radius ball. The proof
+(`Support.zeroCase_of_surrounding`) builds surrounding cycles
+(`Support.exists_hasSurroundingCycles`) from two classical hypotheses: Janiszewski's theorem at
+a point, which turns a separating finite edge set into a separating cycle, and unicoherence of
+the sphere.
+-/
+
 -- FROZEN-STATEMENT-BEGIN
 /-- “There exist positive constants ε₀ and n₀ ... then f ≡ 0 on Bₙ.”
 `ucplanar.tex:187-190 (theorem:zero-case)`.

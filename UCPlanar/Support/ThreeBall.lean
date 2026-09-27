@@ -47,6 +47,8 @@ theorem rpow_ratio_le (γ : ℝ) (N : ℕ) (hγ0 : 0 ≤ γ) (hγ1 : γ ≤ 3 / 
   have h2 : (0 : ℝ) ≤ 16 / (1 - γ) := by apply div_nonneg <;> linarith
   exact Real.rpow_le_rpow h2 h1 (mul_nonneg hγ0 (Nat.cast_nonneg N))
 
+/-- The elementary inequality `(m+1) * 3^m ≤ 16^m`, used to bound the Lagrange
+interpolation error by the Remez constant. -/
 theorem pow_arith (m : ℕ) : (m + 1) * 3 ^ m ≤ 16 ^ m := by
   have h1 : (m + 1 : ℕ) ≤ 3 ^ m := by
     induction m with
@@ -60,6 +62,9 @@ theorem pow_arith (m : ℕ) : (m + 1) * 3 ^ m ≤ 16 ^ m := by
   calc (m + 1) * 3 ^ m ≤ 3 ^ m * 3 ^ m := Nat.mul_le_mul_right _ h1
     _ ≤ 16 ^ m := h2
 
+/-- Each Lagrange basis polynomial built from `m+1` distinct integer nodes in `[-R,R]` is
+bounded by `(3R)^m` at any point `s` with `|s| ≤ 2R`, since each of its `m` linear
+factors is bounded above and each denominator is at least `1`. -/
 theorem basis_bound (m : ℕ) (R : ℝ)
     (x : Fin (m+1) → ℤ) (hinj : Function.Injective x) (hx : ∀ i, |(x i : ℝ)| ≤ R)
     (s : ℤ) (hs : |(s : ℝ)| ≤ 2*R) (i : Fin (m+1)) :
@@ -107,6 +112,10 @@ theorem basis_bound (m : ℕ) (R : ℝ)
           omega
         rw [hcard]
 
+/-- **Lagrange interpolation bound.**  A degree-≤m polynomial `p` bounded by `A` at `m+1`
+distinct integer nodes in `[-R,R]` is bounded by `A*(16R)^m` at any point `s` with
+`|s|≤2R`, by writing `p` as its own Lagrange interpolant and using `basis_bound` and
+`pow_arith`. -/
 theorem remez_bound (m : ℕ) (A R : ℝ) (p : Polynomial ℝ)
     (hA : 0 ≤ A) (hR : 0 < R) (hdeg : p.natDegree ≤ m)
     (x : Fin (m+1) → ℤ) (hinj : Function.Injective x) (hx : ∀ i, |(x i : ℝ)| ≤ R)
@@ -210,6 +219,9 @@ theorem density_transfer (N : ℕ) (ε : ℝ) (f : ℤ → ℤ → ℝ)
     exact (Finset.mem_filter.mp hs).2
 
 
+/-- Specializes the discrete Remez inequality `hremez` at bound `A = 2`, degree `N/2` and
+window `[-N,N]`: a polynomial bounded by `2` on a half-density subset of `seg N` is
+bounded by `2 * 32^(N/2)` on `[-2N,2N]`. -/
 theorem remez_half (N : ℕ) (hN : 0 < N) (hremez : RemezInput) (p : Polynomial ℝ)
     (hdeg : p.natDegree ≤ N/2)
     (hS : ∃ S : Finset ℤ, S ⊆ seg N ∧ 2 * S.card ≥ (seg N).card ∧ ∀ s ∈ S, |p.eval (s:ℝ)| ≤ 2)

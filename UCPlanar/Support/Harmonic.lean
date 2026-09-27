@@ -8,6 +8,8 @@ import Mathlib.Tactic
 open scoped BigOperators Classical
 set_option autoImplicit false
 
+/-- **The weighted Laplacian is the negative of the network Laplacian.**  Expanding
+`netLaplacian` and negating the sum term by term gives `∑ c(x,y)(f(x) - f(y)) = -Δf(x)`. -/
 theorem UCPlanar.Support.laplacian_sign {V : Type*} (G : SimpleGraph V) [G.LocallyFinite]
     (c : V → V → ℝ) (f : V → ℝ) (x : V) :
     ∑ y ∈ G.neighborFinset x, c x y * (f x - f y) = - LatticeProb.Network.netLaplacian G c f x := by
@@ -17,6 +19,8 @@ theorem UCPlanar.Support.laplacian_sign {V : Type*} (G : SimpleGraph V) [G.Local
   intro y hy
   ring
 
+/-- **Harmonicity restricts to subsets.**  A function harmonic on `S` is harmonic on any
+`T ⊆ S`. -/
 theorem UCPlanar.Support.harmonic_mono {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
     {c : V → V → ℝ} {f : V → ℝ} {S T : Set V}
     (h : LatticeProb.Network.HarmonicOn G c f S) (hTS : T ⊆ S) :
@@ -24,6 +28,7 @@ theorem UCPlanar.Support.harmonic_mono {V : Type*} {G : SimpleGraph V} [G.Locall
   intro x hx
   exact h x (hTS hx)
 
+/-- **The sum of two harmonic functions is harmonic**, since `netLaplacian` is additive. -/
 theorem UCPlanar.Support.harmonic_add {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
     {c : V → V → ℝ} {f g : V → ℝ} {S : Set V}
     (hf : LatticeProb.Network.HarmonicOn G c f S) (hg : LatticeProb.Network.HarmonicOn G c g S) :
@@ -31,6 +36,8 @@ theorem UCPlanar.Support.harmonic_add {V : Type*} {G : SimpleGraph V} [G.Locally
   intro x hx
   rw [LatticeProb.Network.netLaplacian_add, hf x hx, hg x hx, add_zero]
 
+/-- **A scalar multiple of a harmonic function is harmonic**, since `netLaplacian` is
+`ℝ`-linear. -/
 theorem UCPlanar.Support.harmonic_smul {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
     {c : V → V → ℝ} {f : V → ℝ} {S : Set V}
     (hf : LatticeProb.Network.HarmonicOn G c f S) (a : ℝ) :
@@ -38,6 +45,9 @@ theorem UCPlanar.Support.harmonic_smul {V : Type*} {G : SimpleGraph V} [G.Locall
   intro x hx
   rw [LatticeProb.Network.netLaplacian_smul, hf x hx, mul_zero]
 
+/-- **A positively weighted sum that vanishes has a negative term.**  If `∑ cᵢfᵢ = 0` with all
+`cᵢ > 0` on `s` and some `fᵢ > 0`, some other `fⱼ` must be negative, else the sum would be
+strictly positive. -/
 theorem UCPlanar.Support.weighted_opposite {ι : Type*} (s : Finset ι) (c f : ι → ℝ)
     (hc : ∀ i ∈ s, 0 < c i) (hzero : ∑ i ∈ s, c i * f i = 0)
     (i : ι) (hi : i ∈ s) (hfi : 0 < f i) : ∃ j ∈ s, f j < 0 := by
@@ -49,6 +59,9 @@ theorem UCPlanar.Support.weighted_opposite {ι : Type*} (s : Finset ι) (c f : �
       ⟨i, hi, mul_pos (hc i hi) hfi⟩
   linarith
 
+/-- **A harmonic maximum is constant on its neighbors.**  If `x` is a pointwise maximum among
+its neighbors and `netLaplacian` vanishes at `x`, each term `c(x,y)(f(y) - f(x))` of the sum is
+nonpositive, so the sum vanishing forces every term, hence every neighbor value, to be `f(x)`. -/
 theorem UCPlanar.Support.maximum_neighbors {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
     {c : V → V → ℝ} {f : V → ℝ} (hc : LatticeProb.Network.IsCond G c) (x : V)
     (hh : LatticeProb.Network.netLaplacian G c f x = 0)
@@ -64,6 +77,9 @@ theorem UCPlanar.Support.maximum_neighbors {V : Type*} {G : SimpleGraph V} [G.Lo
   have he := hz y ((SimpleGraph.mem_neighborFinset G x y).mpr hy)
   exact sub_eq_zero.mp ((mul_eq_zero.mp he).resolve_left (hc.pos hy).ne')
 
+/-- **A weighted sum in a bounded conductance band that vanishes has a very negative term.**
+If `∑ cᵢfᵢ = 0` with each `cᵢ ∈ [lam, big]` and one `fᵢ` exceeds `big · s.card · A / lam`, some
+other `fⱼ` must fall below `-A`, by bounding the sum's parts against the band's extremes. -/
 theorem UCPlanar.Support.band_opposite {ι : Type*} (s : Finset ι) (c f : ι → ℝ)
     (A lam big : ℝ) (hA : 0 ≤ A) (hlam : 0 < lam) (hbig : 0 ≤ big)
     (hc : ∀ i ∈ s, lam ≤ c i ∧ c i ≤ big) (hmean : ∑ i ∈ s, c i * f i = 0)

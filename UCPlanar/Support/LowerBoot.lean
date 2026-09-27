@@ -86,19 +86,23 @@ theorem grid_walk (g : ℤ → ℤ → ℝ) (δ : ℝ) (hδ : 0 ≤ δ) (T : ℤ
 /-- The lattice vector with the given two coordinates. -/
 def vec (p q : ℤ) : LatticeProb.Site 2 := fun i => if i = 0 then p else q
 
+/-- `vec` sends the origin `(0, 0)` to the zero lattice vector. -/
 theorem vec_zero : vec 0 0 = 0 := by
   funext i; by_cases h : i = 0 <;> simp [vec, h]
 
+/-- Incrementing the first coordinate of `vec` adds the first unit vector `vec 1 0`. -/
 theorem vec_succ_fst (p q : ℤ) : vec (p+1) q = vec 1 0 + vec p q := by
   funext i
   by_cases h : i = 0 <;> simp [vec, h]
   omega
 
+/-- Incrementing the second coordinate of `vec` adds the second unit vector `vec 0 1`. -/
 theorem vec_succ_snd (q : ℤ) : vec 0 (q+1) = vec 0 1 + vec 0 q := by
   funext i
   by_cases h : i = 0 <;> simp [vec, h]
   omega
 
+/-- `vec` is injective: equal lattice vectors have equal coordinate pairs. -/
 theorem vec_injective {p q p' q' : ℤ} (h : vec p q = vec p' q') : p = p' ∧ q = q' := by
   constructor
   · have := congrFun h 0; simpa [vec] using this

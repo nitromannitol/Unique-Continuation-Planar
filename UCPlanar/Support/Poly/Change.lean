@@ -46,6 +46,8 @@ noncomputable def coordForm {V : Type*} (P : UCPlanar.PeriodicGraph V) (v' : V) 
   MvPolynomial.C (- (P.period.symm (P.pos v') i))
     + ∑ j : Fin 2, MvPolynomial.C (P.period.symm (Pi.single j (1:ℝ)) i) * MvPolynomial.X j
 
+/-- The affine coordinate form `coordForm P v' i` has total degree at most one, being a
+constant plus a linear combination of the variables. -/
 theorem coordForm_totalDegree_le {V : Type*} (P : UCPlanar.PeriodicGraph V) (v' : V) (i : Fin 2) :
     (coordForm P v' i).totalDegree ≤ 1 := by
   rw [coordForm]
@@ -57,6 +59,8 @@ theorem coordForm_totalDegree_le {V : Type*} (P : UCPlanar.PeriodicGraph V) (v' 
     refine le_trans (MvPolynomial.totalDegree_mul _ _) ?_
     rw [MvPolynomial.totalDegree_C, zero_add, MvPolynomial.totalDegree_X]
 
+/-- Evaluating `coordForm P v' i` at a plane point `u` recovers the `i`-th lattice coordinate of
+`u - P.pos v'`, via `linear_coord` applied to the inverse period map. -/
 theorem coordForm_eval {V : Type*} (P : UCPlanar.PeriodicGraph V) (v' : V) (i : Fin 2)
     (u : UCPlanar.Plane) :
     MvPolynomial.eval u (coordForm P v' i) = P.period.symm (u - P.pos v') i := by
@@ -80,10 +84,14 @@ noncomputable def changeVar {V : Type*} (P : UCPlanar.PeriodicGraph V) (v' : V)
     (q : MvPolynomial (Fin 2) ℝ) : MvPolynomial (Fin 2) ℝ :=
   MvPolynomial.bind₁ (coordForm P v') q
 
+/-- The change of variables does not raise total degree: `(changeVar P v' q).totalDegree ≤
+q.totalDegree`, by `totalDegree_bind₁_le` applied to the degree-one `coordForm`. -/
 theorem changeVar_totalDegree_le {V : Type*} (P : UCPlanar.PeriodicGraph V) (v' : V)
     (q : MvPolynomial (Fin 2) ℝ) : (changeVar P v' q).totalDegree ≤ q.totalDegree :=
   totalDegree_bind₁_le q (coordForm P v') (coordForm_totalDegree_le P v')
 
+/-- Evaluating `changeVar P v' q` at a plane point `u` equals evaluating `q` at the lattice
+coordinates of `u` relative to `v'`, by substituting `coordForm_eval` into `bind₁`. -/
 theorem changeVar_eval {V : Type*} (P : UCPlanar.PeriodicGraph V) (v' : V)
     (q : MvPolynomial (Fin 2) ℝ) (u : UCPlanar.Plane) :
     MvPolynomial.eval u (changeVar P v' q)

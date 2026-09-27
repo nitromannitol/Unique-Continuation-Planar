@@ -5,6 +5,17 @@ import UCPlanar.Support.Growth
 import UCPlanar.Support.LiouBridge
 import UCPlanar.Support.LiouPeriodic
 
+/-!
+# The frozen Liouville theorem
+
+Proves `ucplanar.tex`'s `theorem:liouville` outright: on a periodic conductance network there is
+a density threshold `ε > 0` below which every harmonic function of bounded density is constant.
+The proof combines the uniform upper bound (`Frozen.uniformlyBounded`), the periodic lower bound
+(`Frozen.periodicLowerBound`), and the bounded Liouville theorem for periodic networks
+(`Support.boundedLiouville_periodic`), so it inherits the cited inputs of both: edge splitting
+of the plane, unicoherence of the sphere, and the discrete Moser estimate.
+-/
+
 -- FROZEN-STATEMENT-BEGIN
 /-- “There is some ε > 0 ... then f is constant.”
 `ucplanar.tex:161-167 (theorem:liouville)`.

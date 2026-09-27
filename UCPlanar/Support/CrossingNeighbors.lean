@@ -3,6 +3,9 @@ import UCPlanar.Support.CrossingGraph
 import Mathlib.Tactic
 open scoped Classical
 
+/-- **Neighbors of the crossing graph lie among the eight lattice offsets.**  Unfolding
+`crossingGraph` and case-splitting on the eight disjuncts of `crossingRelation` shows any
+`y` adjacent to `x` is one of the four unit-step or four diagonal-step translates of `x`. -/
 theorem UCPlanar.Support.neighbor_mem_eight (x y : LatticeProb.Site 2)
     (hy : UCPlanar.crossingGraph.Adj x y) :
     y ∈ ({x - LatticeProb.unit 0, x - LatticeProb.unit 1,

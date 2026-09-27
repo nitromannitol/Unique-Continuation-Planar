@@ -26,6 +26,8 @@ theorem isBounded_image_homeo {X Y : Type*} [MetricSpace X] [ProperSpace X]
 def insideOf {X : Type*} [TopologicalSpace X] [Bornology X] (S : Set X) : Set X :=
   {x | x ∉ S ∧ Bornology.IsBounded (connectedComponentIn Sᶜ x)}
 
+/-- On the Schoenflies plane, the ambient-space definition `insideOf` agrees definitionally with
+`Schoenflies.inside`. -/
 theorem insideOf_eq_inside (S : Set Schoenflies.Plane) :
     insideOf S = Schoenflies.inside S := rfl
 

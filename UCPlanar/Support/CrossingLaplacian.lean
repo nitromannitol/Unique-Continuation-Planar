@@ -6,6 +6,9 @@ import UCPlanar.Support.CrossingCoefficients
 import UCPlanar.Support.CrossingSum
 open scoped Classical BigOperators
 
+/-- The network Laplacian of `crossingConductance` at `x` equals the explicit eight-term sum
+over the axis, diagonal, and doubled-diagonal neighbors, reducing the abstract
+`netLaplacian` sum to the finite eight-neighbor stencil `sum_eight`. -/
 theorem UCPlanar.Support.crossing_laplacian (a b t d : ℝ)
     (ha : 0<a) (hb : 0<b) (ht : 0<t) (hd : 0<d)
     (f : LatticeProb.Site 2 → ℝ) (x : LatticeProb.Site 2) :

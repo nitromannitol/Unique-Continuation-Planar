@@ -3,6 +3,16 @@ import UCPlanar.Support.Periodic
 import UCPlanar.External.MoserEstimate
 import UCPlanar.Support.ThreeAssembly
 
+/-!
+# The three-ball supremum bound
+
+Proves `ucplanar.tex`'s `prop:three-ball` outright: for a periodic network there is a density
+threshold and an outer-radius multiple `k` such that a function harmonic and bounded by `M` on
+`Q_{kN}`, with density at least `1 - ε` on `Q_N`, obeys the three-ball bound `|f| ≤ C√M +
+C·exp(-c₀N)·M` on `Q_{2N}`. The proof (`Support.Three.threeBall_assembled`) applies the discrete
+Remez inequality to the polynomial approximation of `f` and cites the discrete Moser estimate.
+-/
+
 -- FROZEN-STATEMENT-BEGIN
 /-- “max on Q₂ₙ |f| ≤ CM^{1/2} + C exp(-cN) M.”
 `ucplanar.tex:457-469 (prop:three-ball)`.

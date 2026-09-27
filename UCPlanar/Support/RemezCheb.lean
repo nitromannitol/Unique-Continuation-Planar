@@ -56,13 +56,16 @@ theorem chebT_eval_le (n : ℕ) {x : ℝ} (hx : 1 ≤ x) :
 /-- The equioscillation nodes of `T_n`: `η_k = cos((n − k)π/n)` for `k ≤ n`. -/
 noncomputable def chebNode (n k : ℕ) : ℝ := Real.cos (((n - k : ℕ) : ℝ) * π / n)
 
+/-- **The first equioscillation node is `-1`**: `chebNode n 0 = cos π = -1`. -/
 theorem chebNode_zero {n : ℕ} (hn : n ≠ 0) : chebNode n 0 = -1 := by
   have hnR : (n : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hn
   rw [chebNode, Nat.sub_zero, mul_div_cancel_left₀ _ hnR, Real.cos_pi]
 
+/-- **The last equioscillation node is `1`**: `chebNode n n = cos 0 = 1`. -/
 theorem chebNode_self (n : ℕ) : chebNode n n = 1 := by
   simp [chebNode]
 
+/-- **Every equioscillation node lies in `[-1, 1]`**, since it is a cosine value. -/
 theorem chebNode_mem_Icc (n k : ℕ) : chebNode n k ∈ Set.Icc (-1) 1 :=
   Real.cos_mem_Icc _
 

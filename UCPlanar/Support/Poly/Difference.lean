@@ -26,6 +26,9 @@ def PeriodicGraph.shiftBall {V : Type*} (P : PeriodicGraph V) (a : LatticeProb.S
 
 end UCPlanar
 
+/-- For a `PeriodicConductance`, the network Laplacian commutes with the lattice shift
+by `a`: the Laplacian of `f ∘ P.shift a` at `x` equals the Laplacian of `f` at
+`P.shift a x`. -/
 theorem netLaplacian_shift {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → ℝ)
     (hp : P.PeriodicConductance c) (a : LatticeProb.Site 2) (f : V → ℝ) (x : V) :
     LatticeProb.Network.netLaplacian P.graph c (fun y => f (P.shift a y)) x
@@ -48,6 +51,9 @@ theorem netLaplacian_shift {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V →
   · intro y hy
     rw [hp a x y]
 
+/-- If `f` is harmonic on a set `S` invariant under the shift `a`, the shifted difference
+`y ↦ f (P.shift a y) - f y` is harmonic on `S` too, by linearity of the Laplacian and
+`netLaplacian_shift`. -/
 theorem harmonic_shift_sub {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → ℝ)
     (hp : P.PeriodicConductance c) (a : LatticeProb.Site 2) (f : V → ℝ) (S : Set V)
     (hS : ∀ x ∈ S, P.shift a x ∈ S)
@@ -65,6 +71,9 @@ theorem harmonic_shift_sub {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V →
   rw [hneg, LatticeProb.Network.netLaplacian_smul, hf x hx]
   ring
 
+/-- Transports the Moser energy estimate `moser_estimate` to the shifted difference
+`f (P.shift a ·) - f`, using harmonicity of `f` on `Q₄` and the nested inclusions
+`Q₁ ⊆ Q₃ ⊆ Q₄` to verify its hypothesis on `Q₁`. -/
 theorem moser_on_difference {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → ℝ)
     (hc : LatticeProb.Network.IsCond P.graph c)
     (hp : P.PeriodicConductance c) (w : ℝ) (hw : 0 < w)

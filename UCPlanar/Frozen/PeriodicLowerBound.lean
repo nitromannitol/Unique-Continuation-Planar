@@ -1,6 +1,16 @@
 import UCPlanar.External.MoserEstimate
 import UCPlanar.Support.LowerAssembly
 
+/-!
+# The periodic exponential lower bound
+
+Proves `ucplanar.tex`'s `theorem:lower-bound` outright for a periodic network: a harmonic
+function with density at least `1 - ε` on every scale from `√N` to `2N` and with a value at
+least `2` somewhere in the inner square grows at least like `exp(bN)`. The proof
+(`Support.Lower.periodicLowerBound_main`) chains the three-ball inequalities along one lattice
+generator and cites the discrete Moser estimate as a hypothesis.
+-/
+
 -- FROZEN-STATEMENT-BEGIN
 /-- “There is some b > 0 ... max on Qₙ |f| ≥ exp(bN).”
 `ucplanar.tex:411-423,521-523 (theorem:lower-bound)`.

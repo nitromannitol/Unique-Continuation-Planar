@@ -22,9 +22,9 @@ carried as explicit hypotheses together with each theorem's own hypotheses.
 | Lean toolchain | `leanprover/lean4:v4.32.0` |
 | Mathlib revision | `81a5d257c8e410db227a6665ed08f64fea08e997` |
 | Paper (`paper/ucplanar.tex`) SHA-256 | `0a97204bffb598a59580eb3fc8537af56ab4eb79f76900086cdadc9b6b00b311` |
-| Build | succeeded, 9003 jobs |
+| Build | succeeded, 9004 jobs |
 | Build warnings | 0 |
-| Generated | 2026-09-24 |
+| Generated | 2026-09-27 |
 
 ## Reproducing it
 

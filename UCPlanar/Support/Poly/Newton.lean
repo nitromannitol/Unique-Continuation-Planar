@@ -119,6 +119,7 @@ theorem sum_range_choose_succ (k m : ℕ) :
     rw [Finset.sum_range_succ, ih, Nat.choose_succ_succ]
     exact Nat.add_comm _ _
 
+/-- Vandermonde's identity: `∑ i ≤ n, a.choose i * b.choose (n - i) = (a + b).choose n`. -/
 theorem sum_range_choose_mul_choose (a b n : ℕ) :
     ∑ i ∈ Finset.range (n + 1), a.choose i * b.choose (n - i) = (a + b).choose n := by
   rw [Nat.add_choose_eq, Finset.Nat.sum_antidiagonal_eq_sum_range_succ_mk]

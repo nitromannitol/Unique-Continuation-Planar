@@ -2,6 +2,16 @@ import UCPlanar.Support.Approximation
 import UCPlanar.Support.Poly.Assembly
 import UCPlanar.External.MoserEstimate
 
+/-!
+# Polynomial approximation of harmonic functions
+
+Proves `ucplanar.tex`'s `lemma:poly-approx` outright: on scales large enough relative to `α`, a
+function harmonic on a big enough square is approximated on an inner orbit by a low-degree
+polynomial to within `α ^ m` times the outer supremum norm. The proof
+(`Support.polynomialApproximation_aux`) iterates the discrete Caccioppoli inequality proved in
+this development and cites the discrete Moser estimate as a hypothesis.
+-/
+
 -- FROZEN-STATEMENT-BEGIN
 /-- “For any α > 0, there is a constant c(α) > 0 ... there exists a polynomial p”
 with error at most α^m times the outer supremum norm on each lattice orbit.

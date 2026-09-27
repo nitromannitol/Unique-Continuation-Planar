@@ -3,6 +3,17 @@ import UCPlanar.Support.PlanarCycle
 import UCPlanar.Support.PlanarTopological
 import UCPlanar.Support.TopoInterleave
 
+/-!
+# The topological lemma on a cycle
+
+Proves `ucplanar.tex`'s `lemma:topological-lemma` outright: for a cycle `γ` in a periodic plane
+graph of bounded degree and face size, and disjoint sign classes `P`, `M` on the cycle's inner
+region each reaching the boundary through every uncovered arc, some exceptional set `Z` of at
+most an `α`-fraction of `γ` absorbs every arc where the two signs fail to reach the boundary.
+The proof (`Support.topological_of_crosscuts`) reduces this to a common vertex among interleaved
+face-boundary walks.
+-/
+
 open scoped Classical
 
 -- FROZEN-STATEMENT-BEGIN

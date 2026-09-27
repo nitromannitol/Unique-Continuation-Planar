@@ -9,6 +9,9 @@ set_option autoImplicit false
 
 namespace UCPlanar.Support
 
+/-- **Iterating a geometric recursion.**  If each term is controlled by the next via
+`a k ≤ (C/R) a(k+1)` for `k < m`, and `a m ≤ B`, then unwinding the recursion `m` times gives
+`a 0 ≤ (C/R)^m B`. -/
 theorem geom_iterate_le (a : ℕ → ℝ) (C R B : ℝ) (m : ℕ)
     (hC : 0 ≤ C) (hR : 0 < R) (ha : ∀ k, 0 ≤ a k)
     (hstep : ∀ k, k < m → a k ≤ (C / R) * a (k + 1)) (htop : a m ≤ B) :
@@ -25,6 +28,8 @@ theorem geom_iterate_le (a : ℕ → ℝ) (C R B : ℝ) (m : ℕ)
           mul_le_mul_of_nonneg_left h1 (div_nonneg hC (le_of_lt hR))
       _ = (C / R) ^ (m + 1) * B := by rw [pow_succ]; ring
 
+/-- The `m+1`-step case of `geom_iterate_le`, isolated since it is the form the derivative bound
+of the nested-domain estimate consumes. -/
 theorem derivBound_iterate (a : ℕ → ℝ) (C R B : ℝ) (m : ℕ)
     (hC : 0 ≤ C) (hR : 0 < R) (ha : ∀ k, 0 ≤ a k)
     (hstep : ∀ k, k < m + 1 → a k ≤ (C / R) * a (k + 1))

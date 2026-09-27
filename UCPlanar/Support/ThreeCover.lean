@@ -106,6 +106,7 @@ theorem polyReach_vertical_of_fit {V : Type*} (P : UCPlanar.PeriodicGraph V) (R 
 noncomputable def orbPt {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V) (x : ℤ × ℤ) : V :=
   P.shift (x.1 • UCPlanar.Support.e₁ + x.2 • UCPlanar.Support.e₂) v
 
+/-- `orbLine` at coordinates `x` is `f` evaluated at the corresponding orbit point `orbPt`. -/
 theorem orbLine_eq_orbPt {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → ℝ) (v : V)
     (x : ℤ × ℤ) : orbLine P f v x.1 x.2 = f (orbPt P v x) := rfl
 
@@ -136,6 +137,7 @@ theorem box_card (n : ℕ) : (box n).card = (2*n+1)^2 := by
     Finset.card_product, hseg]
   ring
 
+/-- The origin lies in every lattice box `box n`. -/
 theorem zero_mem_box (n : ℕ) : ((0 : ℤ), (0 : ℤ)) ∈ box n := by
   rw [box, show (seg n).product (seg n) = seg n ×ˢ seg n from rfl, Finset.mem_product,
     seg, Finset.mem_Icc]

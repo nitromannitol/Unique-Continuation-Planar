@@ -70,6 +70,8 @@ theorem cHeat_succ (c : V → V → ℝ) (k : ℕ) (x y : V) :
 theorem cGreen_eq_tsum (c : V → V → ℝ) (x v : V) :
     cGreen G c x v = ∑' k : ℕ, ENNReal.ofReal (cHeat G c k x v) := rfl
 
+/-- The `k`-step transition probability from `x` vanishes at any `y` lying outside the
+`k`-step `reach` set of `x`. -/
 theorem cHeat_eq_zero_of_notMem_reach {c : V → V → ℝ} :
     ∀ (k : ℕ) (x y : V), y ∉ LatticeProb.Graph.reach G k x → cHeat G c k x y = 0 := by
   classical
@@ -90,6 +92,8 @@ theorem cHeat_eq_zero_of_notMem_reach {c : V → V → ℝ} :
             right
             exact ih w y (hy w hw)), zero_div]
 
+/-- Under `IsCond` and positive degree, the `k`-step transition probabilities out of `x`
+sum to `1` over the reachable set `reach G k x`, so `cHeat` is a genuine distribution. -/
 theorem sum_cHeat_eq_one {c : V → V → ℝ} (hc : IsCond G c) (hdeg : ∀ v : V, 0 < G.degree v) :
     ∀ (k : ℕ) (x : V), ∑ y ∈ LatticeProb.Graph.reach G k x, cHeat G c k x y = 1 := by
   classical
@@ -216,6 +220,8 @@ theorem cHeat_nonneg {c : V → V → ℝ} (hc : IsCond G c) (hdeg : ∀ v : V, 
       exact Finset.sum_nonneg fun z _ =>
         mul_nonneg (div_nonneg (hc.nonneg x z) (le_of_lt (weight_pos hc hdeg x))) (ih z y)
 
+/-- Every walk `p` from `x` to `y` witnesses positive `k`-step transition probability at
+`k = p.length`, by induction on `p` via `cHeat_succ`. -/
 theorem cHeat_pos_of_walk {c : V → V → ℝ} (hc : IsCond G c) (hdeg : ∀ v : V, 0 < G.degree v)
     {x y : V} (p : G.Walk x y) : 0 < cHeat G c p.length x y := by
   classical
@@ -240,6 +246,9 @@ theorem mem_reach_of_walk {x y : V} (p : G.Walk x y) : y ∈ reach G p.length x 
       rw [SimpleGraph.Walk.length_cons, reach_succ]
       exact Finset.mem_biUnion.mpr ⟨w, (SimpleGraph.mem_neighborFinset _ _ _).mpr h, ih⟩
 
+/-- If the network is recurrent at `o`, connectivity of `G` propagates the divergence of
+the Green function from `o` to every vertex `v`, via a walk from `v` to `o` and the
+Chapman--Kolmogorov bound `cHeat_add`. -/
 theorem cGreen_eq_top_of_recurrent {c : V → V → ℝ} (hc : IsCond G c)
     (hdeg : ∀ v : V, 0 < G.degree v) (hG : G.Connected) {o : V}
     (hrec : NetworkRecurrent G c o) (v : V) : cGreen G c v o = ⊤ := by
@@ -297,6 +306,8 @@ theorem reach_one (u : V) : reach G 1 u = G.neighborFinset u := by
   ext v
   simp
 
+/-- The one-step transition probability is the normalised conductance `c u v / weight G c u`
+when `u` and `v` are adjacent, and `0` otherwise. -/
 theorem cHeat_one {c : V → V → ℝ} (hc : IsCond G c) (u v : V) :
     cHeat G c 1 u v = if G.Adj u v then c u v / weight G c u else 0 := by
   rw [cHeat_succ]
@@ -311,6 +322,8 @@ theorem cHeat_one {c : V → V → ℝ} (hc : IsCond G c) (u v : V) :
     rw [hc.zero_of_not_adj (fun h => hv ((SimpleGraph.mem_neighborFinset _ _ _).mpr h)), zero_div,
       zero_mul]
 
+/-- Every neighbour of a vertex `u` reached in `n` steps from `x` is itself reached
+in `n + 1` steps. -/
 theorem nbr_subset_reach_succ {u : V} {n : ℕ} {x : V} (hu : u ∈ reach G n x) :
     G.neighborFinset u ⊆ reach G (n + 1) x := by
   induction n generalizing u x with
@@ -325,6 +338,9 @@ theorem nbr_subset_reach_succ {u : V} {n : ℕ} {x : V} (hu : u ∈ reach G n x)
       rw [reach_succ]
       exact Finset.mem_biUnion.mpr ⟨y, hy, ih huy hw⟩
 
+/-- For `f` harmonic on all of `V`, the weighted mean square of `f` under the
+`(n+1)`-step kernel equals its `n`-step value plus the accumulated one-step energy
+`cEnergy`, the telescoping identity behind the recurrent Liouville argument. -/
 theorem cHeat_variance_telescope {c : V → V → ℝ} (hc : IsCond G c)
     (hdeg : ∀ v : V, 0 < G.degree v) (f : V → ℝ)
     (hharm : HarmonicOn G c f Set.univ) (n : ℕ) (x : V) :
@@ -467,6 +483,9 @@ theorem cHeat_mul_le_add {c : V → V → ℝ} (hc : IsCond G c)
     exact Finset.sum_nonneg fun w _ =>
       mul_nonneg (cHeat_nonneg hc hdeg a x w) (cHeat_nonneg hc hdeg b w z)
 
+/-- Strengthens `cGreen_eq_top_of_recurrent` to arbitrary endpoints: on a connected
+network recurrent at `o`, the Green function `cGreen G c x u` diverges for every pair
+`x, u`, by routing through `o` twice via `cHeat_mul_le_add`. -/
 theorem cGreen_eq_top_of_recurrent' {c : V → V → ℝ} (hc : IsCond G c)
     (hdeg : ∀ v : V, 0 < G.degree v) (hG : G.Connected) {o : V}
     (hrec : NetworkRecurrent G c o) (x u : V) : cGreen G c x u = ⊤ := by
@@ -575,6 +594,9 @@ theorem eq_of_adj_of_cEnergy_eq_zero {c : V → V → ℝ} (hc : IsCond G c)
   have := pow_eq_zero_iff (n := 2) (by norm_num) |>.mp this
   linarith
 
+/-- **The discrete Liouville theorem for a conductance network.**  On a connected network
+recurrent at some `o`, every bounded `c`-harmonic function `f` is constant, by chaining
+`eq_of_adj_of_cEnergy_eq_zero` along a walk between any two vertices. -/
 theorem eq_const_of_recurrent {c : V → V → ℝ} (hc : IsCond G c)
     (hdeg : ∀ v : V, 0 < G.degree v) (hG : G.Connected) {o : V}
     (hrec : NetworkRecurrent G c o) (f : V → ℝ)

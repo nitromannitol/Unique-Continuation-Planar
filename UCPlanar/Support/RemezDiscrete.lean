@@ -37,14 +37,19 @@ namespace UCPlanar.Support
 outside the range. -/
 noncomputable def sortEnum (S : Finset ℤ) (i : ℕ) : ℤ := (S.sort (· ≤ ·)).getD i 0
 
+/-- In range, `sortEnum` agrees with `List.get` on the sorted list, so the `getD` default
+plays no role. -/
 theorem sortEnum_eq_get {S : Finset ℤ} {i : ℕ} (hi : i < S.card) :
     sortEnum S i = (S.sort (· ≤ ·)).get ⟨i, by rwa [Finset.length_sort]⟩ :=
   List.getD_eq_getElem _ _ _
 
+/-- Every in-range `sortEnum S i` is an element of `S`. -/
 theorem sortEnum_mem {S : Finset ℤ} {i : ℕ} (hi : i < S.card) : sortEnum S i ∈ S := by
   rw [sortEnum_eq_get hi]
   exact (Finset.mem_sort _).mp (List.get_mem _ _)
 
+/-- `sortEnum` is strictly increasing in its index, since the underlying sort is
+strictly sorted. -/
 theorem sortEnum_strictMono {S : Finset ℤ} {i j : ℕ} (hij : i < j) (hj : j < S.card) :
     sortEnum S i < sortEnum S j := by
   rw [sortEnum_eq_get (by omega : i < S.card), sortEnum_eq_get hj]

@@ -18,6 +18,8 @@ theorem orbitVec_apply (a b : ℕ) (j : Fin 2) :
       = if j = 0 then (a : ℝ) else (b : ℝ) := by
   fin_cases j <;> simp [UCPlanar.Support.e₁, UCPlanar.Support.e₂]
 
+/-- The lattice vector `a • e₁ + b • e₂` has sup-norm at most `M` whenever both of its
+integer coordinates `a`, `b` do. -/
 theorem orbitVec_norm_le (a b : ℕ) (M : ℝ) (ha : (a : ℝ) ≤ M) (hb : (b : ℝ) ≤ M) :
     ‖(fun j => (((((a : ℤ) • UCPlanar.Support.e₁ + (b : ℤ) • UCPlanar.Support.e₂) j : ℤ) : ℝ))
         : UCPlanar.Plane)‖ ≤ M := by

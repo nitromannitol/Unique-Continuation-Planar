@@ -3,6 +3,9 @@ import UCPlanar.Support.CrossingGraph
 import Mathlib.Tactic
 open scoped Classical BigOperators
 
+/-- **The sum over the eight crossing-graph offsets of `x` unfolds to eight explicit terms.**
+Since the eight offsets from `x` are pairwise distinct, `Finset.sum_insert` peels them off one
+at a time, leaving a plain sum of the eight values of `F`. -/
 theorem UCPlanar.Support.sum_eight (F : LatticeProb.Site 2 → ℝ) (x : LatticeProb.Site 2) :
     (∑ y ∈ ({x - LatticeProb.unit 0, x - LatticeProb.unit 1,
       x + LatticeProb.unit 0, x + LatticeProb.unit 1,

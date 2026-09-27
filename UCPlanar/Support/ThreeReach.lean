@@ -19,9 +19,11 @@ namespace UCPlanar.Support.Three
 /-- The approximation quality of the polynomial approximation at reach `2^J`. -/
 noncomputable def alphaJ (J : ℕ) : ℝ := ((2:ℝ) ^ (24*J))⁻¹
 
+/-- **`alphaJ J` is positive**, being a power of `2` inverted. -/
 theorem alphaJ_pos (J : ℕ) : 0 < alphaJ J := by
   rw [alphaJ]; positivity
 
+/-- **`alphaJ` obeys the expected power law**: `alphaJ J ^ i = 2^(-24Ji)`. -/
 theorem alphaJ_pow (J i : ℕ) : alphaJ J ^ i = ((2:ℝ) ^ (24*J*i))⁻¹ := by
   rw [alphaJ, inv_pow, ← pow_mul]
 
@@ -172,11 +174,14 @@ theorem pow32_le_of_min_J (J i : ℕ) (M : ℝ) (h : 1 < alphaJ J ^ i * M) :
 `192` of `ThreeProp.lean`. -/
 noncomputable def CJ (J : ℕ) : ℝ := 3 * (2:ℝ)^(6*J)
 
+/-- **The propagation constant `CJ J` is at least `3`**, since the `2^(6J)` factor is at
+least `1`. -/
 theorem CJ_ge_three (J : ℕ) : 3 ≤ CJ J := by
   rw [CJ]
   have : (1:ℝ) ≤ (2:ℝ)^(6*J) := one_le_pow₀ (by norm_num)
   linarith
 
+/-- **`CJ J` is positive**, being at least `3` by `CJ_ge_three`. -/
 theorem CJ_pos (J : ℕ) : 0 < CJ J := lt_of_lt_of_le (by norm_num) (CJ_ge_three J)
 
 /-- The minimal degree at which the approximation error drops below one, at reach `2^J`. -/

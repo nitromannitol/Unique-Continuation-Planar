@@ -119,6 +119,9 @@ automation:
         - "kimi-code/k3-256k"
         - "glm-5.3"
         - "glm-5.3-flash"
+        - "claude-sonnet-5"
+        - "gpt-6-luna"
+        - "gpt-5.6-luna"
       framework: >-
         Claude Code (Anthropic) as the supervising harness and, through its
         subagents, the main proving harness; Codex CLI (OpenAI) for
@@ -161,6 +164,12 @@ automation:
         kernel and again with the independent nanoda kernel; results and
         reproduction steps are in Audit/COMPARATOR_RUNS.md.
         .github/workflows/comparator.yml runs it on request.
+        Final pass (2026-09-26 and 2026-09-27): a claude-opus-5-5 general in
+        Claude Code dispatched claude-sonnet-5 subagents, which proved further
+        cited inputs and removed them as hypotheses, updated the Audit surface
+        and re-ran the comparator; gpt-6-luna and gpt-5.6-luna (Codex CLI) were
+        commissioned for some proofs; the release pins Lattice-Probability at
+        commit 9d44b4d4670df393bb86ac5a4e042f215001cddf.
       cost:
         wall_time: >-
           about twelve days of calendar time (2026-09-12 to 2026-09-23), all

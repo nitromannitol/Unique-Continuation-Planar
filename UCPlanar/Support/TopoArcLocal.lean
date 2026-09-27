@@ -181,13 +181,19 @@ variable {G : SimpleGraph V}
 noncomputable def arcParam (E : UCPlanar.PlaneEmbedding G) {x y : V} (h : G.Adj x y) :
     ℝ → UCPlanar.Plane := fun s => E.edge h (Set.projIcc (0:ℝ) 1 zero_le_one s)
 
+/-- `arcParam E h` is continuous, being the edge map composed with the continuous clamp
+`projIcc`. -/
 theorem continuous_arcParam (E : UCPlanar.PlaneEmbedding G) {x y : V} (h : G.Adj x y) :
     Continuous (arcParam E h) :=
   (E.edge h).continuous.comp (continuous_projIcc)
 
+/-- Every value of `arcParam E h` lies in the range of the edge map `E.edge h`, since clamping
+only changes the parameter, not which map is applied. -/
 theorem arcParam_mem (E : UCPlanar.PlaneEmbedding G) {x y : V} (h : G.Adj x y) (s : ℝ) :
     arcParam E h s ∈ Set.range (E.edge h) := ⟨_, rfl⟩
 
+/-- Restricted to `[0,1]`, `arcParam E h` has the same image as the edge map `E.edge h` itself,
+since the clamp `projIcc` is the identity there. -/
 theorem arcParam_image (E : UCPlanar.PlaneEmbedding G) {x y : V} (h : G.Adj x y) :
     arcParam E h '' Set.Icc (0:ℝ) 1 = Set.range (E.edge h) := by
   refine Set.Subset.antisymm (fun q hq => by obtain ⟨s, -, rfl⟩ := hq; exact ⟨_, rfl⟩) ?_
@@ -196,6 +202,8 @@ theorem arcParam_image (E : UCPlanar.PlaneEmbedding G) {x y : V} (h : G.Adj x y)
   show (E.edge h) (Set.projIcc (0:ℝ) 1 zero_le_one (t : ℝ)) = (E.edge h) t
   rw [Set.projIcc_val]
 
+/-- `arcParam E h` is injective on `[0,1]`, inherited from the injectivity of the edge map
+`E.edge_injective` since the clamp is the identity on that interval. -/
 theorem injOn_arcParam (E : UCPlanar.PlaneEmbedding G) {x y : V} (h : G.Adj x y) :
     Set.InjOn (arcParam E h) (Set.Icc (0:ℝ) 1) := by
   intro a ha b hb hab
@@ -205,6 +213,8 @@ theorem injOn_arcParam (E : UCPlanar.PlaneEmbedding G) {x y : V} (h : G.Adj x y)
   rw [h1, h2] at this
   exact congrArg Subtype.val this
 
+/-- At `s = 0` the parametrization reaches the source endpoint `E.pos x`, the value `E.edge h`
+takes at its own starting point. -/
 theorem arcParam_zero (E : UCPlanar.PlaneEmbedding G) {x y : V} (h : G.Adj x y) :
     arcParam E h 0 = E.pos x := by
   have : Set.projIcc (0:ℝ) 1 zero_le_one 0 = 0 := by
@@ -212,6 +222,8 @@ theorem arcParam_zero (E : UCPlanar.PlaneEmbedding G) {x y : V} (h : G.Adj x y) 
   rw [arcParam, this]
   exact (E.edge h).source
 
+/-- At `s = 1` the parametrization reaches the target endpoint `E.pos y`, the value `E.edge h`
+takes at its own endpoint. -/
 theorem arcParam_one (E : UCPlanar.PlaneEmbedding G) {x y : V} (h : G.Adj x y) :
     arcParam E h 1 = E.pos y := by
   have : Set.projIcc (0:ℝ) 1 zero_le_one 1 = 1 := by

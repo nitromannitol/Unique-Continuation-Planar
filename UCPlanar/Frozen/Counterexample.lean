@@ -1,6 +1,17 @@
 import UCPlanar.Support.CrossingHarmonic
 import UCPlanar.Support.CrossingThreshold
 
+/-!
+# The crossing-conductance counterexample
+
+Proves `ucplanar.tex`'s counterexample theorem (`theorem:counterexample`) outright: on the
+explicit crossing-conductance network built from positive parameters `a`, `b`, `t` (and `d`
+produced from them), the diagonal indicator function is harmonic on the whole network and
+vanishes exactly off the diagonal, so unique continuation fails once the network's uniform
+ellipticity is dropped. The single frozen theorem below assembles `Support.crossing_isCond`,
+`Support.diagonal_laplacian`, and `Support.diagonal_balance`.
+-/
+
 -- FROZEN-STATEMENT-BEGIN
 /-- “For each choice of positive A₁ ≠ A₂ and A₃ > ... there is a choice of A₄ > 0”
 with a harmonic function supported on the diagonal.

@@ -13,6 +13,9 @@ namespace UCPlanar.Support
 
 variable {V : Type*}
 
+/-- **A closure point in an open set is a closure point of the intersection.**  If `x ∈ U` for
+open `U` and `x ∈ closure A`, then `x ∈ closure (U ∩ A)`, since every neighborhood of `x` meets
+`A` inside `U`. -/
 theorem mem_closure_inter_open {X : Type*} [TopologicalSpace X] {U A : Set X} {x : X}
     (hU : IsOpen U) (hx : x ∈ U) (hcl : x ∈ closure A) : x ∈ closure (U ∩ A) := by
   rw [mem_closure_iff]
@@ -20,6 +23,9 @@ theorem mem_closure_inter_open {X : Type*} [TopologicalSpace X] {U A : Set X} {x
   obtain ⟨t, htV, htA⟩ := (mem_closure_iff.mp hcl) (V ∩ U) (hV.inter hU) ⟨hxV, hx⟩
   exact ⟨t, htV.1, htV.2, htA⟩
 
+/-- **A point with a positive multiple of `K` on the line's linear form lies in the halfplane
+signed by `K`.**  If `l.1·x 0 + l.2.1·x 1 - l.2.2 = u·K` for `u > 0`, then `x` is on the side
+of the line `halfPlane` labels by the sign of `K`. -/
 theorem mem_halfPlane_of_sign {l : ℝ × ℝ × ℝ} {x : UCPlanar.Plane} {K u : ℝ}
     (hK : K ≠ 0) (hu : 0 < u)
     (hx : l.1 * x 0 + l.2.1 * x 1 - l.2.2 = u * K) :
@@ -34,6 +40,9 @@ theorem mem_halfPlane_of_sign {l : ℝ × ℝ × ℝ} {x : UCPlanar.Plane} {K u 
     have hKneg : K < 0 := lt_of_le_of_ne (not_lt.mp hK0) hK
     nlinarith
 
+/-- **A point with a negative multiple of `K` lies in the halfplane opposite `K`'s sign.**  If
+`l.1·x 0 + l.2.1·x 1 - l.2.2 = t·K` for `t < 0`, then `x` is on the side `halfPlane` labels by
+the negation of `K`'s sign. -/
 theorem mem_halfPlane_of_sign_neg {l : ℝ × ℝ × ℝ} {x : UCPlanar.Plane} {K t : ℝ}
     (hK : K ≠ 0) (ht : t < 0)
     (hx : l.1 * x 0 + l.2.1 * x 1 - l.2.2 = t * K) :
@@ -57,6 +66,8 @@ theorem isOpen_halfPlane (s : Bool) (l : ℝ × ℝ × ℝ) : IsOpen (halfPlane 
   · exact isOpen_lt continuous_const hcont
   · exact isOpen_lt hcont continuous_const
 
+/-- **The line equation scales linearly along a parametrized segment.**  For `p` on the line
+`l` and `d` any point, the linear form at `p + t•(d - p)` is `t` times its value at `d`. -/
 theorem lval_param {l : ℝ × ℝ × ℝ} {p d : UCPlanar.Plane} (hp : p ∈ lineSet l) (t : ℝ) :
     l.1 * (p + t • (d - p)) 0 + l.2.1 * (p + t • (d - p)) 1 - l.2.2
       = t * (l.1 * d 0 + l.2.1 * d 1 - l.2.2) := by
@@ -64,6 +75,9 @@ theorem lval_param {l : ℝ × ℝ × ℝ} {p d : UCPlanar.Plane} (hp : p ∈ li
   simp only [Pi.add_apply, Pi.smul_apply, Pi.sub_apply, smul_eq_mul]
   linear_combination (1 - t) * hp
 
+/-- **A segment point other than its start has a positive parameter.**  If `y ∈ segment p d`
+and `y ≠ p`, then `y = p + u•(d - p)` for some `u > 0`, read off the convex-combination
+weights. -/
 theorem exists_pos_param_of_mem_segment {p d y : UCPlanar.Plane} (hy : y ∈ segment ℝ p d)
     (hne : y ≠ p) : ∃ u : ℝ, 0 < u ∧ y = p + u • (d - p) := by
   obtain ⟨α, β, hα, hβ, hαβ, rfl⟩ := hy

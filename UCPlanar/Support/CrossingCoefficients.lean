@@ -2,6 +2,8 @@
 import UCPlanar.Support.CrossingGraph
 import Mathlib.Tactic
 
+/-- The conductance from `x` to its `+e₀` neighbor is `b` on even sites and `a` on odd sites,
+one of the eight crossing-graph conductances at `x`. -/
 theorem UCPlanar.Support.weight_plus_zero (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x + LatticeProb.unit 0) =
       if Even (x 0 + x 1) then b else a := by
@@ -11,6 +13,8 @@ theorem UCPlanar.Support.weight_plus_zero (a b t d : ℝ) (x : LatticeProb.Site 
   norm_num
   split_ifs <;> simp_all [Int.even_iff] <;> omega
 
+/-- The conductance from `x` to its `-e₀` neighbor is `a` on even sites and `b` on odd sites,
+the parity-swapped counterpart of `weight_plus_zero`. -/
 theorem UCPlanar.Support.weight_minus_zero (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x - LatticeProb.unit 0) =
       if Even (x 0 + x 1) then a else b := by
@@ -25,6 +29,8 @@ theorem UCPlanar.Support.weight_minus_zero (a b t d : ℝ) (x : LatticeProb.Site
   norm_num
   split_ifs <;> simp_all [Int.even_iff] <;> omega
 
+/-- The conductance from `x` to its `+e₁` neighbor is `b` on even sites and `a` on odd sites,
+the second-coordinate analogue of `weight_plus_zero`. -/
 theorem UCPlanar.Support.weight_plus_one (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x + LatticeProb.unit 1) =
       if Even (x 0 + x 1) then b else a := by
@@ -39,6 +45,8 @@ theorem UCPlanar.Support.weight_plus_one (a b t d : ℝ) (x : LatticeProb.Site 2
   norm_num
   split_ifs <;> simp_all [Int.even_iff] <;> omega
 
+/-- The conductance from `x` to its `-e₁` neighbor is `a` on even sites and `b` on odd sites,
+the second-coordinate analogue of `weight_minus_zero`. -/
 theorem UCPlanar.Support.weight_minus_one (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x - LatticeProb.unit 1) =
       if Even (x 0 + x 1) then a else b := by
@@ -53,6 +61,8 @@ theorem UCPlanar.Support.weight_minus_one (a b t d : ℝ) (x : LatticeProb.Site 
   norm_num
   split_ifs <;> simp_all [Int.even_iff] <;> omega
 
+/-- The conductance from `x` along `+diagonalStep` is `d` on even sites and `0` on odd sites,
+so the short diagonal edge is only present at even sites. -/
 theorem UCPlanar.Support.weight_diag_plus (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x + UCPlanar.diagonalStep) =
       if Even (x 0 + x 1) then d else 0 := by
@@ -62,6 +72,8 @@ theorem UCPlanar.Support.weight_diag_plus (a b t d : ℝ) (x : LatticeProb.Site 
   norm_num
   split_ifs <;> simp_all [Int.even_iff] <;> omega
 
+/-- The conductance from `x` along `-diagonalStep` is `d` on even sites and `0` on odd sites,
+the reverse-direction counterpart of `weight_diag_plus`. -/
 theorem UCPlanar.Support.weight_diag_minus (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x - UCPlanar.diagonalStep) =
       if Even (x 0 + x 1) then d else 0 := by
@@ -71,6 +83,8 @@ theorem UCPlanar.Support.weight_diag_minus (a b t d : ℝ) (x : LatticeProb.Site
   norm_num
   split_ifs <;> simp_all [Int.even_iff] <;> omega
 
+/-- The conductance from `x` along `+2•diagonalStep` is `t` on even sites and `0` on odd sites,
+so the long diagonal edge is only present at even sites. -/
 theorem UCPlanar.Support.weight_two_plus (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x + (2 : ℤ) • UCPlanar.diagonalStep) =
       if Even (x 0 + x 1) then t else 0 := by
@@ -80,6 +94,8 @@ theorem UCPlanar.Support.weight_two_plus (a b t d : ℝ) (x : LatticeProb.Site 2
   norm_num
   split_ifs <;> simp_all [Int.even_iff] <;> omega
 
+/-- The conductance from `x` along `-2•diagonalStep` is `t` on even sites and `0` on odd sites,
+the reverse-direction counterpart of `weight_two_plus`. -/
 theorem UCPlanar.Support.weight_two_minus (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x - (2 : ℤ) • UCPlanar.diagonalStep) =
       if Even (x 0 + x 1) then t else 0 := by

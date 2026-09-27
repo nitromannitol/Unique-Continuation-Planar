@@ -28,23 +28,30 @@ noncomputable def remezSet (q : ℝ[X]) (s : ℝ) : Set ℝ :=
 noncomputable def remezVol (q : ℝ[X]) (s t : ℝ) : ℝ :=
   -1 + (volume (remezSet q s ∩ Set.Icc (-1) t)).toReal
 
+/-- The admissible set `remezSet q s` is measurable, being the intersection of a closed
+interval with the closed preimage of `|q| ≤ 1`. -/
 theorem measurableSet_remezSet (q : ℝ[X]) (s : ℝ) : MeasurableSet (remezSet q s) :=
   MeasurableSet.inter measurableSet_Icc
     ((isClosed_Iic.preimage (q.continuous.abs)).measurableSet)
 
+/-- The admissible set `remezSet q s` is closed. -/
 theorem isClosed_remezSet (q : ℝ[X]) (s : ℝ) : IsClosed (remezSet q s) :=
   IsClosed.inter isClosed_Icc (isClosed_Iic.preimage (q.continuous.abs))
 
+/-- The admissible set `remezSet q s` has finite Lebesgue measure, being contained in a
+bounded interval. -/
 theorem volume_remezSet_lt_top (q : ℝ[X]) (s : ℝ) : volume (remezSet q s) < ⊤ := by
   refine lt_of_le_of_lt (measure_mono Set.inter_subset_left) ?_
   rw [Real.volume_Icc]
   exact ENNReal.ofReal_lt_top
 
+/-- The measure of `remezSet q s` restricted to any `Icc (-1) t` is finite. -/
 theorem volume_remezSet_inter_Icc_lt_top (q : ℝ[X]) (s t : ℝ) :
     volume (remezSet q s ∩ Set.Icc (-1) t) < ⊤ := by
   refine lt_of_le_of_lt (measure_mono Set.inter_subset_left) ?_
   exact volume_remezSet_lt_top q s
 
+/-- A volume of at least `2` forces the admissible set `remezSet q s` to be nonempty. -/
 theorem remezSet_nonempty_of_two_le (q : ℝ[X]) (s : ℝ)
     (hE : 2 ≤ (volume (remezSet q s)).toReal) : (remezSet q s).Nonempty := by
   by_contra hne
@@ -52,6 +59,7 @@ theorem remezSet_nonempty_of_two_le (q : ℝ[X]) (s : ℝ)
   rw [hne, measure_empty, ENNReal.toReal_zero] at hE
   norm_num at hE
 
+/-- The compression function `remezVol q s` is monotone in `t`. -/
 theorem remezVol_mono (q : ℝ[X]) (s : ℝ) : Monotone (remezVol q s) := by
   intro t u htu
   show -1 + (volume (remezSet q s ∩ Set.Icc (-1) t)).toReal
@@ -116,6 +124,8 @@ theorem remezVol_lipschitz (q : ℝ[X]) (s : ℝ) (t u : ℝ) :
       rwa [ENNReal.toReal_ofReal (sub_nonneg.mpr htu)] at h2
     linarith
 
+/-- The compression function `remezVol q s` is continuous, since `remezVol_lipschitz`
+makes it `1`-Lipschitz. -/
 theorem continuous_remezVol (q : ℝ[X]) (s : ℝ) : Continuous (remezVol q s) := by
   have h : LipschitzWith 1 (remezVol q s) := by
     have h' := LipschitzWith.of_dist_le' (f := remezVol q s) (K := 1) (fun t u ↦ by
@@ -125,6 +135,7 @@ theorem continuous_remezVol (q : ℝ[X]) (s : ℝ) : Continuous (remezVol q s) :
     rwa [Real.toNNReal_one] at h'
   exact h.continuous
 
+/-- The compression function vanishes at the left endpoint: `remezVol q s (-1) = -1`. -/
 theorem remezVol_neg_one (q : ℝ[X]) (s : ℝ) : remezVol q s (-1) = -1 := by
   have h0 : volume (remezSet q s ∩ Set.Icc (-1) (-1)) = 0 := by
     rw [Set.Icc_self]
@@ -133,6 +144,8 @@ theorem remezVol_neg_one (q : ℝ[X]) (s : ℝ) : remezVol q s (-1) = -1 := by
   unfold remezVol
   rw [h0, ENNReal.toReal_zero, add_zero]
 
+/-- The compression function never exceeds the identity: `remezVol q s t ≤ t` for
+`t ≥ -1`. -/
 theorem remezVol_le_self (q : ℝ[X]) (s : ℝ) {t : ℝ} (ht : -1 ≤ t) :
     remezVol q s t ≤ t := by
   have hle : volume (remezSet q s ∩ Set.Icc (-1) t) ≤ volume (Set.Icc (-1) t) :=

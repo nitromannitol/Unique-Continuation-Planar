@@ -5,6 +5,17 @@ import UCPlanar.Support.BandCoarse
 import UCPlanar.External.EdgeSplitting
 import UCPlanar.External.Unicoherence
 
+/-!
+# The uniform boundedness step
+
+Proves `ucplanar.tex`'s `theorem:uniformly-bounded` outright: on a uniformly elliptic periodic
+conductance network, a harmonic function whose exceptional set `{|f| > 1}` has density at most
+`ε < ε₀` on a ball of radius `2n` is bounded by `exp(A√ε · n)` on the half-radius ball. The
+proof (`Support.uniformlyBounded_of_surrounding`) repeats the zero-case construction of
+surrounding cycles, so it carries the same two classical hypotheses: Janiszewski's theorem at a
+point and unicoherence of the sphere.
+-/
+
 -- FROZEN-STATEMENT-BEGIN
 /-- “Then there exist positive constants ε₀, n₀, and A ... max on Bₙ |f| ≤ e^{A√ε n}.”
 `ucplanar.tex:175-181 (theorem:uniformly-bounded)`.

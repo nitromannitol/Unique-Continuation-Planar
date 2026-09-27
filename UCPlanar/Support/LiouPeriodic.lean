@@ -63,6 +63,7 @@ variable {V : Type*} (P : UCPlanar.PeriodicGraph V)
 noncomputable def baseReps (o : V) : Finset V :=
   insert o P.representatives
 
+/-- `P.covers`, extended so the representative found may be the chosen basepoint `o` itself. -/
 theorem covers_baseReps (o : V) (x : V) :
     ∃ v ∈ P.baseReps o, ∃ a, P.shift a v = x := by
   obtain ⟨v, hv, a, ha⟩ := P.covers x
@@ -78,6 +79,8 @@ theorem shift_injective_at (v : V) :
   funext i
   exact Int.cast_injective (congrFun hpos i)
 
+/-- Shifting by a fixed lattice vector `a` is injective, since `P.shift (-a)` is a left
+inverse. -/
 theorem shift_injective (a : LatticeProb.Site 2) : Function.Injective (P.shift a) := by
   have h : Function.LeftInverse (P.shift (-a)) (P.shift a) := fun x => by
     rw [← P.shift_add, neg_add_cancel, P.shift_zero]
@@ -97,16 +100,19 @@ theorem infinite (v : V) : Infinite V :=
 noncomputable def coordBox (k : ℕ) : Finset (LatticeProb.Site 2) :=
   Fintype.piFinset fun _ : Fin 2 => Finset.Icc (-(k : ℤ)) (k : ℤ)
 
+/-- A lattice site lies in `coordBox k` iff every coordinate has absolute value at most `k`. -/
 theorem mem_coordBox {k : ℕ} {a : LatticeProb.Site 2} :
     a ∈ coordBox k ↔ ∀ i, |a i| ≤ (k : ℤ) := by
   simp only [coordBox, Fintype.mem_piFinset, Finset.mem_Icc, abs_le]
 
+/-- The coordinate boxes are monotone increasing in the radius `k`. -/
 theorem coordBox_mono {k k' : ℕ} (h : k ≤ k') : coordBox k ⊆ coordBox k' := by
   intro a ha
   rw [mem_coordBox] at ha ⊢
   intro i
   exact le_trans (ha i) (by exact_mod_cast h)
 
+/-- The coordinate box of radius `k` has exactly `(2k+1)^2` lattice points. -/
 theorem card_coordBox (k : ℕ) : (coordBox k).card = (2 * k + 1) ^ 2 := by
   rw [coordBox, Fintype.piFinset, Finset.card_map, Finset.card_pi, Fin.prod_univ_two,
     Int.card_Icc]
@@ -118,10 +124,12 @@ theorem card_coordBox (k : ℕ) : (coordBox k).card = (2 * k + 1) ^ 2 := by
 noncomputable def boxSet (o : V) (k : ℕ) : Finset V :=
   (P.baseReps o).biUnion fun v => (coordBox k).image fun a => P.shift a v
 
+/-- A vertex lies in `boxSet o k` iff it is a coordinate-box shift of some representative. -/
 theorem mem_boxSet {o : V} {k : ℕ} {y : V} :
     y ∈ P.boxSet o k ↔ ∃ v ∈ P.baseReps o, ∃ a ∈ coordBox k, P.shift a v = y := by
   simp only [boxSet, Finset.mem_biUnion, Finset.mem_image]
 
+/-- The basepoint `o` lies in every box `P.boxSet o k`, via the zero shift of itself. -/
 theorem mem_boxSet_self (o : V) (k : ℕ) : o ∈ P.boxSet o k := by
   rw [mem_boxSet]
   refine ⟨o, Finset.mem_insert_self o _, 0, ?_, P.shift_zero o⟩
@@ -129,12 +137,15 @@ theorem mem_boxSet_self (o : V) (k : ℕ) : o ∈ P.boxSet o k := by
   intro i
   simp
 
+/-- The vertex boxes are monotone increasing in the radius `k`. -/
 theorem boxSet_mono {o : V} {k k' : ℕ} (h : k ≤ k') : P.boxSet o k ⊆ P.boxSet o k' := by
   intro x hx
   rw [mem_boxSet] at hx ⊢
   obtain ⟨v, hv, a, ha, rfl⟩ := hx
   exact ⟨v, hv, a, coordBox_mono h ha, rfl⟩
 
+/-- The box `P.boxSet o k` has at most `|baseReps o| * (2k+1)^2` vertices, from the union
+bound over representatives and the size of each coordinate box. -/
 theorem card_boxSet_le (o : V) (k : ℕ) :
     (P.boxSet o k).card ≤ (P.baseReps o).card * (2 * k + 1) ^ 2 := by
   rw [boxSet]
@@ -149,6 +160,8 @@ noncomputable def edgeSpan (o : V) : ℝ :=
   (((P.baseReps o).sup fun v => (P.graph.neighborFinset v).sup fun z =>
     ‖P.pos z - P.pos v‖₊) : NNReal)
 
+/-- The displacement across an edge leaving a representative is bounded by `edgeSpan o`,
+its defining supremum. -/
 theorem norm_pos_sub_le_edgeSpan {o v z : V}
     (hv : v ∈ P.baseReps o) (hz : P.graph.Adj v z) :
     ‖P.pos z - P.pos v‖ ≤ P.edgeSpan o := by
@@ -171,6 +184,8 @@ theorem norm_pos_sub_le_edgeSpan {o v z : V}
 noncomputable def repPos (o : V) : ℝ :=
   (((P.baseReps o).sup fun v => ‖P.pos v‖₊) : NNReal)
 
+/-- The positional norm of a representative is bounded by `repPos o`, its defining
+supremum. -/
 theorem norm_pos_le_repPos {o v : V} (hv : v ∈ P.baseReps o) :
     ‖P.pos v‖ ≤ P.repPos o := by
   show (‖P.pos v‖₊ : ℝ) ≤ (((P.baseReps o).sup fun v => ‖P.pos v‖₊) : NNReal)
@@ -184,9 +199,12 @@ noncomputable def periodInvEntry (j i : Fin 2) : ℝ :=
 noncomputable def periodInvBound : ℝ :=
   ∑ j : Fin 2, ∑ i : Fin 2, |P.periodInvEntry j i|
 
+/-- `periodInvBound` is nonnegative, being a sum of absolute values. -/
 theorem periodInvBound_nonneg : 0 ≤ P.periodInvBound :=
   Finset.sum_nonneg fun _ _ => Finset.sum_nonneg fun _ _ => abs_nonneg _
 
+/-- Every entry of the inverse period matrix is bounded by `periodInvBound`, the sum of all
+their absolute values. -/
 theorem abs_periodInvEntry_le (j i : Fin 2) :
     |P.periodInvEntry j i| ≤ P.periodInvBound :=
   le_trans
@@ -195,11 +213,14 @@ theorem abs_periodInvEntry_le (j i : Fin 2) :
     (Finset.single_le_sum (f := fun j' => ∑ i' : Fin 2, |P.periodInvEntry j' i'|)
       (fun _ _ => Finset.sum_nonneg fun _ _ => abs_nonneg _) (Finset.mem_univ j))
 
+/-- A plane vector decomposes into its two coordinates times the standard basis vectors. -/
 theorem plane_eq_sum_single (u : UCPlanar.Plane) :
     u = u 0 • Pi.single (0 : Fin 2) (1 : ℝ) + u 1 • Pi.single (1 : Fin 2) (1 : ℝ) := by
   funext i
   fin_cases i <;> simp
 
+/-- Applying the inverse period to `u` is bounded, entrywise, by `periodInvBound` times the
+sum of `u`'s coordinates' absolute values. -/
 theorem abs_periodInv_apply_le (u : UCPlanar.Plane) (j : Fin 2) :
     |(P.period.symm u) j| ≤ P.periodInvBound * (|u 0| + |u 1|) := by
   have key : (P.period.symm u) j
@@ -229,6 +250,7 @@ theorem abs_periodInv_apply_le (u : UCPlanar.Plane) (j : Fin 2) :
 noncomputable def jumpBound (o : V) : ℝ :=
   P.periodInvBound * (2 * (P.edgeSpan o + 2 * P.repPos o))
 
+/-- `jumpBound` is nonnegative, being built from nonnegative bounds and `periodInvBound`. -/
 theorem jumpBound_nonneg (o : V) : 0 ≤ P.jumpBound o :=
   mul_nonneg P.periodInvBound_nonneg
     (mul_nonneg (by norm_num) (add_nonneg (NNReal.coe_nonneg _)
@@ -238,9 +260,11 @@ theorem jumpBound_nonneg (o : V) : 0 ≤ P.jumpBound o :=
 the coordinate jump of a single edge. -/
 noncomputable def spacing (o : V) : ℕ := max 1 ⌈P.jumpBound o⌉₊
 
+/-- `spacing` was defined by rounding up `jumpBound`, so it dominates it. -/
 theorem jumpBound_le_spacing (o : V) : P.jumpBound o ≤ (P.spacing o : ℝ) :=
   le_trans (Nat.le_ceil _) (by exact_mod_cast le_max_right 1 _)
 
+/-- `spacing` is always at least `1`, by its `max 1 _` definition. -/
 theorem one_le_spacing (o : V) : 1 ≤ P.spacing o := le_max_left _ _
 
 /-- The lattice coordinates of the endpoints of an edge differ by at most the
@@ -315,6 +339,7 @@ theorem shift_mem_boxSet_add_spacing {o x y : V} {k : ℕ}
 noncomputable def maxDegree (o : V) : ℕ :=
   (P.baseReps o).sup fun v => P.graph.degree v
 
+/-- The neighbor set of a shifted vertex is the shift of the original neighbor set. -/
 theorem neighborFinset_shift (a : LatticeProb.Site 2) (v : V) :
     P.graph.neighborFinset (P.shift a v) = (P.graph.neighborFinset v).image (P.shift a) := by
   ext y
@@ -333,18 +358,24 @@ theorem neighborFinset_shift (a : LatticeProb.Site 2) (v : V) :
     rw [SimpleGraph.mem_neighborFinset] at hz ⊢
     exact (P.shift_adj a _ _).mpr hz
 
+/-- The degree of a vertex is unchanged by a lattice shift, since `neighborFinset_shift` and
+the injectivity of `shift` preserve the neighbor count. -/
 theorem degree_shift (a : LatticeProb.Site 2) (v : V) :
     P.graph.degree (P.shift a v) = P.graph.degree v := by
   simp only [SimpleGraph.degree]
   rw [P.neighborFinset_shift]
   exact Finset.card_image_of_injective _ (P.shift_injective a)
 
+/-- Every vertex's degree is bounded by `maxDegree o`, via the covering representative and
+`degree_shift`. -/
 theorem degree_le_maxDegree (o : V) (x : V) :
     P.graph.degree x ≤ P.maxDegree o := by
   obtain ⟨v, hv, a, rfl⟩ := P.covers_baseReps o x
   rw [P.degree_shift]
   exact Finset.le_sup (f := fun v => P.graph.degree v) hv
 
+/-- `maxDegree o` is positive: the basepoint `o` has positive degree since `P` is connected
+and `V` is infinite. -/
 theorem maxDegree_pos (o : V) [Infinite V] : 1 ≤ P.maxDegree o :=
   le_trans (LatticeProb.Graph.degree_pos P.connected o)
     (Finset.le_sup (f := fun v => P.graph.degree v) (Finset.mem_insert_self o _))
@@ -354,6 +385,8 @@ noncomputable def maxCond (o : V) (c : V → V → ℝ) : ℝ :=
   (((P.baseReps o).sup fun v => (P.graph.neighborFinset v).sup fun z =>
     (c v z).toNNReal) : NNReal)
 
+/-- The conductance of any edge is bounded by `maxCond o c`, using the periodicity of `c`
+(`PeriodicConductance`) to transfer the edge back to a representative in `baseReps o`. -/
 theorem cond_le_maxCond {o : V} {c : V → V → ℝ}
     (hc : IsCond P.graph c) (hp : P.PeriodicConductance c) {x y : V}
     (hxy : P.graph.Adj x y) :
@@ -388,6 +421,8 @@ theorem cond_le_maxCond {o : V} {c : V → V → ℝ}
     (Real.coe_toNNReal _ hpos).symm]
   exact_mod_cast le_trans h1 h2
 
+/-- `maxCond o c` is positive: the basepoint `o` has a neighbor, and `IsCond` gives that
+edge's conductance is positive. -/
 theorem maxCond_pos (o : V) [Infinite V] {c : V → V → ℝ} (hc : IsCond P.graph c) :
     0 < P.maxCond o c := by
   have h1 : 0 < P.graph.degree o := LatticeProb.Graph.degree_pos P.connected o

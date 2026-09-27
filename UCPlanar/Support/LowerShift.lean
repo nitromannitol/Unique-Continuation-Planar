@@ -22,6 +22,8 @@ noncomputable def squareAt {V : Type*} (P : UCPlanar.PeriodicGraph V)
     (a : LatticeProb.Site 2) (R : ℝ) : Finset V :=
   (P.square R).image (P.shift a)
 
+/-- **Membership in the shifted square.**  A point `x` lies in `squareAt P a R` iff shifting it
+back by `-a` lands it in the base square `P.square R`. -/
 theorem mem_squareAt {V : Type*} (P : UCPlanar.PeriodicGraph V) (a : LatticeProb.Site 2)
     (R : ℝ) (x : V) : x ∈ squareAt P a R ↔ P.shift (-a) x ∈ P.square R := by
   classical
@@ -34,14 +36,21 @@ theorem mem_squareAt {V : Type*} (P : UCPlanar.PeriodicGraph V) (a : LatticeProb
     refine Finset.mem_image.mpr ⟨P.shift (-a) x, hx, ?_⟩
     rw [← P.shift_add, add_neg_cancel, P.shift_zero]
 
+/-- Shifting a point of the base square `P.square R` by `a` lands it in `squareAt P a R`, the
+direct-image half of `mem_squareAt`. -/
 theorem shift_mem_squareAt {V : Type*} (P : UCPlanar.PeriodicGraph V) (a : LatticeProb.Site 2)
     (R : ℝ) (y : V) (hy : y ∈ P.square R) : P.shift a y ∈ squareAt P a R :=
   Finset.mem_image.mpr ⟨y, hy, rfl⟩
 
+/-- The shifted square `squareAt P a R` has the same cardinality as `P.square R`, since
+`P.shift a` is injective (`shift_injective`). -/
 theorem card_squareAt {V : Type*} (P : UCPlanar.PeriodicGraph V) (a : LatticeProb.Site 2)
     (R : ℝ) : (squareAt P a R).card = (P.square R).card :=
   Finset.card_image_of_injective _ (UCPlanar.Support.shift_injective P a)
 
+/-- **Monotonicity in radius transports to the shifted square.**  If `r ≤ s` then
+`squareAt P a r ⊆ squareAt P a s`, by pulling back through `mem_squareAt` to the base-square
+monotonicity `square_mono`. -/
 theorem squareAt_mono {V : Type*} (P : UCPlanar.PeriodicGraph V) (a : LatticeProb.Site 2)
     {r s : ℝ} (hrs : r ≤ s) : squareAt P a r ⊆ squareAt P a s := by
   intro x hx

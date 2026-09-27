@@ -9,6 +9,7 @@ import UCPlanar.External.Unicoherence
 import UCPlanar.External.MoserEstimate
 import UCPlanar.Support.TopoArcLocal
 import UCPlanar.Support.TopoWalksExternal
+import UCPlanar.Support.TopoUnicoherenceReduction
 import UCPlanar.Support.SurroundExists
 import UCPlanar.Frozen.Topological
 import UCPlanar.Frozen.ZeroCase

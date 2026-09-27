@@ -17,15 +17,18 @@ proof.  It has to beat the growth of the Remez factor at the fourth root, which 
 `32 ≤ αThree⁻¹ ^ (1/4)` says. -/
 noncomputable def alphaThree : ℝ := ((2:ℝ) ^ (24:ℕ))⁻¹
 
+/-- `alphaThree = 2⁻²⁴` is positive. -/
 theorem alphaThree_pos : 0 < alphaThree := by
   rw [alphaThree]; positivity
 
+/-- `alphaThree < 1`, so repeated multiplication by it shrinks a quantity. -/
 theorem alphaThree_lt_one : alphaThree < 1 := by
   rw [alphaThree]
   rw [inv_lt_one_iff₀]
   right
   norm_num
 
+/-- The `i`-th power of `alphaThree` is `(2^{24i})⁻¹`, unfolding the definition. -/
 theorem alphaThree_pow (i : ℕ) : alphaThree ^ i = ((2:ℝ) ^ (24*i))⁻¹ := by
   rw [alphaThree, inv_pow, ← pow_mul]
 

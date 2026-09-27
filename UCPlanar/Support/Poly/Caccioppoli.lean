@@ -10,12 +10,20 @@ set_option autoImplicit false
 
 namespace UCPlanar.Support
 
+/-- **The pointwise Caccioppoli inequality.**  For reals `a,b,u,v`, the algebraic bound
+`(a-b)²u² ≤ 2(a-b)(au²-bv²) + 4(a²+b²)(u-v)²` that the discrete Caccioppoli inequality sums
+over edges, proved by `nlinarith` from an explicit sum of squares. -/
 theorem caccioppoli_pointwise (a b u v : ℝ) :
     (a - b) ^ 2 * u ^ 2
       ≤ 2 * (a - b) * (a * u ^ 2 - b * v ^ 2) + 4 * (a ^ 2 + b ^ 2) * (u - v) ^ 2 := by
   nlinarith [sq_nonneg ((a - b) * v + (a + b) * (u - v)), sq_nonneg (2 * a - b),
     sq_nonneg a, sq_nonneg b, sq_nonneg (u - v)]
 
+/-- **The discrete Caccioppoli inequality.**  For `f` harmonic on `S` and a cutoff `η` supported
+on `B ⊆ S` whose neighbors stay in `S`, the weighted Dirichlet energy of `f` against `η²` is
+bounded by four times the energy of `f²` against the gradient of `η`, obtained by summing
+`caccioppoli_pointwise` over edges and using harmonicity to kill the cross term via
+`formOn_eq_neg_two_mul`. -/
 theorem caccioppoli {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
     {c : V → V → ℝ} (hc : LatticeProb.Network.IsCond G c)
     (S B : Finset V) (f η : V → ℝ)
@@ -73,6 +81,9 @@ theorem caccioppoli {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
           c x y * (f x ^ 2 + f y ^ 2) * (η x - η y) ^ 2 := by
         rw [hform]; ring
 
+/-- **A Cauchy–Schwarz mean-value bound at a harmonic point.**  If `f` is harmonic at `x₀`, the
+mean-value representation combined with `Finset.sum_mul_sq_le_sq_mul_sq` bounds `f(x₀)²` by the
+weighted `L²` average of `f` over the neighbors of `x₀`. -/
 theorem moser_mean_value {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
     {c : V → V → ℝ} (hc : LatticeProb.Network.IsCond G c)
     (f : V → ℝ) (x₀ : V)
@@ -110,6 +121,8 @@ theorem moser_mean_value {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
   rw [div_pow, div_le_div_iff₀ (by positivity) hW]
   nlinarith [hcs]
 
+/-- Summing `moser_mean_value` over `B`, using the uniform weight lower bound `w`, gives the
+aggregate bound `∑_{x∈B} f(x)² ≤ (1/w) ∑_{x∈B} ∑_y c(x,y) f(y)²`. -/
 theorem moser_estimate {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
     {c : V → V → ℝ} (hc : LatticeProb.Network.IsCond G c)
     (B : Finset V) (f : V → ℝ) (w : ℝ) (hw : 0 < w)
@@ -135,6 +148,9 @@ theorem moser_estimate {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
     _ = (1 / w) * ∑ x ∈ B, ∑ y ∈ G.neighborFinset x, c x y * f y ^ 2 := by
         rw [Finset.mul_sum]
 
+/-- **The pointwise Moser L² step.**  Combining `moser_mean_value` with the conductance-sum
+bound `K` and the sup bound `Ssup` on `f` gives the pointwise estimate `f(x)² ≤ (K/w)·Ssup²`
+for every `x ∈ B`. -/
 theorem moser_l2_step {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
     {c : V → V → ℝ} (hc : LatticeProb.Network.IsCond G c)
     (B : Finset V) (f : V → ℝ) (K w Ssup : ℝ) (hw : 0 < w) (hK : 0 ≤ K)

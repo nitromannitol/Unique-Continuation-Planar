@@ -19,6 +19,7 @@ noncomputable def lineRestrictSnd (q : MvPolynomial (Fin 2) ℝ) (s : ℝ) : Pol
   MvPolynomial.aeval
     (fun i : Fin 2 => if i = 0 then Polynomial.C s else (Polynomial.X : Polynomial ℝ)) q
 
+/-- Evaluating `lineRestrictSnd q s` at `t` agrees with evaluating `q` itself at `(s, t)`. -/
 theorem lineRestrictSnd_eval (q : MvPolynomial (Fin 2) ℝ) (s t : ℝ) :
     (lineRestrictSnd q s).eval t
       = MvPolynomial.eval (fun i : Fin 2 => if i = 0 then s else t) q := by

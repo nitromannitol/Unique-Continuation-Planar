@@ -1,5 +1,15 @@
 import UCPlanar.Support.TopoFaceWalks
 
+/-!
+# Cited input: unicoherence of the sphere
+
+Records, as a `Prop`-valued hypothesis, unicoherence of the sphere in the form the face-walk
+development uses: for a connected plane graph, the frontier of every bounded face of its drawing
+is connected. Cited from Newman, *Elements of the Topology of Plane Sets of Points*, Chapter VI,
+and Mohar-Thomassen; reduced to a single classical statement about `Schoenflies.Plane` in
+`UCPlanar.Support.TopoUnicoherenceReduction`.
+-/
+
 -- FROZEN-STATEMENT-BEGIN
 /-- Unicoherence of the sphere, in the form the face walks use.  The sphere is unicoherent, so
 for a compact connected set of the plane whose complement has a bounded component the frontier

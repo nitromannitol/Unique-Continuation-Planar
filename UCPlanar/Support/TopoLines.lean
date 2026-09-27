@@ -63,12 +63,15 @@ theorem isClosed_lineSet (l : ℝ × ℝ × ℝ) : IsClosed (lineSet l) := by
     (continuous_const.mul (continuous_apply 0)).add (continuous_const.mul (continuous_apply 1))
   exact isClosed_eq hcont continuous_const
 
+/-- Each `halfPlane` is convex, being a strict half-space cut out by the linear
+functional `isLinearMap_coord`. -/
 theorem convex_halfPlane (s : Bool) (l : ℝ × ℝ × ℝ) : Convex ℝ (halfPlane s l) := by
   unfold halfPlane
   split
   · exact convex_halfSpace_gt (isLinearMap_coord l.1 l.2.1) l.2.2
   · exact convex_halfSpace_lt (isLinearMap_coord l.1 l.2.1) l.2.2
 
+/-- A half plane is disjoint from the line bounding it. -/
 theorem halfPlane_subset_compl_lineSet (s : Bool) (l : ℝ × ℝ × ℝ) :
     halfPlane s l ⊆ (lineSet l)ᶜ := by
   intro x hx hcon
@@ -78,6 +81,7 @@ theorem halfPlane_subset_compl_lineSet (s : Bool) (l : ℝ × ℝ × ℝ) :
   · exact absurd hcon (ne_of_gt hx)
   · exact absurd hcon (ne_of_lt hx)
 
+/-- Every point off a line lies in one of its two half planes. -/
 theorem exists_mem_halfPlane {l : ℝ × ℝ × ℝ} {x : UCPlanar.Plane} (h : x ∉ lineSet l) :
     ∃ s : Bool, x ∈ halfPlane s l := by
   rw [lineSet, Set.mem_setOf_eq] at h
@@ -170,6 +174,8 @@ theorem finite_components_sdiff_lines (L : Finset (ℝ × ℝ × ℝ))
     exact ⟨σ, x, ⟨(connectedComponentIn_subset _ _ hxC).1, Set.mem_iInter.mpr hσ⟩, hxC⟩
 
 
+/-- Every segment `[u, v]` lies on a line: the equation is trivial if `u = v`, and
+otherwise it is the line through `u` and `v` in coefficient form. -/
 theorem exists_line_of_segment (u v : Schoenflies.Plane) :
     ∃ a b c : ℝ, (a ≠ 0 ∨ b ≠ 0) ∧
       ∀ x ∈ segment ℝ u v, a * x 0 + b * x 1 = c := by
@@ -195,6 +201,8 @@ theorem exists_line_of_segment (u v : Schoenflies.Plane) :
       rw [hx0, hx1]
       linear_combination (u 0 * v 1 - u 1 * v 0) * hst
 
+/-- A finite polygonal path `vs` lies on a finite set of lines, one per edge, obtained by
+induction with `exists_line_of_segment` supplying the line for each new segment. -/
 theorem exists_lines_of_poly : ∀ vs : List Schoenflies.Plane,
     ∃ L : Finset (ℝ × ℝ × ℝ), (∀ l ∈ L, l.1 ≠ 0 ∨ l.2.1 ≠ 0) ∧
       ∀ x ∈ Schoenflies.poly vs, ∃ l ∈ L, l.1 * x 0 + l.2.1 * x 1 = l.2.2 := by

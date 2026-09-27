@@ -3,6 +3,9 @@ import UCPlanar.Support.CrossingGraph
 import Mathlib.Tactic
 open scoped Classical
 
+/-- **The crossing graph is locally finite.**  Every neighbor of `x` lies in the explicit
+eight-element set `x ± e₀, x ± e₁, x ± diagonalStep, x ± 2•diagonalStep`, matching the eight
+conductances of `CrossingCoefficients.lean`. -/
 noncomputable instance UCPlanar.crossingLocallyFinite : UCPlanar.crossingGraph.LocallyFinite := by
   intro x
   let S : Finset (LatticeProb.Site 2) :=

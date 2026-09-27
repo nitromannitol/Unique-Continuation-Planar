@@ -1,5 +1,15 @@
 import UCPlanar.Support.Poly.Difference
 
+/-!
+# Cited input: the discrete Moser estimate
+
+Records, as a `Prop`-valued hypothesis, Delmotte's discrete Moser estimate on a periodic
+network: for nested squares `Q_r ⊆ Q_s`, a function harmonic on `Q_s` has supremum on `Q_r`
+controlled by `C / (s - r)` times its `ℓ²` norm on `Q_s`, with `C` independent of the two
+scales. Cited from Delmotte, *Parabolic Harnack inequality and estimates of Markov chains on
+graphs*, Rev. Mat. Iberoamericana 15 (1999), Prop. 5.3.
+-/
+
 -- FROZEN-STATEMENT-BEGIN
 /-- The discrete Moser estimate on a periodic network, in the form the derivative bound
 consumes.  For nested squares `Q_r ⊆ Q_s` and a function harmonic on `Q_s`, the supremum of

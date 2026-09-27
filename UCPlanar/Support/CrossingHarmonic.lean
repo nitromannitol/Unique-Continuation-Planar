@@ -3,6 +3,10 @@ import UCPlanar.Support.CrossingLaplacian
 import UCPlanar.Support.CounterexampleAlgebra
 open scoped Classical
 
+/-- **The diagonal function is harmonic on the crossing graph.**  Given positive
+conductances `a, b, t, d` obeying the balance equation `hbalance`, the diagonal function
+satisfies the weighted Laplacian equation at every site, by splitting on parity and
+adjacency and reducing to `diagonal_sequence_balance` and `diagonal_recurrence`. -/
 theorem UCPlanar.Support.diagonal_laplacian (a b t d : ℝ)
     (ha : 0<a) (hb : 0<b) (ht : 0<t) (hd : 0<d)
     (hbalance : t*((-b/a)^2+(-b/a)⁻¹^2-2)+d*((-b/a)+(-b/a)⁻¹-2)-2*(a+b)=0)

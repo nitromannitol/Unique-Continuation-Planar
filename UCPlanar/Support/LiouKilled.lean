@@ -35,9 +35,14 @@ noncomputable def killedCHeat (G : SimpleGraph V) [G.LocallyFinite] (c : V → V
         (∑ z ∈ G.neighborFinset x, c x z * killedCHeat G c C k z y) / weight G c x
       else 0
 
+/-- **The killed walk's step-zero transition is the indicator of staying put in `C`.**
+Unfolds the `k = 0` case of `killedCHeat`. -/
 theorem killedCHeat_zero (c : V → V → ℝ) (C : Set V) (x y : V) :
     killedCHeat G c C 0 x y = if x = y ∧ x ∈ C then 1 else 0 := rfl
 
+/-- **The killed walk's one-step recursion**, rewritten as a genuine transition-probability
+sum: from `x ∈ C`, `killedCHeat` at step `k+1` is the `c`-weighted average over neighbors of
+`killedCHeat` at step `k`, and `0` once the walk has left `C`. -/
 theorem killedCHeat_succ (c : V → V → ℝ) (C : Set V) (k : ℕ) (x y : V) :
     killedCHeat G c C (k + 1) x y
       = if x ∈ C then
@@ -49,6 +54,9 @@ theorem killedCHeat_succ (c : V → V → ℝ) (C : Set V) (k : ℕ) (x y : V) :
     exact Finset.sum_congr rfl fun z _ => by ring
   · rfl
 
+/-- **The killed transition probabilities are nonnegative**, by induction on the step using
+that the conductance `c` is nonnegative and the weight `weight G c x` is positive
+(`IsCond` and positive degree). -/
 theorem killedCHeat_nonneg {c : V → V → ℝ} (hc : IsCond G c)
     (hdeg : ∀ v : V, 0 < G.degree v) (C : Set V) :
     ∀ (k : ℕ) (x y : V), 0 ≤ killedCHeat G c C k x y := by
@@ -66,6 +74,9 @@ theorem killedCHeat_nonneg {c : V → V → ℝ} (hc : IsCond G c)
           mul_nonneg (div_nonneg (hc.nonneg x z) (le_of_lt (weight_pos hc hdeg x))) (ih z y)
       · exact le_rfl
 
+/-- **The killed walk is dominated by the free walk.**  Since killing can only remove mass,
+`killedCHeat` is at most the unrestricted transition kernel `cHeat`, by induction on the
+step. -/
 theorem killedCHeat_le_cHeat {c : V → V → ℝ} (hc : IsCond G c)
     (hdeg : ∀ v : V, 0 < G.degree v) (C : Set V) :
     ∀ (k : ℕ) (x y : V), killedCHeat G c C k x y ≤ cHeat G c k x y := by
@@ -88,6 +99,9 @@ theorem killedCHeat_le_cHeat {c : V → V → ℝ} (hc : IsCond G c)
             (div_nonneg (hc.nonneg x z) (le_of_lt (weight_pos hc hdeg x)))
       · exact cHeat_nonneg hc hdeg (k + 1) x y
 
+/-- **The killed walk cannot land outside `C`.**  If `y ∉ C`, `killedCHeat G c C k x y = 0` for
+every step `k`, by induction: the base case fails membership and the inductive step passes
+through the same vanishing target. -/
 theorem killedCHeat_eq_zero_of_not_mem (c : V → V → ℝ) (C : Set V) {y : V} (hy : y ∉ C) :
     ∀ (k : ℕ) (x : V), killedCHeat G c C k x y = 0 := by
   intro k
@@ -103,6 +117,8 @@ theorem killedCHeat_eq_zero_of_not_mem (c : V → V → ℝ) (C : Set V) {y : V}
       · exact Finset.sum_eq_zero fun z _ => by rw [ih z, mul_zero]
       · rfl
 
+/-- **The killed walk vanishes once started outside `C`.**  If `x ∉ C`, `killedCHeat` is `0` at
+every step, since both the base case and the recursive branch require `x ∈ C`. -/
 theorem killedCHeat_eq_zero_of_start_not_mem (c : V → V → ℝ) (C : Set V) {x : V}
     (hx : x ∉ C) (k : ℕ) (y : V) : killedCHeat G c C k x y = 0 := by
   cases k with
@@ -126,19 +142,23 @@ variable {V : Type*} {G : SimpleGraph V} [G.LocallyFinite]
 noncomputable def extC (C : Finset V) (f : C → ℝ) : V → ℝ :=
   fun v => if h : v ∈ C then f ⟨v, h⟩ else 0
 
+/-- **`extC` vanishes off `C`** by definition. -/
 theorem extC_eq_zero_of_not_mem (C : Finset V) (f : C → ℝ) {v : V} (hv : v ∉ C) :
     extC C f v = 0 := by
   rw [extC, dif_neg hv]
 
+/-- **`extC` agrees with `f` on `C`** by definition. -/
 theorem extC_apply (C : Finset V) (f : C → ℝ) {v : V} (hv : v ∈ C) :
     extC C f v = f ⟨v, hv⟩ := by
   rw [extC, dif_pos hv]
 
+/-- **Zero-extension is additive**: `extC C (f + g) = extC C f + extC C g`. -/
 theorem extC_add (C : Finset V) (f g : C → ℝ) :
     extC C (f + g) = extC C f + extC C g := by
   funext v
   by_cases hv : v ∈ C <;> simp [extC, hv]
 
+/-- **Zero-extension commutes with scalars**: `extC C (a • f) = a * extC C f` pointwise. -/
 theorem extC_smul (C : Finset V) (a : ℝ) (f : C → ℝ) :
     extC C (a • f) = fun v => a * extC C f v := by
   funext v
@@ -160,9 +180,13 @@ noncomputable def bvpMap (G : SimpleGraph V) [G.LocallyFinite] (c : V → V → 
     rw [Finset.mul_sum]
     exact Finset.sum_congr rfl fun y _ => by ring
 
+/-- **`bvpMap` computes the network Laplacian of the zero-extension**: `bvpMap G c C f x` is
+literally `netLaplacian G c (extC C f) x`, by definition. -/
 theorem bvpMap_apply {c : V → V → ℝ} (C : Finset V) (f : C → ℝ) (x : C) :
     bvpMap G c C f x = netLaplacian G c (extC C f) x := rfl
 
+/-- **The network Laplacian is additive in the function**, hence distributes over
+subtraction: `netLaplacian G c (f - g) = netLaplacian G c f - netLaplacian G c g`. -/
 theorem netLaplacian_sub (c : V → V → ℝ) (f g : V → ℝ) (x : V) :
     netLaplacian G c (f - g) x = netLaplacian G c f x - netLaplacian G c g x := by
   simp only [netLaplacian, Pi.sub_apply, ← Finset.sum_sub_distrib]
@@ -242,11 +266,15 @@ noncomputable def bvpGreen (G : SimpleGraph V) [G.LocallyFinite] [Infinite V]
     (C : Finset V) (o : V) (ho : o ∈ C) : V → ℝ :=
   (bvp_exists hG hc C ho).choose
 
+/-- **The Dirichlet solution `bvpGreen` vanishes off `C`**, by construction as the zero
+extension chosen in `bvp_exists`. -/
 theorem bvpGreen_eq_zero_of_not_mem (hG : G.Connected) [Infinite V] {c : V → V → ℝ}
     (hc : IsCond G c) (C : Finset V) {o : V} (ho : o ∈ C) {x : V} (hx : x ∉ C) :
     bvpGreen G hG hc C o ho x = 0 :=
   (bvp_exists hG hc C ho).choose_spec.1 x hx
 
+/-- **`bvpGreen` solves the Dirichlet problem**: its network Laplacian on `C` is `-1` at the
+source `o` and `0` elsewhere, by construction in `bvp_exists`. -/
 theorem bvpGreen_laplacian (hG : G.Connected) [Infinite V] {c : V → V → ℝ}
     (hc : IsCond G c) (C : Finset V) {o : V} (ho : o ∈ C) {x : V} (hx : x ∈ C) :
     netLaplacian G c (bvpGreen G hG hc C o ho) x = if x = o then -1 else 0 :=
@@ -456,6 +484,9 @@ theorem killedPartial_le {c : V → V → ℝ} (hG : G.Connected) [Infinite V]
   rw [mul_zero, mul_sub, mul_inv_cancel_left₀ (ne_of_gt hwt), sub_nonneg] at this
   exact this
 
+/-- **The killed transition probabilities are summable in the step.**  Their partial sums are
+bounded above by `weight G c o * bvpGreen G hG hc C o ho x` (`killedPartial_le`), so the
+nonnegative series converges. -/
 theorem summable_killedCHeat {c : V → V → ℝ} (hG : G.Connected) [Infinite V]
     (hc : IsCond G c) (hdeg : ∀ v : V, 0 < G.degree v)
     (C : Finset V) {o : V} (ho : o ∈ C) (x : V) :
@@ -571,6 +602,8 @@ theorem ofReal_weight_mul_bvpGreen_le_cGreen {c : V → V → ℝ} (hG : G.Conne
 
 /-! ### Nash-Williams -/
 
+/-- **Membership in `pairs G S`**: a pair `p` belongs to `pairs G S` iff `p.1 ∈ S` and `p.1`
+is `G`-adjacent to `p.2`. -/
 theorem mem_pairs {S : Finset V} {p : V × V} :
     p ∈ pairs G S ↔ p.1 ∈ S ∧ G.Adj p.1 p.2 := by
   simp only [pairs, Finset.mem_biUnion, Finset.mem_image]

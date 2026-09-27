@@ -2,12 +2,17 @@
 import UCPlanar.Support.CrossingGraph
 import Mathlib.Tactic
 
+/-- **`crossingOutgoing` is nonnegative** whenever all four conductance parameters `a, b, t, d`
+are, since each branch of its case split returns one of them, halved, or zero. -/
 theorem UCPlanar.Support.outgoing_nonneg (a b t d : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b)
     (ht : 0 ≤ t) (hd : 0 ≤ d) (x y : LatticeProb.Site 2) :
     0 ≤ UCPlanar.crossingOutgoing a b t d x y := by
   unfold UCPlanar.crossingOutgoing
   split_ifs <;> positivity
 
+/-- **`crossingOutgoing` is positive on a related pair.**  If `x` and `y` satisfy
+`crossingRelation`, the branch of the case split matching `y`'s offset returns a positive
+parameter, using the eight-way disjunction and that `a, b, t, d` are all positive. -/
 theorem UCPlanar.Support.outgoing_pos (a b t d : ℝ) (ha : 0<a) (hb : 0<b)
     (ht : 0<t) (hd : 0<d) (x y : LatticeProb.Site 2)
     (h : UCPlanar.crossingRelation x y) : 0<UCPlanar.crossingOutgoing a b t d x y := by
@@ -21,12 +26,16 @@ theorem UCPlanar.Support.outgoing_pos (a b t d : ℝ) (ha : 0<a) (hb : 0<b)
   · rcases h.2 with h | h | h | h | h | h | h | h
     all_goals tauto
 
+/-- **`crossingOutgoing` vanishes off the crossing relation.**  If `x` and `y` are not related,
+every branch of the case split fails to match, so the outgoing weight is `0`. -/
 theorem UCPlanar.Support.outgoing_zero (a b t d : ℝ) (x y : LatticeProb.Site 2)
     (h : ¬UCPlanar.crossingRelation x y) : UCPlanar.crossingOutgoing a b t d x y=0 := by
   unfold UCPlanar.crossingRelation at h
   unfold UCPlanar.crossingOutgoing
   split_ifs <;> tauto
 
+/-- **Related vertices are distinct.**  Comparing the two coordinates of `x` and `y` under each
+of the eight possible offsets of `crossingRelation` rules out `x = y`. -/
 theorem UCPlanar.Support.relation_ne (x y : LatticeProb.Site 2)
     (h : UCPlanar.crossingRelation x y) : x ≠ y := by
   intro heq

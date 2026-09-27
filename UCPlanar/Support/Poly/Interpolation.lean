@@ -261,6 +261,10 @@ theorem newtonPoly2_eval_eq_sum (F : ℕ × ℕ → ℝ) (m a b : ℕ) :
   simp [choosePoly_eval_nat]
   try ring
 
+/-- **The two-variable Newton polynomial reproduces `F` at every lattice point of the fitted
+rectangle.**  Summing `newtonPoly2_eval_eq_sum` over one variable at a time and applying the
+one-variable interpolation identity `newtonPoly_eq_of_le` twice gives `F (a, b)` exactly, for
+`a, b ≤ m`. -/
 theorem newtonPoly2_eval_eq (F : ℕ × ℕ → ℝ) (m a b : ℕ) (ha : a ≤ m) (hb : b ≤ m) :
     MvPolynomial.eval (fun k : Fin 2 => if k = 0 then (a : ℝ) else (b : ℝ))
       (UCPlanar.Support.newtonPoly2 F m) = F (a, b) := by
@@ -325,6 +329,9 @@ theorem newtonPoly2Trunc_eval_eq (F : ℕ × ℕ → ℝ) (m a b : ℕ) (hab : a
 
 
 
+/-- **The `j`-fold difference in the second coordinate commutes past one first-coordinate
+difference**, turning into the ordinary one-step difference of the iterated function in the
+first coordinate. -/
 theorem fwdDiff_snd_iter_fst (G : ℕ × ℕ → ℝ) (j x y : ℕ) :
     ((fwdDiff (0, 1))^[j] (fwdDiff (1, 0) G)) (x, y)
       = ((fwdDiff (0, 1))^[j] G) (x + 1, y) - ((fwdDiff (0, 1))^[j] G) (x, y) := by
@@ -336,6 +343,9 @@ theorem fwdDiff_snd_iter_fst (G : ℕ × ℕ → ℝ) (j x y : ℕ) :
     rw [ih x (y + 1), ih x y]
     ring
 
+/-- **Mixed forward differences commute**: iterating `i` times in the first coordinate and
+`j` times in the second gives the same function regardless of order, by induction on `i`
+using `fwdDiff_snd_iter_fst`. -/
 theorem fwdDiff_comm (F : ℕ × ℕ → ℝ) (i j x y : ℕ) :
     ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F)) (x, y)
       = ((fwdDiff (0, 1))^[j] ((fwdDiff (1, 0))^[i] F)) (x, y) := by

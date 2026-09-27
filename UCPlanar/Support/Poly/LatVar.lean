@@ -18,6 +18,7 @@ noncomputable def posForm {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V) (i 
   MvPolynomial.C (P.pos v i)
     + ∑ j : Fin 2, MvPolynomial.C (P.period (Pi.single j (1:ℝ)) i) * MvPolynomial.X j
 
+/-- The affine form `posForm P v i` has total degree at most `1`. -/
 theorem posForm_totalDegree_le {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V) (i : Fin 2) :
     (posForm P v i).totalDegree ≤ 1 := by
   rw [posForm]
@@ -29,6 +30,8 @@ theorem posForm_totalDegree_le {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V
     refine le_trans (MvPolynomial.totalDegree_mul _ _) ?_
     rw [MvPolynomial.totalDegree_C, zero_add, MvPolynomial.totalDegree_X]
 
+/-- Evaluating `posForm P v i` at `u` gives the `i`-th plane coordinate of
+`P.pos v + P.period u`. -/
 theorem posForm_eval {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V) (i : Fin 2)
     (u : UCPlanar.Plane) :
     MvPolynomial.eval u (posForm P v i) = (P.pos v + P.period u) i := by
@@ -45,10 +48,14 @@ noncomputable def latVar {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V)
     (p : MvPolynomial (Fin 2) ℝ) : MvPolynomial (Fin 2) ℝ :=
   MvPolynomial.bind₁ (posForm P v) p
 
+/-- Substituting the affine forms `posForm` does not raise total degree: `latVar P v p`
+has total degree at most that of `p`. -/
 theorem latVar_totalDegree_le {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V)
     (p : MvPolynomial (Fin 2) ℝ) : (latVar P v p).totalDegree ≤ p.totalDegree :=
   totalDegree_bind₁_le p (posForm P v) (posForm_totalDegree_le P v)
 
+/-- Evaluating the substituted polynomial `latVar P v p` at `u` agrees with evaluating
+`p` at the shifted plane point `P.pos v + P.period u`. -/
 theorem latVar_eval {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V)
     (p : MvPolynomial (Fin 2) ℝ) (u : UCPlanar.Plane) :
     MvPolynomial.eval u (latVar P v p) = MvPolynomial.eval (P.pos v + P.period u) p := by

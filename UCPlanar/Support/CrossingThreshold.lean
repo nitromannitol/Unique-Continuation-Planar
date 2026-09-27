@@ -1,6 +1,8 @@
 /- Positivity of the third conductance under the threshold in Section 5. -/
 import UCPlanar.Support.CounterexampleAlgebra
 
+/-- The third conductance `t` is positive whenever it exceeds the threshold
+`2 a² b² / ((a-b)² (a+b))` for positive `a ≠ b`. -/
 theorem UCPlanar.Support.third_positive (a b t : ℝ) (ha : 0<a) (hb : 0<b)
     (hab : a ≠ b) (ht : 2*a^2*b^2/((a-b)^2*(a+b)) < t) : 0<t := by
   apply lt_trans _ ht

@@ -16,10 +16,14 @@ noncomputable def orb {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → ℝ)
     ℕ × ℕ → ℝ :=
   fun ab => UCPlanar.Support.orbitCoord P f v ab.1 ab.2
 
+/-- Unfolds `orb P f v` at `(t, y)` to the value of `f` at the shift of `v` by `t` copies
+of `e₁` and `y` copies of `e₂`. -/
 theorem orb_apply {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → ℝ) (v : V) (t y : ℕ) :
     orb P f v (t, y) = f (P.shift ((t : ℤ) • UCPlanar.Support.e₁ + (y : ℤ) • UCPlanar.Support.e₂) v) :=
   rfl
 
+/-- The forward difference of the orbit data along the first generator equals the orbit
+data of the once-shifted difference `P.diff e₁ f`. -/
 theorem orb_fwdDiff_fst {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → ℝ) (v : V) :
     fwdDiff ((1, 0) : ℕ × ℕ) (orb P f v) = orb P (P.diff UCPlanar.Support.e₁ f) v := by
   funext ab
@@ -35,6 +39,8 @@ theorem orb_fwdDiff_fst {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → �
   push_cast
   module
 
+/-- The forward difference of the orbit data along the second generator equals the orbit
+data of the once-shifted difference `P.diff e₂ f`. -/
 theorem orb_fwdDiff_snd {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → ℝ) (v : V) :
     fwdDiff ((0, 1) : ℕ × ℕ) (orb P f v) = orb P (P.diff UCPlanar.Support.e₂ f) v := by
   funext ab
@@ -50,6 +56,8 @@ theorem orb_fwdDiff_snd {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → �
   push_cast
   module
 
+/-- Iterating the first-generator forward difference `i` times on the orbit data agrees
+with taking the orbit data of `(P.diff e₁)^[i] f`. -/
 theorem orb_fwdDiff_fst_iter {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V) (i : ℕ) :
     ∀ f : V → ℝ, (fwdDiff ((1, 0) : ℕ × ℕ))^[i] (orb P f v)
       = orb P ((P.diff UCPlanar.Support.e₁)^[i] f) v := by
@@ -59,6 +67,8 @@ theorem orb_fwdDiff_fst_iter {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V) 
     intro f
     rw [Function.iterate_succ_apply, orb_fwdDiff_fst, ih, Function.iterate_succ_apply]
 
+/-- Iterating the second-generator forward difference `j` times on the orbit data agrees
+with taking the orbit data of `(P.diff e₂)^[j] f`. -/
 theorem orb_fwdDiff_snd_iter {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V) (j : ℕ) :
     ∀ f : V → ℝ, (fwdDiff ((0, 1) : ℕ × ℕ))^[j] (orb P f v)
       = orb P ((P.diff UCPlanar.Support.e₂)^[j] f) v := by
@@ -68,11 +78,15 @@ theorem orb_fwdDiff_snd_iter {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V) 
     intro f
     rw [Function.iterate_succ_apply, orb_fwdDiff_snd, ih, Function.iterate_succ_apply]
 
+/-- The word difference along a concatenated word `u ++ w` is the word difference along
+`u` applied after the word difference along `w`. -/
 theorem diffWord_append {V : Type*} (P : UCPlanar.PeriodicGraph V)
     (u w : List (LatticeProb.Site 2)) (f : V → ℝ) :
     P.diffWord (u ++ w) f = P.diffWord u (P.diffWord w f) := by
   simp [UCPlanar.PeriodicGraph.diffWord, List.foldr_append]
 
+/-- The word difference along `i` repetitions of a single generator `a` is the `i`-fold
+iterate of the single-step difference `P.diff a`. -/
 theorem diffWord_replicate {V : Type*} (P : UCPlanar.PeriodicGraph V)
     (a : LatticeProb.Site 2) (i : ℕ) (f : V → ℝ) :
     P.diffWord (List.replicate i a) f = (P.diff a)^[i] f := by
