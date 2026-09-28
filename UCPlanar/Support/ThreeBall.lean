@@ -210,10 +210,12 @@ theorem density_transfer (N : ℕ) (ε : ℝ) (f : ℤ → ℤ → ℝ)
   refine ⟨(seg N).filter (fun s => |f s 0| ≤ 1), ?_, ?_, ?_⟩
   · exact Finset.filter_subset _ _
   · have h2 : (1 / 2 : ℝ) ≤ 1 - ε := by linarith [hε1]
-    have h3 : (1 / 2 : ℝ) * ((seg N).card : ℝ) ≤ (((seg N).filter (fun s => |f s 0| ≤ 1)).card : ℝ) := by
+    have h3 : (1 / 2 : ℝ) * ((seg N).card : ℝ) ≤ (((seg N).filter (fun s => |f s 0| ≤ 1)).card : ℝ)
+        := by
       have h4 : (0 : ℝ) ≤ ((seg N).card : ℝ) := Nat.cast_nonneg _
       nlinarith [hdens, h2, h4]
-    have h5 : ((seg N).card : ℝ) ≤ 2 * (((seg N).filter (fun s => |f s 0| ≤ 1)).card : ℝ) := by linarith
+    have h5 : ((seg N).card : ℝ) ≤ 2 * (((seg N).filter (fun s => |f s 0| ≤ 1)).card : ℝ) := by
+        linarith
     exact_mod_cast h5
   · intro s hs
     exact (Finset.mem_filter.mp hs).2
@@ -265,17 +267,20 @@ theorem prop1d_case2_arith (β M : ℝ) (N : ℕ) (hβ : β = -Real.log 32) (hM 
     32 ^ ((N:ℝ)/2) * (2 * (M * Real.exp (β * (N:ℝ)))) + Real.exp (β * (N:ℝ)) * M
       ≤ 3 * Real.exp (-(Real.log 32 / 2) * (N:ℝ)) * M := by
   subst hβ
-  have h32 : (32:ℝ) ^ ((N:ℝ)/2) = Real.exp (Real.log 32 * ((N:ℝ)/2)) := Real.rpow_def_of_pos (by norm_num) _
+  have h32 : (32:ℝ) ^ ((N:ℝ)/2) = Real.exp (Real.log 32 * ((N:ℝ)/2)) := Real.rpow_def_of_pos (by
+      norm_num) _
   rw [h32]
   have hlog : 0 < Real.log 32 := Real.log_pos (by norm_num)
   have hN : (0:ℝ) ≤ (N:ℝ) := Nat.cast_nonneg N
-  have hexp : Real.exp (Real.log 32 * ((N:ℝ)/2)) * Real.exp (-(Real.log 32) * (N:ℝ)) = Real.exp (-(Real.log 32 / 2) * (N:ℝ)) := by
+  have hexp : Real.exp (Real.log 32 * ((N:ℝ)/2)) * Real.exp (-(Real.log 32) * (N:ℝ)) = Real.exp
+      (-(Real.log 32 / 2) * (N:ℝ)) := by
     rw [← Real.exp_add, Real.exp_eq_exp]
     ring
   have hle : Real.exp (-(Real.log 32) * (N:ℝ)) ≤ Real.exp (-(Real.log 32 / 2) * (N:ℝ)) := by
     apply Real.exp_le_exp.mpr
     nlinarith [hlog, hN]
-  nlinarith [hexp, hle, hM, Real.exp_pos (-(Real.log 32 / 2) * (N:ℝ)), Real.exp_pos (-(Real.log 32) * (N:ℝ)), Real.exp_pos (Real.log 32 * ((N:ℝ) / 2))]
+  nlinarith [hexp, hle, hM, Real.exp_pos (-(Real.log 32 / 2) * (N:ℝ)), Real.exp_pos (-(Real.log 32)
+      * (N:ℝ)), Real.exp_pos (Real.log 32 * ((N:ℝ) / 2))]
 
 /-- The fiberwise sum over the box splits along a subset of the lines. -/
 theorem sum_split (N : ℕ) (f : ℤ → ℤ → ℝ) (T : Finset ℤ) (hTsub : T ⊆ seg N) :
@@ -314,7 +319,8 @@ theorem half_lines (N : ℕ) (f : ℤ → ℤ → ℝ) (ε : ℝ) (hε : ε ≤ 
         ∀ s ∈ S, |f s t| ≤ 1 := by
   classical
   set G : Finset (ℤ × ℤ) := (box N).filter (fun x => |f x.1 x.2| ≤ 1) with hG
-  set T : Finset ℤ := (seg N).filter (fun t => 2 * ((seg N).filter (fun s => |f s t| ≤ 1)).card ≥ (seg N).card) with hT
+  set T : Finset ℤ := (seg N).filter (fun t => 2 * ((seg N).filter (fun s => |f s t| ≤ 1)).card ≥
+      (seg N).card) with hT
   have hbox : box N = (seg N).product (seg N) := rfl
   have hsum : G.card = ∑ t ∈ seg N, ((seg N).filter (fun s => |f s t| ≤ 1)).card := by
     rw [hG, hbox, Finset.card_eq_sum_ones, Finset.sum_filter]
@@ -327,7 +333,8 @@ theorem half_lines (N : ℕ) (f : ℤ → ℤ → ℝ) (ε : ℝ) (hε : ε ≤ 
   have hTsub : T ⊆ seg N := by intro t ht; rw [hT] at ht; exact (Finset.mem_filter.mp ht).1
   have hTval : ∀ t ∈ T, 2 * ((seg N).filter (fun s => |f s t| ≤ 1)).card ≥ (seg N).card := by
     intro t ht; rw [hT] at ht; exact (Finset.mem_filter.mp ht).2
-  have hnotT : ∀ t ∈ seg N, t ∉ T → 2 * ((seg N).filter (fun s => |f s t| ≤ 1)).card < (seg N).card := by
+  have hnotT : ∀ t ∈ seg N, t ∉ T → 2 * ((seg N).filter (fun s => |f s t| ≤ 1)).card < (seg N).card
+      := by
     intro t ht hnt
     by_contra hcon
     exact hnt (by rw [hT]; exact Finset.mem_filter.mpr ⟨ht, le_of_not_gt hcon⟩)
@@ -356,17 +363,21 @@ theorem half_lines (N : ℕ) (f : ℤ → ℤ → ℝ) (ε : ℝ) (hε : ε ≤ 
     have hdens' : (1 - ε) * ((n:ℝ) * (n:ℝ)) ≤ (G.card : ℝ) := by
       have h1 : ((box N).card : ℝ) = (n:ℝ) * (n:ℝ) := by rw [hboxcard]; push_cast; ring
       rw [← h1]; exact hdens
-    have hGle : (G.card : ℝ) ≤ (T.card : ℝ) * n + ((n - T.card : ℕ) : ℝ) * (((n - 1) / 2 : ℕ) : ℝ) := by
+    have hGle : (G.card : ℝ) ≤ (T.card : ℝ) * n + ((n - T.card : ℕ) : ℝ) * (((n - 1) / 2 : ℕ) : ℝ)
+        := by
       have hsum' : (G.card : ℝ) = ((∑ t ∈ T, ((seg N).filter (fun s => |f s t| ≤ 1)).card : ℕ) : ℝ)
           + ((∑ t ∈ seg N \ T, ((seg N).filter (fun s => |f s t| ≤ 1)).card : ℕ) : ℝ) := by
         rw [hsum, hsplit]; push_cast; ring
       rw [hsum']
-      have h1 : ((∑ t ∈ T, ((seg N).filter (fun s => |f s t| ≤ 1)).card : ℕ) : ℝ) ≤ (T.card : ℝ) * n := by exact_mod_cast hTle
-      have h2 : ((∑ t ∈ seg N \ T, ((seg N).filter (fun s => |f s t| ≤ 1)).card : ℕ) : ℝ) ≤ ((seg N \ T).card : ℝ) * (((n - 1) / 2 : ℕ) : ℝ) := by exact_mod_cast hnotle
+      have h1 : ((∑ t ∈ T, ((seg N).filter (fun s => |f s t| ≤ 1)).card : ℕ) : ℝ) ≤ (T.card : ℝ) * n
+          := by exact_mod_cast hTle
+      have h2 : ((∑ t ∈ seg N \ T, ((seg N).filter (fun s => |f s t| ≤ 1)).card : ℕ) : ℝ) ≤ ((seg N
+          \ T).card : ℝ) * (((n - 1) / 2 : ℕ) : ℝ) := by exact_mod_cast hnotle
       rw [hsdiff] at h2
       push_cast at h1 h2 ⊢
       linarith
-    have hkey : (1 - ε) * ((n:ℝ) * n) ≤ (T.card : ℝ) * n + ((n - T.card : ℕ) : ℝ) * (((n - 1) / 2 : ℕ) : ℝ) := le_trans hdens' hGle
+    have hkey : (1 - ε) * ((n:ℝ) * n) ≤ (T.card : ℝ) * n + ((n - T.card : ℕ) : ℝ) * (((n - 1) / 2
+        : ℕ) : ℝ) := le_trans hdens' hGle
     have hk : T.card ≤ n := by rw [hn]; exact Finset.card_le_card hTsub
     exact half_lines_arith n T.card ε (by omega) hk hε hkey
   · intro t ht

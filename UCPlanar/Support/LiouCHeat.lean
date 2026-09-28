@@ -357,7 +357,8 @@ theorem cHeat_variance_telescope {c : V → V → ℝ} (hc : IsCond G c)
       rw [← Finset.sum_div, weight]
       exact div_self (ne_of_gt (weight_pos hc hdeg u))
     have hmv : f u = ∑ w ∈ G.neighborFinset u, (c u w / weight G c u) * f w := by
-      have h := (harmonic_iff_mean f (ne_of_gt (weight_pos hc hdeg u))).mp (hharm u (Set.mem_univ u))
+      have h := (harmonic_iff_mean f (ne_of_gt (weight_pos hc hdeg u))).mp (hharm u (Set.mem_univ
+          u))
       rw [h, Finset.sum_div]
       exact Finset.sum_congr rfl fun w _ => by ring
     have := sum_mul_sq_sub_eq (G.neighborFinset u) (fun w => c u w / weight G c u) f (f u) hsum hmv
@@ -400,7 +401,8 @@ theorem cHeat_meanSq_le {c : V → V → ℝ} (hc : IsCond G c)
   calc ∑ v ∈ reach G n x, cHeat G c n x v * f v ^ 2
       ≤ ∑ v ∈ reach G n x, cHeat G c n x v * M ^ 2 := by
         refine Finset.sum_le_sum fun v _ => ?_
-        exact mul_le_mul_of_nonneg_left (by nlinarith [abs_le.mp (hM v)]) (cHeat_nonneg hc hdeg n x v)
+        exact mul_le_mul_of_nonneg_left (by nlinarith [abs_le.mp (hM v)]) (cHeat_nonneg hc hdeg n x
+            v)
     _ = (∑ v ∈ reach G n x, cHeat G c n x v) * M ^ 2 := by rw [Finset.sum_mul]
     _ = M ^ 2 := by rw [sum_cHeat_eq_one hc hdeg n x, one_mul]
 
@@ -536,7 +538,8 @@ theorem cGreen_eq_top_of_recurrent' {c : V → V → ℝ} (hc : IsCond G c)
     have h := ENNReal.tsum_comp_le_tsum_of_injective (add_right_injective (p.length + q.length))
       (fun k => ENNReal.ofReal (cHeat G c k x u))
     refine le_trans (le_of_eq ?_) h
-    exact tsum_congr fun k => by rw [show p.length + q.length + k = p.length + k + q.length by omega]
+    exact tsum_congr fun k => by rw [show p.length + q.length + k = p.length + k + q.length by
+        omega]
   rw [hoo, ENNReal.mul_top (by simpa using (ENNReal.ofReal_pos.mpr hp).ne'),
       ENNReal.top_mul (by simpa using (ENNReal.ofReal_pos.mpr hq).ne')] at hsum
   rw [cGreen_eq_tsum]
@@ -584,7 +587,8 @@ theorem eq_of_adj_of_cEnergy_eq_zero {c : V → V → ℝ} (hc : IsCond G c)
   have hnn : ∀ z ∈ G.neighborFinset x,
       0 ≤ (c x z / weight G c x) * (f z - f x) ^ 2 := fun z _ =>
     mul_nonneg (div_nonneg (hc.nonneg x z) (le_of_lt (weight_pos hc hdeg x))) (sq_nonneg _)
-  have hz := (Finset.sum_eq_zero_iff_of_nonneg hnn).mp h w ((SimpleGraph.mem_neighborFinset G x w).mpr hw)
+  have hz := (Finset.sum_eq_zero_iff_of_nonneg hnn).mp h w ((SimpleGraph.mem_neighborFinset G x
+      w).mpr hw)
   have hcpos : 0 < c x w / weight G c x :=
     div_pos (hc.pos hw) (weight_pos hc hdeg x)
   have : (f w - f x) ^ 2 = 0 := by

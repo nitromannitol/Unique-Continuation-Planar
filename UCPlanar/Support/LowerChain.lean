@@ -179,7 +179,8 @@ theorem prop22 {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → ℝ) 
   have hkey := chain_dichotomy 13 m C C₁ (c₀*(L:ℝ)) hC (by positivity) (by
       have : c₀*(L:ℝ)/2 = (c₀*(L:ℝ))/2 := by ring
       rw [← this]; exact hCt) hC₁ hC₁1 hm0' hmono (by norm_num) hrung
-  have hm13pos : 0 < m 13 := lt_of_lt_of_le (by linarith) (le_trans hm0' (hmono 0 13 (by omega) le_rfl))
+  have hm13pos : 0 < m 13 := lt_of_lt_of_le (by linarith) (le_trans hm0' (hmono 0 13 (by omega)
+      le_rfl))
   have hfinal : Real.log (m 13) ≤ Real.log (UCPlanar.supNorm (P.square (2*K)) f) :=
     Real.log_le_log hm13pos
       (UCPlanar.Support.supNorm_mono (UCPlanar.Support.square_mono P (hrle 13 le_rfl)) f)

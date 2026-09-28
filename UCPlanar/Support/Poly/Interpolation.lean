@@ -270,11 +270,15 @@ theorem newtonPoly2_eval_eq (F : ℕ × ℕ → ℝ) (m a b : ℕ) (ha : a ≤ m
       (UCPlanar.Support.newtonPoly2 F m) = F (a, b) := by
   rw [UCPlanar.Support.newtonPoly2_eval_eq_sum]
   rw [Finset.sum_comm]
-  have h_inner : ∀ j, ∑ i ∈ Finset.range (m + 1), ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F)) (0, 0) * (a.choose i : ℝ) * (b.choose j : ℝ) = ((fwdDiff (1 : ℕ))^[j] (fun y => F (a, y)) 0) * (b.choose j : ℝ) := by
+  have h_inner : ∀ j, ∑ i ∈ Finset.range (m + 1), ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F))
+      (0, 0) * (a.choose i : ℝ) * (b.choose j : ℝ) = ((fwdDiff (1 : ℕ))^[j] (fun y => F (a, y)) 0) *
+      (b.choose j : ℝ) := by
     intro j
     rw [← Finset.sum_mul]
     congr 1
-    have hsum : ∑ i ∈ Finset.range (m + 1), ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F)) (0, 0) * (a.choose i : ℝ) = ∑ i ∈ Finset.range (m + 1), (a.choose i : ℝ) * ((fwdDiff (1 : ℕ))^[i] (fun x => (fwdDiff (1 : ℕ))^[j] (fun y => F (x, y)) 0) 0) := by
+    have hsum : ∑ i ∈ Finset.range (m + 1), ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F)) (0, 0) *
+        (a.choose i : ℝ) = ∑ i ∈ Finset.range (m + 1), (a.choose i : ℝ) * ((fwdDiff (1 : ℕ))^[i]
+        (fun x => (fwdDiff (1 : ℕ))^[j] (fun y => F (x, y)) 0) 0) := by
       apply Finset.sum_congr rfl
       intro i hi
       rw [UCPlanar.Support.mixedDiff_origin]
@@ -282,7 +286,9 @@ theorem newtonPoly2_eval_eq (F : ℕ × ℕ → ℝ) (m a b : ℕ) (ha : a ≤ m
     rw [hsum]
     exact newtonPoly_eq_of_le (fun x => (fwdDiff (1 : ℕ))^[j] (fun y => F (x, y)) 0) m a ha
   rw [Finset.sum_congr rfl (fun j hj => h_inner j)]
-  rw [show (∑ j ∈ Finset.range (m + 1), ((fwdDiff (1 : ℕ))^[j] (fun y => F (a, y)) 0) * (b.choose j : ℝ)) = ∑ j ∈ Finset.range (m + 1), (b.choose j : ℝ) * ((fwdDiff (1 : ℕ))^[j] (fun y => F (a, y)) 0) from by
+  rw [show (∑ j ∈ Finset.range (m + 1), ((fwdDiff (1 : ℕ))^[j] (fun y => F (a, y)) 0) * (b.choose j
+      : ℝ)) = ∑ j ∈ Finset.range (m + 1), (b.choose j : ℝ) * ((fwdDiff (1 : ℕ))^[j] (fun y => F (a,
+      y)) 0) from by
     apply Finset.sum_congr rfl
     intro j hj
     rw [mul_comm]]
@@ -297,7 +303,8 @@ theorem newtonPoly2Trunc_eval_eq_sum (F : ℕ × ℕ → ℝ) (m a b : ℕ) :
           ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F)) (0, 0)
             * (a.choose i : ℝ) * (b.choose j : ℝ) := by
   rw [newtonPoly2Trunc]
-  simp only [MvPolynomial.eval_sum, MvPolynomial.eval_mul, MvPolynomial.eval_C, MvPolynomial.eval_toMvPolynomial]
+  simp only [MvPolynomial.eval_sum, MvPolynomial.eval_mul, MvPolynomial.eval_C,
+      MvPolynomial.eval_toMvPolynomial]
   simp [choosePoly_eval_nat]
 
 /-- The truncated two-variable Newton polynomial reproduces `F` at every lattice
@@ -415,7 +422,8 @@ theorem newtonPoly2Trunc_remainder_choose (F : ℕ × ℕ → ℝ) (m a b : ℕ)
     rw [newtonPoly]
     simp only [UCPlanar.Support.fwdDiff_fst_iter]
     have hfac : (∑ i ∈ Finset.range (m + 1), ∑ j ∈ Finset.range (m + 1 - i),
-          ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F)) (0, 0) * (a.choose i : ℝ) * (b.choose j : ℝ))
+          ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F)) (0, 0) * (a.choose i : ℝ) * (b.choose j
+              : ℝ))
         = ∑ i ∈ Finset.range (m + 1), (a.choose i : ℝ) *
             (∑ j ∈ Finset.range (m + 1 - i),
               ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F)) (0, 0) * (b.choose j : ℝ)) := by
@@ -430,7 +438,8 @@ theorem newtonPoly2Trunc_remainder_choose (F : ℕ × ℕ → ℝ) (m a b : ℕ)
             (((fwdDiff (1, 0))^[i] F) (0, b)
               - (((fwdDiff (1, 0))^[i] F) (0, b)
                 - ∑ j ∈ Finset.range (m + 1 - i),
-                    ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F)) (0, 0) * (b.choose j : ℝ))) := by
+                    ((fwdDiff (1, 0))^[i] ((fwdDiff (0, 1))^[j] F)) (0, 0) * (b.choose j : ℝ))) :=
+                        by
       refine Finset.sum_congr rfl fun i _ => ?_
       ring
     rw [hfac2]
@@ -483,7 +492,8 @@ theorem newtonPoly2Trunc_remainder_choose (F : ℕ × ℕ → ℝ) (m a b : ℕ)
     _ = (((a + b).choose (m + 1) : ℕ) : ℝ) * M := by
         rw [← hvand]
         rw [show (∑ i ∈ Finset.range (m + 1), (a.choose i : ℝ) * ((b.choose (m + 1 - i) : ℝ) * M))
-            = (∑ i ∈ Finset.range (m + 1), (a.choose i : ℝ) * (b.choose (m + 1 - i) : ℝ)) * M from by
+            = (∑ i ∈ Finset.range (m + 1), (a.choose i : ℝ) * (b.choose (m + 1 - i) : ℝ)) * M from
+                by
           rw [Finset.sum_mul]
           exact Finset.sum_congr rfl fun i _ => by ring]
         ring

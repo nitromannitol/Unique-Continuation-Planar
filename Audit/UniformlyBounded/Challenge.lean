@@ -3,14 +3,14 @@ import Mathlib
 /-!
 # Theorem 1.2 (`theorem:uniformly-bounded`): comparator challenge
 
-Mathlib-only comparator challenge for Theorem 1.2 (`theorem:uniformly-bounded`) of Bou-Rabee, Cooperman and Ganguly,
-*Unique continuation on planar graphs* (Discrete Analysis 2025:16).  The certified
-statement is `UCPlanar.Frozen.uniformlyBounded`, restated in `UCPlanar/MainTheorems.lean` as
-`UCPlanar.uniformlyBounded`.  Content: on a periodic plane graph there is `n₀`, and for every
-ellipticity ratio `Θ > 1` there are `ε₀, A > 0`, such that for conductances in
-`(λ, Θλ)`, every `n ≥ n₀`, every `ε < ε₀` and every function harmonic on
-`B_{2n}` with `|f| > 1` on at most `ε |B_{2n}|` vertices of `B_{2n}`,
-`|f| ≤ exp(A √ε n)` on `B_n`.
+Mathlib-only comparator challenge for Theorem 1.2 (`theorem:uniformly-bounded`) of Bou-Rabee,
+Cooperman and Ganguly, *Unique continuation on planar graphs* (Discrete Analysis 2025:16). The
+certified statement is `UCPlanar.Frozen.uniformlyBounded`, restated in
+`UCPlanar/MainTheorems.lean` as `UCPlanar.uniformlyBounded`. Content: on a periodic plane
+graph there is `n₀`, and for every ellipticity ratio `Θ > 1` there are `ε₀, A > 0`, such that
+for conductances in `(λ, Θλ)`, every `n ≥ n₀`, every `ε < ε₀` and every function harmonic on
+`B_{2n}` with `|f| > 1` on at most `ε |B_{2n}|` vertices of `B_{2n}`, `|f| ≤ exp(A √ε n)` on
+`B_n`.
 
 Only Mathlib is imported.  The vocabulary between `VOCABULARY-BEGIN` and
 `VOCABULARY-END` rebuilds, from Mathlib primitives, every definition needed to
@@ -31,7 +31,8 @@ does not prove them either: each is a proposition taken as an explicit
 hypothesis, and this challenge carries the same hypotheses, restated in the
 vocabulary:
    * `External.EdgeSplitting`: Janiszewski's theorem at a point (Newman, Chapter V, Theorem 9.3);
-   * `External.Unicoherence`: unicoherence of the sphere, as connected face frontiers (Newman, Chapter VI).
+   * `External.Unicoherence`: unicoherence of the sphere, as connected face frontiers
+     (Newman, Chapter VI).
 
 ## Presentation deltas
 

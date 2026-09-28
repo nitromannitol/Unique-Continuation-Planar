@@ -3,13 +3,13 @@ import Mathlib
 /-!
 # Theorem 1.3 (`theorem:zero-case`): comparator challenge
 
-Mathlib-only comparator challenge for Theorem 1.3 (`theorem:zero-case`) of Bou-Rabee, Cooperman and Ganguly,
-*Unique continuation on planar graphs* (Discrete Analysis 2025:16).  The certified
-statement is `UCPlanar.Frozen.zeroCase`, restated in `UCPlanar/MainTheorems.lean` as
-`UCPlanar.zeroCase`.  Content: on a periodic plane graph there are `ε₀ > 0` and `n₀`
-such that for arbitrary positive conductances, every `n ≥ n₀`, every `ε < ε₀`
-and every function harmonic on `B_{2n}` that is nonzero on at most
-`ε |B_{2n}|` vertices of `B_{2n}`, `f` vanishes on `B_n`.
+Mathlib-only comparator challenge for Theorem 1.3 (`theorem:zero-case`) of Bou-Rabee,
+Cooperman and Ganguly, *Unique continuation on planar graphs* (Discrete Analysis 2025:16). The
+certified statement is `UCPlanar.Frozen.zeroCase`, restated in `UCPlanar/MainTheorems.lean` as
+`UCPlanar.zeroCase`. Content: on a periodic plane graph there are `ε₀ > 0` and `n₀` such that
+for arbitrary positive conductances, every `n ≥ n₀`, every `ε < ε₀` and every function
+harmonic on `B_{2n}` that is nonzero on at most `ε |B_{2n}|` vertices of `B_{2n}`, `f`
+vanishes on `B_n`.
 
 Only Mathlib is imported.  The vocabulary between `VOCABULARY-BEGIN` and
 `VOCABULARY-END` rebuilds, from Mathlib primitives, every definition needed to
@@ -30,7 +30,8 @@ does not prove them either: each is a proposition taken as an explicit
 hypothesis, and this challenge carries the same hypotheses, restated in the
 vocabulary:
    * `External.EdgeSplitting`: Janiszewski's theorem at a point (Newman, Chapter V, Theorem 9.3);
-   * `External.Unicoherence`: unicoherence of the sphere, as connected face frontiers (Newman, Chapter VI).
+   * `External.Unicoherence`: unicoherence of the sphere, as connected face frontiers
+     (Newman, Chapter VI).
 
 ## Presentation deltas
 

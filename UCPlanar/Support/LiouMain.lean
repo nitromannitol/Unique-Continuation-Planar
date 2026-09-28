@@ -13,10 +13,10 @@ open scoped Classical
 
 namespace UCPlanar.Support
 
-/-- The Liouville theorem, assembled from the uniform upper bound, the periodic
-exponential lower bound, the classical bounded-Liouville fact.  The density hypothesis is transferred from
-the metric balls to the geometric squares, and the ellipticity ratio of the
-conductance comes from its periodicity. -/
+/-- The Liouville theorem, assembled from the uniform upper bound, the periodic exponential
+lower bound, the classical bounded-Liouville fact.  The density hypothesis is transferred from
+the metric balls to the geometric squares, and the ellipticity ratio of the conductance comes
+from its periodicity. -/
 theorem liouville_of_bounds {V : Type*} (P : UCPlanar.PeriodicPlaneGraph V)
     (c : V → V → ℝ) (hc : LatticeProb.Network.IsCond P.graph c)
     (hp : P.toPeriodicGraph.PeriodicConductance c)

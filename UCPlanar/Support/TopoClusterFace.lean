@@ -43,7 +43,8 @@ theorem exists_notMem_trace (Q : UCPlanar.PeriodicPlaneGraph V)
 
 /-- **A face containing a point of the filled region is a face of the cluster.**  It cannot avoid
 `N`, so it carries a vertex of `N` and is contained in the filled region. -/
-theorem isFace_mem_cluster (Q : UCPlanar.PeriodicPlaneGraph V) (hLF : Q.embedding.LocallyFiniteFaces)
+theorem isFace_mem_cluster (Q : UCPlanar.PeriodicPlaneGraph V) (hLF
+    : Q.embedding.LocallyFiniteFaces)
     {N : Set V} {F : Set UCPlanar.Plane} (hF : Q.embedding.IsFace F)
     {q : UCPlanar.Plane} (hq : q ∈ F) (hqc : q ∈ Q.embedding.clusterRegion N) :
     F ⊆ Q.embedding.clusterRegion N ∧ ∃ y, Q.embedding.Incident F y ∧ y ∈ N := by
@@ -76,7 +77,8 @@ theorem exists_clusterFace_of_mem_closure (Q : UCPlanar.PeriodicPlaneGraph V) {N
     {F | Q.embedding.IsFace F ∧ (F ∩ t).Nonempty ∧ F ⊆ Om} with hSS
   have hSSfin : SS.Finite := by
     have himg : SS ⊆ Subtype.val ''
-        {i : {F : Set UCPlanar.Plane // Q.embedding.IsFace F} | ((i : Set UCPlanar.Plane) ∩ t).Nonempty} := by
+        {i : {F : Set UCPlanar.Plane // Q.embedding.IsFace F} | ((i : Set UCPlanar.Plane) ∩
+            t).Nonempty} := by
       rintro F ⟨hF, hFt, -⟩
       exact ⟨⟨F, hF⟩, hFt, rfl⟩
     exact Set.Finite.subset (hfin.image _) himg
@@ -104,7 +106,8 @@ theorem exists_clusterFace_of_mem_closure (Q : UCPlanar.PeriodicPlaneGraph V) {N
   obtain ⟨F, hFSS, hpcl⟩ := Set.mem_iUnion₂.mp hmain
   exact ⟨F, hFSS.1, hpcl, hFSS.2.2,
     (isFace_mem_cluster Q hLF hFSS.1 (isFace_nonempty Q.embedding hFSS.1).choose_spec
-      (connectedComponentIn_subset _ _ (hFSS.2.2 (isFace_nonempty Q.embedding hFSS.1).choose_spec))).2⟩
+      (connectedComponentIn_subset _ _ (hFSS.2.2 (isFace_nonempty Q.embedding
+          hFSS.1).choose_spec))).2⟩
 
 
 /-- **A vertex on the frontier of a cluster component is incident to a face of that component.**

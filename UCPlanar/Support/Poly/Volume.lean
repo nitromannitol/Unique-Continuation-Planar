@@ -106,7 +106,8 @@ theorem sum_sq_le_card_mul_supNorm_sq {V : Type*} (S : Finset V) (f : V → ℝ)
     ∑ x ∈ S, f x ^ 2 ≤ (S.card : ℝ) * UCPlanar.supNorm S f ^ 2 := by
   have hbound : ∀ x ∈ S, f x ^ 2 ≤ UCPlanar.supNorm S f ^ 2 := by
     intro x hx
-    have h : (‖f x‖₊ : NNReal) ≤ (S.sup (fun y => ‖f y‖₊) : NNReal) := Finset.le_sup (f := fun y => ‖f y‖₊) hx
+    have h : (‖f x‖₊ : NNReal) ≤ (S.sup (fun y => ‖f y‖₊) : NNReal) := Finset.le_sup (f := fun y =>
+        ‖f y‖₊) hx
     have h' : |f x| ≤ UCPlanar.supNorm S f := by
       rw [UCPlanar.supNorm]
       have hcast : (‖f x‖₊ : ℝ) ≤ ((S.sup (fun y => ‖f y‖₊) : NNReal) : ℝ) := by exact_mod_cast h

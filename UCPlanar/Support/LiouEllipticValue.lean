@@ -11,7 +11,8 @@ theorem UCPlanar.Support.exists_edge_value_finset {V : Type*} (P : UCPlanar.Peri
     (hp : P.PeriodicConductance c) :
     ∃ T : Finset ℝ, (∀ x y, P.graph.Adj x y → c x y ∈ T) ∧ (∀ t ∈ T, 0 < t)
 := by
-  refine ⟨P.representatives.biUnion (fun v => (P.graph.neighborFinset v).image (fun u => c v u)), ?_, ?_⟩
+  refine ⟨P.representatives.biUnion (fun v => (P.graph.neighborFinset v).image (fun u => c v u)),
+      ?_, ?_⟩
   · intro x y hxy
     obtain ⟨v, hv, a, ha⟩ := P.covers x
     subst ha

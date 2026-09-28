@@ -35,7 +35,8 @@ run_cmd do
     let v := v.replace fun e => match e with
       | .const n ls =>
         if (`UCPlanarAudit.Statements).isPrefixOf n && n.isInternal then
-          (env.find? n).bind fun ci => (ci.value? (allowOpaque := true)).map (·.instantiateLevelParams ci.levelParams ls)
+          (env.find? n).bind fun ci => (ci.value? (allowOpaque := true)).map
+              (·.instantiateLevelParams ci.levelParams ls)
         else none
       | _ => none
     let v ← liftCoreM (Core.betaReduce v)

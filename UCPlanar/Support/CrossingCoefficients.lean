@@ -18,7 +18,8 @@ the parity-swapped counterpart of `weight_plus_zero`. -/
 theorem UCPlanar.Support.weight_minus_zero (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x - LatticeProb.unit 0) =
       if Even (x 0 + x 1) then a else b := by
-  have hn : Even ((x - LatticeProb.unit 0 : LatticeProb.Site 2) 0 + (x - LatticeProb.unit 0 : LatticeProb.Site 2) 1) ↔
+  have hn : Even ((x - LatticeProb.unit 0 : LatticeProb.Site 2) 0 + (x - LatticeProb.unit 0
+      : LatticeProb.Site 2) 1) ↔
       ¬Even (x 0 + x 1) := by
     simp only [Int.even_iff, Pi.sub_apply, LatticeProb.unit, Pi.single_apply]
     norm_num
@@ -34,7 +35,8 @@ the second-coordinate analogue of `weight_plus_zero`. -/
 theorem UCPlanar.Support.weight_plus_one (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x + LatticeProb.unit 1) =
       if Even (x 0 + x 1) then b else a := by
-  have hn : Even ((x + LatticeProb.unit 1 : LatticeProb.Site 2) 0 + (x + LatticeProb.unit 1 : LatticeProb.Site 2) 1) ↔
+  have hn : Even ((x + LatticeProb.unit 1 : LatticeProb.Site 2) 0 + (x + LatticeProb.unit 1
+      : LatticeProb.Site 2) 1) ↔
       ¬Even (x 0 + x 1) := by
     simp only [Int.even_iff, Pi.add_apply, LatticeProb.unit, Pi.single_apply]
     norm_num
@@ -50,7 +52,8 @@ the second-coordinate analogue of `weight_minus_zero`. -/
 theorem UCPlanar.Support.weight_minus_one (a b t d : ℝ) (x : LatticeProb.Site 2) :
     UCPlanar.crossingConductance a b t d x (x - LatticeProb.unit 1) =
       if Even (x 0 + x 1) then a else b := by
-  have hn : Even ((x - LatticeProb.unit 1 : LatticeProb.Site 2) 0 + (x - LatticeProb.unit 1 : LatticeProb.Site 2) 1) ↔
+  have hn : Even ((x - LatticeProb.unit 1 : LatticeProb.Site 2) 0 + (x - LatticeProb.unit 1
+      : LatticeProb.Site 2) 1) ↔
       ¬Even (x 0 + x 1) := by
     simp only [Int.even_iff, Pi.sub_apply, LatticeProb.unit, Pi.single_apply]
     norm_num

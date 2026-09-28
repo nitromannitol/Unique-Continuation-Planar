@@ -6,8 +6,8 @@ import Audit.Support.Bridge
 /-!
 # Solution: Counterexample
 
-The challenge module `Audit/Counterexample/Challenge.lean` imports only Mathlib and states the theorem
-with one intentional `sorry`.  This solution imports the repository together with
+The challenge module `Audit/Counterexample/Challenge.lean` imports only Mathlib and states
+the theorem with one intentional `sorry`. This solution imports the repository together with
 `Audit.Support.Vocabulary`, a verbatim copy of the challenge's vocabulary, and proves the
 byte-identical statement from `UCPlanar.counterexample` through the bridges in
 `Audit/Support/Bridge.lean`.

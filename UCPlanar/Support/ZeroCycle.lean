@@ -39,12 +39,12 @@ def UCPlanar.PeriodicPlaneGraph.SurroundedBy {V : Type*} (Q : UCPlanar.PeriodicP
 
 namespace UCPlanar.Support
 
-/-- **Step 3 of Section 3.**  Granting the boundary cycle of the filled cluster, the topological
-lemma forces linearly many vertices outside `W` within the buffer of the sphere of radius `m`:
-a fixed fraction of the cycle lies in that buffer, the cycle is long because the region it
-bounds contains both `x₀` and a vertex at distance `m` from the centre, and each buffer vertex
-of the cycle is charged to a vertex outside `W` with bounded multiplicity.  The discarded set
-enters only through its cardinality. -/
+/-- **Step 3 of Section 3.**  Granting the boundary cycle of the filled cluster, the
+topological lemma forces linearly many vertices outside `W` within the buffer of the sphere of
+radius `m`: a fixed fraction of the cycle lies in that buffer, the cycle is long because the
+region it bounds contains both `x₀` and a vertex at distance `m` from the centre, and each
+buffer vertex of the cycle is charged to a vertex outside `W` with bounded multiplicity.  The
+discarded set enters only through its cardinality. -/
 theorem surround_step3 {V : Type*} (Q : UCPlanar.PeriodicPlaneGraph V) (d L r : ℕ)
     (hd : ∀ x, Q.graph.degree x ≤ d) (hL : Q.embedding.FaceBound L) :
     ∃ κ C₀ : ℝ, 0 < κ ∧ 0 ≤ C₀ ∧ ∀ (o : V) (m n : ℕ) (W Pos Neg : Set V) (D : Finset V)

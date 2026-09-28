@@ -100,7 +100,8 @@ theorem card_int_box_le (B : ℝ) (hB : 0 ≤ B) :
     have habs : (0 : ℤ) ≤ |a j| := abs_nonneg _
     have h4 : (((|a j|).toNat : ℕ) : ℝ) ≤ B := by
       have hcast : ((|a j|).toNat : ℤ) = |a j| := Int.toNat_of_nonneg habs
-      have h5 : (((|a j|).toNat : ℕ) : ℝ) = ((|a j| : ℤ) : ℝ) := by exact_mod_cast congrArg (fun z : ℤ => (z : ℝ)) hcast
+      have h5 : (((|a j|).toNat : ℕ) : ℝ) = ((|a j| : ℤ) : ℝ) := by
+        exact_mod_cast congrArg (fun z : ℤ => (z : ℝ)) hcast
       rw [h5, Int.cast_abs]
       exact h1
     have h6 : (|a j|).toNat ≤ N := Nat.le_floor h4

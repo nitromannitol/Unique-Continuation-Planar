@@ -24,3 +24,16 @@ To reproduce one pair, from the repository root:
 COMPARATOR_LANDRUN=<landrun> COMPARATOR_LEAN4EXPORT=<lean4export> \
   lake env <comparator>/.lake/build/bin/comparator Audit/<Pair>/comparator.json
 ```
+
+## Run of 2026-09-27
+
+Every pair was run again on 2026-09-27, at commit `1f0410f`, against the current
+statements and the published Lattice-Probability pin, on a second local machine
+(Linux 6.17), with the same tool revisions as above.
+
+| Pair | Lean kernel | Lean and nanoda kernels |
+|---|---|---|
+| `Counterexample` | passed (39 s) | passed (39 s) |
+| `Liouville` | passed (167 s) | passed (286 s) |
+| `UniformlyBounded` | passed (186 s) | passed (403 s) |
+| `ZeroCase` | passed (167 s) | passed (209 s) |

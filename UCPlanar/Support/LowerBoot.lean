@@ -143,7 +143,8 @@ theorem orbit_exceptional {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → 
   classical
   set Box : Finset (ℤ × ℤ) :=
     (Finset.Icc (-(T:ℤ)) (T:ℤ)) ×ˢ (Finset.Icc (-(T:ℤ)) (T:ℤ)) with hBox
-  have hmem : ∀ z ∈ Box, P.shift (vec z.1 z.2) x₀ ∈ (P.square S).filter (fun x => ¬ (|f x| ≤ 1)) := by
+  have hmem : ∀ z ∈ Box, P.shift (vec z.1 z.2) x₀ ∈ (P.square S).filter (fun x => ¬ (|f x| ≤ 1)) :=
+      by
     intro z hz
     rw [hBox, Finset.mem_product, Finset.mem_Icc, Finset.mem_Icc] at hz
     have h1 : |z.1| ≤ (T:ℤ) := by rw [abs_le]; exact ⟨hz.1.1, hz.1.2⟩

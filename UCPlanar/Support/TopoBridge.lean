@@ -48,7 +48,8 @@ theorem isClosed_topoTrace {V : Type*} {G : SimpleGraph V} (E : UCPlanar.PlaneEm
 /-- The transported trace of a drawn walk contains the transported start vertex. -/
 theorem pos_mem_topoTrace {V : Type*} {G : SimpleGraph V} (E : UCPlanar.PlaneEmbedding G)
     {x y : V} (p : G.Walk x y) : planeHomeo (E.pos x) ∈ topoTrace E p := by
-  exact Set.mem_image_of_mem _ ((E.pos_mem_walkTrace_iff p x).mpr (SimpleGraph.Walk.start_mem_support p))
+  exact Set.mem_image_of_mem _ ((E.pos_mem_walkTrace_iff p x).mpr
+      (SimpleGraph.Walk.start_mem_support p))
 
 /-- The transported trace of a drawn walk is contained in the transported closed cycle domain. -/
 theorem topoTrace_subset_topologicalDomain {V : Type*} {G : SimpleGraph V}

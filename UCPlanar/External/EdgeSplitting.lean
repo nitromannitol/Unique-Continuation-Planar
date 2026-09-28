@@ -3,8 +3,8 @@ import UCPlanar.Support.TopoMinimal
 /-!
 # Cited input: Janiszewski's theorem for edge-set drawings
 
-Records, as a `Prop`-valued hypothesis rather than a proof, the point form of Janiszewski's
-theorem for the drawings of two disjoint finite edge sets of a plane graph meeting in at most
+Records, as a `Prop`-valued hypothesis rather than a proof, the point form of Janiszewski's theorem
+for the drawings of two disjoint finite edge sets of a plane graph meeting in at most
 one vertex: if the union of the two drawings does not separate two points, then already one of
 the two edge sets' drawings alone does not separate them. Cited from Newman, *Elements of the
 Topology of Plane Sets of Points*, and from Mohar-Thomassen; consumed as a hypothesis wherever

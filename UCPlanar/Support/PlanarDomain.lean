@@ -46,7 +46,8 @@ theorem UCPlanar.PlaneEmbedding.walkTrace_mapLe_subset_domain {V : Type*}
     change Set.range (E.edge (hHG h)) ∪ E.walkTrace (p.mapLe hHG) ⊆ D
     exact Set.union_subset hD (ih (hD ⟨1, (E.edge he).target⟩))
 
-/-- Restricting to edges drawn inside a cycle preserves access of sign components to its boundary. -/
+/-- Restricting to edges drawn inside a cycle preserves access of sign components to its boundary.
+    -/
 theorem UCPlanar.PlaneEmbedding.componentsMeetBoundary_in_domain {V : Type*}
     {G : SimpleGraph V} (E : UCPlanar.PlaneEmbedding G) {o : V} (γ : G.Walk o o)
     (H : SimpleGraph V) (hHG : H ≤ G)

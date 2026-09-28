@@ -3,13 +3,13 @@ import Mathlib
 /-!
 # Theorem 1.1 (`theorem:liouville`): comparator challenge
 
-Mathlib-only comparator challenge for Theorem 1.1 (`theorem:liouville`) of Bou-Rabee, Cooperman and Ganguly,
-*Unique continuation on planar graphs* (Discrete Analysis 2025:16).  The certified
-statement is `UCPlanar.Frozen.liouville`, restated in `UCPlanar/MainTheorems.lean` as
-`UCPlanar.liouville`.  Content: for conductances on a periodic plane graph that are
-invariant under the translation lattice there is `ε > 0` such that every
-function harmonic on the whole graph, whose set `{|f| ≤ 1}` has a density limit
-at least `1 - ε` in the graph-metric balls about some vertex, is constant.
+Mathlib-only comparator challenge for Theorem 1.1 (`theorem:liouville`) of Bou-Rabee,
+Cooperman and Ganguly, *Unique continuation on planar graphs* (Discrete Analysis 2025:16). The
+certified statement is `UCPlanar.Frozen.liouville`, restated in `UCPlanar/MainTheorems.lean`
+as `UCPlanar.liouville`. Content: for conductances on a periodic plane graph that are
+invariant under the translation lattice there is `ε > 0` such that every function harmonic on
+the whole graph, whose set `{|f| ≤ 1}` has a density limit at least `1 - ε` in the
+graph-metric balls about some vertex, is constant.
 
 Only Mathlib is imported.  The vocabulary between `VOCABULARY-BEGIN` and
 `VOCABULARY-END` rebuilds, from Mathlib primitives, every definition needed to
@@ -31,7 +31,8 @@ hypothesis, and this challenge carries the same hypotheses, restated in the
 vocabulary:
    * `External.MoserEstimate`: the discrete Moser estimate (Delmotte 1999, Proposition 5.3);
    * `External.EdgeSplitting`: Janiszewski's theorem at a point (Newman, Chapter V, Theorem 9.3);
-   * `External.Unicoherence`: unicoherence of the sphere, as connected face frontiers (Newman, Chapter VI).
+   * `External.Unicoherence`: unicoherence of the sphere, as connected face frontiers
+     (Newman, Chapter VI).
 
 ## Presentation deltas
 

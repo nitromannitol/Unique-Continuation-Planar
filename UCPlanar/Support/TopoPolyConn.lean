@@ -156,7 +156,8 @@ theorem deleteVerts_connected_edgeGraph (E : UCPlanar.PlaneEmbedding G) {T : Fin
     · exact ⟨p, hp, h1⟩
   obtain ⟨s, ⟨a₁, ⟨e₁, he₁, he₁G, ha₁⟩, rfl⟩, hsx⟩ := hex
   have ha₁v : a₁ ≠ v₀ := fun h => hsx (by rw [h])
-  have hmemdel : planeHomeo (E.pos a₁) ∈ V((edgeGraph E ↑T).deleteVerts {planeHomeo (E.pos v₀)}) := by
+  have hmemdel : planeHomeo (E.pos a₁) ∈ V((edgeGraph E ↑T).deleteVerts {planeHomeo (E.pos v₀)}) :=
+      by
     rw [Graph.vertexSet_deleteVerts]
     exact ⟨mem_vertexSet_edgeGraph E (by exact_mod_cast he₁) he₁G ha₁, by simpa using hsx⟩
   refine Graph.Connected.of_hub hmemdel ?_

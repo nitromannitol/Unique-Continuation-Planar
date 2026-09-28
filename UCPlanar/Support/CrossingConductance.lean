@@ -15,7 +15,8 @@ theorem UCPlanar.Support.crossing_isCond (a b t d : ℝ)
     rcases h.2 with h | h
     · exact add_pos_of_pos_of_nonneg (UCPlanar.Support.outgoing_pos a b t d ha hb ht hd x y h)
         (UCPlanar.Support.outgoing_nonneg a b t d ha.le hb.le ht.le hd.le y x)
-    · exact add_pos_of_nonneg_of_pos (UCPlanar.Support.outgoing_nonneg a b t d ha.le hb.le ht.le hd.le x y)
+    · exact add_pos_of_nonneg_of_pos (UCPlanar.Support.outgoing_nonneg a b t d ha.le hb.le ht.le
+        hd.le x y)
         (UCPlanar.Support.outgoing_pos a b t d ha hb ht hd y x h)
   · intro x y h
     have hxy : ¬UCPlanar.crossingRelation x y := by

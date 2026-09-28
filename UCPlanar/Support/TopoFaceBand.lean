@@ -104,7 +104,8 @@ theorem length_lt_faceBound (E : UCPlanar.PlaneEmbedding G) {L : ℕ} (hL : E.Fa
   have h2 : q.support.toFinset.card = q.support.length :=
     List.toFinset_card_of_nodup hq.support_nodup
   have h3 : q.support.length = q.length + 1 := SimpleGraph.Walk.length_support q
-  have h4 : hfin.toFinset.card = {x | E.Incident F x}.ncard := (Set.ncard_eq_toFinset_card _ hfin).symm
+  have h4 : hfin.toFinset.card = {x | E.Incident F x}.ncard := (Set.ncard_eq_toFinset_card _
+      hfin).symm
   omega
 
 /-- **The banded face path with the discarded vertex located.**  Either the vertex carries a face

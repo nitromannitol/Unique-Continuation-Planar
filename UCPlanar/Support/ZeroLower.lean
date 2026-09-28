@@ -170,7 +170,8 @@ theorem exists_ball_card_lower {V : Type*} (P : UCPlanar.PeriodicGraph V) :
     have hlen : p.reverse.length ≤ n := by
       rw [SimpleGraph.Walk.length_reverse, hp]; exact hdist
     exact le_trans hed (by exact_mod_cast Nat.cast_le.mpr hlen)
-  have hinj : Set.InjOn (fun a : LatticeProb.Site 2 => P.shift a v) (Box : Set (LatticeProb.Site 2)) :=
+  have hinj : Set.InjOn (fun a : LatticeProb.Site 2 => P.shift a v) (Box : Set (LatticeProb.Site 2))
+      :=
     fun a _ b _ h => shift_left_injective P v h
   have hcard : Box.card ≤ (P.ball v n).card := by
     have := Finset.card_le_card_of_injOn (fun a : LatticeProb.Site 2 => P.shift a v) hmem

@@ -65,7 +65,8 @@ theorem pos_shift_orbit {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V) (a b 
       = P.pos v + (a : ℝ) • P.period (fun i => ((UCPlanar.Support.e₁ : LatticeProb.Site 2) i : ℝ))
         + (b : ℝ) • P.period (fun i => ((UCPlanar.Support.e₂ : LatticeProb.Site 2) i : ℝ)) := by
   rw [UCPlanar.PeriodicGraph.pos_shift]
-  have h1 : (fun i : Fin 2 => (((a : ℤ) • UCPlanar.Support.e₁ + (b : ℤ) • UCPlanar.Support.e₂) i : ℝ))
+  have h1 : (fun i : Fin 2 => (((a : ℤ) • UCPlanar.Support.e₁ + (b : ℤ) • UCPlanar.Support.e₂) i
+      : ℝ))
       = (a : ℝ) • (fun i : Fin 2 => ((UCPlanar.Support.e₁ : LatticeProb.Site 2) i : ℝ))
         + (b : ℝ) • (fun i : Fin 2 => ((UCPlanar.Support.e₂ : LatticeProb.Site 2) i : ℝ)) := by
     funext i

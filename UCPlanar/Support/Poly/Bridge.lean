@@ -19,7 +19,8 @@ noncomputable def orb {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → ℝ)
 /-- Unfolds `orb P f v` at `(t, y)` to the value of `f` at the shift of `v` by `t` copies
 of `e₁` and `y` copies of `e₂`. -/
 theorem orb_apply {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → ℝ) (v : V) (t y : ℕ) :
-    orb P f v (t, y) = f (P.shift ((t : ℤ) • UCPlanar.Support.e₁ + (y : ℤ) • UCPlanar.Support.e₂) v) :=
+    orb P f v (t, y) = f (P.shift ((t : ℤ) • UCPlanar.Support.e₁ + (y : ℤ) • UCPlanar.Support.e₂) v)
+        :=
   rfl
 
 /-- The forward difference of the orbit data along the first generator equals the orbit

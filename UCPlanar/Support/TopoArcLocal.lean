@@ -581,8 +581,8 @@ theorem exists_two_rays_of_arc (Q : UCPlanar.PeriodicPlaneGraph V) {e : Sym2 V}
     exact exists_two_rays_of_arcParam Q hab htIoo hptA ⟨ε, hε, heq⟩
 
 /-- **Near a point interior to an arc and on the frontier of a face the whole drawing is on
-that frontier.**  The two segments radiating from the point lie on the frontier by the corner
-theorem, and near the point they are the drawing. -/
+that frontier.**  The two segments radiating from the point lie on the frontier by the
+corner theorem, and near the point they are the drawing. -/
 theorem exists_ball_trace_subset_frontier (Q : UCPlanar.PeriodicPlaneGraph V)
     {F : Set UCPlanar.Plane} (hF : Q.embedding.IsFace F) {e : Sym2 V}
     (he : e ∈ Q.graph.edgeSet) {p : UCPlanar.Plane} (hp : p ∈ Q.embedding.arcOf e)

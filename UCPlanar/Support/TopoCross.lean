@@ -61,8 +61,10 @@ theorem exists_common_vertex_of_chords {V : Type*} {G : SimpleGraph V} {o : V}
       γ.getVert m = γ.getVert m' → m = m' :=
     fun m m' hm hm' h => hγ.getVert_injOn' (by simpa using hm) (by simpa using hm') h
   -- the two chords, made simple
-  have hp'sup : ∀ v ∈ p.bypass.support, v ∈ p.support := fun v hv => p.support_bypass_subset_support hv
-  have hq'sup : ∀ v ∈ q.bypass.support, v ∈ q.support := fun v hv => q.support_bypass_subset_support hv
+  have hp'sup : ∀ v ∈ p.bypass.support, v ∈ p.support := fun v hv => p.support_bypass_subset_support
+      hv
+  have hq'sup : ∀ v ∈ q.bypass.support, v ∈ q.support := fun v hv => q.support_bypass_subset_support
+      hv
   have hp'tr : E.walkTrace p.bypass ⊆ E.closedCycleDomain γ :=
     (walkTrace_bypass_subset E p).trans hpd
   have hq'tr : E.walkTrace q.bypass ⊆ E.closedCycleDomain γ :=

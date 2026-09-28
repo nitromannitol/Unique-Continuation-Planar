@@ -8,12 +8,12 @@ open scoped BigOperators Classical
 
 namespace UCPlanar.Support
 
-/-- **Step 2 of Section 3: a sparse boundary radius.**  If `f` vanishes off an `ε`-fraction of
-`B_{2n}`, some radius `m` with `3n/2 ≤ m` and `m + r ≤ 2n` carries at most `C ε n` vertices where `f` exceeds
-the threshold within graph distance `r` of the sphere of radius `m`.  Keeping the whole buffer
-inside `B_{2n}` is what makes the count one of vertices the density hypothesis controls;
-quadratic volume growth turns the average over the admissible radii into a bound linear in
-`n`. -/
+/-- **Step 2 of Section 3: a sparse boundary radius.** If `f` vanishes off an `ε`-fraction of
+`B_{2n}`, some radius `m` with `3n/2 ≤ m` and `m + r ≤ 2n` carries at most `C ε n` vertices
+where `f` exceeds the threshold within graph distance `r` of the sphere of radius `m`. Keeping
+the whole buffer inside `B_{2n}` is what makes the count one of vertices the density
+hypothesis controls; quadratic volume growth turns the average over the admissible radii into
+a bound linear in `n`. -/
 theorem exists_sparse_shell {V : Type*} (P : UCPlanar.PeriodicGraph V) (r : ℕ) :
     ∃ C : ℝ, 0 < C ∧ ∀ (o : V) (n : ℕ), 0 < n → 4 * r ≤ n → ∀ (thr ε : ℝ), 0 ≤ ε →
       ∀ f : V → ℝ,

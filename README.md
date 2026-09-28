@@ -168,7 +168,7 @@ The four pairs are `Liouville`, `UniformlyBounded`, `ZeroCase` and
 `Classical.choice` and `Quot.sound`, and `Audit/StatementRegression.lean`
 checks locally that each solution statement is exactly the challenge statement
 and mentions no constant of `UCPlanar`, `LatticeProb` or `Schoenflies`.  The
-comparator was run on all four pairs on 2026-09-24, at commit `767bf10`.
+comparator was run on all four pairs on 2026-09-27, at commit `1f0410f`.
 Every pair passed with the Lean kernel and again with the independent
 nanoda kernel.  Results and reproduction steps are in
 [`Audit/COMPARATOR_RUNS.md`](Audit/COMPARATOR_RUNS.md).  The workflow

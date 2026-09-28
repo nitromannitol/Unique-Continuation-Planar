@@ -26,7 +26,8 @@ theorem UCPlanar.Support.diagonal_laplacian (a b t d : ℝ)
     · simp [UCPlanar.diagonalFunction, LatticeProb.unit, UCPlanar.diagonalStep, hx]
       split_ifs <;> first | omega | norm_num
   · simp only [if_neg he, zero_mul, add_zero]
-    have hx : x 0 ≠ x 1 := UCPlanar.Support.diagonal_parity (x 0) (x 1) (by simpa [Int.even_iff] using he)
+    have hx : x 0 ≠ x 1 :=
+      UCPlanar.Support.diagonal_parity (x 0) (x 1) (by simpa [Int.even_iff] using he)
     by_cases h1 : x 0 = x 1 + 1
     · have hr := UCPlanar.Support.diagonal_recurrence a b (ne_of_gt ha) (ne_of_gt hb) (x 0)
       simp only [h1, add_sub_cancel_right] at hr

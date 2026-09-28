@@ -57,11 +57,13 @@ theorem threeball_iterate (C c₀ : ℝ) (N : ℕ) (M : ℝ)
     M ≤ (2*C)^2 ∨ Real.exp (-c₀ * (N:ℝ)) * C > 1/2 := by
   by_cases hsmall : C * Real.exp (-c₀ * (N:ℝ)) ≤ 1/2
   · left
-    have h2 : C * Real.exp (-c₀ * (N:ℝ)) * M ≤ (1/2) * M := mul_le_mul_of_nonneg_right hsmall (le_of_lt hM)
+    have h2 : C * Real.exp (-c₀ * (N:ℝ)) * M ≤ (1/2) * M := mul_le_mul_of_nonneg_right hsmall
+        (le_of_lt hM)
     have h3 : M ≤ C * Real.sqrt M + (1/2) * M := by linarith
     have h4 : (1/2) * M ≤ C * Real.sqrt M := by linarith
     have h5 : M ≤ 2 * C * Real.sqrt M := by linarith
-    have hs : Real.sqrt M * Real.sqrt M = M := by nlinarith [Real.sq_sqrt (le_of_lt hM), sq_nonneg (Real.sqrt M)]
+    have hs : Real.sqrt M * Real.sqrt M = M := by
+      nlinarith [Real.sq_sqrt (le_of_lt hM), sq_nonneg (Real.sqrt M)]
     have h6 : Real.sqrt M ≤ 2 * C := by nlinarith [h5, hs, Real.sqrt_nonneg M, hC]
     nlinarith [h6, hs, Real.sqrt_nonneg M, hC]
   · right
@@ -374,10 +376,12 @@ theorem iter_geom (C c : ℝ) (N : ℕ) (M : ℕ → ℝ) (_hC : 0 < C) (_hc : 0
   induction j with
   | zero => simp
   | succ j ih =>
-    have h1 : Real.exp (c * ((N:ℝ) * 2^j)) / (2*C) * (Real.exp (c * (N:ℝ) * (2^j - 1)) / (2*C)^j * M 0) ≤ Real.exp (c * ((N:ℝ) * 2^j)) / (2*C) * M j :=
+    have h1 : Real.exp (c * ((N:ℝ) * 2^j)) / (2*C) * (Real.exp (c * (N:ℝ) * (2^j - 1)) / (2*C)^j * M
+        0) ≤ Real.exp (c * ((N:ℝ) * 2^j)) / (2*C) * M j :=
       mul_le_mul_of_nonneg_left ih (by positivity)
     have h2 := hstep j
-    have h3 : Real.exp (c * ((N:ℝ) * 2^j)) / (2*C) * (Real.exp (c * (N:ℝ) * (2^j - 1)) / (2*C)^j * M 0) = Real.exp (c * (N:ℝ) * (2^(j+1) - 1)) / (2*C)^(j+1) * M 0 := by
+    have h3 : Real.exp (c * ((N:ℝ) * 2^j)) / (2*C) * (Real.exp (c * (N:ℝ) * (2^j - 1)) / (2*C)^j * M
+        0) = Real.exp (c * (N:ℝ) * (2^(j+1) - 1)) / (2*C)^(j+1) * M 0 := by
       have hexp : c * ((N:ℝ) * 2^j) + c * (N:ℝ) * (2^j - 1) = c * (N:ℝ) * (2^(j+1) - 1) := by
         rw [pow_succ]; ring
       rw [← hexp, Real.exp_add, pow_succ]
@@ -427,7 +431,8 @@ at the inner scale dominates `exp(bN)` once `b ≤ c/2` and `N` is large enough.
 theorem geom_accum (C c b : ℝ) (N : ℕ) (J : ℕ) (M M' : ℝ)
     (hC : 0 < C) (hC1 : 1 ≤ C) (_hc : 0 < c) (_hb : 0 < b) (_hbc : b ≤ c/2)
     (hM : 2 ≤ M) (hJ : (2:ℝ)^J ≤ 2*Real.sqrt N)
-    (hN : c * Real.sqrt N + Real.log (2*C) * (Real.log (2*Real.sqrt N) / Real.log 2) ≤ (c-b) * (N:ℝ))
+    (hN : c * Real.sqrt N + Real.log (2*C) * (Real.log (2*Real.sqrt N) / Real.log 2) ≤ (c-b) *
+        (N:ℝ))
     (h : Real.exp (c * ((N:ℝ) - Real.sqrt N)) / (2*C)^J * M ≤ M') :
     Real.exp (b * (N:ℝ)) ≤ M' := by
   have hlog2 : 0 < Real.log 2 := Real.log_pos (by norm_num)
@@ -443,10 +448,12 @@ theorem geom_accum (C c b : ℝ) (N : ℕ) (J : ℕ) (M M' : ℝ)
     have := mul_le_mul_of_nonneg_left hJle hlog2C
     linarith [this]
   have hMpos : 0 < M := by linarith
-  have h1 : Real.exp (c * ((N:ℝ) - Real.sqrt N)) / Real.exp (Real.log (2*C) * (Real.log (2*Real.sqrt N) / Real.log 2)) * M ≤ Real.exp (c * ((N:ℝ) - Real.sqrt N)) / (2*C)^J * M := by
+  have h1 : Real.exp (c * ((N:ℝ) - Real.sqrt N)) / Real.exp (Real.log (2*C) * (Real.log (2*Real.sqrt
+      N) / Real.log 2)) * M ≤ Real.exp (c * ((N:ℝ) - Real.sqrt N)) / (2*C)^J * M := by
     apply mul_le_mul_of_nonneg_right _ (le_of_lt hMpos)
     exact div_le_div_of_nonneg_left (Real.exp_pos _).le (by positivity) h2CJ
-  have h2 : Real.exp (b * (N:ℝ)) ≤ Real.exp (c * ((N:ℝ) - Real.sqrt N)) / Real.exp (Real.log (2*C) * (Real.log (2*Real.sqrt N) / Real.log 2)) * M := by
+  have h2 : Real.exp (b * (N:ℝ)) ≤ Real.exp (c * ((N:ℝ) - Real.sqrt N)) / Real.exp (Real.log (2*C) *
+      (Real.log (2*Real.sqrt N) / Real.log 2)) * M := by
     rw [div_mul_eq_mul_div]
     rw [le_div_iff₀ (Real.exp_pos _)]
     rw [← Real.exp_log hMpos]
@@ -463,7 +470,8 @@ exponential lower bound `exp(bN) ≤ M'`. -/
 theorem lower_bound_assembly (C c b : ℝ) (N : ℕ) (J : ℕ) (M M' : ℝ)
     (hC : 0 < C) (hC1 : 1 ≤ C) (hc : 0 < c) (hb : 0 < b) (hbc : b ≤ c/2)
     (hM : 2 ≤ M) (hJ : (2:ℝ)^J ≤ 2*Real.sqrt N)
-    (hN : c * Real.sqrt N + Real.log (2*C) * (Real.log (2*Real.sqrt N) / Real.log 2) ≤ (c-b) * (N:ℝ))
+    (hN : c * Real.sqrt N + Real.log (2*C) * (Real.log (2*Real.sqrt N) / Real.log 2) ≤ (c-b) *
+        (N:ℝ))
     (h : Real.exp (c * ((N:ℝ) - Real.sqrt N)) / (2*C)^J * M ≤ M') :
     Real.exp (b * (N:ℝ)) ≤ M' :=
   geom_accum C c b N J M M' hC hC1 hc hb hbc hM hJ hN h

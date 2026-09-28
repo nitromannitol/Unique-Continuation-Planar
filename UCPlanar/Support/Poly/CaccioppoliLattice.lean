@@ -300,7 +300,8 @@ theorem diff_sq_le_chain {V : Type*} (P : UCPlanar.PeriodicGraph V) (f : V → �
     intro i _
     rcases hstep i with heq | hadj
     · rw [heq, sub_self]
-      simpa using Finset.sum_nonneg (fun w (_ : w ∈ P.graph.neighborFinset (z i)) => sq_nonneg (f (z i) - f w))
+      simpa using Finset.sum_nonneg (fun w (_ : w ∈ P.graph.neighborFinset (z i)) => sq_nonneg (f (z
+          i) - f w))
     · have hmem : z (i+1) ∈ P.graph.neighborFinset (z i) :=
         (SimpleGraph.mem_neighborFinset _ _ _).mpr hadj
       have hsq : (f (z (i+1)) - f (z i)) ^ 2 = (f (z i) - f (z (i+1))) ^ 2 := by ring

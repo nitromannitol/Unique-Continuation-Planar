@@ -3,14 +3,13 @@ import Mathlib
 /-!
 # Theorem 5.1 (`theorem:counterexample`): comparator challenge
 
-Mathlib-only comparator challenge for Theorem 5.1 (`theorem:counterexample`) of Bou-Rabee, Cooperman and Ganguly,
-*Unique continuation on planar graphs* (Discrete Analysis 2025:16).  The certified
-statement is `UCPlanar.Frozen.counterexample`, restated in `UCPlanar/MainTheorems.lean` as
-`UCPlanar.counterexample`.  Content: for positive `A₁ ≠ A₂` and
-`A₃ > 2 A₁² A₂² / ((A₁ - A₂)² (A₁ + A₂))` there is `A₄ > 0` such that the
-square lattice with the crossing conductances `𝓔(A₁, A₂, A₃, A₄)` carries a
-harmonic function with `h(0) = 1` that is nonzero exactly on the diagonal
-`{x₁ = x₂}`.
+Mathlib-only comparator challenge for Theorem 5.1 (`theorem:counterexample`) of Bou-Rabee,
+Cooperman and Ganguly, *Unique continuation on planar graphs* (Discrete Analysis 2025:16). The
+certified statement is `UCPlanar.Frozen.counterexample`, restated in
+`UCPlanar/MainTheorems.lean` as `UCPlanar.counterexample`. Content: for positive `A₁ ≠ A₂` and
+`A₃ > 2 A₁² A₂² / ((A₁ - A₂)² (A₁ + A₂))` there is `A₄ > 0` such that the square lattice with
+the crossing conductances `𝓔(A₁, A₂, A₃, A₄)` carries a harmonic function with `h(0) = 1` that
+is nonzero exactly on the diagonal `{x₁ = x₂}`.
 
 Only Mathlib is imported.  The vocabulary between `VOCABULARY-BEGIN` and
 `VOCABULARY-END` rebuilds, from Mathlib primitives, every definition needed to

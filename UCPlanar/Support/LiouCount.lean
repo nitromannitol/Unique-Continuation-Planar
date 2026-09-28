@@ -13,7 +13,8 @@ theorem UCPlanar.Support.exceptionalCount_le_of_density {V : Type*} (S : Finset 
 := by
   simp only [UCPlanar.boundedDensity] at h
   simp only [UCPlanar.exceptionalCount]
-  have hpart : (S.filter (fun x => |f x| ≤ 1)).card + (S.filter (fun x => 1 < |f x|)).card = S.card := by
+  have hpart : (S.filter (fun x => |f x| ≤ 1)).card + (S.filter (fun x => 1 < |f x|)).card = S.card
+      := by
     simp only [not_le.symm, Finset.card_filter_add_card_filter_not]
   have hpos : (0 : ℝ) < S.card := by exact_mod_cast hcard
   rw [le_div_iff₀ hpos] at h

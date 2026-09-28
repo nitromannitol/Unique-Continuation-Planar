@@ -125,7 +125,7 @@ challenge statement and depends only on `propext`, `Classical.choice` and
 
 **Status.**  All four solutions build, and the statement regression and the
 axiom prints pass locally.  `leanprover/comparator` was run on all four
-pairs on 2026-09-24, at commit `767bf10`.  Every pair passed with the Lean
+pairs on 2026-09-27, at commit `1f0410f`.  Every pair passed with the Lean
 kernel and again with the independent nanoda kernel.  Results and
 reproduction steps are in
 [`COMPARATOR_RUNS.md`](COMPARATOR_RUNS.md).  The workflow

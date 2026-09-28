@@ -177,8 +177,8 @@ namespace UCPlanar.Support
 
 variable {V : Type*} {G : SimpleGraph V}
 
-/-- **The boundary cycle theorem, reduced to two classical inputs.**  Granting Janiszewski's
-theorem at a single point and the two connected base case, every finite edge set whose drawing
+/-- **The boundary cycle theorem, reduced to two classical inputs.**  Granting Janiszewski's theorem
+at a single point and the two connected base case, every finite edge set whose drawing
 separates a point of the plane from infinity carries a cycle that separates it. -/
 theorem hasBoundaryCycles_of_twoConnected (E : UCPlanar.PlaneEmbedding G)
     (hJ : E.EdgeSplitting) (hbase : E.TwoConnectedBoundaryCycles) :

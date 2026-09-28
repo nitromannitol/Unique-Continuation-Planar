@@ -14,7 +14,8 @@ theorem UCPlanar.Support.exists_cycle_vertex_index {V : Type*} {G : SimpleGraph 
   · exact ⟨i, hlt, hi⟩
   · have he : i = γ.length := by omega
     have hz' : o = z := by simpa only [he, SimpleGraph.Walk.getVert_length] using hi
-    exact ⟨0, by have := hγ.three_le_length; omega, by simpa only [SimpleGraph.Walk.getVert_zero] using hz'⟩
+    exact ⟨0, by have := hγ.three_le_length; omega,
+      by simpa only [SimpleGraph.Walk.getVert_zero] using hz'⟩
 
 /-- Distinct contacts on a cycle admit an enumeration in strict cyclic order. -/
 theorem UCPlanar.Support.exists_ordered_cycle_contacts {V I : Type*} {G : SimpleGraph V}

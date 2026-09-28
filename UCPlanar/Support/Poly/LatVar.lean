@@ -85,7 +85,8 @@ theorem latVar_eval_orbit {V : Type*} (P : UCPlanar.PeriodicGraph V) (v : V)
     (p : MvPolynomial (Fin 2) ℝ) (a b : ℤ) :
     MvPolynomial.eval (fun k : Fin 2 => if k = 0 then (a : ℝ) else (b : ℝ)) (latVar P v p)
       = MvPolynomial.eval
-          (P.pos (P.shift ((a : ℤ) • UCPlanar.Support.e₁ + (b : ℤ) • UCPlanar.Support.e₂) v)) p := by
+          (P.pos (P.shift ((a : ℤ) • UCPlanar.Support.e₁ + (b : ℤ) • UCPlanar.Support.e₂) v)) p :=
+              by
   rw [latVar_eval, pos_shift_coord]
 
 end UCPlanar.Support
