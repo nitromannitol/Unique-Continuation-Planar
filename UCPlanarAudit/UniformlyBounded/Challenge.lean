@@ -20,7 +20,7 @@ sets of the plane (copied from the Schoenflies library), plane embeddings and
 their faces, periodic plane graphs with their squares, balls and density
 notions, the crossing conductances of the counterexample, and the cited
 results.  It is a statement-level copy of the definitions the repository uses
-(see `Audit/README.md` for the provenance table) and is byte-identical in all
+(see `UCPlanarAudit/README.md` for the provenance table) and is byte-identical in all
 four challenges.  The sole intentional `sorry` is the proof of the final
 theorem.
 
@@ -41,7 +41,7 @@ statement of `UCPlanar.uniformlyBounded` with every repository and library name 
 its vocabulary copy.  The structures of the vocabulary (`IsCond`,
 `PlaneEmbedding`, `PeriodicGraph`, `PeriodicPlaneGraph`) are new inductive
 types; the solution transports them field by field
-(`Audit/Support/Bridge.lean`).
+(`UCPlanarAudit/Support/UniformlyBoundedBridge.lean`).
 -/
 
 -- VOCABULARY-BEGIN

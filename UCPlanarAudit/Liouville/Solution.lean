@@ -1,16 +1,16 @@
 import Mathlib
 import UCPlanar.MainTheorems
-import Audit.Support.Vocabulary
-import Audit.Support.Bridge
+import UCPlanarAudit.Liouville.SolutionBasic
+import UCPlanarAudit.Support.LiouvilleBridge
 
 /-!
 # Solution: Liouville
 
-The challenge module `Audit/Liouville/Challenge.lean` imports only Mathlib and states the theorem
-with one intentional `sorry`.  This solution imports the repository together with
-`Audit.Support.Vocabulary`, a verbatim copy of the challenge's vocabulary, and proves the
-byte-identical statement from `UCPlanar.liouville` through the bridges in
-`Audit/Support/Bridge.lean`.
+The challenge module `UCPlanarAudit/Liouville/Challenge.lean` imports only Mathlib and states
+the theorem with one intentional `sorry`.  This solution imports the repository together with
+`UCPlanarAudit.Liouville.SolutionBasic`, a verbatim copy of the challenge's vocabulary, and
+proves the byte-identical statement from `UCPlanar.liouville` through the bridge in
+`UCPlanarAudit/Support/LiouvilleBridge.lean`.
 -/
 
 namespace UCPlanarAudit

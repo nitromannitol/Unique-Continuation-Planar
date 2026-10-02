@@ -1,0 +1,14 @@
+{
+  "challenge_module": "UCPlanarAudit.ZeroCase.Challenge",
+  "solution_module": "UCPlanarAudit.ZeroCase.Solution",
+  "theorem_names": [
+    "UCPlanarAudit.zeroCase"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

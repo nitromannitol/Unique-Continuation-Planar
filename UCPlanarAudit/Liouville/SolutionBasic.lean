@@ -1,47 +1,14 @@
 import Mathlib
 
 /-!
-# Theorem 1.1 (`theorem:liouville`): comparator challenge
+# Mathlib-only statement vocabulary for the `Liouville` comparator solution
 
-Mathlib-only comparator challenge for Theorem 1.1 (`theorem:liouville`) of Bou-Rabee,
-Cooperman and Ganguly, *Unique continuation on planar graphs* (Discrete Analysis 2025:16). The
-certified statement is `UCPlanar.Frozen.liouville`, restated in `UCPlanar/MainTheorems.lean`
-as `UCPlanar.liouville`. Content: for conductances on a periodic plane graph that are
-invariant under the translation lattice there is `ε > 0` such that every function harmonic on
-the whole graph, whose set `{|f| ≤ 1}` has a density limit at least `1 - ε` in the
-graph-metric balls about some vertex, is constant.
-
-Only Mathlib is imported.  The vocabulary between `VOCABULARY-BEGIN` and
-`VOCABULARY-END` rebuilds, from Mathlib primitives, every definition needed to
-read the theorem: lattice sites, graph-metric balls, conductances, the network
-Laplacian and harmonic functions (copied from `Lattice-Probability`), polygonal
-sets of the plane (copied from the Schoenflies library), plane embeddings and
-their faces, periodic plane graphs with their squares, balls and density
-notions, the crossing conductances of the counterexample, and the cited
-results.  It is a statement-level copy of the definitions the repository uses
-(see `Audit/README.md` for the provenance table) and is byte-identical in all
-four challenges.  The sole intentional `sorry` is the proof of the final
-theorem.
-
-## Cited results
-
-The paper uses results from the literature without proof.  The repository
-does not prove them either: each is a proposition taken as an explicit
-hypothesis, and this challenge carries the same hypotheses, restated in the
-vocabulary:
-   * `External.MoserEstimate`: the discrete Moser estimate (Delmotte 1999, Proposition 5.3);
-   * `External.EdgeSplitting`: Janiszewski's theorem at a point (Newman, Chapter V, Theorem 9.3);
-   * `External.Unicoherence`: unicoherence of the sphere, as connected face frontiers
-     (Newman, Chapter VI).
-
-## Presentation deltas
-
-None at the level of the displayed statement: the theorem below is the
-statement of `UCPlanar.liouville` with every repository and library name replaced by
-its vocabulary copy.  The structures of the vocabulary (`IsCond`,
-`PlaneEmbedding`, `PeriodicGraph`, `PeriodicPlaneGraph`) are new inductive
-types; the solution transports them field by field
-(`Audit/Support/Bridge.lean`).
+Verbatim copy of the vocabulary block of `UCPlanarAudit/Liouville/Challenge.lean`
+(between `VOCABULARY-BEGIN` and `VOCABULARY-END`); a mechanical copy, not
+hand-edited.  It imports only Mathlib, so the definitions it declares elaborate
+exactly as they do in the challenge, and the comparator's constant-by-constant
+closure check passes; `bash UCPlanarAudit/check_standalone.sh --vocabulary` checks that
+the two blocks are byte-identical.
 -/
 
 -- VOCABULARY-BEGIN
@@ -344,19 +311,3 @@ end External
 
 end UCPlanarAudit
 -- VOCABULARY-END
-
-namespace UCPlanarAudit
-
-/-- Theorem 1.1 (`theorem:liouville`). -/
-theorem liouville {V : Type*} (P : PeriodicPlaneGraph V)
-    (c : V → V → ℝ) (hc : IsCond P.graph c)
-    (hp : P.toPeriodicGraph.PeriodicConductance c)
-    (hMos : External.MoserEstimate P.toPeriodicGraph c)
-    (hES : External.EdgeSplitting P.embedding)
-    (hU : External.Unicoherence P.embedding) :
-    ∃ ε : ℝ, 0 < ε ∧ ∀ (o : V) (f : V → ℝ),
-      HarmonicOn P.graph c f Set.univ →
-      P.toPeriodicGraph.HasBoundedDensity o f ε → ∃ a : ℝ, ∀ x, f x = a := by
-  sorry
-
-end UCPlanarAudit

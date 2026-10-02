@@ -13,11 +13,12 @@ require mathlib from git
 require «schoenflies-lean» from git
   "https://github.com/alonamaloh/schoenflies-lean.git" @ "05a43d29cde026618777db3d4e4316204ccca237"
 
-/-- The comparator audit surface (`Audit/*/Challenge.lean`, `Audit/*/Solution.lean` and
-`Audit/Support/`).  Not a default target: it builds only on demand (`lake build Audit`), so the
-ordinary build of `UCPlanar` is unchanged. -/
-lean_lib «Audit» where
-  globs := #[.submodules `Audit]
+/-- The comparator audit surface (`UCPlanarAudit/*/Challenge.lean`,
+`UCPlanarAudit/*/SolutionBasic.lean`, `UCPlanarAudit/*/Solution.lean` and
+`UCPlanarAudit/Support/`).  Not a default target: it builds only on demand
+(`lake build UCPlanarAudit`), so the ordinary build of `UCPlanar` is unchanged. -/
+lean_lib «UCPlanarAudit» where
+  globs := #[.submodules `UCPlanarAudit]
   leanOptions := #[
     ⟨`autoImplicit, false⟩,
     ⟨`relaxedAutoImplicit, false⟩,

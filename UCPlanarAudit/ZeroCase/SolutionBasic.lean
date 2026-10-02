@@ -1,40 +1,14 @@
 import Mathlib
 
 /-!
-# Theorem 5.1 (`theorem:counterexample`): comparator challenge
+# Mathlib-only statement vocabulary for the `ZeroCase` comparator solution
 
-Mathlib-only comparator challenge for Theorem 5.1 (`theorem:counterexample`) of Bou-Rabee,
-Cooperman and Ganguly, *Unique continuation on planar graphs* (Discrete Analysis 2025:16). The
-certified statement is `UCPlanar.Frozen.counterexample`, restated in
-`UCPlanar/MainTheorems.lean` as `UCPlanar.counterexample`. Content: for positive `A₁ ≠ A₂` and
-`A₃ > 2 A₁² A₂² / ((A₁ - A₂)² (A₁ + A₂))` there is `A₄ > 0` such that the square lattice with
-the crossing conductances `𝓔(A₁, A₂, A₃, A₄)` carries a harmonic function with `h(0) = 1` that
-is nonzero exactly on the diagonal `{x₁ = x₂}`.
-
-Only Mathlib is imported.  The vocabulary between `VOCABULARY-BEGIN` and
-`VOCABULARY-END` rebuilds, from Mathlib primitives, every definition needed to
-read the theorem: lattice sites, graph-metric balls, conductances, the network
-Laplacian and harmonic functions (copied from `Lattice-Probability`), polygonal
-sets of the plane (copied from the Schoenflies library), plane embeddings and
-their faces, periodic plane graphs with their squares, balls and density
-notions, the crossing conductances of the counterexample, and the cited
-results.  It is a statement-level copy of the definitions the repository uses
-(see `Audit/README.md` for the provenance table) and is byte-identical in all
-four challenges.  The sole intentional `sorry` is the proof of the final
-theorem.
-
-## Cited results
-
-None: the theorem, like its library counterpart, uses no cited result.
-
-## Presentation deltas
-
-None at the level of the displayed statement: the theorem below is the
-statement of `UCPlanar.counterexample` with every repository and library name replaced by
-its vocabulary copy.  The structures of the vocabulary (`IsCond`,
-`PlaneEmbedding`, `PeriodicGraph`, `PeriodicPlaneGraph`) are new inductive
-types; the solution transports them field by field
-(`Audit/Support/Bridge.lean`).
+Verbatim copy of the vocabulary block of `UCPlanarAudit/ZeroCase/Challenge.lean`
+(between `VOCABULARY-BEGIN` and `VOCABULARY-END`); a mechanical copy, not
+hand-edited.  It imports only Mathlib, so the definitions it declares elaborate
+exactly as they do in the challenge, and the comparator's constant-by-constant
+closure check passes; `bash UCPlanarAudit/check_standalone.sh --vocabulary` checks that
+the two blocks are byte-identical.
 -/
 
 -- VOCABULARY-BEGIN
@@ -337,18 +311,3 @@ end External
 
 end UCPlanarAudit
 -- VOCABULARY-END
-
-namespace UCPlanarAudit
-
-/-- Theorem 5.1 (`theorem:counterexample`). -/
-theorem counterexample (a b t : ℝ) (ha : 0 < a) (hb : 0 < b)
-    (hab : a ≠ b) (ht : 2*a^2*b^2 / ((a-b)^2*(a+b)) < t) :
-    ∃ d : ℝ, 0 < d ∧ ∃ lf : crossingGraph.LocallyFinite,
-      IsCond crossingGraph (crossingConductance a b t d) ∧
-      ∃ f : Site 2 → ℝ,
-        @HarmonicOn _ crossingGraph lf
-          (crossingConductance a b t d) f Set.univ ∧
-        f 0 = 1 ∧ ∀ x, f x ≠ 0 ↔ x 0 = x 1 := by
-  sorry
-
-end UCPlanarAudit

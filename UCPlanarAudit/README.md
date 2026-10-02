@@ -1,4 +1,4 @@
-# Audit Comparator Surface
+# UCPlanarAudit Comparator Surface
 
 This directory contains Mathlib-only comparator challenges for the four main
 theorems of the formalization of *Unique continuation on planar graphs*
@@ -80,19 +80,21 @@ repository's.
 
 ## Solutions
 
-Each `Solution.lean` imports the repository together with
-`Audit/Support/Vocabulary.lean`, a verbatim copy of the vocabulary block that
-imports only Mathlib, and proves the byte-identical statement from the
-corresponding theorem of `UCPlanar/MainTheorems.lean` through the bridges in
-`Audit/Support/Bridge.lean` (see [`DESIGN.md`](DESIGN.md)).
+Each pair has the same four files.
 
-`Audit/StatementRegression.lean` is a local check of the statement-identity
-part of the comparator: it elaborates each statement in the challenge
-environment (`Audit/Support/Statements.lean`, which imports only Mathlib and
-the vocabulary), checks that each solution theorem has exactly that type and
-the same universe parameters, and that it mentions no constant of the
-namespaces `UCPlanar`, `LatticeProb` or `Schoenflies`, and prints the axioms
-of each solution theorem.
+| File | Content |
+| --- | --- |
+| `<Pair>/Challenge.lean` | imports `Mathlib` only; vocabulary block, statement, one `sorry` |
+| `<Pair>/SolutionBasic.lean` | imports `Mathlib` only; the vocabulary block of the challenge, copied mechanically |
+| `<Pair>/Solution.lean` | imports the library, `<Pair>/SolutionBasic.lean` and `Support/<Pair>Bridge.lean`; the byte-identical statement with its proof |
+| `<Pair>/comparator.json` | challenge module, solution module, theorem name, permitted axioms, nanoda enabled |
+
+Each `Solution.lean` proves the byte-identical statement from the corresponding theorem of
+`UCPlanar/MainTheorems.lean` through the bridge `Support/<Pair>Bridge.lean`, which converts the
+structures of the vocabulary to the repository's field by field (see [`DESIGN.md`](DESIGN.md)).
+There is no file shared between two solutions.  The comparator itself checks that each
+solution theorem has the statement of its challenge, constant by constant through the whole
+dependency closure, and that its closure rests on Mathlib and the permitted axioms alone.
 
 ## Reproducing The Checks
 
@@ -102,31 +104,35 @@ The comparator configurations permit only
 ["propext", "Quot.sound", "Classical.choice"]
 ```
 
-and set `enable_nanoda: false`.  Each challenge elaborates standalone against
-this repository's Mathlib toolchain, e.g.
+and enable the nanoda replay.  Each challenge elaborates standalone against this repository's
+Mathlib toolchain, e.g.
 
 ```bash
-bash Audit/check_standalone.sh Audit/Liouville/Challenge.lean
-bash Audit/check_standalone.sh --vocabulary
+bash UCPlanarAudit/check_standalone.sh UCPlanarAudit/Liouville/Challenge.lean
+bash UCPlanarAudit/check_standalone.sh --vocabulary   # Challenge vs SolutionBasic, per pair
 ```
 
-with expected outcome `rc=0` and exactly one `declaration uses 'sorry'`
-warning per challenge; the second command checks that the vocabulary block is
-the same in every challenge and in `Audit/Support/Vocabulary.lean`.  The
-solutions and the regression build with
+with expected outcome `rc=0` and exactly one `declaration uses 'sorry'` warning per challenge;
+the second command checks that the vocabulary block of each challenge is byte-identical to
+that of its `SolutionBasic.lean`.  The solutions build with
 
 ```bash
-lake build Audit.StatementRegression
+lake build UCPlanarAudit
 ```
 
-which prints, for each of the four theorems, that it is identical to the
-challenge statement and depends only on `propext`, `Classical.choice` and
-`Quot.sound`.
+Then, with `leanprover/comparator`, `lean4export` (at the toolchain's tag), `landrun` and
+`nanoda` built at the pins in [`COMPARATOR_RUNS.md`](COMPARATOR_RUNS.md), from the repository
+root:
 
-**Status.**  All four solutions build, and the statement regression and the
-axiom prints pass locally.  `leanprover/comparator` passes on all four
-pairs, with the Lean kernel and again with the independent nanoda kernel.
-Results and reproduction steps are in
-[`COMPARATOR_RUNS.md`](COMPARATOR_RUNS.md).  The workflow
-[`.github/workflows/comparator.yml`](../.github/workflows/comparator.yml)
-runs the same check on request.
+```bash
+COMPARATOR_LANDRUN=<landrun> COMPARATOR_LEAN4EXPORT=<lean4export> COMPARATOR_NANODA=<nanoda_bin> \
+  lake env <comparator>/.lake/build/bin/comparator UCPlanarAudit/<Pair>/comparator.json
+```
+
+expecting `Your solution is okay!`.
+
+**Status.**  All four solutions build.  `leanprover/comparator` passes on all four pairs, with
+the Lean kernel and again with the independent nanoda kernel.  Results and reproduction steps
+are in [`COMPARATOR_RUNS.md`](COMPARATOR_RUNS.md).  The workflow
+[`.github/workflows/comparator.yml`](../.github/workflows/comparator.yml) runs the same check
+on request.

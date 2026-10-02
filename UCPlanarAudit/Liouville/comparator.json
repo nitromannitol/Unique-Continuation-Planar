@@ -1,0 +1,14 @@
+{
+  "challenge_module": "UCPlanarAudit.Liouville.Challenge",
+  "solution_module": "UCPlanarAudit.Liouville.Solution",
+  "theorem_names": [
+    "UCPlanarAudit.liouville"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

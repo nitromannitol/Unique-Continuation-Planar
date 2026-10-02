@@ -1,0 +1,14 @@
+{
+  "challenge_module": "UCPlanarAudit.UniformlyBounded.Challenge",
+  "solution_module": "UCPlanarAudit.UniformlyBounded.Solution",
+  "theorem_names": [
+    "UCPlanarAudit.uniformlyBounded"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

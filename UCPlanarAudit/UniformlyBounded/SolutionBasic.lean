@@ -1,46 +1,14 @@
 import Mathlib
 
 /-!
-# Theorem 1.3 (`theorem:zero-case`): comparator challenge
+# Mathlib-only statement vocabulary for the `UniformlyBounded` comparator solution
 
-Mathlib-only comparator challenge for Theorem 1.3 (`theorem:zero-case`) of Bou-Rabee,
-Cooperman and Ganguly, *Unique continuation on planar graphs* (Discrete Analysis 2025:16). The
-certified statement is `UCPlanar.Frozen.zeroCase`, restated in `UCPlanar/MainTheorems.lean` as
-`UCPlanar.zeroCase`. Content: on a periodic plane graph there are `ε₀ > 0` and `n₀` such that
-for arbitrary positive conductances, every `n ≥ n₀`, every `ε < ε₀` and every function
-harmonic on `B_{2n}` that is nonzero on at most `ε |B_{2n}|` vertices of `B_{2n}`, `f`
-vanishes on `B_n`.
-
-Only Mathlib is imported.  The vocabulary between `VOCABULARY-BEGIN` and
-`VOCABULARY-END` rebuilds, from Mathlib primitives, every definition needed to
-read the theorem: lattice sites, graph-metric balls, conductances, the network
-Laplacian and harmonic functions (copied from `Lattice-Probability`), polygonal
-sets of the plane (copied from the Schoenflies library), plane embeddings and
-their faces, periodic plane graphs with their squares, balls and density
-notions, the crossing conductances of the counterexample, and the cited
-results.  It is a statement-level copy of the definitions the repository uses
-(see `Audit/README.md` for the provenance table) and is byte-identical in all
-four challenges.  The sole intentional `sorry` is the proof of the final
-theorem.
-
-## Cited results
-
-The paper uses results from the literature without proof.  The repository
-does not prove them either: each is a proposition taken as an explicit
-hypothesis, and this challenge carries the same hypotheses, restated in the
-vocabulary:
-   * `External.EdgeSplitting`: Janiszewski's theorem at a point (Newman, Chapter V, Theorem 9.3);
-   * `External.Unicoherence`: unicoherence of the sphere, as connected face frontiers
-     (Newman, Chapter VI).
-
-## Presentation deltas
-
-None at the level of the displayed statement: the theorem below is the
-statement of `UCPlanar.zeroCase` with every repository and library name replaced by
-its vocabulary copy.  The structures of the vocabulary (`IsCond`,
-`PlaneEmbedding`, `PeriodicGraph`, `PeriodicPlaneGraph`) are new inductive
-types; the solution transports them field by field
-(`Audit/Support/Bridge.lean`).
+Verbatim copy of the vocabulary block of `UCPlanarAudit/UniformlyBounded/Challenge.lean`
+(between `VOCABULARY-BEGIN` and `VOCABULARY-END`); a mechanical copy, not
+hand-edited.  It imports only Mathlib, so the definitions it declares elaborate
+exactly as they do in the challenge, and the comparator's constant-by-constant
+closure check passes; `bash UCPlanarAudit/check_standalone.sh --vocabulary` checks that
+the two blocks are byte-identical.
 -/
 
 -- VOCABULARY-BEGIN
@@ -343,21 +311,3 @@ end External
 
 end UCPlanarAudit
 -- VOCABULARY-END
-
-namespace UCPlanarAudit
-
-/-- Theorem 1.3 (`theorem:zero-case`). -/
-theorem zeroCase {V : Type*} (P : PeriodicPlaneGraph V)
-    (hES : External.EdgeSplitting P.embedding)
-    (hU : External.Unicoherence P.embedding) :
-    ∃ ε₀ : ℝ, 0 < ε₀ ∧ ∃ n₀ : ℕ, 0 < n₀ ∧
-      ∀ (c : V → V → ℝ), IsCond P.graph c →
-      ∀ (o : V) (n : ℕ), n₀ ≤ n → ∀ ε : ℝ, 0 ≤ ε → ε < ε₀ →
-      ∀ f : V → ℝ,
-        HarmonicOn P.graph c f (closedBall P.graph o (2*n)) →
-        (exceptionalCount (P.toPeriodicGraph.ball o (2*n)) f 0 : ℝ) ≤
-          ε * (P.toPeriodicGraph.ball o (2*n)).card →
-        ∀ x ∈ P.toPeriodicGraph.ball o n, f x = 0 := by
-  sorry
-
-end UCPlanarAudit

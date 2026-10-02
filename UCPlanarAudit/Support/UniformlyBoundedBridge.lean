@@ -1,19 +1,25 @@
 import Mathlib
 import UCPlanar.MainTheorems
-import Audit.Support.Vocabulary
+import UCPlanarAudit.UniformlyBounded.SolutionBasic
 
 /-!
-# Bridges from the Mathlib-only vocabulary to the repository
+# Bridge from the `UniformlyBounded` vocabulary to the repository
 
-The challenge vocabulary (`Audit/Support/Vocabulary.lean`, namespace `UCPlanarAudit`) is a
-statement-level copy of the repository definitions and of the definitions it uses from
-`Lattice-Probability` and the Schoenflies library.  Plain definitions over shared Mathlib types
-(`closedBall`, `netLaplacian`, `HarmonicOn`, `insideOf`, `crossingGraph`,
-`crossingConductance`, …) are definitionally equal to their counterparts.  The structures
-(`IsCond`, `PlaneEmbedding`, `PeriodicGraph`, `PeriodicPlaneGraph`) are new inductive types, so
-this file converts between them field by field; the recursive `poly` is a new recursive
-definition, and `poly_eq` proves it equal to `Schoenflies.poly` by induction.  From these, each
-cited-result proposition of the vocabulary implies the repository's.
+The vocabulary of `UCPlanarAudit/UniformlyBounded/Challenge.lean` (copied verbatim into
+`UCPlanarAudit/UniformlyBounded/SolutionBasic.lean`, which imports only Mathlib; namespace
+`UCPlanarAudit`) is a statement-level copy of the repository definitions and of the definitions
+it uses from `Lattice-Probability` and the Schoenflies library.  Plain definitions over shared
+Mathlib types (`closedBall`, `netLaplacian`, `HarmonicOn`, …) are definitionally equal to their
+counterparts.  The structures (`IsCond`, `PlaneEmbedding`, `PeriodicGraph`,
+`PeriodicPlaneGraph`) are new inductive types, so this file converts between them field by
+field; the recursive `poly` is a new recursive definition, and `poly_eq` proves it equal to
+`Schoenflies.poly` by induction.  From these, each cited-result proposition of the vocabulary
+that the theorem carries (`EdgeSplitting`, `Unicoherence`) implies the repository's.
+
+It is imported by `UCPlanarAudit/UniformlyBounded/Solution.lean` only.  The `Challenge` and
+`SolutionBasic` files must stay Mathlib-only: a repository import inside the vocabulary
+changes instance elaboration there and breaks the comparator's constant-by-constant closure
+check.
 -/
 
 namespace UCPlanarAudit.Bridge
@@ -83,11 +89,6 @@ theorem edgeSplitting {G : SimpleGraph V} (E : UCPlanarAudit.PlaneEmbedding G)
 
 theorem unicoherence {G : SimpleGraph V} (E : UCPlanarAudit.PlaneEmbedding G)
     (h : UCPlanarAudit.External.Unicoherence E) : UCPlanar.External.Unicoherence (toPE E) :=
-  h
-
-theorem moserEstimate (P : UCPlanarAudit.PeriodicGraph V) (c : V → V → ℝ)
-    (h : UCPlanarAudit.External.MoserEstimate P c) :
-    UCPlanar.External.MoserEstimate (toPG P) c :=
   h
 
 end Graph

@@ -29,14 +29,15 @@ newline retained, are hashed by `tools/freeze.py` and checked by
 The main results are additionally exposed, stated in full, in
 [`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean), each proved by
 `exact` of its certified statement, and all four are restated over a
-Mathlib-only vocabulary for the comparator (see [`Audit/`](Audit/)).
+Mathlib-only vocabulary for the comparator (see
+[`UCPlanarAudit/`](UCPlanarAudit/)).
 
 | Source | Main theorem | Certified statement | Comparator |
 |---|---|---|---|
-| Theorem 1.1, `theorem:liouville` | `UCPlanar.liouville` | `UCPlanar.Frozen.liouville` | `Audit/Liouville/` |
-| Theorem 1.2, `theorem:uniformly-bounded` | `UCPlanar.uniformlyBounded` | `UCPlanar.Frozen.uniformlyBounded` | `Audit/UniformlyBounded/` |
-| Theorem 1.3, `theorem:zero-case` | `UCPlanar.zeroCase` | `UCPlanar.Frozen.zeroCase` | `Audit/ZeroCase/` |
-| Theorem 5.1, `theorem:counterexample` | `UCPlanar.counterexample` | `UCPlanar.Frozen.counterexample` | `Audit/Counterexample/` |
+| Theorem 1.1, `theorem:liouville` | `UCPlanar.liouville` | `UCPlanar.Frozen.liouville` | `UCPlanarAudit/Liouville/` |
+| Theorem 1.2, `theorem:uniformly-bounded` | `UCPlanar.uniformlyBounded` | `UCPlanar.Frozen.uniformlyBounded` | `UCPlanarAudit/UniformlyBounded/` |
+| Theorem 1.3, `theorem:zero-case` | `UCPlanar.zeroCase` | `UCPlanar.Frozen.zeroCase` | `UCPlanarAudit/ZeroCase/` |
+| Theorem 5.1, `theorem:counterexample` | `UCPlanar.counterexample` | `UCPlanar.Frozen.counterexample` | `UCPlanarAudit/Counterexample/` |
 
 ## Registered statements
 

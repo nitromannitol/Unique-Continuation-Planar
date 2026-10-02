@@ -137,9 +137,9 @@ radius, function, density or conductance parameter is bound before it.
 
 ## Guarantees
 
-- **No `sorry`** in the library.  The four comparator challenges under `Audit/`
-  each contain one intentional statement-level `sorry`, which the corresponding
-  solution file proves.
+- **No `sorry`** in the library.  The four comparator challenges under
+  `UCPlanarAudit/` each contain one intentional statement-level `sorry`, which
+  the corresponding solution file proves.
 - **No custom axiom.**  The four main theorems depend only on mathlib's
   standard axioms `propext`, `Classical.choice` and `Quot.sound`.
   [`UCPlanar/Meta/AxiomsAudit.lean`](UCPlanar/Meta/AxiomsAudit.lean) prints
@@ -149,28 +149,27 @@ radius, function, density or conductance parameter is bound before it.
 - **Independent check of the statements.**  So that the main claims can be read
   without trusting the 26,000-line development, each main theorem is restated
   using only Mathlib, with no project or library definitions, in
-  [`Audit/Liouville/Challenge.lean`](Audit/Liouville/Challenge.lean),
-  [`Audit/UniformlyBounded/Challenge.lean`](Audit/UniformlyBounded/Challenge.lean),
-  [`Audit/ZeroCase/Challenge.lean`](Audit/ZeroCase/Challenge.lean) and
-  [`Audit/Counterexample/Challenge.lean`](Audit/Counterexample/Challenge.lean).
+  [`UCPlanarAudit/Liouville/Challenge.lean`](UCPlanarAudit/Liouville/Challenge.lean),
+  [`UCPlanarAudit/UniformlyBounded/Challenge.lean`](UCPlanarAudit/UniformlyBounded/Challenge.lean),
+  [`UCPlanarAudit/ZeroCase/Challenge.lean`](UCPlanarAudit/ZeroCase/Challenge.lean) and
+  [`UCPlanarAudit/Counterexample/Challenge.lean`](UCPlanarAudit/Counterexample/Challenge.lean).
   Each challenge rebuilds the model from Mathlib primitives (lattice sites,
   graph balls, conductances, the network Laplacian and harmonic functions as in
   `Lattice-Probability`; polygonal sets as in the Schoenflies library; plane
   embeddings, faces, periodic plane graphs and their density notions; the
   crossing conductances of Theorem 5.1; and the cited results it assumes), and
   the corresponding `Solution.lean` proves the byte-identical statement from the
-  library through the bridges in `Audit/Support/`.  The configurations in
-  `Audit/*/comparator.json` are for
+  library through the bridge of its pair in `UCPlanarAudit/Support/`, over a
+  Mathlib-only copy of the challenge's vocabulary (`SolutionBasic.lean`).  The
+  configurations in `UCPlanarAudit/*/comparator.json` are for
   [`leanprover/comparator`](https://github.com/leanprover/comparator), which
   confirms that the two statements have identical elaborated types and that the
   proof reduces to the three standard axioms; the workflow
   [`.github/workflows/comparator.yml`](.github/workflows/comparator.yml) runs it
-  on request.  `Audit/StatementRegression.lean` checks locally that each
-  solution statement is exactly the challenge statement and mentions no
-  constant of `UCPlanar`, `LatticeProb` or `Schoenflies`.  Every pair passed the
-  comparator with the Lean kernel and again with the independent nanoda kernel.
-  See [`Audit/README.md`](Audit/README.md) and
-  [`Audit/COMPARATOR_RUNS.md`](Audit/COMPARATOR_RUNS.md).
+  on request.  Every pair passed the comparator with the Lean kernel and again
+  with the independent nanoda kernel.  See
+  [`UCPlanarAudit/README.md`](UCPlanarAudit/README.md) and
+  [`UCPlanarAudit/COMPARATOR_RUNS.md`](UCPlanarAudit/COMPARATOR_RUNS.md).
 - **Pinned toolchain.**  Lean `v4.32.0`, `mathlib` at revision
   `81a5d257c8e410db227a6665ed08f64fea08e997`, `Lattice-Probability` at commit
   `9d44b4d` and `schoenflies-lean` at commit `05a43d29`, recorded in
@@ -198,8 +197,7 @@ lake build           # compile the project
 
 ```bash
 lake build UCPlanar.Meta.AxiomsAudit   # print the axioms of the four main theorems
-lake build Audit                       # the comparator challenges and solutions
-lake build Audit.StatementRegression
+lake build UCPlanarAudit               # the comparator challenges and solutions
 ```
 
 To use the library, `import UCPlanar` pulls in the whole development; the main
@@ -236,7 +234,7 @@ UCPlanar/
   Meta/               AxiomsAudit.lean
   Basic.lean          bounded density, exceptional count, uniform ellipticity
 UCPlanar.lean         the root module (imports the whole library)
-Audit/                Mathlib-only comparator challenges and solutions
+UCPlanarAudit/        Mathlib-only comparator challenges and solutions
 ASSUMPTIONS.md        the cited results assumed, with their Lean statements (generated)
 CORRESPONDENCE.md     paper ↔ Lean, node by node
 PROOF.md              the mathematics of the proof and the Lean tree
@@ -278,7 +276,7 @@ This formalization is built on [Lean 4](https://lean-lang.org),
 and the Schoenflies library
 [`schoenflies-lean`](https://github.com/alonamaloh/schoenflies-lean) of Álvaro
 Begué, which supplies the planar Jordan and crosscut theorems; the comparator
-audit in [`Audit/`](Audit/) is set up for
+audit in [`UCPlanarAudit/`](UCPlanarAudit/) is set up for
 [`leanprover/comparator`](https://github.com/leanprover/comparator).
 
 ## License

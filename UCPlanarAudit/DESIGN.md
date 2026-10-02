@@ -1,11 +1,26 @@
 # Comparator design memo: vocabulary, bridges, deltas
 
 This memo records how the four comparator pairs are built, for whoever checks
-or extends them.  The files are `Audit/<Thm>/Challenge.lean`,
-`Audit/<Thm>/Solution.lean`, `Audit/Support/Vocabulary.lean` (the
-Mathlib-only copy of the vocabulary), `Audit/Support/Bridge.lean` (the
-transports), `Audit/Support/Statements.lean` and
-`Audit/StatementRegression.lean` (the local statement check).
+or extends them.  Each pair `<Pair>` (`Liouville`, `UniformlyBounded`, `ZeroCase`,
+`Counterexample`) has a directory `UCPlanarAudit/<Pair>/` with four files, and one bridge,
+`UCPlanarAudit/Support/<Pair>Bridge.lean`.
+
+- `Challenge.lean` imports `Mathlib` and nothing else.  It rebuilds from Mathlib
+  primitives every object the theorem mentions, states the theorem, and ends in a single
+  `sorry`.  This file is the object of trust: a reader checks what it says, not how it is
+  proved.
+- `SolutionBasic.lean` is a verbatim, mechanical copy of the vocabulary block of
+  `Challenge.lean` (between `VOCABULARY-BEGIN` and `VOCABULARY-END`).  It imports only
+  `Mathlib`, so the vocabulary elaborates in the solution exactly as in the challenge.
+- `Solution.lean` imports the library together with `SolutionBasic` and the bridge of its
+  pair, restates the challenge theorem byte-for-byte, and proves it from the library's
+  verified statement.
+- `comparator.json` names the challenge module, the solution module, the theorem and the
+  permitted axioms (`propext`, `Classical.choice`, `Quot.sound`), with the nanoda kernel
+  enabled.
+
+`UCPlanarAudit/Support/<Pair>Bridge.lean` is part of the solution of its pair and imports
+that pair's `SolutionBasic` only; no file is shared between two pairs.
 
 ## 0. Solution architecture
 
@@ -14,17 +29,21 @@ as the challenge theorem, constant by constant through the whole dependency
 closure.  So the vocabulary constants must elaborate in the solution exactly
 as in the challenge.  As in the comparator pattern of the `CoarseGraining` and
 `Superdiffusion` repositories, the vocabulary is therefore compiled in a module
-that imports **only Mathlib** (`Audit/Support/Vocabulary.lean`, the analogue
-of their per-challenge `SolutionBasic.lean`), and `Solution.lean` imports the
-repository, that module, and the bridges, and states the theorem with the
-challenge's bytes.
+that imports **only Mathlib** (`UCPlanarAudit/<Pair>/SolutionBasic.lean`), and
+`Solution.lean` imports the repository, that module, and the bridge of its pair, and states
+the theorem with the challenge's bytes.
 
-The four challenges share one vocabulary block, byte-identical in each
-(`bash Audit/check_standalone.sh --vocabulary`), so one `Vocabulary.lean`
-serves all four solutions.  The block contains definitions that a given
-challenge does not use (for instance the crossing conductances in the three
-challenges on periodic plane graphs); they do not enter that theorem's
-dependency closure.
+The four challenges share one vocabulary block, byte-identical in each, and
+each `SolutionBasic.lean` carries that block
+(`bash UCPlanarAudit/check_standalone.sh --vocabulary` compares each challenge with its
+`SolutionBasic.lean`).  The block contains definitions that a given challenge does not use
+(for instance the crossing conductances in the three challenges on periodic plane graphs);
+they do not enter that theorem's dependency closure.
+
+The bridges keep only what their solution uses.  `LiouvilleBridge` carries all the
+conversions; `UniformlyBoundedBridge` and `ZeroCaseBridge` omit `moserEstimate`, the cited
+result that their theorems do not carry; `CounterexampleBridge` carries `isCond_iff`
+alone.
 
 ## 1. Definitionally shared vocabulary
 
@@ -97,16 +116,17 @@ library.
   in the statements depends on the library beyond what the vocabulary
   displays; a reader still has to check the vocabulary against the paper.
 
-## 6. Checks beyond the local regression
+## 6. Checks by the comparator
 
 - **Instance environments.**  The solutions import both the repository
   and the vocabulary, and both declare the local finiteness of a periodic
-  graph as an instance (`attribute [instance] PeriodicGraph.locallyFinite`).
-  `Audit/StatementRegression.lean` checks that no solution statement picked up
-  a repository or library constant, in particular not the repository's
-  instance.
-- **The comparator's closure check.**  The local regression compares the
-  solution types with the challenge-environment types up to the auxiliary proof
-  lemmas that a `def` abstracts; the comparator's own closure check is
-  stricter, and every pair passes it, with the Lean kernel and again with the
-  independent nanoda kernel (see `Audit/COMPARATOR_RUNS.md`).
+  graph as an instance (`attribute [instance] PeriodicGraph.locallyFinite`).  The
+  comparator elaborates the solution statement and the challenge statement and compares them
+  constant by constant, so a statement that picked up a repository or library constant, in
+  particular the repository's instance, is rejected.
+- **No local regression file.**  A local file that elaborated every solution statement in the
+  challenge environment would have to import the four per-pair vocabularies at once, and they
+  declare the same names.  The comparator itself checks each solution statement against its
+  challenge and the closure of each solution against Mathlib, with the Lean kernel and again
+  with the independent nanoda kernel; every pair passes (see
+  `UCPlanarAudit/COMPARATOR_RUNS.md`).

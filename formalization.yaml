@@ -16,7 +16,7 @@ project:
     point, unicoherence of the sphere and the discrete Moser estimate) are
     explicit hypotheses of the theorems that use them; the classical Liouville
     theorem for periodic networks and the discrete Remez inequality are proved.
-    The four main theorems are independently checked using the Audit/
+    The four main theorems are independently checked using the UCPlanarAudit/
     comparator pairs.
   authors:
     - "Ahmed Bou-Rabee"
@@ -80,7 +80,7 @@ status:
     replaces by a direct proof on the periodic plane graph.  The main theorems
     are stated in full in UCPlanar/MainTheorems.lean; all four are
     additionally restated over a Mathlib-only vocabulary for the Lean
-    comparator (Audit/).
+    comparator (UCPlanarAudit/).
   sorry_count: 0
   sorry_count_scope: "UCPlanar production library only"
   comparator_challenge_sorry_count: 4
@@ -94,7 +94,7 @@ status:
       file: "UCPlanar/MainTheorems.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "Audit/Liouville/comparator.json"
+      comparator_config: "UCPlanarAudit/Liouville/comparator.json"
       literature_dependencies:
         - statement: "The discrete Moser estimate (UCPlanar.External.MoserEstimate), carried as an explicit hypothesis"
           source: "Delmotte 1999, Proposition 5.3"
@@ -106,7 +106,7 @@ status:
       file: "UCPlanar/MainTheorems.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "Audit/UniformlyBounded/comparator.json"
+      comparator_config: "UCPlanarAudit/UniformlyBounded/comparator.json"
       literature_dependencies:
         - statement: "Janiszewski's theorem at a point (UCPlanar.External.EdgeSplitting), carried as an explicit hypothesis"
           source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3"
@@ -116,7 +116,7 @@ status:
       file: "UCPlanar/MainTheorems.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "Audit/ZeroCase/comparator.json"
+      comparator_config: "UCPlanarAudit/ZeroCase/comparator.json"
       literature_dependencies:
         - statement: "Janiszewski's theorem at a point (UCPlanar.External.EdgeSplitting), carried as an explicit hypothesis"
           source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3"
@@ -126,13 +126,13 @@ status:
       file: "UCPlanar/MainTheorems.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "Audit/Counterexample/comparator.json"
+      comparator_config: "UCPlanarAudit/Counterexample/comparator.json"
       literature_dependencies: []
     - declaration: "UCPlanarAudit.liouville"
-      file: "Audit/Liouville/Solution.lean"
+      file: "UCPlanarAudit/Liouville/Solution.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "Audit/Liouville/comparator.json"
+      comparator_config: "UCPlanarAudit/Liouville/comparator.json"
       literature_dependencies:
         - statement: "The discrete Moser estimate, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
           source: "Delmotte 1999, Proposition 5.3"
@@ -141,30 +141,30 @@ status:
         - statement: "Unicoherence of the sphere, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
           source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere"
     - declaration: "UCPlanarAudit.uniformlyBounded"
-      file: "Audit/UniformlyBounded/Solution.lean"
+      file: "UCPlanarAudit/UniformlyBounded/Solution.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "Audit/UniformlyBounded/comparator.json"
+      comparator_config: "UCPlanarAudit/UniformlyBounded/comparator.json"
       literature_dependencies:
         - statement: "Janiszewski's theorem at a point, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
           source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3"
         - statement: "Unicoherence of the sphere, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
           source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere"
     - declaration: "UCPlanarAudit.zeroCase"
-      file: "Audit/ZeroCase/Solution.lean"
+      file: "UCPlanarAudit/ZeroCase/Solution.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "Audit/ZeroCase/comparator.json"
+      comparator_config: "UCPlanarAudit/ZeroCase/comparator.json"
       literature_dependencies:
         - statement: "Janiszewski's theorem at a point, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
           source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3"
         - statement: "Unicoherence of the sphere, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
           source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere"
     - declaration: "UCPlanarAudit.counterexample"
-      file: "Audit/Counterexample/Solution.lean"
+      file: "UCPlanarAudit/Counterexample/Solution.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "Audit/Counterexample/comparator.json"
+      comparator_config: "UCPlanarAudit/Counterexample/comparator.json"
       literature_dependencies: []
 
 automation:
@@ -197,9 +197,9 @@ automation:
         SHA-256 of its text, and the tools/ checkers verify the hashes, the
         axiom closure of every node, a warning-free build, the paper anchors
         and the quantifier order.  The Lean comparator (leanprover/comparator)
-        was run on all four Audit pairs, and every pair passed with the Lean
-        kernel and again with the independent nanoda kernel; results and
-        reproduction steps are in Audit/COMPARATOR_RUNS.md.
+        was run on all four UCPlanarAudit pairs, and every pair passed with
+        the Lean kernel and again with the independent nanoda kernel; results
+        and reproduction steps are in UCPlanarAudit/COMPARATOR_RUNS.md.
         .github/workflows/comparator.yml runs it on request.
       cost:
         wall_time: "about two weeks of calendar time"
@@ -217,11 +217,11 @@ automation:
     and Mathlib; the verified library contains no sorry and no custom axiom.
     The results the paper cites without proof enter as explicit hypotheses, not
     axioms.  The Mathlib-only comparator challenge files
-    (Audit/*/Challenge.lean) each contain exactly one intentional
+    (UCPlanarAudit/*/Challenge.lean) each contain exactly one intentional
     statement-level sorry (the theorem body), which is filled by the
-    corresponding Audit/*/Solution.lean.  The dependencies Lattice-Probability
-    and schoenflies-lean are separate formalizations, not written for this
-    repository.
+    corresponding UCPlanarAudit/*/Solution.lean.  The dependencies
+    Lattice-Probability and schoenflies-lean are separate formalizations, not
+    written for this repository.
 
 fidelity:
   divergences: >-
@@ -252,22 +252,22 @@ alignment:
       lean: "UCPlanar.liouville"
       module: "UCPlanar.MainTheorems"
       status: "proved"
-      note: "Certified statement UCPlanar.Frozen.liouville (N-001). Comparator challenge Audit/Liouville/."
+      note: "Certified statement UCPlanar.Frozen.liouville (N-001). Comparator challenge UCPlanarAudit/Liouville/."
     - source: "Theorem 1.2 (theorem:uniformly-bounded)"
       lean: "UCPlanar.uniformlyBounded"
       module: "UCPlanar.MainTheorems"
       status: "proved"
-      note: "Certified statement UCPlanar.Frozen.uniformlyBounded (N-002). Comparator challenge Audit/UniformlyBounded/."
+      note: "Certified statement UCPlanar.Frozen.uniformlyBounded (N-002). Comparator challenge UCPlanarAudit/UniformlyBounded/."
     - source: "Theorem 1.3 (theorem:zero-case)"
       lean: "UCPlanar.zeroCase"
       module: "UCPlanar.MainTheorems"
       status: "proved"
-      note: "Certified statement UCPlanar.Frozen.zeroCase (N-003). Comparator challenge Audit/ZeroCase/."
+      note: "Certified statement UCPlanar.Frozen.zeroCase (N-003). Comparator challenge UCPlanarAudit/ZeroCase/."
     - source: "Theorem 5.1 (theorem:counterexample)"
       lean: "UCPlanar.counterexample"
       module: "UCPlanar.MainTheorems"
       status: "proved"
-      note: "Certified statement UCPlanar.Frozen.counterexample (N-005). Comparator challenge Audit/Counterexample/."
+      note: "Certified statement UCPlanar.Frozen.counterexample (N-005). Comparator challenge UCPlanarAudit/Counterexample/."
     - source: "Lemma 2.1 (lemma:topological-lemma)"
       lean: "UCPlanar.Frozen.topological"
       module: "UCPlanar.Frozen.Topological"

@@ -18,8 +18,8 @@ lake build           # compile the project
 
 The production build is required to emit no Lean or linter warnings
 (`python3 tools/check_warnings.py`).  The four Mathlib-only files
-`Audit/*/Challenge.lean` are the sole exception: each contains one documented
-statement-level `sorry`, checked against its completed solution by
+`UCPlanarAudit/*/Challenge.lean` are the sole exception: each contains one
+documented statement-level `sorry`, checked against its completed solution by
 `leanprover/comparator`.
 
 A few practical notes for working with this development:
@@ -42,8 +42,8 @@ A few practical notes for working with this development:
 
 - **The main results** are in `UCPlanar/MainTheorems.lean`; the axiom audit is
   `lake build UCPlanar.Meta.AxiomsAudit`, and the comparator surface is
-  `lake build Audit`.  The audit module is deliberately not imported by the
-  library root, so it is built only as an explicit target.
+  `lake build UCPlanarAudit`.  The audit module is deliberately not imported by
+  the library root, so it is built only as an explicit target.
 
 ## Elaboration policy for new files
 

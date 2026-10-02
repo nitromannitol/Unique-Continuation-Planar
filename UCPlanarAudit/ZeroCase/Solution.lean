@@ -1,16 +1,16 @@
 import Mathlib
 import UCPlanar.MainTheorems
-import Audit.Support.Vocabulary
-import Audit.Support.Bridge
+import UCPlanarAudit.ZeroCase.SolutionBasic
+import UCPlanarAudit.Support.ZeroCaseBridge
 
 /-!
 # Solution: ZeroCase
 
-The challenge module `Audit/ZeroCase/Challenge.lean` imports only Mathlib and states the theorem
-with one intentional `sorry`.  This solution imports the repository together with
-`Audit.Support.Vocabulary`, a verbatim copy of the challenge's vocabulary, and proves the
-byte-identical statement from `UCPlanar.zeroCase` through the bridges in
-`Audit/Support/Bridge.lean`.
+The challenge module `UCPlanarAudit/ZeroCase/Challenge.lean` imports only Mathlib and states the
+theorem with one intentional `sorry`.  This solution imports the repository together with
+`UCPlanarAudit.ZeroCase.SolutionBasic`, a verbatim copy of the challenge's vocabulary, and
+proves the byte-identical statement from `UCPlanar.zeroCase` through the bridge in
+`UCPlanarAudit/Support/ZeroCaseBridge.lean`.
 -/
 
 namespace UCPlanarAudit
