@@ -351,7 +351,7 @@ Q_{C√N/3}. Hence f > 1 at every vertex of Q_K, for K = ⌈√N⌉, in the tran
 of Q_{⌊√N⌋} where f ≥ 2. These vertices form a fixed positive fraction of Q_K ∩ V, which contradicts
 the density hypothesis at the scale K for ε sufficiently small."
 
-Proposition A.3 now has the outer square Q_{kN}, and on a periodic graph it holds at squares
+Proposition A.3 has the outer square Q_{kN}, and on a periodic graph it holds at squares
 centred at points of L, which the translations provide. Three-ball inequalities alone cannot force
 growth, since a harmonic function with |f| ≤ 2 satisfies all of them; the starting constant comes
 from the gradient estimate, which on the square lattice is standard and on a periodic graph is
