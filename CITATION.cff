@@ -11,7 +11,9 @@ abstract: >-
   of the appendix, and non-planar periodic conductances on Z^2 with a harmonic
   function supported on a diagonal (Theorem 5.1).  Three results the paper
   cites without proof are taken as explicit hypotheses.  The development
-  contains no sorry and no custom axiom.
+  contains no sorry and no custom axiom; each of the four Mathlib-only
+  comparator challenges contains one intentional statement-level sorry whose
+  completed solution is checked separately.
 type: software
 authors:
   - family-names: Bou-Rabee
@@ -24,7 +26,6 @@ keywords:
   - discrete harmonic functions
   - planar graphs
 license: Apache-2.0
-# Add a Zenodo DOI here once an archived release is minted.
 repository-code: "https://github.com/nitromannitol/Unique-Continuation-Planar"
 references:
   - type: article
@@ -40,4 +41,7 @@ references:
     year: 2025
     doi: "10.19086/da.144015"
     url: "https://doi.org/10.19086/da.144015"
+    identifiers:
+      - type: other
+        value: "arXiv:2309.13728"
     notes: "The paper formalized by this repository."

@@ -409,14 +409,14 @@ of every bounded face is connected. It is consumed by `N-003`, `N-002` and
 `N-001`.
 
 The classical Liouville theorem for a periodic network, recalled at
-`ucplanar.tex:159`, is proved rather than cited: `LiouCHeat`, `LiouKilled` and
+`ucplanar.tex:159`, is proved here, not assumed: `LiouCHeat`, `LiouKilled` and
 `LiouPeriodic` show that a periodic network is recurrent — the Nash-Williams
 criterion applied to the boundary cuts of the coordinate boxes, whose total
 conductance grows at most linearly in the radius — and that on a recurrent
 network every bounded harmonic function is constant.
 
 The discrete Remez inequality of Buhovsky, Logunov, Malinnikova and Sodin,
-Corollary 2.2, cited at `ucplanar.tex:489`, is proved rather than cited:
+Corollary 2.2, cited at `ucplanar.tex:489`, is proved here, not assumed:
 `RemezCheb`, `RemezLagrange`, `RemezMeasure` and `RemezDiscrete` show that a
 real polynomial of degree at most `m` with `m < R`, bounded by `A` on at least
 half of the integer points of `[-R, R]`, is bounded by `A (16R/(R-m))^m` on the

@@ -67,7 +67,7 @@ Mathlib-only vocabulary for the comparator (see [`Audit/`](Audit/)).
 | N-001, N-006, N-008 | `UCPlanar.External.MoserEstimate P c` | The discrete Moser estimate on the periodic network, inherited from the polynomial approximation lemma, which the proof applies at the scale fixed by the outer radius. N-008 consumes it twice, through the three-ball proposition and through the derivative bound that supplies the gradient estimate along one lattice generator; N-001 inherits it from N-008. |
 
 The classical Liouville theorem for the periodic network, recalled at
-ucplanar.tex:159, is proved rather than cited: a periodic network is recurrent
+ucplanar.tex:159, is proved here, not assumed: a periodic network is recurrent
 by the Nash-Williams criterion applied to the boundary cuts of the coordinate
 boxes, whose total conductance grows at most linearly in the radius, and on a
 recurrent network every bounded harmonic function is constant
@@ -75,7 +75,7 @@ recurrent network every bounded harmonic function is constant
 `UCPlanar/Support/LiouPeriodic.lean`).
 
 The discrete Remez inequality of Buhovsky, Logunov, Malinnikova and Sodin,
-Corollary 2.2, cited at ucplanar.tex:489, is proved rather than cited: between
+Corollary 2.2, cited at ucplanar.tex:489, is proved here, not assumed: between
 consecutive points of the dense set at least `|S| - m` unit intervals contain
 no root of the derivative, so the set where the polynomial is bounded has
 positive Lebesgue measure, and the sharp Remez inequality — proved by Bojanov's
@@ -120,5 +120,5 @@ density bound, with alternating-crosscut intersection as an explicit hypothesis.
 
 The general Jordan curve and crosscut theorems are imported from the pinned
 [Schoenflies library](https://github.com/alonamaloh/schoenflies-lean).
-The passage from embedded graph cycles to its Jordan-curve interface remains
-part of the topological node.
+The passage from embedded graph cycles to its Jordan-curve interface is part of
+the topological node.

@@ -97,18 +97,16 @@ library.
   in the statements depends on the library beyond what the vocabulary
   displays; a reader still has to check the vocabulary against the paper.
 
-## 6. Uncertainties
+## 6. Checks beyond the local regression
 
-- **U1 (instance environments).**  The solutions import both the repository
+- **Instance environments.**  The solutions import both the repository
   and the vocabulary, and both declare the local finiteness of a periodic
   graph as an instance (`attribute [instance] PeriodicGraph.locallyFinite`).
   `Audit/StatementRegression.lean` checks that no solution statement picked up
   a repository or library constant, in particular not the repository's
   instance.
-- **U2 (resolved).**  `leanprover/comparator` was run on these pairs on
-  2026-09-24, at commit `767bf10`, and every pair passed with the Lean
-  kernel and again with the independent nanoda kernel; see
-  `Audit/COMPARATOR_RUNS.md`.  The local regression compares the solution
-  types with the challenge-environment types up to the auxiliary proof
+- **The comparator's closure check.**  The local regression compares the
+  solution types with the challenge-environment types up to the auxiliary proof
   lemmas that a `def` abstracts; the comparator's own closure check is
-  stricter.
+  stricter, and every pair passes it, with the Lean kernel and again with the
+  independent nanoda kernel (see `Audit/COMPARATOR_RUNS.md`).
