@@ -171,58 +171,24 @@ automation:
   methods:
     - method: "agent"
       models:
-        - "claude-fable-5-1"
-        - "claude-opus-5"
-        - "claude-opus-5-5"
-        - "gpt-6-astra"
-        - "deepseek-v4.1-flash"
-        - "kimi-code/k3-256k"
-        - "glm-5.3"
-        - "glm-5.3-flash"
-        - "claude-sonnet-5"
-        - "gpt-6-luna"
-        - "gpt-5.6-luna"
+        - "Claude Opus 5.5"
+        - "Claude Sonnet 5"
+        - "Claude Opus 5"
+        - "DeepSeek v4.1 Flash"
       framework: >-
-        Claude Code (Anthropic) for the Claude models; Codex CLI (OpenAI) for
-        the gpt models (gpt-6-astra with reasoning ultra); Kimi Code CLI for
-        kimi-code/k3-256k (thinking high); scripted API agent loops for
-        deepseek-v4.1-flash (thinking low); scripted API fan-outs for the GLM
-        models
+        Claude Code (Anthropic) and the Pi agent harness, directing the models above; the author
+        supervised the work and is responsible for the formalization.
       tool_setup: >-
-        Lake builds under leanprover/lean4:v4.32.0 with Mathlib at revision
-        81a5d257c8e410db227a6665ed08f64fea08e997, Lattice-Probability at
-        commit 9d44b4d4670df393bb86ac5a4e042f215001cddf and schoenflies-lean
-        at commit 05a43d29cde026618777db3d4e4316204ccca237.  A frozen-statement
-        manifest (ledger/manifest.yaml) pins each registered statement by the
-        SHA-256 of its text, and the tools/ checkers verify the hashes, the
-        axiom closure of every node, a warning-free build, the paper anchors
-        and the quantifier order.  The Lean comparator (leanprover/comparator)
-        was run on all four UCPlanarAudit pairs, and every pair passed with
-        the Lean kernel and again with the independent nanoda kernel; results
-        and reproduction steps are in UCPlanarAudit/COMPARATOR_RUNS.md.
-        .github/workflows/comparator.yml runs it on request.
+        Lake builds under the pinned Lean toolchain and Mathlib revision. Every change is gated by
+        the axiom-closure and warning-free-build checks, and the public CI runs the Mathlib-only
+        comparator challenge/solution pairs against leanprover/comparator, lean4export and landrun
+        at the revisions recorded in .github/workflows/.
       cost:
-        wall_time: "about two weeks of calendar time"
-        spend_usd: "not tracked (subscription and API accounts)"
-        hardware: "a 20-thread Intel i9-9900X / 125 GB RAM Ubuntu machine"
+        spend_usd: "not separately tracked (subscription and API accounts)"
+        hardware: "one Ubuntu workstation"
       prompting_notes: >-
-        Human-directed agent work, closely supervised by the author, who decided
-        every statement-level question.  Every statement was pinned before its
-        proof was attempted, and proofs were accepted only through the manifest
-        and axiom gates.
-  spend_usd: "not tracked (subscription and API accounts)"
-  notes: >-
-    All Lean code in this repository was written by the listed models under the
-    close supervision of the author.  Every proof is checked by the Lean kernel
-    and Mathlib; the verified library contains no sorry and no custom axiom.
-    The results the paper cites without proof enter as explicit hypotheses, not
-    axioms.  The Mathlib-only comparator challenge files
-    (UCPlanarAudit/*/Challenge.lean) each contain exactly one intentional
-    statement-level sorry (the theorem body), which is filled by the
-    corresponding UCPlanarAudit/*/Solution.lean.  The dependencies
-    Lattice-Probability and schoenflies-lean are separate formalizations, not
-    written for this repository.
-
+        Human-directed agent work, closely supervised by the author. Statement differences from the
+        paper are disclosed under fidelity.
 fidelity:
   divergences: >-
     The Lean statements transcribe paper/ucplanar.tex, which is
