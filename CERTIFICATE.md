@@ -24,7 +24,7 @@ carried as explicit hypotheses together with each theorem's own hypotheses.
 | Paper (`paper/ucplanar.tex`) SHA-256 | `0a97204bffb598a59580eb3fc8537af56ab4eb79f76900086cdadc9b6b00b311` |
 | Build | succeeded, 9004 jobs |
 | Build warnings | 0 |
-| Generated | 2026-09-27 |
+| Generated | 2026-10-04 |
 
 ## Reproducing it
 
@@ -50,20 +50,20 @@ nowhere below.
 
 | # | node | Lean name | state | paper | axiom closure |
 |---|---|---|---|---|---|
-| 1 | `N-005` | `UCPlanar.Frozen.counterexample` | `SEALED` | `theorem:counterexample` | classical only |
-| 2 | `N-004` | `UCPlanar.Frozen.topological` | `SEALED` | `lemma:topological-lemma` | classical only |
-| 3 | `N-003` | `UCPlanar.Frozen.zeroCase` | `SEALED` | `theorem:zero-case` | classical only |
-| 4 | `N-002` | `UCPlanar.Frozen.uniformlyBounded` | `SEALED` | `theorem:uniformly-bounded` | classical only |
+| 1 | `N-005` | `UCPlanar.Frozen.counterexample` | `PROVED` | `theorem:counterexample` | classical only |
+| 2 | `N-004` | `UCPlanar.Frozen.topological` | `PROVED` | `lemma:topological-lemma` | classical only |
+| 3 | `N-003` | `UCPlanar.Frozen.zeroCase` | `PROVED` | `theorem:zero-case` | classical only |
+| 4 | `N-002` | `UCPlanar.Frozen.uniformlyBounded` | `PROVED` | `theorem:uniformly-bounded` | classical only |
 | 5 | `X-007` | `UCPlanar.External.MoserEstimate` | `FROZEN` | lines 441-446 | assumed (a cited theorem, stated as a proposition) |
-| 6 | `N-007` | `UCPlanar.Frozen.polynomialApproximation` | `SEALED` | `lemma:poly-approx` | classical only |
+| 6 | `N-007` | `UCPlanar.Frozen.polynomialApproximation` | `PROVED` | `lemma:poly-approx` | classical only |
 | 7 | `X-002` | `UCPlanar.External.EdgeSplitting` | `FROZEN` | lines 285-309 | assumed (a cited theorem, stated as a proposition) |
 | 8 | `X-003` | `UCPlanar.External.Unicoherence` | `FROZEN` | lines 285-309 | assumed (a cited theorem, stated as a proposition) |
-| 9 | `N-006` | `UCPlanar.Frozen.threeBall` | `SEALED` | `prop:three-ball` | classical only |
-| 10 | `N-008` | `UCPlanar.Frozen.periodicLowerBound` | `SEALED` | `theorem:lower-bound` | classical only |
-| 11 | `N-001` | `UCPlanar.Frozen.liouville` | `SEALED` | `theorem:liouville` | classical only |
+| 9 | `N-006` | `UCPlanar.Frozen.threeBall` | `PROVED` | `prop:three-ball` | classical only |
+| 10 | `N-008` | `UCPlanar.Frozen.periodicLowerBound` | `PROVED` | `theorem:lower-bound` | classical only |
+| 11 | `N-001` | `UCPlanar.Frozen.liouville` | `PROVED` | `theorem:liouville` | classical only |
 
 All 8 theorem declarations have axiom closures contained in the three
-classical axioms. The 8 theorem nodes are `SEALED`; the 3 external
+classical axioms. The 0 theorem nodes are `SEALED`; the 3 external
 definitions are `FROZEN`. A clean definition does not supply a proof of its
 proposition.
 

@@ -45,17 +45,17 @@ Mathlib-only vocabulary for the comparator (see
 
 | id | Lean | paper | state |
 |---|---|---|---|
-| `N-005` | `UCPlanar.Frozen.counterexample` | `ucplanar.tex:368-373`, `theorem:counterexample` | SEALED |
-| `N-004` | `UCPlanar.Frozen.topological` | `ucplanar.tex:222-231`, `lemma:topological-lemma` | SEALED |
-| `N-003` | `UCPlanar.Frozen.zeroCase` | ucplanar.tex:187-190 (theorem:zero-case) | SEALED |
-| `N-002` | `UCPlanar.Frozen.uniformlyBounded` | ucplanar.tex:175-181 (theorem:uniformly-bounded) | SEALED |
+| `N-005` | `UCPlanar.Frozen.counterexample` | `ucplanar.tex:368-373`, `theorem:counterexample` | PROVED |
+| `N-004` | `UCPlanar.Frozen.topological` | `ucplanar.tex:222-231`, `lemma:topological-lemma` | PROVED |
+| `N-003` | `UCPlanar.Frozen.zeroCase` | ucplanar.tex:187-190 (theorem:zero-case) | PROVED |
+| `N-002` | `UCPlanar.Frozen.uniformlyBounded` | ucplanar.tex:175-181 (theorem:uniformly-bounded) | PROVED |
 | `X-007` | `UCPlanar.External.MoserEstimate` | ucplanar.tex:441-446 (the discrete Moser estimate cited in the proof of lemma:poly-approx) | FROZEN |
-| `N-007` | `UCPlanar.Frozen.polynomialApproximation` | `ucplanar.tex:427-434`, `lemma:poly-approx` | SEALED |
+| `N-007` | `UCPlanar.Frozen.polynomialApproximation` | `ucplanar.tex:427-434`, `lemma:poly-approx` | PROVED |
 | `X-002` | `UCPlanar.External.EdgeSplitting` | ucplanar.tex:285-309 (Step 3 of section 3, the boundary cycle of the filled cluster) | FROZEN |
 | `X-003` | `UCPlanar.External.Unicoherence` | ucplanar.tex:285-309 (Step 3 of section 3, the face walks along the frontier of a face) | FROZEN |
-| `N-006` | `UCPlanar.Frozen.threeBall` | `ucplanar.tex:457-469`, `prop:three-ball` | SEALED |
-| `N-008` | `UCPlanar.Frozen.periodicLowerBound` | `ucplanar.tex:411-422`, `theorem:lower-bound` | SEALED |
-| `N-001` | `UCPlanar.Frozen.liouville` | ucplanar.tex:161-167 (theorem:liouville) | SEALED |
+| `N-006` | `UCPlanar.Frozen.threeBall` | `ucplanar.tex:457-469`, `prop:three-ball` | PROVED |
+| `N-008` | `UCPlanar.Frozen.periodicLowerBound` | `ucplanar.tex:411-422`, `theorem:lower-bound` | PROVED |
+| `N-001` | `UCPlanar.Frozen.liouville` | ucplanar.tex:161-167 (theorem:liouville) | PROVED |
 
 <!-- FROZEN-SURFACE-END -->
 
