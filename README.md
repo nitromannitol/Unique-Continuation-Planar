@@ -166,7 +166,7 @@ radius, function, density or conductance parameter is bound before it.
   confirms that the two statements have identical elaborated types and that the
   proof reduces to the three standard axioms; the workflow
   [`.github/workflows/comparator.yml`](.github/workflows/comparator.yml) runs it
-  on request.  Every pair passed the comparator with the Lean kernel and again
+  on relevant changes to `main` or by manual dispatch.  Every pair passed the comparator with the Lean kernel and again
   with the independent nanoda kernel.  See
   [`UCPlanarAudit/README.md`](UCPlanarAudit/README.md) and
   [`UCPlanarAudit/COMPARATOR_RUNS.md`](UCPlanarAudit/COMPARATOR_RUNS.md).
