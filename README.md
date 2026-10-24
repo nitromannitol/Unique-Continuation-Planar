@@ -255,7 +255,11 @@ lakefile.lean, lake-manifest.json, lean-toolchain   the pinned build
 
 ## How this was built
 
-The Lean code was written by AI coding agents under the close supervision of the author; the models, tooling and cost are disclosed in [`formalization.yaml`](formalization.yaml).
+The Lean code was written with AI assistance, using models from Anthropic (Claude) and
+DeepSeek, under the direction of the author. Every proof is checked by the Lean kernel. The
+models, tooling, cost and review status are disclosed in [`formalization.yaml`](formalization.yaml),
+following the [mathlib-initiative](https://github.com/mathlib-initiative/formalization.yaml)
+standard.
 
 ## Authors, citation, acknowledgements
 

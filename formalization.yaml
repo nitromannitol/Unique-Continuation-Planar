@@ -37,7 +37,7 @@ sources:
       The formalizer is an author of the source.  The Lean statements transcribe
       paper/ucplanar.tex, which is arXiv:2309.13728v2 with the corrections
       listed in paper/CHANGES_FROM_ARXIV.md.
-    license: ""                 # TODO(author): the license under which the paper is published
+    license: "CC-BY-4.0"
     author_endorsement: "n/a"   # the formalizer is an author of the source
 
 related_formalizations:
