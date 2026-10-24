@@ -1,19 +1,21 @@
-# Unique-Continuation-Planar
+# Unique continuation on planar graphs
 
 A machine-checked **Lean 4** formalization of the paper
-[*Unique continuation on planar graphs*](https://doi.org/10.19086/da.144015)
-(Ahmed Bou-Rabee, William Cooperman and Shirshendu Ganguly, Discrete Analysis
-2025:16; arXiv:2309.13728), built on [`mathlib`](https://github.com/leanprover-community/mathlib4),
-the shared library [`Lattice-Probability`](https://github.com/nitromannitol/Lattice-Probability)
-(`LatticeProb`), and the Schoenflies library
+
+> Ahmed Bou-Rabee, William Cooperman and Shirshendu Ganguly,
+> [*Unique continuation on planar graphs*](https://doi.org/10.19086/da.144015),
+> Discrete Analysis 2025:16; arXiv:2309.13728.
+
+The development is built on [mathlib](https://github.com/leanprover-community/mathlib4), the shared library
+[Lattice-Probability](https://github.com/nitromannitol/Lattice-Probability) (`LatticeProb`), and the Schoenflies library
 [`schoenflies-lean`](https://github.com/alonamaloh/schoenflies-lean).
 
 Every theorem, lemma and proposition of the paper is formalized and proved, in
 the form in which the paper states it.  Three results that the paper cites from
 the literature enter as explicit hypotheses of the theorems that use them.
 
-[![CI](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/build.yml/badge.svg)](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/build.yml)
-[![Comparator audit](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/comparator.yml/badge.svg)](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/comparator.yml)
+[![CI](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/build.yml)
+[![Comparator audit](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/comparator.yml/badge.svg?branch=main)](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/comparator.yml)
 
 ## What is proved
 
