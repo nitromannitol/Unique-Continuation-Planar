@@ -1,6 +1,10 @@
+module
+
 /- Coordinate transport to the square-lattice contour and winding library. -/
-import LatticeProb.Site
-import LatticeProb.Lattice.Planar
+public import LatticeProb.Site
+public import LatticeProb.Lattice.Planar
+
+@[expose] public section
 
 /-- The coordinate identification of the two square-lattice site types. -/
 def UCPlanar.Support.planarSiteEquiv :

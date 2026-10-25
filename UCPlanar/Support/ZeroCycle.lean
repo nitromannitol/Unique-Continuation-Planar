@@ -1,10 +1,14 @@
+module
+
 /- Step 3 of Section 3: the cycle around the filled cluster of faces meeting the set where the
 harmonic function is large, and the linear lower bound it forces on the number of such vertices
 near the chosen sphere. -/
-import UCPlanar.Support.ZeroGeom
-import UCPlanar.Support.PlanarMetric
-import UCPlanar.Frozen.Topological
-import Mathlib
+public import UCPlanar.Support.ZeroGeom
+public import UCPlanar.Support.PlanarMetric
+public import UCPlanar.Frozen.Topological
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

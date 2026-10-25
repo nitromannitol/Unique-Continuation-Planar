@@ -1,8 +1,12 @@
+module
+
 /- The banded sign step of Section 4: at a positive threshold a vertex of small value which is
 adjacent to a value beyond the band is adjacent to a value beyond the band of the opposite sign,
 and the face path of Step 3 either reaches both signs or stops inside the band. -/
-import UCPlanar.Support.TopoFacePath
-import Mathlib
+public import UCPlanar.Support.TopoFacePath
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

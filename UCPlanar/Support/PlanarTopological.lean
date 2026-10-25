@@ -1,7 +1,11 @@
+module
+
 /- Quantitative continuation on a cycle from alternating-crosscut intersection. -/
-import UCPlanar.Support.Periodic
-import UCPlanar.Support.PlanarReduction
-import UCPlanar.Support.PlanarMetric
+public import UCPlanar.Support.Periodic
+public import UCPlanar.Support.PlanarReduction
+public import UCPlanar.Support.PlanarMetric
+
+@[expose] public section
 
 open scoped Classical
 

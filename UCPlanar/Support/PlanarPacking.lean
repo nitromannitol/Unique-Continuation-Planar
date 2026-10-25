@@ -1,6 +1,10 @@
+module
+
 /- Finite separated subsets and bounded-neighborhood counting. -/
-import UCPlanar.Support.Density
-import Mathlib.Data.Finset.Max
+public import UCPlanar.Support.Density
+public import Mathlib.Data.Finset.Max
+
+@[expose] public section
 
 open scoped Classical
 

@@ -1,8 +1,12 @@
+module
+
 /- Plane embeddings whose edges are drawn by polygonal arcs, and the finite plane graph that a
 finite set of edges draws. -/
-import UCPlanar.Support.TopoBlock
-import Schoenflies.OuterChain
-import Mathlib
+public import UCPlanar.Support.TopoBlock
+public import Schoenflies.OuterChain
+public import Mathlib
+
+@[expose] public section
 
 open Set unitInterval
 open scoped Classical

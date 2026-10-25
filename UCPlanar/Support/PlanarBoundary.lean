@@ -1,6 +1,10 @@
+module
+
 /- Boundary contacts and complementary components of plane walks. -/
-import UCPlanar.Support.PlanarInterior
-import Mathlib.Topology.Order.IntermediateValue
+public import UCPlanar.Support.PlanarInterior
+public import Mathlib.Topology.Order.IntermediateValue
+
+@[expose] public section
 
 open scoped Classical
 

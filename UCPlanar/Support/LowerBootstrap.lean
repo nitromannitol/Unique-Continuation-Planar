@@ -1,3 +1,5 @@
+module
+
 /-
 The bootstrap constant of the exponential lower bound.
 
@@ -8,7 +10,9 @@ increment inside the orbit box of half-side `⌊√N⌋` would be below `1/(8⌊
 propagate to the whole orbit box, and the orbit box would be an exceptional set too large for the
 density hypothesis at that scale.
 -/
-import UCPlanar.Support.LowerBoot
+public import UCPlanar.Support.LowerBoot
+
+@[expose] public section
 
 open scoped Classical BigOperators
 set_option autoImplicit false

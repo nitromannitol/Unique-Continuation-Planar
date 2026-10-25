@@ -1,7 +1,11 @@
+module
+
 /- The boundary cycle of a cluster: a bounded open plane region whose frontier is covered by the
 drawing of a finite edge set is enclosed by a cycle of that edge set, drawn on that frontier. -/
-import UCPlanar.Support.TopoEdgeWalk
-import Mathlib
+public import UCPlanar.Support.TopoEdgeWalk
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

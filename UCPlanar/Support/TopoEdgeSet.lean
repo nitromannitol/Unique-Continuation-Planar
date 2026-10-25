@@ -1,6 +1,10 @@
+module
+
 /- The drawing of a set of edges of a plane graph, and its splitting at a single common vertex. -/
-import UCPlanar.Support.TopoSeparate
-import Mathlib
+public import UCPlanar.Support.TopoSeparate
+public import Mathlib
+
+@[expose] public section
 
 open Set
 

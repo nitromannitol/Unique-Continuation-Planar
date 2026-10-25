@@ -1,4 +1,8 @@
-import UCPlanar.Support.TopoMinimal
+module
+
+public import UCPlanar.Support.TopoMinimal
+
+@[expose] public section
 
 /-!
 # Cited input: Janiszewski's theorem for edge-set drawings

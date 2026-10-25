@@ -1,9 +1,13 @@
+module
+
 /-
 Weighted graph and finite-domain density vocabulary.
 Graph balls, conductances and harmonicity are provided by the shared library.
 -/
-import LatticeProb.Network.Basic
-import LatticeProb.Site
+public import LatticeProb.Network.Basic
+public import LatticeProb.Site
+
+@[expose] public section
 
 open scoped Classical
 

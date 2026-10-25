@@ -1,3 +1,5 @@
+module
+
 /-
 The three-ball inequality at a square centred at a lattice point.
 
@@ -7,9 +9,11 @@ translation is an automorphism of the graph which preserves the conductance and 
 coordinate realization, so the translated inequality is the frozen one applied to the translated
 function.
 -/
-import UCPlanar.Frozen.ThreeBall
-import UCPlanar.Support.Poly.Elliptic
-import UCPlanar.Support.Poly.Square
+public import UCPlanar.Frozen.ThreeBall
+public import UCPlanar.Support.Poly.Elliptic
+public import UCPlanar.Support.Poly.Square
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

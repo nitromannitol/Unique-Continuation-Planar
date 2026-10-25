@@ -1,5 +1,9 @@
+module
+
 /- Alternating crosscuts intersect, for a crosscut that is only a topological arc. -/
-import UCPlanar.Support.TopoModel
+public import UCPlanar.Support.TopoModel
+
+@[expose] public section
 
 open Set unitInterval
 

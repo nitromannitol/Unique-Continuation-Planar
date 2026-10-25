@@ -1,9 +1,13 @@
+module
+
 /-
 The bounded density over a subset is at least the density over a containing set,
 up to the ratio of the two cardinalities.
 -/
-import UCPlanar.Support.LiouTransfer
-import UCPlanar.Basic
+public import UCPlanar.Support.LiouTransfer
+public import UCPlanar.Basic
+
+@[expose] public section
 
 open scoped Classical
 

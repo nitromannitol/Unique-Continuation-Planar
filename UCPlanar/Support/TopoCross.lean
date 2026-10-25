@@ -1,6 +1,10 @@
+module
+
 /- Interleaved chords of a drawn cycle share a vertex. -/
-import UCPlanar.Support.TopoCycleArcs
-import UCPlanar.Support.TopoGenCrosscut
+public import UCPlanar.Support.TopoCycleArcs
+public import UCPlanar.Support.TopoGenCrosscut
+
+@[expose] public section
 
 open Set SimpleGraph
 

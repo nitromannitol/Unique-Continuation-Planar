@@ -1,3 +1,5 @@
+module
+
 /-
 The comparison of geometric squares with graph metric balls.
 
@@ -7,10 +9,12 @@ vertices of the square of radius `ρ`, the translation has coordinates at most a
 the square of radius `R` lies in the ball of radius `C R + c`, where `C` depends only on the
 graph and only the additive constant depends on the centre of the ball.
 -/
-import UCPlanar.Support.ZeroLower
-import UCPlanar.Support.ZeroVolume
-import UCPlanar.Support.ZeroAssemble
-import UCPlanar.Support.LowerVolume
+public import UCPlanar.Support.ZeroLower
+public import UCPlanar.Support.ZeroVolume
+public import UCPlanar.Support.ZeroAssemble
+public import UCPlanar.Support.LowerVolume
+
+@[expose] public section
 
 open scoped Classical BigOperators
 set_option autoImplicit false

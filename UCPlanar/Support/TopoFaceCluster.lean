@@ -1,8 +1,12 @@
+module
+
 /- The cluster of faces meeting a vertex set, the open plane region it fills, and the cycle of
 the graph that surrounds that region. -/
-import UCPlanar.Support.TopoCluster
-import UCPlanar.Support.TopoProper
-import Mathlib
+public import UCPlanar.Support.TopoCluster
+public import UCPlanar.Support.TopoProper
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

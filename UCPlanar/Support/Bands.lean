@@ -1,6 +1,10 @@
+module
+
 /- Geometric bands of values: one band is sparse. -/
-import UCPlanar.Basic
-import Mathlib.Tactic
+public import UCPlanar.Basic
+public import Mathlib.Tactic
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

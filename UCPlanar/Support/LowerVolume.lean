@@ -1,3 +1,5 @@
+module
+
 /-
 Counting for the local density hypothesis.
 
@@ -7,9 +9,11 @@ counting, because the exceptional vertices of the small square are exceptional v
 large one, the number of vertices of a square is quadratic in its radius from both sides, and a
 lattice translation preserves cardinalities.
 -/
-import UCPlanar.Support.LowerShift
-import UCPlanar.Support.Poly.Volume
-import UCPlanar.Support.Poly.Rebase
+public import UCPlanar.Support.LowerShift
+public import UCPlanar.Support.Poly.Volume
+public import UCPlanar.Support.Poly.Rebase
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

@@ -1,9 +1,13 @@
+module
+
 /-
 The change of variables from lattice coordinates to positions in the plane: an invertible affine
 substitution, which does not raise the total degree, carries the Newton interpolating polynomial
 of the orbit data to a polynomial evaluated at the drawing of the vertex.
 -/
-import UCPlanar.Support.Poly.Rebase
+public import UCPlanar.Support.Poly.Rebase
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

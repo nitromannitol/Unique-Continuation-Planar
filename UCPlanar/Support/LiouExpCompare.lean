@@ -1,8 +1,12 @@
+module
+
 /-
 The exponential comparison that closes the Liouville assembly.
 -/
-import Mathlib.Analysis.SpecialFunctions.Exp
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+public import Mathlib.Analysis.SpecialFunctions.Exp
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
+
+@[expose] public section
 
 open scoped Classical
 

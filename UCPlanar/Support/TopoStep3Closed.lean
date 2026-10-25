@@ -1,16 +1,20 @@
+module
+
 /- Step 3 of Sections 3 and 4 with every topological input discharged: the boundary cycles come
 from the cited splitting theorem, the face walks from the cited unicoherence, the filled cluster
 is bounded because the cluster set lies in a ball and faces have bounded diameter, its frontier is
 drawn by a finite edge set and stays within the face bound of that ball.  What is left is the
 harmonicity of the function at the vertices the cycle encloses. -/
-import UCPlanar.Support.TopoStep3Component
-import UCPlanar.Support.TopoStep3Band
-import UCPlanar.Support.TopoComponentArcs
-import UCPlanar.Support.TopoClusterBounded
-import UCPlanar.Support.ZeroAssemble
-import UCPlanar.Support.TopoPolyCycle
-import UCPlanar.External.EdgeSplitting
-import Mathlib
+public import UCPlanar.Support.TopoStep3Component
+public import UCPlanar.Support.TopoStep3Band
+public import UCPlanar.Support.TopoComponentArcs
+public import UCPlanar.Support.TopoClusterBounded
+public import UCPlanar.Support.ZeroAssemble
+public import UCPlanar.Support.TopoPolyCycle
+public import UCPlanar.External.EdgeSplitting
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

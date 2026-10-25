@@ -1,6 +1,10 @@
+module
+
 /- Incidence and separation of drawn graph walks. -/
-import UCPlanar.Support.PlanarCycle
-import Mathlib.Tactic
+public import UCPlanar.Support.PlanarCycle
+public import Mathlib.Tactic
+
+@[expose] public section
 
 /-- A drawn walk passes through exactly its support vertices. -/
 theorem UCPlanar.PlaneEmbedding.pos_mem_walkTrace_iff {V : Type*} {G : SimpleGraph V}

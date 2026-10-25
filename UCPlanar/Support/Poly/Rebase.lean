@@ -1,9 +1,13 @@
+module
+
 /-
 The lattice coordinates of an orbit: the two generators span the period lattice, and the period
 map distorts lengths boundedly in the forward direction.
 -/
-import UCPlanar.Support.Poly.Bridge
-import UCPlanar.Support.ZeroVolume
+public import UCPlanar.Support.Poly.Bridge
+public import UCPlanar.Support.ZeroVolume
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

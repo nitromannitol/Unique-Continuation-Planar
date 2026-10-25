@@ -1,5 +1,9 @@
+module
+
 /- Drawn chords of a drawn cycle: their traces meet the cycle only at their ends. -/
-import UCPlanar.Support.TopoTransport
+public import UCPlanar.Support.TopoTransport
+
+@[expose] public section
 
 open Set
 

@@ -1,6 +1,10 @@
+module
+
 /- The drawing of a walk read as the drawing of the edges it uses. -/
-import UCPlanar.Support.TopoMinimal
-import Mathlib
+public import UCPlanar.Support.TopoMinimal
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

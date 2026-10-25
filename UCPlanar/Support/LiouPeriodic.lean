@@ -1,3 +1,5 @@
+module
+
 /-
 Recurrence of a periodic network, and the bounded Liouville theorem.
 
@@ -8,10 +10,12 @@ in the radius, so the reciprocal conductance sum diverges and the
 Nash-Williams criterion applies.  On a recurrent network every bounded
 harmonic function is constant.
 -/
-import UCPlanar.Support.LiouKilled
-import UCPlanar.Support.Periodic
-import LatticeProb.Network.Series
-import Mathlib.Analysis.Normed.Group.Constructions
+public import UCPlanar.Support.LiouKilled
+public import UCPlanar.Support.Periodic
+public import LatticeProb.Network.Series
+public import Mathlib.Analysis.Normed.Group.Constructions
+
+@[expose] public section
 
 open scoped Classical ENNReal
 

@@ -1,9 +1,13 @@
+module
+
 /- Step 3 of Section 4 at a positive threshold, run on the connected component of the filled
 cluster through the chosen vertex.  The cycle is the one of Step 3, the face path at each of its
 vertices comes from the walk along a face of the cluster, and the vertices where that walk stops
 inside the band are collected into the discarded set of the surrounding property. -/
-import UCPlanar.Support.TopoStep3Component
-import Mathlib
+public import UCPlanar.Support.TopoStep3Component
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

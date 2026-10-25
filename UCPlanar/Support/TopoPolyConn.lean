@@ -1,7 +1,11 @@
+module
+
 /- Two connectedness of the finite plane graph drawn by an edge set with a second edge at every
 vertex and no splitting vertex. -/
-import UCPlanar.Support.TopoPolyWalk
-import Mathlib
+public import UCPlanar.Support.TopoPolyWalk
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

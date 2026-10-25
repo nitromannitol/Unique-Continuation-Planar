@@ -1,7 +1,11 @@
-import UCPlanar.Support.RemezLagrange
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
-import Mathlib.Topology.Algebra.Polynomial
-import Mathlib.Topology.Order.Monotone
+module
+
+public import UCPlanar.Support.RemezLagrange
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+public import Mathlib.Topology.Algebra.Polynomial
+public import Mathlib.Topology.Order.Monotone
+
+@[expose] public section
 
 /-!
 # The sharp Remez inequality

@@ -1,12 +1,16 @@
+module
+
 /-
 Uniform ellipticity, bounded degree and bounded translation walks on a periodic network.
 These are the geometric facts behind the discrete Caccioppoli inequality for a difference
 along a lattice vector: the vector is crossed by a walk of bounded length, and the
 conductance seen along that walk is bounded above and below.
 -/
-import UCPlanar.Support.ZeroVolume
-import UCPlanar.Support.Poly.Difference
-import Mathlib
+public import UCPlanar.Support.ZeroVolume
+public import UCPlanar.Support.Poly.Difference
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

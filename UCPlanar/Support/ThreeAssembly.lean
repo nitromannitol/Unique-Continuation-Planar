@@ -1,9 +1,13 @@
+module
+
 /-
 The three-ball proposition from the lattice inequality: the arithmetic of the degree bound, the
 supremum norm on the outer square, and the bound along one coset of the period lattice.
 -/
-import UCPlanar.Support.ThreeCover
-import UCPlanar.Frozen.PolynomialApproximation
+public import UCPlanar.Support.ThreeCover
+public import UCPlanar.Frozen.PolynomialApproximation
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

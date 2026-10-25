@@ -1,9 +1,13 @@
+module
+
 /-
 Assembly of the polynomial approximation: the Newton interpolation of the orbit data at a corner
 of the square, the sharp discrete Taylor remainder, the derivative bound, and the change of
 variables to the drawing.
 -/
-import UCPlanar.Support.Poly.Change
+public import UCPlanar.Support.Poly.Change
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

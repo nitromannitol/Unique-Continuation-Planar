@@ -1,8 +1,12 @@
+module
+
 /- Periodic plane geometry: drawn edges are short, cycles enclose only a bounded region,
 and the graph metric is controlled by the geometric one. -/
-import UCPlanar.Support.ZeroLower
-import UCPlanar.Support.PlanarTrace
-import Mathlib
+public import UCPlanar.Support.ZeroLower
+public import UCPlanar.Support.PlanarTrace
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

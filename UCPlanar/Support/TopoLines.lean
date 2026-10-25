@@ -1,10 +1,14 @@
+module
+
 /- The faces of a periodic plane drawing form a locally finite family: near a point the drawing
 is the drawing of finitely many polygonal arcs, each arc lies on finitely many lines, and a
 convex open set minus a closed set contained in finitely many lines has only finitely many
 components, because the open sign cells of the lines are convex and every component contains
 one. -/
-import UCPlanar.Support.TopoFaceLocal
-import Mathlib
+public import UCPlanar.Support.TopoFaceLocal
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

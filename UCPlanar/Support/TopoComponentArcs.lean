@@ -1,11 +1,15 @@
+module
+
 /- The frontier of a component of the filled cluster is a union of whole arcs.  At a point of
 that frontier the drawing has a face of the component on one side and a face avoiding the vertex
 set on the other, and the arc through the point lies on the frontier of both. -/
-import UCPlanar.Support.TopoPuncture
-import UCPlanar.Support.TopoClusterFace
-import UCPlanar.Support.TopoClusterEdges
-import UCPlanar.Support.TopoStep3Component
-import Mathlib
+public import UCPlanar.Support.TopoPuncture
+public import UCPlanar.Support.TopoClusterFace
+public import UCPlanar.Support.TopoClusterEdges
+public import UCPlanar.Support.TopoStep3Component
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

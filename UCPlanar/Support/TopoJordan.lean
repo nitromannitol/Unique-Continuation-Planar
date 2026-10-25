@@ -1,5 +1,9 @@
+module
+
 /- The Jordan domain of a drawn cycle, and the face a point off the drawing lies in. -/
-import UCPlanar.Support.TopoProper
+public import UCPlanar.Support.TopoProper
+
+@[expose] public section
 
 open Set
 

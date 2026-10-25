@@ -1,3 +1,5 @@
+module
+
 /-
 The dyadic ladder of the exponential lower bound.
 
@@ -7,7 +9,9 @@ the top is at least `c₁` times the scale one doubling below, or every doubling
 logarithm by `32`, and then it is at least `32^l log 2`.  Both alternatives exceed `bN` for a
 small enough `b`.
 -/
-import UCPlanar.Support.LowerArith
+public import UCPlanar.Support.LowerArith
+
+@[expose] public section
 
 open scoped Classical
 set_option autoImplicit false

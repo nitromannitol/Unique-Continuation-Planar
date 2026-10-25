@@ -1,7 +1,11 @@
+module
+
 /- Separation of a point of the plane from infinity, and the splitting of a separator at a
 single common point. -/
-import UCPlanar.Support.TopoRegion
-import Mathlib
+public import UCPlanar.Support.TopoRegion
+public import Mathlib
+
+@[expose] public section
 
 open Set
 

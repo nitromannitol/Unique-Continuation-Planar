@@ -1,8 +1,12 @@
+module
+
 /- The boundary cycle theorem: every finite edge set whose drawing separates a point of the
 plane from infinity carries a cycle that already separates it, reduced to Janiszewski's theorem
 at a single point and to the two connected base case. -/
-import UCPlanar.Support.TopoEdgeSet
-import Mathlib
+public import UCPlanar.Support.TopoEdgeSet
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

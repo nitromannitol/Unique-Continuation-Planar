@@ -1,7 +1,11 @@
+module
+
 /-
 The density hypothesis gives an eventual lower bound on the bounded density.
 -/
-import UCPlanar.Support.Growth
+public import UCPlanar.Support.Growth
+
+@[expose] public section
 
 open scoped Classical
 

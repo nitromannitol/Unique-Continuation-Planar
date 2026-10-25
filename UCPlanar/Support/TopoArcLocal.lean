@@ -1,8 +1,12 @@
+module
+
 /- The local structure of the drawing at a point interior to one arc: exactly two segments
 radiate from such a point, which is what the corner theorem consumes, so the frontier of a face
 is covered by whole arcs. -/
-import UCPlanar.Support.TopoCorner
-import Mathlib
+public import UCPlanar.Support.TopoCorner
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

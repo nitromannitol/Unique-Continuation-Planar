@@ -1,141 +1,145 @@
-import UCPlanar.Basic
-import UCPlanar.Support.Harmonic
-import UCPlanar.Support.CounterexampleAlgebra
-import UCPlanar.Support.Density
-import UCPlanar.Support.Bands
-import UCPlanar.Support.CrossingGraph
-import UCPlanar.External.EdgeSplitting
-import UCPlanar.External.Unicoherence
-import UCPlanar.External.MoserEstimate
-import UCPlanar.Support.TopoArcLocal
-import UCPlanar.Support.TopoWalksExternal
-import UCPlanar.Support.TopoUnicoherenceReduction
-import UCPlanar.Support.SurroundExists
-import UCPlanar.Frozen.Topological
-import UCPlanar.Frozen.ZeroCase
-import UCPlanar.Frozen.UniformlyBounded
-import UCPlanar.Frozen.Counterexample
-import UCPlanar.Frozen.PolynomialApproximation
-import UCPlanar.Frozen.ThreeBall
-import UCPlanar.Frozen.PeriodicLowerBound
-import UCPlanar.Frozen.Liouville
-import UCPlanar.Support.FiniteDomains
-import UCPlanar.Support.PlanarTrace
-import UCPlanar.Support.PlanarFaces
-import UCPlanar.Support.PlanarPacking
-import UCPlanar.Support.PlanarLattice
-import UCPlanar.Support.PlanarMetric
-import UCPlanar.Support.PlanarLabels
-import UCPlanar.Support.PlanarComponents
-import UCPlanar.Support.PlanarInterior
-import Schoenflies.JordanClosed
-import UCPlanar.Support.PlanarBoundary
-import UCPlanar.Support.PlanarAttachments
-import UCPlanar.Support.PlanarDomain
-import UCPlanar.Support.PlanarOrder
-import UCPlanar.Support.PlanarReduction
-import UCPlanar.Support.PlanarTopological
-import UCPlanar.Support.TopoWalk
-import UCPlanar.Support.TopoCrosscut
-import UCPlanar.Support.TopoTransport
-import UCPlanar.Support.TopoModel
-import UCPlanar.Support.TopoGenCrosscut
-import UCPlanar.Support.TopoChord
-import UCPlanar.Support.TopoCycleArcs
-import UCPlanar.Support.TopoCross
-import UCPlanar.Support.TopoInterleave
-import UCPlanar.Support.TopoBridge
-import UCPlanar.Support.TopoWalk
-import UCPlanar.Support.TopoCrosscut
-import UCPlanar.Support.LiouEllipticValue
-import UCPlanar.Support.LiouElliptic
-import UCPlanar.Support.LiouDensity
-import UCPlanar.Support.LiouCount
-import UCPlanar.Support.LiouEllipticValue
-import UCPlanar.Support.LiouElliptic
-import UCPlanar.Support.LiouDensity
-import UCPlanar.Support.LiouCount
-import UCPlanar.Support.LiouTransfer
-import UCPlanar.Support.LiouDensityTransfer
-import UCPlanar.Support.LiouSupNorm
-import UCPlanar.Support.LiouSupBound
-import UCPlanar.Support.LiouEventually
-import UCPlanar.Support.LiouExpCompare
-import UCPlanar.Support.LiouAssembly
-import UCPlanar.Support.TopoRegion
-import UCPlanar.Support.TopoFace
-import UCPlanar.Support.TopoFaceLocal
-import UCPlanar.Support.TopoLines
-import UCPlanar.Support.TopoFacePath
-import UCPlanar.Support.TopoStep3
-import UCPlanar.Support.TopoFaceBand
-import UCPlanar.Support.TopoClusterFace
-import UCPlanar.Support.TopoFaceWalks
-import UCPlanar.Support.TopoLocal
-import UCPlanar.Support.TopoCorner
-import UCPlanar.Support.TopoStep3Component
-import UCPlanar.Support.TopoPuncture
-import UCPlanar.Support.TopoClusterBounded
-import UCPlanar.Support.TopoComponentArcs
-import UCPlanar.Support.TopoStep3Closed
-import UCPlanar.Support.TopoStep3Band
-import UCPlanar.Support.TopoClusterBoundary
-import UCPlanar.Support.TopoClusterEdges
-import UCPlanar.Support.TopoClusterInside
-import UCPlanar.Support.TopoClusterReach
-import UCPlanar.Support.TopoFaceCluster
-import UCPlanar.Support.TopoProper
-import UCPlanar.Support.TopoJordan
-import UCPlanar.Support.TopoBounded
-import UCPlanar.Support.TopoSeparate
-import UCPlanar.Support.TopoEdgeSet
-import UCPlanar.Support.TopoCluster
-import UCPlanar.Support.TopoMinimal
-import UCPlanar.Support.TopoEdgeWalk
-import UCPlanar.Support.TopoBlock
-import UCPlanar.Support.TopoPolygonal
-import UCPlanar.Support.TopoPolyWalk
-import UCPlanar.Support.TopoPolyConn
-import UCPlanar.Support.TopoPolyCycle
-import UCPlanar.Support.ZeroCount
-import UCPlanar.Support.ZeroVolume
-import UCPlanar.Support.ZeroSign
-import UCPlanar.Support.ZeroShell
-import UCPlanar.Support.ZeroMax
-import UCPlanar.Support.ZeroLower
-import UCPlanar.Support.BandsCover
-import UCPlanar.Support.ZeroGeom
-import UCPlanar.Support.ZeroCycle
-import UCPlanar.Support.ZeroAssemble
-import UCPlanar.Support.BandSign
-import UCPlanar.Support.BandCoarse
-import UCPlanar.Support.Poly.Basic
-import UCPlanar.Support.Poly.Caccioppoli
-import UCPlanar.Support.Poly.CaccioppoliLattice
-import UCPlanar.Support.Poly.Elliptic
-import UCPlanar.Support.Poly.Iterate
-import UCPlanar.Support.Poly.Factorial
-import UCPlanar.Support.Poly.Square
-import UCPlanar.Support.Poly.Difference
-import UCPlanar.Support.Poly.Newton
-import UCPlanar.Support.Poly.Interpolation
-import UCPlanar.Support.Poly.Orbit
-import UCPlanar.Support.Poly.Word
-import UCPlanar.Support.Poly.Volume
-import UCPlanar.Support.Poly.DerivBound
-import UCPlanar.Support.Poly.Bridge
-import UCPlanar.Support.Poly.Rebase
-import UCPlanar.Support.Poly.Change
-import UCPlanar.Support.Poly.Assembly
-import UCPlanar.Support.LowerArith
-import UCPlanar.Support.LowerBound
-import UCPlanar.Support.LowerShift
-import UCPlanar.Support.LowerVolume
-import UCPlanar.Support.LowerChain
-import UCPlanar.Support.LowerLadder
-import UCPlanar.Support.LowerBoot
-import UCPlanar.Support.LowerBootstrap
-import UCPlanar.Support.LowerAssembly
-import UCPlanar.Support.LiouFinalGeom
-import UCPlanar.Support.LiouFinalContra
-import UCPlanar.MainTheorems
+module
+
+public import UCPlanar.Basic
+public import UCPlanar.Support.Harmonic
+public import UCPlanar.Support.CounterexampleAlgebra
+public import UCPlanar.Support.Density
+public import UCPlanar.Support.Bands
+public import UCPlanar.Support.CrossingGraph
+public import UCPlanar.External.EdgeSplitting
+public import UCPlanar.External.Unicoherence
+public import UCPlanar.External.MoserEstimate
+public import UCPlanar.Support.TopoArcLocal
+public import UCPlanar.Support.TopoWalksExternal
+public import UCPlanar.Support.TopoUnicoherenceReduction
+public import UCPlanar.Support.SurroundExists
+public import UCPlanar.Frozen.Topological
+public import UCPlanar.Frozen.ZeroCase
+public import UCPlanar.Frozen.UniformlyBounded
+public import UCPlanar.Frozen.Counterexample
+public import UCPlanar.Frozen.PolynomialApproximation
+public import UCPlanar.Frozen.ThreeBall
+public import UCPlanar.Frozen.PeriodicLowerBound
+public import UCPlanar.Frozen.Liouville
+public import UCPlanar.Support.FiniteDomains
+public import UCPlanar.Support.PlanarTrace
+public import UCPlanar.Support.PlanarFaces
+public import UCPlanar.Support.PlanarPacking
+public import UCPlanar.Support.PlanarLattice
+public import UCPlanar.Support.PlanarMetric
+public import UCPlanar.Support.PlanarLabels
+public import UCPlanar.Support.PlanarComponents
+public import UCPlanar.Support.PlanarInterior
+public import Schoenflies.JordanClosed
+public import UCPlanar.Support.PlanarBoundary
+public import UCPlanar.Support.PlanarAttachments
+public import UCPlanar.Support.PlanarDomain
+public import UCPlanar.Support.PlanarOrder
+public import UCPlanar.Support.PlanarReduction
+public import UCPlanar.Support.PlanarTopological
+public import UCPlanar.Support.TopoWalk
+public import UCPlanar.Support.TopoCrosscut
+public import UCPlanar.Support.TopoTransport
+public import UCPlanar.Support.TopoModel
+public import UCPlanar.Support.TopoGenCrosscut
+public import UCPlanar.Support.TopoChord
+public import UCPlanar.Support.TopoCycleArcs
+public import UCPlanar.Support.TopoCross
+public import UCPlanar.Support.TopoInterleave
+public import UCPlanar.Support.TopoBridge
+public import UCPlanar.Support.TopoWalk
+public import UCPlanar.Support.TopoCrosscut
+public import UCPlanar.Support.LiouEllipticValue
+public import UCPlanar.Support.LiouElliptic
+public import UCPlanar.Support.LiouDensity
+public import UCPlanar.Support.LiouCount
+public import UCPlanar.Support.LiouEllipticValue
+public import UCPlanar.Support.LiouElliptic
+public import UCPlanar.Support.LiouDensity
+public import UCPlanar.Support.LiouCount
+public import UCPlanar.Support.LiouTransfer
+public import UCPlanar.Support.LiouDensityTransfer
+public import UCPlanar.Support.LiouSupNorm
+public import UCPlanar.Support.LiouSupBound
+public import UCPlanar.Support.LiouEventually
+public import UCPlanar.Support.LiouExpCompare
+public import UCPlanar.Support.LiouAssembly
+public import UCPlanar.Support.TopoRegion
+public import UCPlanar.Support.TopoFace
+public import UCPlanar.Support.TopoFaceLocal
+public import UCPlanar.Support.TopoLines
+public import UCPlanar.Support.TopoFacePath
+public import UCPlanar.Support.TopoStep3
+public import UCPlanar.Support.TopoFaceBand
+public import UCPlanar.Support.TopoClusterFace
+public import UCPlanar.Support.TopoFaceWalks
+public import UCPlanar.Support.TopoLocal
+public import UCPlanar.Support.TopoCorner
+public import UCPlanar.Support.TopoStep3Component
+public import UCPlanar.Support.TopoPuncture
+public import UCPlanar.Support.TopoClusterBounded
+public import UCPlanar.Support.TopoComponentArcs
+public import UCPlanar.Support.TopoStep3Closed
+public import UCPlanar.Support.TopoStep3Band
+public import UCPlanar.Support.TopoClusterBoundary
+public import UCPlanar.Support.TopoClusterEdges
+public import UCPlanar.Support.TopoClusterInside
+public import UCPlanar.Support.TopoClusterReach
+public import UCPlanar.Support.TopoFaceCluster
+public import UCPlanar.Support.TopoProper
+public import UCPlanar.Support.TopoJordan
+public import UCPlanar.Support.TopoBounded
+public import UCPlanar.Support.TopoSeparate
+public import UCPlanar.Support.TopoEdgeSet
+public import UCPlanar.Support.TopoCluster
+public import UCPlanar.Support.TopoMinimal
+public import UCPlanar.Support.TopoEdgeWalk
+public import UCPlanar.Support.TopoBlock
+public import UCPlanar.Support.TopoPolygonal
+public import UCPlanar.Support.TopoPolyWalk
+public import UCPlanar.Support.TopoPolyConn
+public import UCPlanar.Support.TopoPolyCycle
+public import UCPlanar.Support.ZeroCount
+public import UCPlanar.Support.ZeroVolume
+public import UCPlanar.Support.ZeroSign
+public import UCPlanar.Support.ZeroShell
+public import UCPlanar.Support.ZeroMax
+public import UCPlanar.Support.ZeroLower
+public import UCPlanar.Support.BandsCover
+public import UCPlanar.Support.ZeroGeom
+public import UCPlanar.Support.ZeroCycle
+public import UCPlanar.Support.ZeroAssemble
+public import UCPlanar.Support.BandSign
+public import UCPlanar.Support.BandCoarse
+public import UCPlanar.Support.Poly.Basic
+public import UCPlanar.Support.Poly.Caccioppoli
+public import UCPlanar.Support.Poly.CaccioppoliLattice
+public import UCPlanar.Support.Poly.Elliptic
+public import UCPlanar.Support.Poly.Iterate
+public import UCPlanar.Support.Poly.Factorial
+public import UCPlanar.Support.Poly.Square
+public import UCPlanar.Support.Poly.Difference
+public import UCPlanar.Support.Poly.Newton
+public import UCPlanar.Support.Poly.Interpolation
+public import UCPlanar.Support.Poly.Orbit
+public import UCPlanar.Support.Poly.Word
+public import UCPlanar.Support.Poly.Volume
+public import UCPlanar.Support.Poly.DerivBound
+public import UCPlanar.Support.Poly.Bridge
+public import UCPlanar.Support.Poly.Rebase
+public import UCPlanar.Support.Poly.Change
+public import UCPlanar.Support.Poly.Assembly
+public import UCPlanar.Support.LowerArith
+public import UCPlanar.Support.LowerBound
+public import UCPlanar.Support.LowerShift
+public import UCPlanar.Support.LowerVolume
+public import UCPlanar.Support.LowerChain
+public import UCPlanar.Support.LowerLadder
+public import UCPlanar.Support.LowerBoot
+public import UCPlanar.Support.LowerBootstrap
+public import UCPlanar.Support.LowerAssembly
+public import UCPlanar.Support.LiouFinalGeom
+public import UCPlanar.Support.LiouFinalContra
+public import UCPlanar.MainTheorems
+
+@[expose] public section

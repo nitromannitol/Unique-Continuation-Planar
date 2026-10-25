@@ -1,3 +1,5 @@
+module
+
 /-
 The contradiction that closes the Liouville theorem.
 
@@ -8,12 +10,14 @@ then forces `exp(bN)` on `Q_N`, while the uniform upper bound on a graph ball co
 forces `exp(A√ε n)` with `n` linear in `N`.  The two are incompatible once `ε` is small compared
 with `b / (A C)`, where `C` is the LINEAR constant of the comparison of squares with balls.
 -/
-import UCPlanar.Support.LowerAssembly
-import UCPlanar.Support.ZeroAssemble
-import UCPlanar.Support.ZeroMax
-import UCPlanar.Support.ThreeAssembly
-import UCPlanar.Support.Growth
-import UCPlanar.Support.LiouFinalGeom
+public import UCPlanar.Support.LowerAssembly
+public import UCPlanar.Support.ZeroAssemble
+public import UCPlanar.Support.ZeroMax
+public import UCPlanar.Support.ThreeAssembly
+public import UCPlanar.Support.Growth
+public import UCPlanar.Support.LiouFinalGeom
+
+@[expose] public section
 
 open scoped Classical BigOperators
 set_option autoImplicit false

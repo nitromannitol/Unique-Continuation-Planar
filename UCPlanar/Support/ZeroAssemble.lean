@@ -1,10 +1,14 @@
+module
+
 /- The zero case of Section 3, assembled from the sparse radius of Step 2 and the boundary
 cycle of Step 3. -/
-import UCPlanar.Support.ZeroCycle
-import UCPlanar.Support.ZeroShell
-import UCPlanar.Support.ZeroLower
-import UCPlanar.Support.FiniteDomains
-import Mathlib
+public import UCPlanar.Support.ZeroCycle
+public import UCPlanar.Support.ZeroShell
+public import UCPlanar.Support.ZeroLower
+public import UCPlanar.Support.FiniteDomains
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

@@ -1,7 +1,11 @@
+module
+
 /- Transport of drawn traces to the Euclidean plane of the Jordan-curve development. -/
-import UCPlanar.Support.PlanarBoundary
-import Schoenflies.JordanClosed
-import Schoenflies.GeneralCrosscut
+public import UCPlanar.Support.PlanarBoundary
+public import Schoenflies.JordanClosed
+public import Schoenflies.GeneralCrosscut
+
+@[expose] public section
 
 open scoped Classical
 

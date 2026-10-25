@@ -1,5 +1,9 @@
+module
+
 /- Boundary representatives of components of induced subgraphs. -/
-import UCPlanar.Support.PlanarTrace
+public import UCPlanar.Support.PlanarTrace
+
+@[expose] public section
 
 open scoped Classical
 

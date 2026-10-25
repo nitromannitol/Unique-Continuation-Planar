@@ -1,8 +1,12 @@
+module
+
 /-
 Metric balls are contained in geometric squares and conversely.
 -/
-import UCPlanar.Support.Periodic
-import UCPlanar.Support.FiniteDomains
+public import UCPlanar.Support.Periodic
+public import UCPlanar.Support.FiniteDomains
+
+@[expose] public section
 
 open scoped Classical
 

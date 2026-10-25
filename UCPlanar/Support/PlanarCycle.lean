@@ -1,9 +1,13 @@
+module
+
 /-
 Cycle interiors, face paths and the boundary conditions of Section 2.
 -/
-import UCPlanar.Support.Planar
-import Mathlib.Combinatorics.SimpleGraph.Paths
-import Mathlib.Topology.MetricSpace.Bounded
+public import UCPlanar.Support.Planar
+public import Mathlib.Combinatorics.SimpleGraph.Paths
+public import Mathlib.Topology.MetricSpace.Bounded
+
+@[expose] public section
 
 open scoped Classical
 

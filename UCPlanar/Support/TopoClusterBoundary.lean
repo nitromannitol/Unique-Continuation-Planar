@@ -1,7 +1,11 @@
+module
+
 /- The boundary edges of the cluster of faces, and the cycle of Step 3 they carry. -/
-import UCPlanar.Support.TopoFaceCluster
-import UCPlanar.Support.ZeroCycle
-import Mathlib
+public import UCPlanar.Support.TopoFaceCluster
+public import UCPlanar.Support.ZeroCycle
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

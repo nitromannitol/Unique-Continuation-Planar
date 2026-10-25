@@ -1,6 +1,10 @@
-import UCPlanar.Support.Approximation
-import UCPlanar.Support.Poly.Assembly
-import UCPlanar.External.MoserEstimate
+module
+
+public import UCPlanar.Support.Approximation
+public import UCPlanar.Support.Poly.Assembly
+public import UCPlanar.External.MoserEstimate
+
+@[expose] public section
 
 /-!
 # Polynomial approximation of harmonic functions

@@ -1,8 +1,12 @@
+module
+
 /-
 Iteration of a geometric recursion, the arithmetic core of the nested-domain
 bound on mixed differences.
 -/
-import Mathlib
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

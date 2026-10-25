@@ -1,10 +1,14 @@
+module
+
 /-
 Newton interpolation on a lattice orbit: the interpolating polynomial of the
 mixed-difference data, its total degree, and the remainder estimate.
 -/
-import UCPlanar.Support.Poly.Newton
-import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.Algebra.MvPolynomial.Eval
+public import UCPlanar.Support.Poly.Newton
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Algebra.MvPolynomial.Eval
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

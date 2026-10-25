@@ -1,8 +1,12 @@
+module
+
 /-
 Finite exceptional sets and the coefficient obtained from a separated subset of zeros.
 -/
-import LatticeProb.Network.Basic
-import Mathlib.Tactic
+public import LatticeProb.Network.Basic
+public import Mathlib.Tactic
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

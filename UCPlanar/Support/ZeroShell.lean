@@ -1,8 +1,12 @@
+module
+
 /- Step 2 of Section 3: a radius whose neighbourhood carries few nonzero vertices. -/
-import UCPlanar.Support.ZeroVolume
-import UCPlanar.Support.ZeroCount
-import UCPlanar.Basic
-import Mathlib
+public import UCPlanar.Support.ZeroVolume
+public import UCPlanar.Support.ZeroCount
+public import UCPlanar.Basic
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

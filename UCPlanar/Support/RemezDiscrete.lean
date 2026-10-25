@@ -1,9 +1,13 @@
-import UCPlanar.Support.RemezMeasure
-import Mathlib.Analysis.Calculus.Deriv.Polynomial
-import Mathlib.Analysis.Calculus.LocalExtr.Basic
-import Mathlib.Data.Finset.Sort
-import Mathlib.Data.Int.Interval
-import Mathlib.Data.List.GetD
+module
+
+public import UCPlanar.Support.RemezMeasure
+public import Mathlib.Analysis.Calculus.Deriv.Polynomial
+public import Mathlib.Analysis.Calculus.LocalExtr.Basic
+public import Mathlib.Data.Finset.Sort
+public import Mathlib.Data.Int.Interval
+public import Mathlib.Data.List.GetD
+
+@[expose] public section
 
 /-!
 # The discrete Remez inequality

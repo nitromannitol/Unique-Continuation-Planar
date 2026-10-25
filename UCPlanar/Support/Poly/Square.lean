@@ -1,8 +1,12 @@
+module
+
 /-
 Membership, monotonicity and the effect of a lattice translation on the geometric
 squares of a periodic graph.
 -/
-import UCPlanar.Support.Poly.Difference
+public import UCPlanar.Support.Poly.Difference
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

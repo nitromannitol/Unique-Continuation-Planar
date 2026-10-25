@@ -1,7 +1,11 @@
+module
+
 /-
 A periodic positive conductance has a finite ellipticity ratio.
 -/
-import UCPlanar.Support.LiouElliptic
+public import UCPlanar.Support.LiouElliptic
+
+@[expose] public section
 
 open scoped Classical
 set_option autoImplicit false

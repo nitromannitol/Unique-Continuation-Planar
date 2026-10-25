@@ -1,8 +1,12 @@
+module
+
 /-
 Periodic positive conductances give a global ellipticity ratio.
 -/
-import UCPlanar.Support.LiouEllipticValue
-import UCPlanar.Basic
+public import UCPlanar.Support.LiouEllipticValue
+public import UCPlanar.Basic
+
+@[expose] public section
 
 open scoped Classical
 

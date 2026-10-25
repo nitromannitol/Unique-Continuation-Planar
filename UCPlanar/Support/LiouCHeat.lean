@@ -1,3 +1,5 @@
+module
+
 /-
 The random walk of a conductance network, and recurrence of that walk.
 
@@ -7,9 +9,11 @@ network with conductances `c` has its own walk, with transition probability
 Green function and recurrence, so that the Liouville theorem can be stated for
 the network the paper uses rather than for the unit conductance.
 -/
-import LatticeProb.Network.Basic
-import LatticeProb.Graph.Reach
-import LatticeProb.Graph.Basic
+public import LatticeProb.Network.Basic
+public import LatticeProb.Graph.Reach
+public import LatticeProb.Graph.Basic
+
+@[expose] public section
 
 open scoped Classical ENNReal
 

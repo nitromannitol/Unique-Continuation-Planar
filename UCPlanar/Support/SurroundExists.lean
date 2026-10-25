@@ -1,9 +1,13 @@
+module
+
 /- The boundary cycles of Step 3 as a property of the graph: the two closed forms of Step 3
 supply them, and the harmonicity they ask for inside the cycle is available because a cycle
 confined to the buffer of the sphere of radius `m` encloses only vertices within a graph
 constant times `m`. -/
-import UCPlanar.Support.TopoStep3Closed
-import Mathlib
+public import UCPlanar.Support.TopoStep3Closed
+public import Mathlib
+
+@[expose] public section
 
 open scoped Classical
 

@@ -1,12 +1,16 @@
+module
+
 /-
 Plane embeddings and the complementary faces of a drawn graph.
 -/
-import LatticeProb.Network.Basic
-import LatticeProb.Site
-import Mathlib.Topology.Path
-import Mathlib.Topology.Connected.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Schoenflies.Polygonal
+public import LatticeProb.Network.Basic
+public import LatticeProb.Site
+public import Mathlib.Topology.Path
+public import Mathlib.Topology.Connected.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Schoenflies.Polygonal
+
+@[expose] public section
 
 open scoped Classical
 

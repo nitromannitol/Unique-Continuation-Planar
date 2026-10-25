@@ -1,9 +1,13 @@
+module
+
 /- Step 1 of Section 4: the coarse exponential bound, from the same boundary cycles. -/
-import UCPlanar.Support.BandSign
-import UCPlanar.Support.Bands
-import UCPlanar.Support.ZeroCycle
-import UCPlanar.Support.BandsCover
-import Mathlib
+public import UCPlanar.Support.BandSign
+public import UCPlanar.Support.Bands
+public import UCPlanar.Support.ZeroCycle
+public import UCPlanar.Support.BandsCover
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

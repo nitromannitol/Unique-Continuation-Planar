@@ -1,9 +1,13 @@
+module
+
 /- The face walks of Step 3, granted the cited unicoherence of the sphere: the frontier of every
 face is connected, every face is bounded by the diameter bound of the periodic plane graph, and
 the frontier is then covered by whole arcs, which is what joins the vertices of a face along it. -/
-import UCPlanar.Support.TopoArcLocal
-import UCPlanar.External.Unicoherence
-import Mathlib
+public import UCPlanar.Support.TopoArcLocal
+public import UCPlanar.External.Unicoherence
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

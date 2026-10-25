@@ -1,11 +1,15 @@
+module
+
 /- The cycle around the cluster reaches the sphere: the maximum principle drives a path of large
 values from the chosen vertex to the sphere, and that path cannot leave the region the cycle
 bounds without meeting the cycle, whose vertices carry no large value. -/
-import UCPlanar.Support.TopoClusterInside
-import UCPlanar.Support.TopoClusterBoundary
-import UCPlanar.Support.TopoRegion
-import UCPlanar.Support.ZeroAssemble
-import Mathlib
+public import UCPlanar.Support.TopoClusterInside
+public import UCPlanar.Support.TopoClusterBoundary
+public import UCPlanar.Support.TopoRegion
+public import UCPlanar.Support.ZeroAssemble
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

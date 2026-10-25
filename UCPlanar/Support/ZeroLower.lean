@@ -1,7 +1,11 @@
+module
+
 /- Periodic geometry: translations move vertices a bounded distance, so balls grow quadratically. -/
-import UCPlanar.Support.ZeroVolume
-import UCPlanar.Support.ZeroMax
-import Mathlib
+public import UCPlanar.Support.ZeroVolume
+public import UCPlanar.Support.ZeroMax
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

@@ -1,9 +1,13 @@
+module
+
 /-
 Finite weighted graph Laplacians and harmonicity.
 The paper uses the negative of the shared network Laplacian.
 -/
-import LatticeProb.Network.Basic
-import Mathlib.Tactic
+public import LatticeProb.Network.Basic
+public import Mathlib.Tactic
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

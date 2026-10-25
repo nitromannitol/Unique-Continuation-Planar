@@ -1,9 +1,13 @@
+module
+
 /-
 Polynomial approximation on a translation orbit.
 -/
-import UCPlanar.Support.Periodic
-import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.Algebra.MvPolynomial.Eval
+public import UCPlanar.Support.Periodic
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Algebra.MvPolynomial.Eval
+
+@[expose] public section
 
 /-- Membership in the lattice orbit of a vertex. -/
 def UCPlanar.PeriodicGraph.OnOrbit {V : Type*} (P : UCPlanar.PeriodicGraph V)

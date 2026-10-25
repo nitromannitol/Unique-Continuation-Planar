@@ -1,5 +1,9 @@
+module
+
 /- Combinatorial facts about drawn walks: common points are common vertices. -/
-import UCPlanar.Support.TopoBridge
+public import UCPlanar.Support.TopoBridge
+
+@[expose] public section
 
 open scoped Classical
 

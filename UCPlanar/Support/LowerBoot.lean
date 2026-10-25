@@ -1,3 +1,5 @@
+module
+
 /-
 The bootstrap of the exponential lower bound.
 
@@ -7,9 +9,11 @@ of every square cannot have all of its lattice increments small, because small i
 propagate the value `2` along a whole orbit, and an orbit is a fixed positive fraction of a
 square.  This module proves the propagation.
 -/
-import UCPlanar.Support.LowerVolume
-import UCPlanar.Support.Poly.DerivBound
-import Mathlib.Data.Int.Interval
+public import UCPlanar.Support.LowerVolume
+public import UCPlanar.Support.Poly.DerivBound
+public import Mathlib.Data.Int.Interval
+
+@[expose] public section
 
 open scoped Classical
 set_option autoImplicit false

@@ -1,8 +1,12 @@
+module
+
 /-
 The factorial gain in the discrete Taylor remainder: the binomial coefficient of the
 sharp remainder absorbs the factor `m` that the derivative bound loses at each order.
 -/
-import Mathlib
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

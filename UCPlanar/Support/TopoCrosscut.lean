@@ -1,7 +1,11 @@
+module
+
 /- Alternating crosscuts intersect: the general Jordan-curve form. -/
-import UCPlanar.Support.TopoWalk
-import Schoenflies.CrosscutCells
-import Schoenflies.PolyArcRealize
+public import UCPlanar.Support.TopoWalk
+public import Schoenflies.CrosscutCells
+public import Schoenflies.PolyArcRealize
+
+@[expose] public section
 
 open scoped Classical
 

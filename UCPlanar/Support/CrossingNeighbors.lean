@@ -1,6 +1,10 @@
+module
+
 /- The crossing graph has no neighbors outside its eight offsets. -/
-import UCPlanar.Support.CrossingGraph
-import Mathlib.Tactic
+public import UCPlanar.Support.CrossingGraph
+public import Mathlib.Tactic
+
+@[expose] public section
 open scoped Classical
 
 /-- **Neighbors of the crossing graph lie among the eight lattice offsets.**  Unfolding

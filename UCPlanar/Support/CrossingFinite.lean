@@ -1,6 +1,10 @@
+module
+
 /- Local finiteness of the crossing graph of Section 5. -/
-import UCPlanar.Support.CrossingGraph
-import Mathlib.Tactic
+public import UCPlanar.Support.CrossingGraph
+public import Mathlib.Tactic
+
+@[expose] public section
 open scoped Classical
 
 /-- **The crossing graph is locally finite.**  Every neighbor of `x` lies in the explicit

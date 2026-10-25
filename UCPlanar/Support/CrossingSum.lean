@@ -1,6 +1,10 @@
+module
+
 /- Finite summation over the crossing graph offsets. -/
-import UCPlanar.Support.CrossingGraph
-import Mathlib.Tactic
+public import UCPlanar.Support.CrossingGraph
+public import Mathlib.Tactic
+
+@[expose] public section
 open scoped Classical BigOperators
 
 /-- **The sum over the eight crossing-graph offsets of `x` unfolds to eight explicit terms.**

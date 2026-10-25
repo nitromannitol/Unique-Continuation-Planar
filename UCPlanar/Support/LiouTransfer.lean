@@ -1,7 +1,11 @@
+module
+
 /-
 A geometric square is contained in a graph metric ball of comparable radius.
 -/
-import UCPlanar.Support.LiouBallSquare
+public import UCPlanar.Support.LiouBallSquare
+
+@[expose] public section
 
 open scoped Classical
 

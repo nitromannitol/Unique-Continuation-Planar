@@ -1,9 +1,13 @@
+module
+
 /- Step 3 of Section 3 with local finiteness of the faces discharged: the faces of a periodic
 plane drawing are locally finite, so the cluster construction needs only the boundary cycle
 statement together with the local conditions on the cluster. -/
-import UCPlanar.Support.TopoLines
-import UCPlanar.Support.TopoClusterReach
-import Mathlib
+public import UCPlanar.Support.TopoLines
+public import UCPlanar.Support.TopoClusterReach
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

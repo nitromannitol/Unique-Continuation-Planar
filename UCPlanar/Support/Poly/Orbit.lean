@@ -1,13 +1,17 @@
+module
+
 /-
 Newton interpolation on a lattice orbit of a periodic graph: the interpolating
 polynomial of the mixed-difference data of a harmonic function, and the
 remainder estimate along lattice steps.
 -/
-import UCPlanar.Support.Poly.Interpolation
-import UCPlanar.Support.Poly.Caccioppoli
-import UCPlanar.Support.Poly.Difference
-import UCPlanar.Support.Approximation
-import UCPlanar.Support.Poly.Factorial
+public import UCPlanar.Support.Poly.Interpolation
+public import UCPlanar.Support.Poly.Caccioppoli
+public import UCPlanar.Support.Poly.Difference
+public import UCPlanar.Support.Approximation
+public import UCPlanar.Support.Poly.Factorial
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

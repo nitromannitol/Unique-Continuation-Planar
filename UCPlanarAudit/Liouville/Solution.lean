@@ -1,7 +1,11 @@
-import Mathlib
-import UCPlanar.MainTheorems
-import UCPlanarAudit.Liouville.SolutionBasic
-import UCPlanarAudit.Support.LiouvilleBridge
+module
+
+public import Mathlib
+public import UCPlanar.MainTheorems
+public import UCPlanarAudit.Liouville.SolutionBasic
+public import UCPlanarAudit.Support.LiouvilleBridge
+
+@[expose] public section
 
 /-!
 # Solution: Liouville

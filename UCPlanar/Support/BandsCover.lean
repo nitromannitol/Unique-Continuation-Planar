@@ -1,8 +1,12 @@
+module
+
 /- Step 2 of Section 4: the rescaling that turns a coarse exponential bound into `exp (A √ε n)`. -/
-import UCPlanar.Support.ZeroLower
-import UCPlanar.Support.ZeroMax
-import UCPlanar.Support.FiniteDomains
-import Mathlib
+public import UCPlanar.Support.ZeroLower
+public import UCPlanar.Support.ZeroMax
+public import UCPlanar.Support.FiniteDomains
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

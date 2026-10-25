@@ -1,5 +1,9 @@
+module
+
 /- The complementary faces of a drawn graph: their elementary properties. -/
-import UCPlanar.Support.TopoRegion
+public import UCPlanar.Support.TopoRegion
+
+@[expose] public section
 
 open Set
 

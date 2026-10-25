@@ -1,4 +1,8 @@
-import UCPlanar.MainTheorems
+module
+
+public import UCPlanar.MainTheorems
+
+@[expose] public section
 
 /-!
 # Axioms audit

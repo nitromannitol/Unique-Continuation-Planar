@@ -1,9 +1,13 @@
+module
+
 /-
 Translation invariance of the network Laplacian on a periodic graph, and the
 finite supremum norm.
 -/
-import UCPlanar.Support.Periodic
-import UCPlanar.Support.Harmonic
+public import UCPlanar.Support.Periodic
+public import UCPlanar.Support.Harmonic
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

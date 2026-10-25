@@ -1,7 +1,11 @@
+module
+
 /-
 A nonconstant harmonic function is unbounded, by the classical bounded-Liouville fact.
 -/
-import UCPlanar.Support.LiouAssembly
+public import UCPlanar.Support.LiouAssembly
+
+@[expose] public section
 
 open scoped Classical
 

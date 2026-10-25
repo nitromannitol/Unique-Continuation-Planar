@@ -47,7 +47,7 @@ related_formalizations:
     relationship: "builds-on"
     note: >-
       Lattice-Probability (shared Lean library LatticeProb, pinned git
-      dependency at commit 9d44b4d4670df393bb86ac5a4e042f215001cddf): graph
+      dependency at commit 014ab660fc93c018b804942b26f73893b62a59c5): graph
       balls, conductances, the network Laplacian and harmonic functions.  A
       separate formalization, not written for this repository.
   - id: "https://github.com/alonamaloh/schoenflies-lean"

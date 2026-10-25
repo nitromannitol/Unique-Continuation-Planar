@@ -1,10 +1,14 @@
+module
+
 /- Step 3 of Section 3 run on the connected component of the filled cluster through the chosen
 vertex: the cycle is then drawn on the frontier of that component, every one of its vertices is
 incident to a face of the component, and the face path of the topological lemma follows from the
 face walks. -/
-import UCPlanar.Support.TopoClusterFace
-import UCPlanar.Support.TopoStep3
-import Mathlib
+public import UCPlanar.Support.TopoClusterFace
+public import UCPlanar.Support.TopoStep3
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

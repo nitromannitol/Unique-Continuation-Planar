@@ -1,5 +1,9 @@
+module
+
 /- Pigeonhole with bounded multiplicity, for the boundary radius of the zero case. -/
-import Mathlib
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

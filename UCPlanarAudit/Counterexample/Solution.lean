@@ -1,7 +1,11 @@
-import Mathlib
-import UCPlanar.MainTheorems
-import UCPlanarAudit.Counterexample.SolutionBasic
-import UCPlanarAudit.Support.CounterexampleBridge
+module
+
+public import Mathlib
+public import UCPlanar.Frozen.Counterexample
+public import UCPlanarAudit.Counterexample.SolutionBasic
+public import UCPlanarAudit.Support.CounterexampleBridge
+
+@[expose] public section
 
 /-!
 # Solution: Counterexample
@@ -24,7 +28,7 @@ theorem counterexample (a b t : ℝ) (ha : 0 < a) (hb : 0 < b)
         @HarmonicOn _ crossingGraph lf
           (crossingConductance a b t d) f Set.univ ∧
         f 0 = 1 ∧ ∀ x, f x ≠ 0 ↔ x 0 = x 1 := by
-  obtain ⟨d, hd, lf, hc, f, hf⟩ := UCPlanar.counterexample a b t ha hb hab ht
+  obtain ⟨d, hd, lf, hc, f, hf⟩ := UCPlanar.Frozen.counterexample a b t ha hb hab ht
   exact ⟨d, hd, lf, (Bridge.isCond_iff _ _).2 hc, f, hf⟩
 
 end UCPlanarAudit

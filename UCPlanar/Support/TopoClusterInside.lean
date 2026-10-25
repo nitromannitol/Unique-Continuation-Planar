@@ -1,8 +1,12 @@
+module
+
 /- The filled cluster lies inside the cycle that bounds it: a connected set disjoint from a
 drawn cycle is enclosed by it as soon as one of its points is. -/
-import UCPlanar.Support.TopoFaceCluster
-import UCPlanar.Support.TopoBounded
-import Mathlib
+public import UCPlanar.Support.TopoFaceCluster
+public import UCPlanar.Support.TopoBounded
+public import Mathlib
+
+@[expose] public section
 
 open Set
 

@@ -1,8 +1,12 @@
+module
+
 /-
 Forward difference operators along lattice shifts, and their iterates.
 -/
-import UCPlanar.Support.Poly.Basic
-import UCPlanar.Support.Poly.Caccioppoli
+public import UCPlanar.Support.Poly.Basic
+public import UCPlanar.Support.Poly.Caccioppoli
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

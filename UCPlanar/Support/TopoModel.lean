@@ -1,5 +1,9 @@
+module
+
 /- A plane homeomorphism carrying one arc of a Jordan curve onto a polygonal arc. -/
-import UCPlanar.Support.TopoTransport
+public import UCPlanar.Support.TopoTransport
+
+@[expose] public section
 
 open Set unitInterval
 

@@ -1,8 +1,12 @@
+module
+
 /-
 Density limits and exponential growth in graph metric balls.
 -/
-import UCPlanar.Basic
-import UCPlanar.Support.Periodic
+public import UCPlanar.Basic
+public import UCPlanar.Support.Periodic
+
+@[expose] public section
 
 /-- Existence of the bounded-value density limit, with its lower bound. -/
 def UCPlanar.PeriodicGraph.HasBoundedDensity {V : Type*} (P : UCPlanar.PeriodicGraph V)

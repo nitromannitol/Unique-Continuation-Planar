@@ -1,4 +1,8 @@
-import UCPlanar.Support.TopoFaceWalks
+module
+
+public import UCPlanar.Support.TopoFaceWalks
+
+@[expose] public section
 
 /-!
 # Cited input: unicoherence of the sphere

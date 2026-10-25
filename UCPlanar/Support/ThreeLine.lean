@@ -1,3 +1,5 @@
+module
+
 /-
 The one-dimensional propagation of the three-ball proposition.
 
@@ -6,7 +8,9 @@ to a polynomial of low degree, supplied by the polynomial approximation lemma.  
 is then the discrete Remez inequality with two triangle inequalities around it, and this is the
 display at `ucplanar.tex:489-493`.
 -/
-import UCPlanar.Support.ThreeBall
+public import UCPlanar.Support.ThreeBall
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

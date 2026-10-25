@@ -1,7 +1,11 @@
+module
+
 /-
 Periodic networks have finitely many edge-conductance values.
 -/
-import UCPlanar.Support.Periodic
+public import UCPlanar.Support.Periodic
+
+@[expose] public section
 
 open scoped Classical
 

@@ -1,3 +1,5 @@
+module
+
 /-
 The bounded-value density passes from the metric balls to the geometric squares.
 
@@ -6,15 +8,17 @@ lies in a geometric square of radius linear in `K`, and both squares have cardin
 with `K²`.  So a density at least `1 - ε` on the balls gives a density at least `1 - C ε` on the
 squares at every large radius, with `C` a constant of the graph.
 -/
-import UCPlanar.Basic
-import UCPlanar.Support.ZeroVolume
-import UCPlanar.Support.Poly.Square
-import UCPlanar.Support.Poly.Volume
-import UCPlanar.Support.LowerVolume
-import UCPlanar.Support.LiouCount
-import UCPlanar.Support.LiouEventually
-import UCPlanar.Support.LiouFinalGeom
-import UCPlanar.Support.ZeroAssemble
+public import UCPlanar.Basic
+public import UCPlanar.Support.ZeroVolume
+public import UCPlanar.Support.Poly.Square
+public import UCPlanar.Support.Poly.Volume
+public import UCPlanar.Support.LowerVolume
+public import UCPlanar.Support.LiouCount
+public import UCPlanar.Support.LiouEventually
+public import UCPlanar.Support.LiouFinalGeom
+public import UCPlanar.Support.ZeroAssemble
+
+@[expose] public section
 
 open scoped Classical
 set_option autoImplicit false

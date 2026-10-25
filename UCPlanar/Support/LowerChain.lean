@@ -1,3 +1,5 @@
+module
+
 /-
 One rung of the chain of three-ball inequalities.
 
@@ -6,8 +8,10 @@ centred at a lattice point, and the three-ball inequality at that small square b
 maximum by the maximum over a square whose radius is larger by a fixed multiple of the small
 radius.  This is the inequality `M_i ≤ C M_{i+1}^{1/2} + C exp(-cK/A) M_{i+1}` of the source.
 -/
-import UCPlanar.Support.LowerVolume
-import UCPlanar.Support.LowerArith
+public import UCPlanar.Support.LowerVolume
+public import UCPlanar.Support.LowerArith
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

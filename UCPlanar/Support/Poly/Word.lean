@@ -1,9 +1,13 @@
+module
+
 /-
 Iterated forward differences along a word of lattice vectors: their harmonicity on a square
 shrunk by the length of the word, and the iteration of the discrete Caccioppoli inequality
 across a chain of equally spaced nested squares.
 -/
-import UCPlanar.Support.Poly.Square
+public import UCPlanar.Support.Poly.Square
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

@@ -1,7 +1,11 @@
+module
+
 /- The observation that opens Section 4: under uniform ellipticity a small value with a large
 neighbour has a large neighbour of the opposite sign. -/
-import UCPlanar.Support.ZeroAssemble
-import Mathlib
+public import UCPlanar.Support.ZeroAssemble
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

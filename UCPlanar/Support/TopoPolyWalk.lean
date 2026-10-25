@@ -1,6 +1,10 @@
+module
+
 /- Walks of a graph and walks of the finite plane graph its edges draw. -/
-import UCPlanar.Support.TopoPolygonal
-import Mathlib
+public import UCPlanar.Support.TopoPolygonal
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

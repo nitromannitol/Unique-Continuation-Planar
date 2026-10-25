@@ -1,7 +1,11 @@
+module
+
 /- Short interior attachments and access to the boundary. -/
-import UCPlanar.Support.PlanarBoundary
-import UCPlanar.Support.PlanarMetric
-import UCPlanar.Support.PlanarComponents
+public import UCPlanar.Support.PlanarBoundary
+public import UCPlanar.Support.PlanarMetric
+public import UCPlanar.Support.PlanarComponents
+
+@[expose] public section
 
 open scoped Classical
 

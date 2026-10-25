@@ -1,10 +1,14 @@
+module
+
 /- The corner of a polygonal drawing.  Where the drawing near a point is two segments radiating
 from it on two different lines, the two lines cut the ball into four convex cells which the two
 free half lines join into two pieces, each with both segments in its closure.  A face beside the
 corner contains one of the two pieces, so both segments lie on its frontier: this is the
 two-sidedness of the drawing at a corner. -/
-import UCPlanar.Support.TopoLocal
-import Mathlib
+public import UCPlanar.Support.TopoLocal
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

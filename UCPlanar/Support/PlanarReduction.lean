@@ -1,6 +1,10 @@
+module
+
 /- Boundary counting from alternating-path intersection. -/
-import UCPlanar.Support.PlanarDomain
-import UCPlanar.Support.PlanarOrder
+public import UCPlanar.Support.PlanarDomain
+public import UCPlanar.Support.PlanarOrder
+
+@[expose] public section
 
 open scoped Classical
 

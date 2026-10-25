@@ -1,8 +1,12 @@
-import UCPlanar.Basic
-import UCPlanar.Support.Periodic
-import UCPlanar.Support.SurroundExists
-import UCPlanar.External.EdgeSplitting
-import UCPlanar.External.Unicoherence
+module
+
+public import UCPlanar.Basic
+public import UCPlanar.Support.Periodic
+public import UCPlanar.Support.SurroundExists
+public import UCPlanar.External.EdgeSplitting
+public import UCPlanar.External.Unicoherence
+
+@[expose] public section
 
 /-!
 # The zero-case step

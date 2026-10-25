@@ -1,9 +1,13 @@
-import UCPlanar.External.EdgeSplitting
-import UCPlanar.External.Unicoherence
-import UCPlanar.External.MoserEstimate
-import UCPlanar.Support.Growth
-import UCPlanar.Support.LiouBridge
-import UCPlanar.Support.LiouPeriodic
+module
+
+public import UCPlanar.External.EdgeSplitting
+public import UCPlanar.External.Unicoherence
+public import UCPlanar.External.MoserEstimate
+public import UCPlanar.Support.Growth
+public import UCPlanar.Support.LiouBridge
+public import UCPlanar.Support.LiouPeriodic
+
+@[expose] public section
 
 /-!
 # The frozen Liouville theorem

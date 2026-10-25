@@ -1,6 +1,10 @@
+module
+
 /- Sign components of a harmonic function reach the boundary of a finite domain. -/
-import UCPlanar.Support.Harmonic
-import Mathlib
+public import UCPlanar.Support.Harmonic
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

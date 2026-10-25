@@ -1,5 +1,9 @@
-import UCPlanar.External.MoserEstimate
-import UCPlanar.Support.LowerAssembly
+module
+
+public import UCPlanar.External.MoserEstimate
+public import UCPlanar.Support.LowerAssembly
+
+@[expose] public section
 
 /-!
 # The periodic exponential lower bound

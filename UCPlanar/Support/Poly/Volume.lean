@@ -1,9 +1,13 @@
+module
+
 /-
 Quadratic volume growth of the geometric squares of a periodic graph, the conversion from the
 `ℓ²` norm on a square to the supremum norm.
 -/
-import UCPlanar.Support.ZeroVolume
-import UCPlanar.Support.Poly.Square
+public import UCPlanar.Support.ZeroVolume
+public import UCPlanar.Support.Poly.Square
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

@@ -172,8 +172,8 @@ radius, function, density or conductance parameter is bound before it.
   with the independent nanoda kernel.  See
   [`UCPlanarAudit/README.md`](UCPlanarAudit/README.md) and
   [`UCPlanarAudit/COMPARATOR_RUNS.md`](UCPlanarAudit/COMPARATOR_RUNS.md).
-- **Pinned toolchain.**  Lean `v4.32.0`, `mathlib` at revision
-  `81a5d257c8e410db227a6665ed08f64fea08e997`, `Lattice-Probability` at commit
+- **Pinned toolchain.**  Lean `v4.35.0-rc2`, `mathlib` at revision
+  `065356127b1dc0016f66b7283ce0ce2c4055aa55`, `Lattice-Probability` at commit
   `9d44b4d` and `schoenflies-lean` at commit `05a43d29`, recorded in
   [`lean-toolchain`](lean-toolchain), [`lakefile.lean`](lakefile.lean) and
   [`lake-manifest.json`](lake-manifest.json).
@@ -188,7 +188,7 @@ Lattice-Probability library and the Schoenflies library.
 
 The project uses [`elan`](https://github.com/leanprover/elan) (the Lean
 toolchain manager) and Lake.  The toolchain is pinned in
-[`lean-toolchain`](lean-toolchain) (`leanprover/lean4:v4.32.0`), so `elan`
+[`lean-toolchain`](lean-toolchain) (`leanprover/lean4:v4.35.0-rc2`), so `elan`
 installs the right Lean version automatically, and the dependencies are pinned
 to commits in `lakefile.lean` and [`lake-manifest.json`](lake-manifest.json).
 
@@ -294,3 +294,12 @@ Comparator configuration to check. It records the dispatched commit and runs wit
 minimum, source-module, Challenge-closure, licensing and metadata requirements before
 dispatch. A passing preflight is advisory; it is separate from submission, editorial
 review and a public registry record.
+
+The selected Palomar preflight checks `UCPlanarAudit/Counterexample/comparator.json`
+(Theorem 5.1). Its comparator Solution and bridge import the existing frozen
+counterexample theorem directly, which is the same theorem used by the public
+MainTheorems wrapper. This selected import closure avoids building unrelated
+topology results; every original mathematical definition and frozen statement is
+retained. The Schoenflies dependency stays pinned for the other project results.
+Module interfaces are adapted to the selected supported toolchain. Other comparator
+configurations have separate proof and verification scopes.

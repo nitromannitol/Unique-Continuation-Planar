@@ -1,5 +1,9 @@
+module
+
 /- Interleaved drawn walks in a drawn cycle share a vertex. -/
-import UCPlanar.Support.TopoCross
+public import UCPlanar.Support.TopoCross
+
+@[expose] public section
 
 open Set SimpleGraph
 

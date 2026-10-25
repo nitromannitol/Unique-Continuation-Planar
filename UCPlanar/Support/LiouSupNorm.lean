@@ -1,7 +1,11 @@
+module
+
 /-
 The sup norm over a ball controls the value at a point.
 -/
-import UCPlanar.Support.Periodic
+public import UCPlanar.Support.Periodic
+
+@[expose] public section
 
 open scoped Classical
 

@@ -1,6 +1,10 @@
+module
+
 /- Positivity and edge support of the crossing conductances. -/
-import UCPlanar.Support.CrossingGraph
-import Mathlib.Tactic
+public import UCPlanar.Support.CrossingGraph
+public import Mathlib.Tactic
+
+@[expose] public section
 
 /-- **`crossingOutgoing` is nonnegative** whenever all four conductance parameters `a, b, t, d`
 are, since each branch of its case split returns one of them, halved, or zero. -/

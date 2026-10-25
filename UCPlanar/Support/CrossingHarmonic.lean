@@ -1,6 +1,10 @@
+module
+
 /- The diagonal sequence solves the weighted graph equation at every vertex. -/
-import UCPlanar.Support.CrossingLaplacian
-import UCPlanar.Support.CounterexampleAlgebra
+public import UCPlanar.Support.CrossingLaplacian
+public import UCPlanar.Support.CounterexampleAlgebra
+
+@[expose] public section
 open scoped Classical
 
 /-- **The diagonal function is harmonic on the crossing graph.**  Given positive

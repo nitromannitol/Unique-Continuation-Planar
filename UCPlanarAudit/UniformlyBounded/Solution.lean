@@ -1,7 +1,11 @@
-import Mathlib
-import UCPlanar.MainTheorems
-import UCPlanarAudit.UniformlyBounded.SolutionBasic
-import UCPlanarAudit.Support.UniformlyBoundedBridge
+module
+
+public import Mathlib
+public import UCPlanar.MainTheorems
+public import UCPlanarAudit.UniformlyBounded.SolutionBasic
+public import UCPlanarAudit.Support.UniformlyBoundedBridge
+
+@[expose] public section
 
 /-!
 # Solution: UniformlyBounded

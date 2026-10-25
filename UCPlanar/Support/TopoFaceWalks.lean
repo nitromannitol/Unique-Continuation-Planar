@@ -1,11 +1,15 @@
+module
+
 /- The face walks of Step 3, reduced to two properties of the plane: the frontier of a face is
 covered by whole edge arcs, and it is connected.  Everything combinatorial is proved here: the
 edges drawn on the frontier and reachable from one vertex carry a relatively clopen part of the
 frontier, so connectedness makes every vertex incident to the face reachable along it. -/
-import UCPlanar.Support.TopoClusterEdges
-import UCPlanar.Support.TopoLines
-import UCPlanar.Support.TopoFacePath
-import Mathlib
+public import UCPlanar.Support.TopoClusterEdges
+public import UCPlanar.Support.TopoLines
+public import UCPlanar.Support.TopoFacePath
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

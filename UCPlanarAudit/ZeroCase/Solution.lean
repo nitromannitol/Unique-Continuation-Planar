@@ -1,7 +1,11 @@
-import Mathlib
-import UCPlanar.MainTheorems
-import UCPlanarAudit.ZeroCase.SolutionBasic
-import UCPlanarAudit.Support.ZeroCaseBridge
+module
+
+public import Mathlib
+public import UCPlanar.MainTheorems
+public import UCPlanarAudit.ZeroCase.SolutionBasic
+public import UCPlanarAudit.Support.ZeroCaseBridge
+
+@[expose] public section
 
 /-!
 # Solution: ZeroCase

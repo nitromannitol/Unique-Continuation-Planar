@@ -1,5 +1,9 @@
+module
+
 /- Walks and sign components restricted to a plane domain. -/
-import UCPlanar.Support.PlanarAttachments
+public import UCPlanar.Support.PlanarAttachments
+
+@[expose] public section
 
 open scoped Classical
 

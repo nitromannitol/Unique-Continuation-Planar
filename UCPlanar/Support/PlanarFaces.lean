@@ -1,5 +1,9 @@
+module
+
 /- Finite paths in the frontier of a face. -/
-import UCPlanar.Support.PlanarTrace
+public import UCPlanar.Support.PlanarTrace
+
+@[expose] public section
 
 open scoped Classical
 

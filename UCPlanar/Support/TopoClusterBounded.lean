@@ -1,8 +1,12 @@
+module
+
 /- The filled region of a finite vertex set is bounded: a point far from the drawing of that set
 lies in a face avoiding it, because the face of a point off the drawing has diameter at most the
 uniform face bound of the periodic plane graph. -/
-import UCPlanar.Support.TopoClusterFace
-import Mathlib
+public import UCPlanar.Support.TopoClusterFace
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

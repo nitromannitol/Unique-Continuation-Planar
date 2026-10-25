@@ -1,5 +1,9 @@
+module
+
 /- The two arcs a pair of vertices cuts a drawn cycle into. -/
-import UCPlanar.Support.TopoChord
+public import UCPlanar.Support.TopoChord
+
+@[expose] public section
 
 open Set SimpleGraph
 

@@ -1,5 +1,9 @@
+module
+
 /- The finite domains agree with their defining geometric and graph sets. -/
-import UCPlanar.Support.Periodic
+public import UCPlanar.Support.Periodic
+
+@[expose] public section
 
 /-- The finite ball `P.ball o n`, as a set, coincides with the graph's closed metric
 ball of radius `n` about `o`. -/

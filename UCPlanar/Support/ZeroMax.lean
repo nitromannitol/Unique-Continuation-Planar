@@ -1,9 +1,13 @@
+module
+
 /- The maximum principle in a finite domain: few exceptional vertices force a bound. -/
-import UCPlanar.Support.ZeroVolume
-import UCPlanar.Support.ZeroCount
-import UCPlanar.Support.ZeroSign
-import UCPlanar.Basic
-import Mathlib
+public import UCPlanar.Support.ZeroVolume
+public import UCPlanar.Support.ZeroCount
+public import UCPlanar.Support.ZeroSign
+public import UCPlanar.Basic
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

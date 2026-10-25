@@ -1,3 +1,5 @@
+module
+
 /-
 The reach of the one-dimensional propagation.
 
@@ -9,7 +11,9 @@ the graph.  Iterating the Remez inequality on the approximating polynomial does 
 doubling costs a factor `32^m`, and an approximation quality `α = 2^{-24J}` still beats the
 accumulated factor at the fourth root, which is what the exponent `1/4` of the propagation asks.
 -/
-import UCPlanar.Support.ThreeProp
+public import UCPlanar.Support.ThreeProp
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

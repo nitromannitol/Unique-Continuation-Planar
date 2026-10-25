@@ -1,10 +1,14 @@
+module
+
 /-
 Algebra and lattice parity for the diagonal harmonic function of Section 5.
 The ratio is `-A₂/A₁`, and the fourth conductance is
 `A₃ (A₁-A₂)²/(A₁ A₂) - 2 A₁ A₂/(A₁+A₂)`.
 -/
-import LatticeProb.Network.Basic
-import Mathlib.Tactic
+public import LatticeProb.Network.Basic
+public import Mathlib.Tactic
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

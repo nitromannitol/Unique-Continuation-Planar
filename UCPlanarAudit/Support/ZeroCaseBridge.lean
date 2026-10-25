@@ -1,6 +1,10 @@
-import Mathlib
-import UCPlanar.MainTheorems
-import UCPlanarAudit.ZeroCase.SolutionBasic
+module
+
+public import Mathlib
+public import UCPlanar.MainTheorems
+public import UCPlanarAudit.ZeroCase.SolutionBasic
+
+@[expose] public section
 
 /-!
 # Bridge from the `ZeroCase` vocabulary to the repository

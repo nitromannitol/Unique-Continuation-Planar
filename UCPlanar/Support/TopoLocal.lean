@@ -1,11 +1,15 @@
+module
+
 /- The local structure of a polygonal drawing.  Every arc of the drawing is covered by finitely
 many segments lying on it, so inside a ball all but finitely many points of the drawing have a
 neighbourhood in which the drawing is exactly a piece of one line.  Beside a face this turns the
 straight local model into two-sidedness: off the finite set, the frontier of a face contains a
 whole neighbourhood of each of its points in the drawing. -/
-import UCPlanar.Support.TopoFaceWalks
-import UCPlanar.Support.TopoProper
-import Mathlib
+public import UCPlanar.Support.TopoFaceWalks
+public import UCPlanar.Support.TopoProper
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

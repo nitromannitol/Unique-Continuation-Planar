@@ -1,6 +1,10 @@
+module
+
 /- Connectivity of an edge set with no splitting vertex. -/
-import UCPlanar.Support.TopoEdgeWalk
-import Mathlib
+public import UCPlanar.Support.TopoEdgeWalk
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

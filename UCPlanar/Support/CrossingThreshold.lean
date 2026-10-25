@@ -1,5 +1,9 @@
+module
+
 /- Positivity of the third conductance under the threshold in Section 5. -/
-import UCPlanar.Support.CounterexampleAlgebra
+public import UCPlanar.Support.CounterexampleAlgebra
+
+@[expose] public section
 
 /-- The third conductance `t` is positive whenever it exceeds the threshold
 `2 a² b² / ((a-b)² (a+b))` for positive `a ≠ b`. -/

@@ -1,5 +1,9 @@
-import UCPlanar.Support.CrossingHarmonic
-import UCPlanar.Support.CrossingThreshold
+module
+
+public import UCPlanar.Support.CrossingHarmonic
+public import UCPlanar.Support.CrossingThreshold
+
+@[expose] public section
 
 /-!
 # The crossing-conductance counterexample

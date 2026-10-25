@@ -1,11 +1,15 @@
+module
+
 /-
 The bridge from the polynomial approximation lemma to the one-dimensional propagation: the
 approximating polynomial, read in the lattice coordinates of an orbit and restricted to one
 line of that orbit, is the univariate polynomial the discrete Remez inequality consumes.
 -/
-import UCPlanar.Support.ThreeLine
-import UCPlanar.Support.Poly.LatVar
-import UCPlanar.Support.Poly.CaccioppoliLattice
+public import UCPlanar.Support.ThreeLine
+public import UCPlanar.Support.Poly.LatVar
+public import UCPlanar.Support.Poly.CaccioppoliLattice
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

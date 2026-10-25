@@ -1,3 +1,5 @@
+module
+
 /-
 The lattice ingredients of the three-ball inequality on a periodic planar graph.
 
@@ -9,14 +11,16 @@ consumes: the half-lines lemma, which turns a density hypothesis on the box into
 lines each carrying a dense set of points, and the arithmetic of the two cases.  The propagation
 itself is in ThreeLine.lean and ThreeProp.lean.
 -/
-import UCPlanar.Support.Approximation
-import UCPlanar.Support.RemezDiscrete
-import UCPlanar.Support.Density
-import UCPlanar.Support.Harmonic
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Analysis.SpecialFunctions.Sqrt
-import Mathlib.Data.Int.Interval
-import Mathlib.Algebra.Polynomial.Eval.Defs
+public import UCPlanar.Support.Approximation
+public import UCPlanar.Support.RemezDiscrete
+public import UCPlanar.Support.Density
+public import UCPlanar.Support.Harmonic
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
+public import Mathlib.Data.Int.Interval
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+
+@[expose] public section
 
 open scoped Classical
 set_option autoImplicit false

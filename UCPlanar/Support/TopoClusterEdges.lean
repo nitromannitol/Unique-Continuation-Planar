@@ -1,7 +1,11 @@
+module
+
 /- The boundary edges of the filled cluster: finitely many arcs of the drawing meet a bounded
 part of the plane, so the frontier of a bounded filled region is drawn by a finite edge set. -/
-import UCPlanar.Support.TopoClusterBoundary
-import Mathlib
+public import UCPlanar.Support.TopoClusterBoundary
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

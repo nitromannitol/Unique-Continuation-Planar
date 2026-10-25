@@ -1,10 +1,14 @@
+module
+
 /-
 The bridge between the mixed forward differences of the orbit data of a function and the word
 differences along the two lattice generators, and the resulting bound on the mixed differences
 of order `m+1` supplied by the derivative bound.
 -/
-import UCPlanar.Support.Poly.Orbit
-import UCPlanar.Support.Poly.DerivBound
+public import UCPlanar.Support.Poly.Orbit
+public import UCPlanar.Support.Poly.DerivBound
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

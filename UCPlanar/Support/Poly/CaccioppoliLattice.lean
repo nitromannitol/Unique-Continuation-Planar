@@ -1,3 +1,5 @@
+module
+
 /-
 The discrete Caccioppoli inequality for a forward difference along a lattice vector.
 
@@ -7,8 +9,10 @@ vertex and its translate are joined by a walk of bounded length, and the walks e
 the points of one square are translates of finitely many fixed walks, so each of them can be
 compared with the energy of the square it lies in.
 -/
-import UCPlanar.Support.Poly.Elliptic
-import UCPlanar.Support.Poly.Square
+public import UCPlanar.Support.Poly.Elliptic
+public import UCPlanar.Support.Poly.Square
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

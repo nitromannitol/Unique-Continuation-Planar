@@ -1,6 +1,10 @@
+module
+
 /- Periodic geometry: edges are short, walks move the drawing slowly, vertices are infinite. -/
-import UCPlanar.Support.Periodic
-import Mathlib
+public import UCPlanar.Support.Periodic
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 

@@ -1,3 +1,5 @@
+module
+
 /- A reduction of X-003 (`UCPlanar.External.Unicoherence`) to a clean classical statement about
 `Schoenflies.Plane`, mirroring `janiszewskiPoint_of_euclidean` (`TopoSeparate.lean`): the
 classical statement is transported along `planeHomeo` using `Homeomorph.image_connectedComponentIn`
@@ -14,11 +16,13 @@ graph (`UCPlanar.Support.isClosed_trace`, `TopoProper.lean`), which is the only 
 `Unicoherence` is ever consumed at, but is not automatic for an arbitrary `PlaneEmbedding` of an
 arbitrary (possibly infinite, non-locally-finite) graph, so it is carried as an explicit
 hypothesis `hclosed` here rather than re-derived. -/
-import UCPlanar.Support.TopoTransport
-import UCPlanar.Support.PlanarInterior
-import UCPlanar.Support.TopoFace
-import UCPlanar.External.Unicoherence
-import Mathlib
+public import UCPlanar.Support.TopoTransport
+public import UCPlanar.Support.PlanarInterior
+public import UCPlanar.Support.TopoFace
+public import UCPlanar.External.Unicoherence
+public import Mathlib
+
+@[expose] public section
 
 open Set
 

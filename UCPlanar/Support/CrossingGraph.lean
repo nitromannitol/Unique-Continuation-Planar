@@ -1,10 +1,14 @@
+module
+
 /-
 The periodic graph and conductances of `ucplanar.tex:348–357`.
 The four nearest-neighbor edges are supplemented by diagonal jumps from vertices
 whose coordinate sum is even.
 -/
-import LatticeProb.Site
-import LatticeProb.Network.Basic
+public import LatticeProb.Site
+public import LatticeProb.Network.Basic
+
+@[expose] public section
 
 open scoped Classical
 

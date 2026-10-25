@@ -1,11 +1,15 @@
+module
+
 /-
 The geometry between the lattice three-ball inequality and the proposition: the line data of a
 whole lattice line at reach `2^J`, and the transfer of the density hypothesis from the geometric
 square to one coset of the period lattice.
 -/
-import UCPlanar.Basic
-import UCPlanar.Support.ThreeReach
-import UCPlanar.Support.Poly.Volume
+public import UCPlanar.Basic
+public import UCPlanar.Support.ThreeReach
+public import UCPlanar.Support.Poly.Volume
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

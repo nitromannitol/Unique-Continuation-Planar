@@ -1,6 +1,10 @@
-import Mathlib
-import UCPlanar.MainTheorems
-import UCPlanarAudit.Liouville.SolutionBasic
+module
+
+public import Mathlib
+public import UCPlanar.MainTheorems
+public import UCPlanarAudit.Liouville.SolutionBasic
+
+@[expose] public section
 
 /-!
 # Bridge from the `Liouville` vocabulary to the repository

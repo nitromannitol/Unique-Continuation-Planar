@@ -1,7 +1,11 @@
-import UCPlanar.Basic
-import UCPlanar.Support.Periodic
-import UCPlanar.External.MoserEstimate
-import UCPlanar.Support.ThreeAssembly
+module
+
+public import UCPlanar.Basic
+public import UCPlanar.Support.Periodic
+public import UCPlanar.External.MoserEstimate
+public import UCPlanar.Support.ThreeAssembly
+
+@[expose] public section
 
 /-!
 # The three-ball supremum bound

@@ -1,6 +1,10 @@
+module
+
 /- The region a drawn closed walk encloses, read as a Jordan domain. -/
-import UCPlanar.Support.TopoTransport
-import UCPlanar.Support.TopoWalk
+public import UCPlanar.Support.TopoTransport
+public import UCPlanar.Support.TopoWalk
+
+@[expose] public section
 
 open Set
 

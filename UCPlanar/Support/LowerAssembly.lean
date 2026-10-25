@@ -1,3 +1,5 @@
+module
+
 /-
 The assembly of the exponential lower bound.
 
@@ -8,9 +10,11 @@ inside it, and the bootstrap supplies the constant that starts the chain.  The l
 `l ≍ log₂ √N` rungs, so the squaring branch produces `2^{32^l}` with `32^l ≥ N`, and the
 exponential branch produces `exp(c₁ 2^{l-1} K₀)` with `2^{l-1} K₀ ≥ N/4`.
 -/
-import UCPlanar.Support.LowerBootstrap
-import UCPlanar.Support.LowerLadder
-import UCPlanar.Support.LowerChain
+public import UCPlanar.Support.LowerBootstrap
+public import UCPlanar.Support.LowerLadder
+public import UCPlanar.Support.LowerChain
+
+@[expose] public section
 
 open scoped Classical BigOperators
 set_option autoImplicit false

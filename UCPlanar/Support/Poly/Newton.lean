@@ -1,8 +1,12 @@
+module
+
 /-
 Newton interpolation in one variable: the Newton polynomial of a sequence, its
 forward difference, and the discrete Taylor remainder bound.
 -/
-import Mathlib
+public import Mathlib
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

@@ -1,7 +1,11 @@
+module
+
 /- A punctured ball of the plane is connected, so a point of the frontier of an open set which
 the complement of the closure also reaches is not isolated in that frontier. -/
-import UCPlanar.Support.TopoArcLocal
-import Mathlib
+public import UCPlanar.Support.TopoArcLocal
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

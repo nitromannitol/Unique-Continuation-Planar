@@ -1,13 +1,17 @@
+module
+
 /-
 The derivative bound of the polynomial approximation lemma: iterating the discrete Caccioppoli
 inequality across `Q_{2R} ⊂ … ⊂ Q_{3R}` and applying the discrete Moser estimate once bounds the
 word differences of a harmonic function on `Q_R` by `(C k / R) ^ k` times its supremum norm on
 `Q_{3R}`, where `k` is the order of the difference.
 -/
-import UCPlanar.Support.Poly.Word
-import UCPlanar.Support.Poly.Volume
-import UCPlanar.Support.Poly.CaccioppoliLattice
-import UCPlanar.External.MoserEstimate
+public import UCPlanar.Support.Poly.Word
+public import UCPlanar.Support.Poly.Volume
+public import UCPlanar.Support.Poly.CaccioppoliLattice
+public import UCPlanar.External.MoserEstimate
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

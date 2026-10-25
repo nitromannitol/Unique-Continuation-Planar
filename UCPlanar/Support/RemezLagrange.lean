@@ -1,4 +1,8 @@
-import UCPlanar.Support.RemezCheb
+module
+
+public import UCPlanar.Support.RemezCheb
+
+@[expose] public section
 
 /-!
 # Lagrange interpolation at compressed nodes and the Remez comparison

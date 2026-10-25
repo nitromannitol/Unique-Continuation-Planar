@@ -1,6 +1,10 @@
+module
+
 /- Transport of arcs, Jordan curves and Jordan domains along a homeomorphism. -/
-import UCPlanar.Support.TopoCrosscut
-import Schoenflies.JordanSchoenflies
+public import UCPlanar.Support.TopoCrosscut
+public import Schoenflies.JordanSchoenflies
+
+@[expose] public section
 
 open Set unitInterval
 

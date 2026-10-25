@@ -1,18 +1,22 @@
+module
+
 /-
 Assembly of the Liouville theorem from the uniform upper bound, the periodic
 exponential lower bound, and the classical bounded-Liouville fact.
 -/
-import UCPlanar.Basic
-import UCPlanar.Support.Periodic
-import UCPlanar.Support.Growth
-import UCPlanar.Support.LiouElliptic
-import UCPlanar.Support.LiouDensity
-import UCPlanar.Support.LiouCount
-import UCPlanar.Support.LiouTransfer
-import UCPlanar.Support.LiouDensityTransfer
-import UCPlanar.Support.LiouSupNorm
-import UCPlanar.Support.LiouSupBound
-import UCPlanar.Support.LiouEventually
+public import UCPlanar.Basic
+public import UCPlanar.Support.Periodic
+public import UCPlanar.Support.Growth
+public import UCPlanar.Support.LiouElliptic
+public import UCPlanar.Support.LiouDensity
+public import UCPlanar.Support.LiouCount
+public import UCPlanar.Support.LiouTransfer
+public import UCPlanar.Support.LiouDensityTransfer
+public import UCPlanar.Support.LiouSupNorm
+public import UCPlanar.Support.LiouSupBound
+public import UCPlanar.Support.LiouEventually
+
+@[expose] public section
 
 open scoped Classical
 

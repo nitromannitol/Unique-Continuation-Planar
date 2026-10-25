@@ -1,7 +1,11 @@
-import UCPlanar.Support.Periodic
-import UCPlanar.Support.PlanarCycle
-import UCPlanar.Support.PlanarTopological
-import UCPlanar.Support.TopoInterleave
+module
+
+public import UCPlanar.Support.Periodic
+public import UCPlanar.Support.PlanarCycle
+public import UCPlanar.Support.PlanarTopological
+public import UCPlanar.Support.TopoInterleave
+
+@[expose] public section
 
 /-!
 # The topological lemma on a cycle

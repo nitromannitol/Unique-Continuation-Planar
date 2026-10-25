@@ -1,10 +1,14 @@
+module
+
 /-
 The change of variables in the other direction: a polynomial of the plane coordinates is read
 as a polynomial of the lattice coordinates along an orbit.  This is what turns the approximating
 polynomial of the polynomial approximation lemma, which is evaluated at the drawing of a vertex,
 into a polynomial of the two integer coordinates of that vertex in its orbit.
 -/
-import UCPlanar.Support.Poly.Change
+public import UCPlanar.Support.Poly.Change
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

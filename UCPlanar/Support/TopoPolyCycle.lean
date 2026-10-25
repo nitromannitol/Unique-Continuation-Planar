@@ -1,6 +1,10 @@
+module
+
 /- The boundary cycle theorem for polygonal plane embeddings. -/
-import UCPlanar.Support.TopoPolyConn
-import Mathlib
+public import UCPlanar.Support.TopoPolyConn
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

@@ -1,6 +1,10 @@
+module
+
 /- The eight conductances at a vertex of the crossing graph. -/
-import UCPlanar.Support.CrossingGraph
-import Mathlib.Tactic
+public import UCPlanar.Support.CrossingGraph
+public import Mathlib.Tactic
+
+@[expose] public section
 
 /-- The conductance from `x` to its `+e₀` neighbor is `b` on even sites and `a` on odd sites,
 one of the eight crossing-graph conductances at `x`. -/

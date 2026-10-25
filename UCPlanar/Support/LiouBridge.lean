@@ -1,10 +1,14 @@
+module
+
 /-
 The frozen statements of the uniform upper bound and the periodic lower bound
 instantiate the assembly predicates.
 -/
-import UCPlanar.Support.LiouMain
-import UCPlanar.Frozen.UniformlyBounded
-import UCPlanar.Frozen.PeriodicLowerBound
+public import UCPlanar.Support.LiouMain
+public import UCPlanar.Frozen.UniformlyBounded
+public import UCPlanar.Frozen.PeriodicLowerBound
+
+@[expose] public section
 
 open scoped Classical
 

@@ -1,9 +1,13 @@
+module
+
 /-
 The discrete Caccioppoli inequality for a harmonic function on a finite
 weighted graph, with the periodic-conductance hypotheses explicit.
 -/
-import UCPlanar.Support.Poly.Basic
-import LatticeProb.Network.Variational
+public import UCPlanar.Support.Poly.Basic
+public import LatticeProb.Network.Variational
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

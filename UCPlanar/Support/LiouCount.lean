@@ -1,7 +1,11 @@
+module
+
 /-
 The exceptional count and the bounded density are complementary.
 -/
-import UCPlanar.Basic
+public import UCPlanar.Basic
+
+@[expose] public section
 
 open scoped Classical
 

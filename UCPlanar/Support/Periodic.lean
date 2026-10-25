@@ -1,9 +1,13 @@
+module
+
 /-
 Periodic graphs with a proper rank-two coordinate realization.
 -/
-import UCPlanar.Support.Planar
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.Analysis.Normed.Group.Basic
+public import UCPlanar.Support.Planar
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Analysis.Normed.Group.Basic
+
+@[expose] public section
 
 open scoped Classical
 

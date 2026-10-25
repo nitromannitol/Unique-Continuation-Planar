@@ -1,6 +1,10 @@
-import Mathlib
-import UCPlanar.MainTheorems
-import UCPlanarAudit.Counterexample.SolutionBasic
+module
+
+public import Mathlib
+public import UCPlanar.Frozen.Counterexample
+public import UCPlanarAudit.Counterexample.SolutionBasic
+
+@[expose] public section
 
 /-!
 # Bridge from the `Counterexample` vocabulary to the repository

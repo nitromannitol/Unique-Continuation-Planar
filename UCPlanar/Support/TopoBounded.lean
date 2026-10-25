@@ -1,5 +1,9 @@
+module
+
 /- The closed region a drawn cycle bounds is a bounded set, so it holds finitely many vertices. -/
-import UCPlanar.Support.TopoJordan
+public import UCPlanar.Support.TopoJordan
+
+@[expose] public section
 
 open Set
 

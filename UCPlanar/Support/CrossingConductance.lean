@@ -1,5 +1,9 @@
+module
+
 /- The positive undirected network of Section 5. -/
-import UCPlanar.Support.CrossingWeights
+public import UCPlanar.Support.CrossingWeights
+
+@[expose] public section
 
 /-- For positive weights `a, b, t, d`, `crossingConductance` is a symmetric conductance on
 `crossingGraph`: it is positive exactly on the `crossingRelation` edges (via `outgoing_pos`) and

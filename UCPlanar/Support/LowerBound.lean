@@ -1,3 +1,5 @@
+module
+
 /-
 The exponential lower bound on a periodic planar graph.
 
@@ -6,8 +8,10 @@ on a large square and is small on a positive fraction of the inner square, then 
 three-ball bound forces `M` to grow at most exponentially in the side length, and the
 iteration of that bound gives the exponential lower bound of the paper.
 -/
-import UCPlanar.Support.ThreeBall
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import UCPlanar.Support.ThreeBall
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+
+@[expose] public section
 
 open scoped Classical
 

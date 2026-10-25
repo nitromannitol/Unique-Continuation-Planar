@@ -1,6 +1,10 @@
+module
+
 /- The drawing of a periodic plane graph is a closed set, so its faces are open. -/
-import UCPlanar.Support.TopoFace
-import UCPlanar.Support.Periodic
+public import UCPlanar.Support.TopoFace
+public import UCPlanar.Support.Periodic
+
+@[expose] public section
 
 open Set
 

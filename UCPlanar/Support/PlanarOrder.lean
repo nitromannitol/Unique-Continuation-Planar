@@ -1,7 +1,11 @@
+module
+
 /- Ordering and counting finite families of boundary contacts. -/
-import UCPlanar.Support.PlanarBoundary
-import UCPlanar.Support.PlanarLabels
-import Mathlib.Data.Finset.Sort
+public import UCPlanar.Support.PlanarBoundary
+public import UCPlanar.Support.PlanarLabels
+public import Mathlib.Data.Finset.Sort
+
+@[expose] public section
 
 open scoped Classical
 

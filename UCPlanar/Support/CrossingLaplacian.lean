@@ -1,9 +1,13 @@
+module
+
 /- The shared network Laplacian as its explicit eight-term sum. -/
-import UCPlanar.Support.CrossingFinite
-import UCPlanar.Support.CrossingNeighbors
-import UCPlanar.Support.CrossingConductance
-import UCPlanar.Support.CrossingCoefficients
-import UCPlanar.Support.CrossingSum
+public import UCPlanar.Support.CrossingFinite
+public import UCPlanar.Support.CrossingNeighbors
+public import UCPlanar.Support.CrossingConductance
+public import UCPlanar.Support.CrossingCoefficients
+public import UCPlanar.Support.CrossingSum
+
+@[expose] public section
 open scoped Classical BigOperators
 
 /-- The network Laplacian of `crossingConductance` at `x` equals the explicit eight-term sum

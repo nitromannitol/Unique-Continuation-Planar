@@ -1,6 +1,10 @@
-import Mathlib
-import UCPlanar.MainTheorems
-import UCPlanarAudit.UniformlyBounded.SolutionBasic
+module
+
+public import Mathlib
+public import UCPlanar.MainTheorems
+public import UCPlanarAudit.UniformlyBounded.SolutionBasic
+
+@[expose] public section
 
 /-!
 # Bridge from the `UniformlyBounded` vocabulary to the repository

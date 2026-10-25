@@ -1,3 +1,5 @@
+module
+
 /-
 The arithmetic of the exponential lower bound.
 
@@ -7,8 +9,10 @@ gain already doubles the scale of the exponent, and a chain made only of square-
 multiplies the logarithm of the maximum by `32`.  The two branches are propagated along the
 dyadic ladder of scales by the last two theorems of this module.
 -/
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
+
+@[expose] public section
 
 open scoped Classical
 

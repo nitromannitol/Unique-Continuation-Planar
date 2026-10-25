@@ -1,11 +1,15 @@
+module
+
 /- The two bookkeeping inputs of the face path of Step 3: every point on the frontier of the
 filled cluster through a vertex is on the frontier of a face of that cluster, and every vertex
 incident to such a face lies in the region the surrounding cycle bounds. -/
-import UCPlanar.Support.TopoLines
-import UCPlanar.Support.TopoClusterInside
-import UCPlanar.Support.TopoFaceBand
-import UCPlanar.Support.TopoWalksExternal
-import Mathlib
+public import UCPlanar.Support.TopoLines
+public import UCPlanar.Support.TopoClusterInside
+public import UCPlanar.Support.TopoFaceBand
+public import UCPlanar.Support.TopoWalksExternal
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

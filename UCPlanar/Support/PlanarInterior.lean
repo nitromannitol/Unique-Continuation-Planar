@@ -1,6 +1,10 @@
+module
+
 /- Connected traces in complementary regions of a drawn cycle. -/
-import UCPlanar.Support.PlanarTrace
-import Mathlib.Combinatorics.SimpleGraph.Connectivity.Subgraph
+public import UCPlanar.Support.PlanarTrace
+public import Mathlib.Combinatorics.SimpleGraph.Connectivity.Subgraph
+
+@[expose] public section
 
 open scoped Classical
 

@@ -1,3 +1,5 @@
+module
+
 /-
 The one-dimensional propagation of the three-ball proposition, in the two cases of
 `ucplanar.tex:478-519`, and its composition along the two families of lattice lines.
@@ -5,7 +7,9 @@ The one-dimensional propagation of the three-ball proposition, in the two cases 
 The constants are those of the paper: the approximation quality is `α = 2⁻²⁴` and the case
 split is at `M = 32^N`, which is `M exp(βN) = 1` for `β = -log 32`.
 -/
-import UCPlanar.Support.ThreeBridge
+public import UCPlanar.Support.ThreeBridge
+
+@[expose] public section
 
 open scoped BigOperators Classical
 set_option autoImplicit false

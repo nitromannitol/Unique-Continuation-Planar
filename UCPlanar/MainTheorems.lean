@@ -1,7 +1,11 @@
-import UCPlanar.Frozen.Liouville
-import UCPlanar.Frozen.UniformlyBounded
-import UCPlanar.Frozen.ZeroCase
-import UCPlanar.Frozen.Counterexample
+module
+
+public import UCPlanar.Frozen.Liouville
+public import UCPlanar.Frozen.UniformlyBounded
+public import UCPlanar.Frozen.ZeroCase
+public import UCPlanar.Frozen.Counterexample
+
+@[expose] public section
 
 /-!
 # Main results

@@ -1,3 +1,5 @@
+module
+
 /-
 The killed walk of a conductance network, the discrete Dirichlet problem on a
 finite set, and the Nash-Williams recurrence criterion.
@@ -11,9 +13,11 @@ energy identity, hence surjective.  The Nash-Williams cutset bound then gives
 so a network whose balls admit cutset families with divergent reciprocal sums
 is recurrent.
 -/
-import UCPlanar.Support.LiouCHeat
-import LatticeProb.Network.NashWilliams
-import Mathlib.Order.Filter.AtTopBot.Basic
+public import UCPlanar.Support.LiouCHeat
+public import LatticeProb.Network.NashWilliams
+public import Mathlib.Order.Filter.AtTopBot.Basic
+
+@[expose] public section
 
 open scoped Classical ENNReal
 

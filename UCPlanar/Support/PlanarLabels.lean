@@ -1,6 +1,10 @@
+module
+
 /- Counting component labels in an ordered list of boundary contacts. -/
-import UCPlanar.Support.PlanarPacking
-import Mathlib.Tactic
+public import UCPlanar.Support.PlanarPacking
+public import Mathlib.Tactic
+
+@[expose] public section
 
 open scoped Classical
 

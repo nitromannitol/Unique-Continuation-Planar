@@ -1,4 +1,8 @@
-import UCPlanar.Support.Poly.Difference
+module
+
+public import UCPlanar.Support.Poly.Difference
+
+@[expose] public section
 
 /-!
 # Cited input: the discrete Moser estimate

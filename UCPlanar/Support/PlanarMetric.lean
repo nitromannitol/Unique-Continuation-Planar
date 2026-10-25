@@ -1,7 +1,11 @@
+module
+
 /- Metric bounds for the face paths and their sign neighbors. -/
-import UCPlanar.Support.PlanarFaces
-import UCPlanar.Support.PlanarPacking
-import LatticeProb.Graph.Reach
+public import UCPlanar.Support.PlanarFaces
+public import UCPlanar.Support.PlanarPacking
+public import LatticeProb.Graph.Reach
+
+@[expose] public section
 
 open scoped Classical
 

@@ -1,12 +1,16 @@
+module
+
 /- The face path of Step 3: a walk drawn on the frontier of a face from a vertex where the
 harmonic function is small to a vertex next to both signs, obtained by stopping the walk along
 the face at the first vertex carrying a large value and completing the sign by harmonicity. -/
-import UCPlanar.Support.TopoChord
-import UCPlanar.Support.TopoRegion
-import UCPlanar.Support.ZeroSign
-import UCPlanar.Support.ZeroMax
-import UCPlanar.Support.PlanarCycle
-import Mathlib
+public import UCPlanar.Support.TopoChord
+public import UCPlanar.Support.TopoRegion
+public import UCPlanar.Support.ZeroSign
+public import UCPlanar.Support.ZeroMax
+public import UCPlanar.Support.PlanarCycle
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical

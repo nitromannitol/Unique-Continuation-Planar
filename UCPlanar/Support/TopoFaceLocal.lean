@@ -1,8 +1,12 @@
+module
+
 /- Local finiteness of the faces, reduced to a statement about the plane: a neighbourhood that
 meets only finitely many connected components of its part off the drawing meets only finitely
 many faces. -/
-import UCPlanar.Support.TopoClusterEdges
-import Mathlib
+public import UCPlanar.Support.TopoClusterEdges
+public import Mathlib
+
+@[expose] public section
 
 open Set
 open scoped Classical
