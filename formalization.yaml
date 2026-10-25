@@ -20,6 +20,8 @@ project:
     comparator pairs.
   authors:
     - "Ahmed Bou-Rabee"
+  responsible_maintainers:
+    - "Ahmed Bou-Rabee"
   license: "Apache-2.0"
 
 sources:
@@ -265,3 +267,6 @@ acknowledgements: >-
   Built on Lean 4, Mathlib, Lake, the shared library Lattice-Probability, the
   Schoenflies library schoenflies-lean of Alvaro Begue, and
   leanprover/comparator.
+
+classification:
+  arxiv: ["math.PR"]
