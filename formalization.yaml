@@ -171,6 +171,13 @@ status:
 
 automation:
   methods:
+    - method: agent
+      models: ["GPT-6.1 Sol"]
+      tool_setup: >-
+        Submission compatibility maintenance: public module interfaces, pinned build
+        dependencies, comparator wiring and metadata.
+        The existing mathematical proofs were reused. Selected full Palomar preflight
+        receipts distinguish mechanical verification from review and registration.
     - method: "agent"
       models:
         - "Claude Opus 5.5"
@@ -204,14 +211,13 @@ fidelity:
     faithfully is a reading, not a check.
 
 review:
-  status: "author-verified"
-  reviewers:
-    - "Ahmed Bou-Rabee"
-  notes: >-
-    Correctness of every proof is guaranteed by the Lean kernel and Mathlib (no
-    sorry, no custom axiom).  The author decided the statement-level questions.
-    The statements were additionally audited by GLM-5.3 and by Claude Opus 5
-    agents.  This is not external peer review.
+  status: unchecked
+  notes: 'This submission compatibility revision has no independent statement audit or author
+    review. Original review reported before the maintenance revision: status author-verified;
+    reviewers Ahmed Bou-Rabee. Prior review notes follow: Correctness of every proof is guaranteed
+    by the Lean kernel and Mathlib (no sorry, no custom axiom).  The author decided the statement-level
+    questions. The statements were additionally audited by GLM-5.3 and by Claude Opus 5 agents.  This
+    is not external peer review.'
 
 alignment:
   namespace: "UCPlanar"
