@@ -56,7 +56,7 @@ def status_block(nodes: list[dict]) -> str:
     counts = Counter(n["state"] for n in nodes)
     parts = ", ".join(f"{counts[s]} `{s}`" for s in sorted(counts))
     draft = [n["id"] for n in nodes if n["state"] == "DRAFT_SORRY"]
-    sealed = counts["SEALED"]
+    sealed = counts["SEALED"] + counts["PROVED"]
     if not nodes:
         body = "No declarations have been registered."
     else:
