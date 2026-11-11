@@ -9,7 +9,9 @@ A machine-checked **Lean 4** formalization of the paper
 
 The paper's source and the list of its differences from the arXiv version are included under
 [`paper/`](paper/). The 4 main theorems of the paper are formalized and proved, in the form in
-which the paper states them. Three results that the paper cites from the literature enter as
+which the corrected text in [`paper/`](paper/) states them;
+[`paper/CHANGES_FROM_ARXIV.md`](paper/CHANGES_FROM_ARXIV.md) lists every difference from the
+arXiv version. Three results that the paper cites from the literature enter as
 explicit hypotheses of the theorems that use them: Theorem 1.1 takes three, Theorems 1.2 and
 1.3 take two, and Theorem 5.1 takes none; see
 [Assumed literature inputs](#assumed-literature-inputs).
@@ -79,7 +81,7 @@ nonzero exactly on the diagonal `{x₁ = x₂}`. No hypotheses.
 
 In Lean, the periodic plane graph is a structure `UCPlanar.PeriodicPlaneGraph V`, conductances
 are `LatticeProb.Network.IsCond`, harmonicity is `LatticeProb.Network.HarmonicOn`, and the
-limit in Theorem 1.1 is made explicit by `HasBoundedDensity o f ε`.
+limit in Theorem 1.1 is made explicit by `UCPlanar.PeriodicGraph.HasBoundedDensity`.
 
 This repository formalizes every theorem, lemma and proposition of the paper: Theorems 1.1,
 1.2 and 1.3, the topological lemma (Lemma 2.1), the non-planar counterexample (Theorem 5.1),
