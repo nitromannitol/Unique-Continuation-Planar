@@ -86,6 +86,14 @@ This repository formalizes every theorem, lemma and proposition of the paper: Th
 and the exponential lower bound of the appendix with its polynomial approximation lemma and
 three-ball proposition (Theorem A.1, Lemma A.2, Proposition A.3).
 
+## Corrections to the published version
+
+The formalization follows `paper/ucplanar.tex`, a corrected text of the paper: it is
+[arXiv:2309.13728v2](https://arxiv.org/abs/2309.13728v2) with corrections, and the Lean
+statements transcribe the corrected text.
+[`paper/CHANGES_FROM_ARXIV.md`](paper/CHANGES_FROM_ARXIV.md) lists every difference from the
+arXiv version.
+
 ## Standing assumptions and scope
 
 1. **Every theorem is about every periodic plane graph.** Theorems 1.1 to 1.3 hold for every
@@ -123,9 +131,7 @@ three-ball proposition (Theorem A.1, Lemma A.2, Proposition A.3).
    paper has a registered Lean declaration. The correspondence table in
    [`CORRESPONDENCE.md`](CORRESPONDENCE.md) maps the registered statements to Lean
    declarations node by node, and [`PROOF.md`](PROOF.md) describes the mathematics of the
-   proof and the Lean tree. The paper text in `paper/ucplanar.tex` is arXiv:2309.13728v2 with
-   corrections, and the Lean statements transcribe the corrected text; every difference from
-   the arXiv version is listed in [`paper/CHANGES_FROM_ARXIV.md`](paper/CHANGES_FROM_ARXIV.md).
+   proof and the Lean tree.
 
 ## Assumed literature inputs
 
