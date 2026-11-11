@@ -1,8 +1,10 @@
 cff-version: 1.2.0
 message: "If you use this formalization, please cite it as below."
-title: "Unique-Continuation-Planar: a Lean 4 formalization of Unique continuation on planar graphs"
+title: "Unique continuation on planar graphs"
+type: software
+repository-code: "https://github.com/nitromannitol/Unique-Continuation-Planar"
 abstract: >-
-  A machine-checked Lean 4 / mathlib formalization of the paper "Unique
+  A machine-checked Lean 4 and Mathlib formalization of the paper "Unique
   continuation on planar graphs" (Bou-Rabee, Cooperman and Ganguly, Discrete
   Analysis 2025:16): a harmonic function on a periodic plane graph with
   periodic conductances that is bounded by one on a set of density at least
@@ -14,7 +16,6 @@ abstract: >-
   contains no sorry and no custom axiom; each of the four Mathlib-only
   comparator challenges contains one intentional statement-level sorry whose
   completed solution is checked separately.
-type: software
 authors:
   - family-names: Bou-Rabee
     given-names: Ahmed
@@ -26,7 +27,6 @@ keywords:
   - discrete harmonic functions
   - planar graphs
 license: Apache-2.0
-repository-code: "https://github.com/nitromannitol/Unique-Continuation-Planar"
 references:
   - type: article
     title: "Unique continuation on planar graphs"
@@ -44,4 +44,4 @@ references:
     identifiers:
       - type: other
         value: "arXiv:2309.13728"
-    notes: "The paper formalized by this repository."
+    notes: "The paper formalized by this repository (Discrete Analysis 2025:16; arXiv:2309.13728). Its source is in paper/."
