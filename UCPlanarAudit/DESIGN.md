@@ -60,7 +60,7 @@ definitionally, with no rewriting:
 | `PeriodicGraph.square`, `.ball`, `.PeriodicConductance`, `.HasBoundedDensity` | the repository's, at `toPG P` |
 | `boundedDensity`, `exceptionalCount`, `UniformlyElliptic` | the repository's |
 | `diagonalStep`, `crossingRelation`, `crossingGraph`, `crossingOutgoing`, `crossingConductance` | the repository's |
-| `External.EdgeSplitting`, `External.Unicoherence` (at `E`), `External.MoserEstimate` (at `P`) | the repository's, at `toPE E` and `toPG P`: `Bridge.edgeSplitting`, `Bridge.unicoherence`, `Bridge.moserEstimate`, each proved by the hypothesis itself |
+| `External.EdgeSplitting`, `External.Unicoherence` (at `E`), `External.MoserEstimate` (at `P`) | the repository's, at `toPE E` and `toPG P`: `Bridge.edgeSplitting` and `Bridge.unicoherence`, each proved by the hypothesis itself, and `Bridge.moserEstimate`, proved from the hypothesis through `isCond_iff` |
 
 These identifications are not asserted: each `exact` in a solution and each
 bridge above is checked by the kernel, which unfolds both sides.

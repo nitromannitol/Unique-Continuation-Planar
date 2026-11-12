@@ -32,7 +32,7 @@ theorem exists_derivative_bound {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : 
   obtain ⟨CV, hCV0, hCV⟩ := UCPlanar.Support.exists_square_card_bound P
   obtain ⟨D₁, hD₁0, hD₁⟩ := UCPlanar.Support.exists_lattice_caccioppoli P hc hp a₁
   obtain ⟨D₂, hD₂0, hD₂⟩ := UCPlanar.Support.exists_lattice_caccioppoli P hc hp a₂
-  obtain ⟨CM, hCM0, hCM⟩ := hMos
+  obtain ⟨CM, hCM0, hCM⟩ := hMos hc hp
   set C : ℝ := max D₁ D₂ with hCdef
   have hC0 : 0 < C := lt_of_lt_of_le hD₁0 (le_max_left _ _)
   set C₀ : ℝ := ‖P.period (fun j => (a₁ j : ℝ))‖ + ‖P.period (fun j => (a₂ j : ℝ))‖ with hC₀def

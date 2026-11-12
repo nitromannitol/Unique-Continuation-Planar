@@ -50,15 +50,15 @@ nodes:
     approved: "2026-09-13"
 
   - id: X-007
-    version: 2
+    version: 3
     kind: definition
     source: ucplanar.tex:441-446 (the discrete Moser estimate cited in the proof of lemma:poly-approx)
     file: UCPlanar/External/MoserEstimate.lean
     export: UCPlanar.External.MoserEstimate
     state: FROZEN
-    frozen_sha256: c9bd7ca658ea81af62fc6c244dadd4b9bd901d5b9d14b9bf5fdddfba410043f1
+    frozen_sha256: 377ca55036c7fe0f5bbbf472d6b43f608fb6336c5a2ae6ef133efa184ff030f9
     provider: UCPlanar.External.MoserEstimate
-    approved: "2026-09-13"
+    approved: "2026-11-12"
 
   - id: N-007
     version: 5

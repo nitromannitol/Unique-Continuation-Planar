@@ -324,9 +324,11 @@ def Unicoherence {V : Type*} {G : SimpleGraph V}
   G.Connected → ∀ F, E.IsFace F → Bornology.IsBounded F → IsPreconnected (frontier F)
 
 /-- The discrete Moser estimate on a periodic network (Delmotte, Rev. Mat. Iberoamericana 15
-(1999), Proposition 5.3), assumed. -/
+(1999), Proposition 5.3), assumed for a conductance on the graph that is invariant under the
+translation lattice. -/
 def MoserEstimate {V : Type*} (P : PeriodicGraph V)
     (c : V → V → ℝ) : Prop :=
+  IsCond P.graph c → P.PeriodicConductance c →
   ∃ C : ℝ, 0 < C ∧
     ∀ r s : ℝ, 0 < r → r < s → ∀ f : V → ℝ,
       (∀ x ∈ P.square s, netLaplacian P.graph c f x = 0) →

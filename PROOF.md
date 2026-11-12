@@ -428,7 +428,8 @@ polynomial. It is consumed by `N-006`, `N-008` and `N-001`.
 
 `X-007`, `UCPlanar.External.MoserEstimate`, transcribes the discrete Moser
 estimate of Delmotte, Proposition 5.3, in the form the derivative bound
-consumes: for nested squares `Q_r` and `Q_s` and a function harmonic on `Q_s`,
+consumes: for a conductance on the graph that is invariant under the translation
+lattice, nested squares `Q_r` and `Q_s` and a function harmonic on `Q_s`,
 each value of `f` on `Q_r` is at most `C/(s-r)` times the `ℓ²` norm of `f`
 over `Q_s`, with a constant that depends on the network but not on the two
 scales. It is consumed by `N-007`, `N-006`, `N-008` and `N-001`.

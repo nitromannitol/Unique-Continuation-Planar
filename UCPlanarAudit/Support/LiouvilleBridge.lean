@@ -94,7 +94,7 @@ theorem unicoherence {G : SimpleGraph V} (E : UCPlanarAudit.PlaneEmbedding G)
 theorem moserEstimate (P : UCPlanarAudit.PeriodicGraph V) (c : V → V → ℝ)
     (h : UCPlanarAudit.External.MoserEstimate P c) :
     UCPlanar.External.MoserEstimate (toPG P) c :=
-  h
+  fun hc hp => h ((isCond_iff _ _).2 hc) hp
 
 end Graph
 
