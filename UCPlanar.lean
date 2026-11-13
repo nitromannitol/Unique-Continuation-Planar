@@ -149,3 +149,6 @@ import UCPlanar.Vendored.TopoEilenberg
 import UCPlanar.Vendored.TopoJaniszewski
 import UCPlanar.Vendored.Janiszewski
 import UCPlanar.Vendored.PlaneUnicoherence
+import UCPlanar.Proved.Unicoherence
+import UCPlanar.Proved.EdgeSplitting
+import UCPlanar.Proved.Main
