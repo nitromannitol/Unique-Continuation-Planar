@@ -152,3 +152,4 @@ import UCPlanar.Vendored.PlaneUnicoherence
 import UCPlanar.Proved.Unicoherence
 import UCPlanar.Proved.EdgeSplitting
 import UCPlanar.Proved.Main
+import UCPlanar.Proved.MoserEstimate
