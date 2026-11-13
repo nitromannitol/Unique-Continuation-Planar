@@ -5,6 +5,7 @@ Sobolev bound along lattice orbits and the iterated discrete Caccioppoli inequal
 import UCPlanar.External.MoserEstimate
 import UCPlanar.Support.Poly.CaccioppoliLattice
 import UCPlanar.Support.Poly.Word
+import UCPlanar.Support.Moser.Orbit
 
 /-!
 # The discrete Moser estimate from an orbit Sobolev bound
@@ -14,7 +15,8 @@ For a function `f` on a periodic graph and a vertex `x` whose lattice orbit
 `|f x|` by the `ℓ²` norms over `Q_t` of `f`, of its two first differences and of its mixed
 second difference, with the weights `1 / (n + 1)`, `1`, `1` and `n + 1`.
 
-This file shows that such a bound implies `UCPlanar.External.MoserEstimate`. For a function
+This file shows that such a bound implies `UCPlanar.External.MoserEstimate`, and, with the orbit
+Sobolev bound `UCPlanar.Support.abs_le_orbit_sobolev`, that the Moser estimate holds. For a function
 harmonic on `Q_s` and `x ∈ Q_r`, with `ρ = s - r`, the orbit of side `n = ⌊ρ / (8K)⌋` lies in
 `Q_{r + ρ/4}`, the iterated Caccioppoli inequality bounds the first differences by `4K / ρ` and
 the mixed difference by `(4K / ρ)²` in `ℓ²`, and the four terms add up to `20K / ρ` times the
@@ -24,6 +26,8 @@ the mixed difference by `(4K / ρ)²` in `ℓ²`, and the four terms add up to `
 
 * `UCPlanar.Support.moserEstimate_of_orbit`: an orbit Sobolev bound implies the Moser
   estimate.
+* `UCPlanar.Support.moserEstimate_holds`: the Moser estimate holds for every periodic graph and
+  every conductance.
 -/
 
 open scoped BigOperators Classical
@@ -248,5 +252,10 @@ theorem moserEstimate_of_orbit {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V
     calc |f x| ≤ Real.sqrt S := htriv
       _ = 1 * Real.sqrt S := (one_mul _).symm
       _ ≤ 20 * K / (s - r) * Real.sqrt S := mul_le_mul_of_nonneg_right hge hA0
+
+/-- **The discrete Moser estimate holds** for every periodic graph and every conductance. -/
+theorem moserEstimate_holds {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → ℝ) :
+    UCPlanar.External.MoserEstimate P c :=
+  moserEstimate_of_orbit P c fun f x n t hbox => abs_le_orbit_sobolev P f x n t hbox
 
 end UCPlanar.Support
