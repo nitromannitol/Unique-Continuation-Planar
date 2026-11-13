@@ -139,3 +139,13 @@ import UCPlanar.Support.LowerAssembly
 import UCPlanar.Support.LiouFinalGeom
 import UCPlanar.Support.LiouFinalContra
 import UCPlanar.MainTheorems
+import UCPlanar.Vendored.Polygonal
+import UCPlanar.Vendored.PlaneTopology
+import UCPlanar.Vendored.ComplementComponents
+import UCPlanar.Vendored.Unicoherence
+import UCPlanar.Vendored.TopoSep
+import UCPlanar.Vendored.TopoDegree
+import UCPlanar.Vendored.TopoEilenberg
+import UCPlanar.Vendored.TopoJaniszewski
+import UCPlanar.Vendored.Janiszewski
+import UCPlanar.Vendored.PlaneUnicoherence
