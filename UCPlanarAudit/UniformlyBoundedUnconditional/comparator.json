@@ -1,0 +1,14 @@
+{
+  "challenge_module": "UCPlanarAudit.UniformlyBoundedUnconditional.Challenge",
+  "solution_module": "UCPlanarAudit.UniformlyBoundedUnconditional.Solution",
+  "theorem_names": [
+    "UCPlanarAudit.uniformlyBounded_unconditional"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
