@@ -126,3 +126,69 @@ nodes:
     provider: UCPlanar.Frozen.liouville
     approved: "2026-09-16"
 
+
+  - id: N-001-unconditional
+    version: 1
+    kind: theorem
+    source: "ucplanar.tex:161-167 (theorem:liouville); cited inputs discharged"
+    file: UCPlanar/Frozen/Unconditional/LiouvilleOfPeriodic.lean
+    export: UCPlanar.Frozen.liouville_of_periodic
+    state: PROVED
+    frozen_sha256: 79f4125b6a26e6c8ac07e77c89c2e487418613ecf1ca7f800a48393bd2ee84b2
+    provider: UCPlanar.Proved.liouville_of_periodic
+    approved: "2026-11-19"
+
+  - id: N-002-unconditional
+    version: 1
+    kind: theorem
+    source: "ucplanar.tex:175-181 (theorem:uniformly-bounded); cited inputs discharged"
+    file: UCPlanar/Frozen/Unconditional/UniformlyBounded.lean
+    export: UCPlanar.Frozen.uniformlyBounded_unconditional
+    state: PROVED
+    frozen_sha256: 77e6c1f359810e2af6ddad7c41404fbbbedd5c3c682c63b714899bdf112ef051
+    provider: UCPlanar.Proved.uniformlyBounded
+    approved: "2026-11-19"
+
+  - id: N-003-unconditional
+    version: 1
+    kind: theorem
+    source: "ucplanar.tex:187-190 (theorem:zero-case); cited inputs discharged"
+    file: UCPlanar/Frozen/Unconditional/ZeroCase.lean
+    export: UCPlanar.Frozen.zeroCase_unconditional
+    state: PROVED
+    frozen_sha256: 97eb84ea85b04c52195b3e9bfe3310f75f98ef43f1f427460322b66860b4b1eb
+    provider: UCPlanar.Proved.zeroCase
+    approved: "2026-11-19"
+
+  - id: N-007-unconditional
+    version: 1
+    kind: theorem
+    source: "ucplanar.tex:427-434 (label lemma:poly-approx); cited inputs discharged"
+    file: UCPlanar/Frozen/Unconditional/PolynomialApproximation.lean
+    export: UCPlanar.Frozen.polynomialApproximation_unconditional
+    state: PROVED
+    frozen_sha256: 6ed19a7e10afbe6953f1b07cfc5f1b3509d6631301b9216919f7cea54bc4883b
+    provider: UCPlanar.Proved.polynomialApproximation
+    approved: "2026-11-19"
+
+  - id: N-006-unconditional
+    version: 1
+    kind: theorem
+    source: "ucplanar.tex:457-469 (label prop:three-ball); cited inputs discharged"
+    file: UCPlanar/Frozen/Unconditional/ThreeBall.lean
+    export: UCPlanar.Frozen.threeBall_unconditional
+    state: PROVED
+    frozen_sha256: da58f828b421bcda6bbb82e54633754d200b7c969aceabf7c5c2c36e478b9da8
+    provider: UCPlanar.Proved.threeBall
+    approved: "2026-11-19"
+
+  - id: N-008-unconditional
+    version: 1
+    kind: theorem
+    source: "ucplanar.tex:411-422 (label theorem:lower-bound); cited inputs discharged"
+    file: UCPlanar/Frozen/Unconditional/PeriodicLowerBound.lean
+    export: UCPlanar.Frozen.periodicLowerBound_unconditional
+    state: PROVED
+    frozen_sha256: 90b3b7ecad75f24313c0775e11daa114290f7741faacb57b23043037019527a0
+    provider: UCPlanar.Proved.periodicLowerBound
+    approved: "2026-11-19"
