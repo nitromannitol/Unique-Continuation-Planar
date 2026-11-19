@@ -48,7 +48,7 @@ def surface_table(nodes: list[dict]) -> str:
     for n in nodes:
         rows.append(
             f"| `{n['id']}` | `{n['export']}` | {paper_cell(n['source'])} "
-            f"| {n['state']} |")
+            f"| {n['state']}" + (f" (proved by `{n['proved_by']}`" + (f" for {n['proof_scope']}" if n.get("proof_scope") else "") + ")" if n.get("proved_by") else "") + " |")
     return "\n".join(rows)
 
 
@@ -65,9 +65,9 @@ def status_block(nodes: list[dict]) -> str:
                 f"Lean's three standard axioms `propext`, `Classical.choice` and "
                 f"`Quot.sound`.")
         if counts["FROZEN"]:
-            body += (f" {counts['FROZEN']} result(s) are cited from the literature and "
-                     f"stated as explicit hypotheses rather than proved here, so the theorems "
-                     f"that use them are proved conditional on them.")
+            body += (f" {counts['FROZEN']} frozen definitions record cited inputs; "
+                     f"their proofs are recorded in the manifest and used by the "
+                     f"unconditional results.")
         if draft:
             body += " Still open: " + ", ".join(f"`{i}`" for i in draft) + "."
     detail = f": {parts}" if parts else ""

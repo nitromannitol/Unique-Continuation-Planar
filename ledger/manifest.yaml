@@ -56,6 +56,8 @@ nodes:
     file: UCPlanar/External/MoserEstimate.lean
     export: UCPlanar.External.MoserEstimate
     state: FROZEN
+    proved_by: UCPlanar.Proved.moserEstimate
+    proof_file: UCPlanar/Proved/MoserEstimate.lean
     frozen_sha256: 377ca55036c7fe0f5bbbf472d6b43f608fb6336c5a2ae6ef133efa184ff030f9
     provider: UCPlanar.External.MoserEstimate
     approved: "2026-11-12"
@@ -78,6 +80,8 @@ nodes:
     file: UCPlanar/External/EdgeSplitting.lean
     export: UCPlanar.External.EdgeSplitting
     state: FROZEN
+    proved_by: UCPlanar.Support.edgeSplitting_holds
+    proof_file: UCPlanar/Proved/EdgeSplitting.lean
     frozen_sha256: 346a7e4c708e0de758c33953a42d1a4bfb275e75084ec51d3cec8968602b0681
     provider: UCPlanar.External.EdgeSplitting
     approved: "2026-09-15"
@@ -89,6 +93,9 @@ nodes:
     file: UCPlanar/External/Unicoherence.lean
     export: UCPlanar.External.Unicoherence
     state: FROZEN
+    proved_by: UCPlanar.Support.unicoherence_holds
+    proof_file: UCPlanar/Proved/Unicoherence.lean
+    proof_scope: periodic plane graphs
     frozen_sha256: 005ea9d2a22424e69b3891a7b6eebdad1a50af7f6dac6e624b83a4ee9dbe4851
     provider: UCPlanar.External.Unicoherence
     approved: "2026-09-15"

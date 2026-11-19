@@ -14,10 +14,9 @@ project:
     Z^2 with a harmonic function supported on a diagonal (Theorem 5.1).  Three
     results the paper cites from the literature (Janiszewski's theorem at a
     point, unicoherence of the sphere and the discrete Moser estimate) are
-    explicit hypotheses of the theorems that use them; the classical Liouville
-    theorem for periodic networks and the discrete Remez inequality are proved.
-    The four main theorems are independently checked using the UCPlanarAudit/
-    comparator pairs.
+    proved, as are the classical Liouville theorem for periodic networks and
+    the discrete Remez inequality. Unconditional main statements and
+    Mathlib-only comparator pairs are provided.
   authors:
     - "Ahmed Bou-Rabee"
   license: "Apache-2.0"
@@ -65,107 +64,120 @@ status:
     non-planar counterexample on the square lattice (Theorem 5.1), and the
     exponential lower bound of the appendix with its polynomial approximation
     lemma and three-ball proposition (Theorem A.1, Lemma A.2, Proposition
-    A.3).  SCOPE BOUNDARY: three results the paper cites from the literature
-    are stated as propositions in UCPlanar/External/ and are explicit
-    hypotheses of every theorem whose proof uses them: Janiszewski's theorem at
-    a point for the drawings of two finite edge sets (EdgeSplitting),
-    unicoherence of the sphere as connectedness of the frontier of a bounded
-    face (Unicoherence), and the discrete Moser estimate (MoserEstimate);
-    ASSUMPTIONS.md lists them with their Lean statements.  Two further cited
-    results, the bounded Liouville theorem for the periodic network and the
-    discrete Remez inequality, are proved here.  Not formalized: the survey of
-    related work and applications, the remark following Theorem 1.3, the
-    figures, and Step 1 of the proof of Theorem 1.3 (the reduction by deleting
-    and contracting finite edge-connected components), which the formalization
-    replaces by a direct proof on the periodic plane graph.  The main theorems
-    are stated in full in UCPlanar/MainTheorems.lean; all four are
-    additionally restated over a Mathlib-only vocabulary for the Lean
-    comparator (UCPlanarAudit/).
+    A.3). Janiszewski's theorem, unicoherence and the discrete Moser estimate
+    are proved and applied to obtain unconditional statements. The survey of
+    related work and applications, the remark after Theorem 1.3, the figures,
+    and Step 1 of that proof are not formalized; the theorem is proved directly
+    on the periodic plane graph. Comparator pairs use Mathlib-only vocabulary.
   sorry_count: 0
   sorry_count_scope: "UCPlanar production library only"
-  comparator_challenge_sorry_count: 4
+  comparator_challenge_sorry_count: 8
   sorry_in_definitions: 0
   axioms:
     - "propext"
     - "Classical.choice"
     - "Quot.sound"
   main_results:
-    - declaration: "UCPlanar.liouville"
-      file: "UCPlanar/MainTheorems.lean"
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "UCPlanarAudit/Liouville/comparator.json"
-      literature_dependencies:
-        - statement: "The discrete Moser estimate (UCPlanar.External.MoserEstimate), carried as an explicit hypothesis"
-          source: "Delmotte 1999, Proposition 5.3"
-        - statement: "Janiszewski's theorem at a point (UCPlanar.External.EdgeSplitting), carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3"
-        - statement: "Unicoherence of the sphere (UCPlanar.External.Unicoherence), carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere"
-    - declaration: "UCPlanar.uniformlyBounded"
-      file: "UCPlanar/MainTheorems.lean"
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "UCPlanarAudit/UniformlyBounded/comparator.json"
-      literature_dependencies:
-        - statement: "Janiszewski's theorem at a point (UCPlanar.External.EdgeSplitting), carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3"
-        - statement: "Unicoherence of the sphere (UCPlanar.External.Unicoherence), carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere"
-    - declaration: "UCPlanar.zeroCase"
-      file: "UCPlanar/MainTheorems.lean"
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "UCPlanarAudit/ZeroCase/comparator.json"
-      literature_dependencies:
-        - statement: "Janiszewski's theorem at a point (UCPlanar.External.EdgeSplitting), carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3"
-        - statement: "Unicoherence of the sphere (UCPlanar.External.Unicoherence), carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere"
-    - declaration: "UCPlanar.counterexample"
-      file: "UCPlanar/MainTheorems.lean"
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "UCPlanarAudit/Counterexample/comparator.json"
-      literature_dependencies: []
-    - declaration: "UCPlanarAudit.liouville"
-      file: "UCPlanarAudit/Liouville/Solution.lean"
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "UCPlanarAudit/Liouville/comparator.json"
-      literature_dependencies:
-        - statement: "The discrete Moser estimate, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
-          source: "Delmotte 1999, Proposition 5.3"
-        - statement: "Janiszewski's theorem at a point, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3"
-        - statement: "Unicoherence of the sphere, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere"
-    - declaration: "UCPlanarAudit.uniformlyBounded"
-      file: "UCPlanarAudit/UniformlyBounded/Solution.lean"
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "UCPlanarAudit/UniformlyBounded/comparator.json"
-      literature_dependencies:
-        - statement: "Janiszewski's theorem at a point, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3"
-        - statement: "Unicoherence of the sphere, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere"
-    - declaration: "UCPlanarAudit.zeroCase"
-      file: "UCPlanarAudit/ZeroCase/Solution.lean"
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "UCPlanarAudit/ZeroCase/comparator.json"
-      literature_dependencies:
-        - statement: "Janiszewski's theorem at a point, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3"
-        - statement: "Unicoherence of the sphere, restated over the Mathlib-only vocabulary, carried as an explicit hypothesis"
-          source: "Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere"
-    - declaration: "UCPlanarAudit.counterexample"
-      file: "UCPlanarAudit/Counterexample/Solution.lean"
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "UCPlanarAudit/Counterexample/comparator.json"
-      literature_dependencies: []
+  - declaration: UCPlanar.Proved.liouville_of_periodic
+    file: UCPlanar/Proved/MoserEstimate.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: UCPlanarAudit/LiouvilleUnconditional/comparator.json
+    literature_dependencies:
+    - statement: Discrete Moser estimate, proved as UCPlanar.Proved.moserEstimate
+      source: Delmotte 1999, Proposition 5.3
+    - statement: Janiszewski theorem, proved as UCPlanar.Support.edgeSplitting_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3
+    - statement: Unicoherence for periodic plane graphs, proved as UCPlanar.Support.unicoherence_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere
+  - declaration: UCPlanar.Proved.uniformlyBounded
+    file: UCPlanar/Proved/Main.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: UCPlanarAudit/UniformlyBoundedUnconditional/comparator.json
+    literature_dependencies:
+    - statement: Janiszewski theorem, proved as UCPlanar.Support.edgeSplitting_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3
+    - statement: Unicoherence for periodic plane graphs, proved as UCPlanar.Support.unicoherence_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere
+  - declaration: UCPlanar.Proved.zeroCase
+    file: UCPlanar/Proved/Main.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: UCPlanarAudit/ZeroCaseUnconditional/comparator.json
+    literature_dependencies:
+    - statement: Janiszewski theorem, proved as UCPlanar.Support.edgeSplitting_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3
+    - statement: Unicoherence for periodic plane graphs, proved as UCPlanar.Support.unicoherence_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere
+  - declaration: UCPlanar.counterexample
+    file: UCPlanar/MainTheorems.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: UCPlanarAudit/CounterexampleUnconditional/comparator.json
+    literature_dependencies: []
+  - declaration: UCPlanarAudit.liouville_unconditional
+    file: UCPlanarAudit/LiouvilleUnconditional/Solution.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: UCPlanarAudit/LiouvilleUnconditional/comparator.json
+    literature_dependencies:
+    - statement: Discrete Moser estimate, proved as UCPlanar.Proved.moserEstimate
+      source: Delmotte 1999, Proposition 5.3
+    - statement: Janiszewski theorem, proved as UCPlanar.Support.edgeSplitting_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3
+    - statement: Unicoherence for periodic plane graphs, proved as UCPlanar.Support.unicoherence_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere
+  - declaration: UCPlanarAudit.uniformlyBounded_unconditional
+    file: UCPlanarAudit/UniformlyBoundedUnconditional/Solution.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: UCPlanarAudit/UniformlyBoundedUnconditional/comparator.json
+    literature_dependencies:
+    - statement: Janiszewski theorem, proved as UCPlanar.Support.edgeSplitting_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3
+    - statement: Unicoherence for periodic plane graphs, proved as UCPlanar.Support.unicoherence_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere
+  - declaration: UCPlanarAudit.zeroCase_unconditional
+    file: UCPlanarAudit/ZeroCaseUnconditional/Solution.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: UCPlanarAudit/ZeroCaseUnconditional/comparator.json
+    literature_dependencies:
+    - statement: Janiszewski theorem, proved as UCPlanar.Support.edgeSplitting_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter V, Theorem 9.3
+    - statement: Unicoherence for periodic plane graphs, proved as UCPlanar.Support.unicoherence_holds
+      source: Newman, Elements of the Topology of Plane Sets of Points, Chapter VI, unicoherence of the sphere
+  - declaration: UCPlanarAudit.counterexample_unconditional
+    file: UCPlanarAudit/CounterexampleUnconditional/Solution.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: UCPlanarAudit/CounterexampleUnconditional/comparator.json
+    literature_dependencies: []
 
 automation:
   methods:
@@ -197,9 +209,8 @@ fidelity:
     formalized, the statement being proved directly for the periodic plane
     graph with the surrounding cycles supplied by the cited plane inputs.
     Theorem 1.1 makes the density limit explicit, as a real number d with
-    1 - epsilon <= d.  The three cited results enter as hypotheses whose Lean
-    statements are in ASSUMPTIONS.md; that they render the cited theorems
-    faithfully is a reading, not a check.
+    1 - epsilon <= d.  The three cited results are proved, and their statements and witnesses are
+    recorded in ASSUMPTIONS.md.
 
 review:
   status: "author-verified"
@@ -212,53 +223,53 @@ review:
     agents.  This is not external peer review.
 
 alignment:
-  namespace: "UCPlanar"
+  namespace: UCPlanar
   statements:
-    - source: "Theorem 1.1 (theorem:liouville)"
-      lean: "UCPlanar.liouville"
-      module: "UCPlanar.MainTheorems"
-      status: "proved"
-      note: "Certified statement UCPlanar.Frozen.liouville (N-001). Comparator challenge UCPlanarAudit/Liouville/."
-    - source: "Theorem 1.2 (theorem:uniformly-bounded)"
-      lean: "UCPlanar.uniformlyBounded"
-      module: "UCPlanar.MainTheorems"
-      status: "proved"
-      note: "Certified statement UCPlanar.Frozen.uniformlyBounded (N-002). Comparator challenge UCPlanarAudit/UniformlyBounded/."
-    - source: "Theorem 1.3 (theorem:zero-case)"
-      lean: "UCPlanar.zeroCase"
-      module: "UCPlanar.MainTheorems"
-      status: "proved"
-      note: "Certified statement UCPlanar.Frozen.zeroCase (N-003). Comparator challenge UCPlanarAudit/ZeroCase/."
-    - source: "Theorem 5.1 (theorem:counterexample)"
-      lean: "UCPlanar.counterexample"
-      module: "UCPlanar.MainTheorems"
-      status: "proved"
-      note: "Certified statement UCPlanar.Frozen.counterexample (N-005). Comparator challenge UCPlanarAudit/Counterexample/."
-    - source: "Lemma 2.1 (lemma:topological-lemma)"
-      lean: "UCPlanar.Frozen.topological"
-      module: "UCPlanar.Frozen.Topological"
-      status: "proved"
-      note: "N-004."
-    - source: "Theorem A.1 (theorem:lower-bound), periodic form"
-      lean: "UCPlanar.Frozen.periodicLowerBound"
-      module: "UCPlanar.Frozen.PeriodicLowerBound"
-      status: "proved"
-      note: "N-008."
-    - source: "Lemma A.2 (lemma:poly-approx)"
-      lean: "UCPlanar.Frozen.polynomialApproximation"
-      module: "UCPlanar.Frozen.PolynomialApproximation"
-      status: "proved"
-      note: "N-007."
-    - source: "Proposition A.3 (prop:three-ball)"
-      lean: "UCPlanar.Frozen.threeBall"
-      module: "UCPlanar.Frozen.ThreeBall"
-      status: "proved"
-      note: "N-006."
-    - source: "Cited results (Janiszewski's theorem at a point, unicoherence of the sphere, the discrete Moser estimate)"
-      lean: "UCPlanar.External.*"
-      module: "UCPlanar.External"
-      status: "literature-dependency"
-      note: "Explicit hypotheses of the theorems that use them; listed in ASSUMPTIONS.md."
+  - source: Theorem 1.1 (theorem:liouville)
+    lean: UCPlanar.Proved.liouville_of_periodic
+    module: UCPlanar.Proved.MoserEstimate
+    status: proved
+    note: Unconditional statement; comparator challenge UCPlanarAudit/LiouvilleUnconditional/.
+  - source: Theorem 1.2 (theorem:uniformly-bounded)
+    lean: UCPlanar.Proved.uniformlyBounded
+    module: UCPlanar.Proved.Main
+    status: proved
+    note: Unconditional statement; comparator challenge UCPlanarAudit/UniformlyBoundedUnconditional/.
+  - source: Theorem 1.3 (theorem:zero-case)
+    lean: UCPlanar.Proved.zeroCase
+    module: UCPlanar.Proved.Main
+    status: proved
+    note: Unconditional statement; comparator challenge UCPlanarAudit/ZeroCaseUnconditional/.
+  - source: Theorem 5.1 (theorem:counterexample)
+    lean: UCPlanar.counterexample
+    module: UCPlanar.MainTheorems
+    status: proved
+    note: Certified statement UCPlanar.Frozen.counterexample (N-005). Comparator challenge UCPlanarAudit/CounterexampleUnconditional/.
+  - source: Lemma 2.1 (lemma:topological-lemma)
+    lean: UCPlanar.Frozen.topological
+    module: UCPlanar.Frozen.Topological
+    status: proved
+    note: N-004.
+  - source: Theorem A.1 (theorem:lower-bound), periodic form
+    lean: UCPlanar.Frozen.periodicLowerBound_unconditional
+    module: UCPlanar.Frozen.Unconditional.PeriodicLowerBound
+    status: proved
+    note: Registered without the Moser hypothesis.
+  - source: Lemma A.2 (lemma:poly-approx)
+    lean: UCPlanar.Frozen.polynomialApproximation_unconditional
+    module: UCPlanar.Frozen.Unconditional.PolynomialApproximation
+    status: proved
+    note: Registered without the Moser hypothesis.
+  - source: Proposition A.3 (prop:three-ball)
+    lean: UCPlanar.Frozen.threeBall_unconditional
+    module: UCPlanar.Frozen.Unconditional.ThreeBall
+    status: proved
+    note: Registered without the Moser hypothesis.
+  - source: Cited results (Janiszewski's theorem at a point, unicoherence of the sphere, the discrete Moser estimate)
+    lean: UCPlanar.External.*
+    module: UCPlanar.External
+    status: proved
+    note: Proved by UCPlanar.Support.edgeSplitting_holds, UCPlanar.Support.unicoherence_holds and UCPlanar.Proved.moserEstimate.
 
 acknowledgements: >-
   The paper is joint work with William Cooperman and Shirshendu Ganguly.

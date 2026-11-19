@@ -10,8 +10,8 @@ do not edit it by hand.
 The paper's registered statements are proved in Lean 4 from Mathlib and the
 shared library `LatticeProb`, under the hypotheses displayed in their frozen
 declarations, with no added axiom and no `sorry`.
-Cited inputs are proposition-valued predicates in `UCPlanar/External/`,
-carried as explicit hypotheses together with each theorem's own hypotheses.
+Cited inputs are proposition-valued predicates in `UCPlanar/External/`.
+Their proofs are supplied to the registered unconditional statements.
 `CORRESPONDENCE.md` records the correspondence with the paper and
 `PROOF.md` describes the proof and the Lean tree.
 
@@ -22,9 +22,9 @@ carried as explicit hypotheses together with each theorem's own hypotheses.
 | Lean toolchain | `leanprover/lean4:v4.32.0` |
 | Mathlib revision | `81a5d257c8e410db227a6665ed08f64fea08e997` |
 | Paper (`paper/ucplanar.tex`) SHA-256 | `0a97204bffb598a59580eb3fc8537af56ab4eb79f76900086cdadc9b6b00b311` |
-| Build | succeeded, 9004 jobs |
+| Build | succeeded, 9027 jobs |
 | Build warnings | 0 |
-| Generated | 2026-10-04 |
+| Generated | 2026-11-19 |
 
 ## Reproducing it
 
@@ -54,24 +54,30 @@ nowhere below.
 | 2 | `N-004` | `UCPlanar.Frozen.topological` | `PROVED` | `lemma:topological-lemma` | classical only |
 | 3 | `N-003` | `UCPlanar.Frozen.zeroCase` | `PROVED` | `theorem:zero-case` | classical only |
 | 4 | `N-002` | `UCPlanar.Frozen.uniformlyBounded` | `PROVED` | `theorem:uniformly-bounded` | classical only |
-| 5 | `X-007` | `UCPlanar.External.MoserEstimate` | `FROZEN` | lines 441-446 | assumed (a cited theorem, stated as a proposition) |
+| 5 | `X-007` | `UCPlanar.External.MoserEstimate` | `FROZEN` | lines 441-446 | proved by `UCPlanar.Proved.moserEstimate` |
 | 6 | `N-007` | `UCPlanar.Frozen.polynomialApproximation` | `PROVED` | `lemma:poly-approx` | classical only |
-| 7 | `X-002` | `UCPlanar.External.EdgeSplitting` | `FROZEN` | lines 285-309 | assumed (a cited theorem, stated as a proposition) |
-| 8 | `X-003` | `UCPlanar.External.Unicoherence` | `FROZEN` | lines 285-309 | assumed (a cited theorem, stated as a proposition) |
+| 7 | `X-002` | `UCPlanar.External.EdgeSplitting` | `FROZEN` | lines 285-309 | proved by `UCPlanar.Support.edgeSplitting_holds` |
+| 8 | `X-003` | `UCPlanar.External.Unicoherence` | `FROZEN` | lines 285-309 | proved for periodic plane graphs by `UCPlanar.Support.unicoherence_holds` |
 | 9 | `N-006` | `UCPlanar.Frozen.threeBall` | `PROVED` | `prop:three-ball` | classical only |
 | 10 | `N-008` | `UCPlanar.Frozen.periodicLowerBound` | `PROVED` | `theorem:lower-bound` | classical only |
 | 11 | `N-001` | `UCPlanar.Frozen.liouville` | `PROVED` | `theorem:liouville` | classical only |
+| 12 | `N-001-unconditional` | `UCPlanar.Frozen.liouville_of_periodic` | `PROVED` | `theorem:liouville` | classical only |
+| 13 | `N-002-unconditional` | `UCPlanar.Frozen.uniformlyBounded_unconditional` | `PROVED` | `theorem:uniformly-bounded` | classical only |
+| 14 | `N-003-unconditional` | `UCPlanar.Frozen.zeroCase_unconditional` | `PROVED` | `theorem:zero-case` | classical only |
+| 15 | `N-007-unconditional` | `UCPlanar.Frozen.polynomialApproximation_unconditional` | `PROVED` | `lemma:poly-approx` | classical only |
+| 16 | `N-006-unconditional` | `UCPlanar.Frozen.threeBall_unconditional` | `PROVED` | `prop:three-ball` | classical only |
+| 17 | `N-008-unconditional` | `UCPlanar.Frozen.periodicLowerBound_unconditional` | `PROVED` | `theorem:lower-bound` | classical only |
 
-All 8 theorem declarations have axiom closures contained in the three
-classical axioms. The 0 theorem nodes are `SEALED`; the 3 external
+All 14 theorem declarations have axiom closures contained in the three
+classical axioms. The 14 theorem nodes are `SEALED` or `PROVED`; the 3 external
 definitions are `FROZEN`. A clean definition does not supply a proof of its
 proposition.
 
 ## External inputs
 
 Each external predicate is a cited theorem of the literature, stated in the
-paper's vocabulary and carried as an explicit hypothesis.  The table records
-the frozen statement that consumes it.
+paper's vocabulary. The table records the older statements consuming it;
+the unconditional statements apply the recorded proofs.
 
 | node | Lean name | consumed by |
 |---|---|---|
@@ -98,12 +104,15 @@ verifies these; the recipe is in `CORRESPONDENCE.md`.
 | `N-006` | `3d97239ef4c95dc816b44f8a2d02377b9dd3aaf93292534da0aeb1a4aad0a58d` |
 | `N-008` | `ad1d0f3f7aa5a2d6f95a95a41fbad2334c31cd26d1f08522c737bd65264a5d21` |
 | `N-001` | `ed35e14cb4364604613120a726ce4d6e2dcc50d5fc26b2e27eea42d147b152fc` |
+| `N-001-unconditional` | `79f4125b6a26e6c8ac07e77c89c2e487418613ecf1ca7f800a48393bd2ee84b2` |
+| `N-002-unconditional` | `77e6c1f359810e2af6ddad7c41404fbbbedd5c3c682c63b714899bdf112ef051` |
+| `N-003-unconditional` | `97eb84ea85b04c52195b3e9bfe3310f75f98ef43f1f427460322b66860b4b1eb` |
+| `N-007-unconditional` | `6ed19a7e10afbe6953f1b07cfc5f1b3509d6631301b9216919f7cea54bc4883b` |
+| `N-006-unconditional` | `da58f828b421bcda6bbb82e54633754d200b7c969aceabf7c5c2c36e478b9da8` |
+| `N-008-unconditional` | `90b3b7ecad75f24313c0775e11daa114290f7741faacb57b23043037019527a0` |
 
 ## What is not claimed
 
-- The cited theorems in `UCPlanar/External/` (the rows marked *assumed*
-  above) are not proved here; each statement that uses one carries it as an
-  explicit hypothesis.
 - The counterexample of Section 5 is a statement about one family of
   conductances on the square lattice; nothing here bears on other graphs.
 - The proof ideas and the related work of Section 1 are outside the

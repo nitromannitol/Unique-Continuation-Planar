@@ -19,25 +19,23 @@ newline retained, are hashed by `tools/freeze.py` and checked by
 - Conductances and harmonicity use `LatticeProb.Network.IsCond` and
   `LatticeProb.Network.HarmonicOn`. The paper's Laplacian is the negative of
   `LatticeProb.Network.netLaplacian`; their zero equations agree.
-- A cited result is a proposition under `UCPlanar/External/`, carried as an
-  explicit hypothesis at a use site satisfying its source hypotheses.
+- Cited results are propositions under `UCPlanar/External/`; their proofs are
+  supplied to the unconditional results.
 - Numerical constants precede the radius, function, and density parameters on
   which they do not depend. Finite cardinalities are used only for finite sets.
 
 ## Main results
 
-The main results are additionally exposed, stated in full, in
-[`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean), each proved by
-`exact` of its certified statement, and all four are restated over a
-Mathlib-only vocabulary for the comparator (see
-[`UCPlanarAudit/`](UCPlanarAudit/)).
+The unconditional forms are in `UCPlanar.Proved` and registered in
+`UCPlanar/Frozen/Unconditional/`. Older conditional forms remain in
+[`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean).
 
 | Source | Main theorem | Certified statement | Comparator |
 |---|---|---|---|
-| Theorem 1.1, `theorem:liouville` | `UCPlanar.liouville` | `UCPlanar.Frozen.liouville` | `UCPlanarAudit/Liouville/` |
-| Theorem 1.2, `theorem:uniformly-bounded` | `UCPlanar.uniformlyBounded` | `UCPlanar.Frozen.uniformlyBounded` | `UCPlanarAudit/UniformlyBounded/` |
-| Theorem 1.3, `theorem:zero-case` | `UCPlanar.zeroCase` | `UCPlanar.Frozen.zeroCase` | `UCPlanarAudit/ZeroCase/` |
-| Theorem 5.1, `theorem:counterexample` | `UCPlanar.counterexample` | `UCPlanar.Frozen.counterexample` | `UCPlanarAudit/Counterexample/` |
+| Theorem 1.1, `theorem:liouville` | `UCPlanar.Proved.liouville_of_periodic` | `UCPlanar.Frozen.liouville_of_periodic` | `UCPlanarAudit/LiouvilleUnconditional/` |
+| Theorem 1.2, `theorem:uniformly-bounded` | `UCPlanar.Proved.uniformlyBounded` | `UCPlanar.Frozen.uniformlyBounded_unconditional` | `UCPlanarAudit/UniformlyBoundedUnconditional/` |
+| Theorem 1.3, `theorem:zero-case` | `UCPlanar.Proved.zeroCase` | `UCPlanar.Frozen.zeroCase_unconditional` | `UCPlanarAudit/ZeroCaseUnconditional/` |
+| Theorem 5.1, `theorem:counterexample` | `UCPlanar.counterexample` | `UCPlanar.Frozen.counterexample` | `UCPlanarAudit/CounterexampleUnconditional/` |
 
 ## Registered statements
 
@@ -49,17 +47,27 @@ Mathlib-only vocabulary for the comparator (see
 | `N-004` | `UCPlanar.Frozen.topological` | `ucplanar.tex:222-231`, `lemma:topological-lemma` | PROVED |
 | `N-003` | `UCPlanar.Frozen.zeroCase` | ucplanar.tex:187-190 (theorem:zero-case) | PROVED |
 | `N-002` | `UCPlanar.Frozen.uniformlyBounded` | ucplanar.tex:175-181 (theorem:uniformly-bounded) | PROVED |
-| `X-007` | `UCPlanar.External.MoserEstimate` | ucplanar.tex:441-446 (the discrete Moser estimate cited in the proof of lemma:poly-approx) | FROZEN |
+| `X-007` | `UCPlanar.External.MoserEstimate` | ucplanar.tex:441-446 (the discrete Moser estimate cited in the proof of lemma:poly-approx) | FROZEN (proved by `UCPlanar.Proved.moserEstimate`) |
 | `N-007` | `UCPlanar.Frozen.polynomialApproximation` | `ucplanar.tex:427-434`, `lemma:poly-approx` | PROVED |
-| `X-002` | `UCPlanar.External.EdgeSplitting` | ucplanar.tex:285-309 (Step 3 of section 3, the boundary cycle of the filled cluster) | FROZEN |
-| `X-003` | `UCPlanar.External.Unicoherence` | ucplanar.tex:285-309 (Step 3 of section 3, the face walks along the frontier of a face) | FROZEN |
+| `X-002` | `UCPlanar.External.EdgeSplitting` | ucplanar.tex:285-309 (Step 3 of section 3, the boundary cycle of the filled cluster) | FROZEN (proved by `UCPlanar.Support.edgeSplitting_holds`) |
+| `X-003` | `UCPlanar.External.Unicoherence` | ucplanar.tex:285-309 (Step 3 of section 3, the face walks along the frontier of a face) | FROZEN (proved by `UCPlanar.Support.unicoherence_holds` for periodic plane graphs) |
 | `N-006` | `UCPlanar.Frozen.threeBall` | `ucplanar.tex:457-469`, `prop:three-ball` | PROVED |
 | `N-008` | `UCPlanar.Frozen.periodicLowerBound` | `ucplanar.tex:411-422`, `theorem:lower-bound` | PROVED |
 | `N-001` | `UCPlanar.Frozen.liouville` | ucplanar.tex:161-167 (theorem:liouville) | PROVED |
+| `N-001-unconditional` | `UCPlanar.Frozen.liouville_of_periodic` | ucplanar.tex:161-167 (theorem:liouville); cited inputs discharged | PROVED |
+| `N-002-unconditional` | `UCPlanar.Frozen.uniformlyBounded_unconditional` | ucplanar.tex:175-181 (theorem:uniformly-bounded); cited inputs discharged | PROVED |
+| `N-003-unconditional` | `UCPlanar.Frozen.zeroCase_unconditional` | ucplanar.tex:187-190 (theorem:zero-case); cited inputs discharged | PROVED |
+| `N-007-unconditional` | `UCPlanar.Frozen.polynomialApproximation_unconditional` | `ucplanar.tex:427-434`, `lemma:poly-approx` | PROVED |
+| `N-006-unconditional` | `UCPlanar.Frozen.threeBall_unconditional` | `ucplanar.tex:457-469`, `prop:three-ball` | PROVED |
+| `N-008-unconditional` | `UCPlanar.Frozen.periodicLowerBound_unconditional` | `ucplanar.tex:411-422`, `theorem:lower-bound` | PROVED |
 
 <!-- FROZEN-SURFACE-END -->
 
 ## Cited inputs
+
+The three cited inputs below are proved by `UCPlanar.Support.edgeSplitting_holds`,
+`UCPlanar.Support.unicoherence_holds`, and `UCPlanar.Proved.moserEstimate`, respectively.
+The older nodes carry them as hypotheses; unconditional nodes apply these proofs.
 
 | nodes | input | source scope at the use site |
 |---|---|---|

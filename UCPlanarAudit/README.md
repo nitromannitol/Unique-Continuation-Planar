@@ -24,10 +24,18 @@ with their squares, balls, periodic conductances, bounded-value densities,
 exceptional counts and uniform ellipticity; the crossing graph and crossing
 conductances of Theorem 5.1; and the three cited results.
 
+## Unconditional pairs
+
+Each main result also has a `*Unconditional/` pair. These challenges carry no cited
+literature input as a hypothesis, and the solutions apply the unconditional library
+results. The original pairs documented below remain available. The vocabulary blocks
+are checked against each pair's `SolutionBasic.lean`; the solutions use the existing
+bridges for the corresponding original pair.
+
 ## What Is Checked
 
-The theorems are conditional on results the paper cites without proof, and so
-are the challenges: each carries, as explicit hypotheses, the cited results
+Some original theorems are conditional on results the paper cites without proof, and so
+are the original challenges: each carries, as explicit hypotheses, the cited results
 its library theorem uses, restated in the vocabulary.
 
 | Directory | Cited results carried as hypotheses |

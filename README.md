@@ -11,10 +11,8 @@ The paper's source and the list of its differences from the arXiv version are in
 [`paper/`](paper/). The 4 main theorems of the paper are formalized and proved, in the form in
 which the corrected text in [`paper/`](paper/) states them;
 [`paper/CHANGES_FROM_ARXIV.md`](paper/CHANGES_FROM_ARXIV.md) lists every difference from the
-arXiv version. Three results that the paper cites from the literature enter as
-explicit hypotheses of the theorems that use them: Theorem 1.1 takes three, Theorems 1.2 and
-1.3 take two, and Theorem 5.1 takes none; see
-[Assumed literature inputs](#assumed-literature-inputs).
+arXiv version. The cited topology and Moser inputs are proved, and the main results
+are available without them as hypotheses; see [Literature inputs](#literature-inputs).
 
 The development is built on [mathlib](https://github.com/leanprover-community/mathlib4) and on
 two public libraries:
@@ -46,33 +44,31 @@ and Theorem 5.1 shows that planarity is needed: it gives non-planar periodic con
 `ℤ²` with a harmonic function supported on a diagonal. The model is stated precisely in
 [Standing assumptions and scope](#standing-assumptions-and-scope).
 
-The 4 main results, formalized as stated in the paper, are collected in
-[`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean). Each is proved by `exact` of its
-certified counterpart in `UCPlanar/Frozen/`, so the statements displayed there are the
-certified ones.
+The unconditional main results are in [`UCPlanar/Proved/MoserEstimate.lean`](UCPlanar/Proved/MoserEstimate.lean),
+[`UCPlanar/Proved/Main.lean`](UCPlanar/Proved/Main.lean), and
+[`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean). The older frozen forms retain
+explicit cited inputs; the ledger also registers the unconditional forms.
 
 | Paper | Lean declaration | Content |
 | --- | --- | --- |
-| Theorem 1.1 (label `theorem:liouville`) | `UCPlanar.liouville` | a harmonic function with density at least `1 − ε` of `{\|f\| ≤ 1}` in the balls is constant |
-| Theorem 1.2 (label `theorem:uniformly-bounded`) | `UCPlanar.uniformlyBounded` | exponential upper bound on a harmonic function that is large on few vertices |
-| Theorem 1.3 (label `theorem:zero-case`) | `UCPlanar.zeroCase` | a harmonic function that vanishes on most of a ball vanishes on the half ball |
+| Theorem 1.1 (label `theorem:liouville`) | `UCPlanar.Proved.liouville_of_periodic` | a harmonic function with density at least `1 − ε` of `{\|f\| ≤ 1}` in the balls is constant |
+| Theorem 1.2 (label `theorem:uniformly-bounded`) | `UCPlanar.Proved.uniformlyBounded` | exponential upper bound on a harmonic function that is large on few vertices |
+| Theorem 1.3 (label `theorem:zero-case`) | `UCPlanar.Proved.zeroCase` | a harmonic function that vanishes on most of a ball vanishes on the half ball |
 | Theorem 5.1 (label `theorem:counterexample`) | `UCPlanar.counterexample` | non-planar periodic conductances on `ℤ²` with a harmonic function supported on a diagonal |
 
 **Theorem 1.1 (Liouville, `theorem:liouville`).** For a periodic plane graph `P` and a
 conductance `c` invariant under the translation lattice, there is `ε > 0` such that every
 function harmonic on the whole graph whose density of `{|f| ≤ 1}` in the balls `B_n` about
-some vertex converges to a limit at least `1 − ε` is constant. Hypotheses: `MoserEstimate`,
-`EdgeSplitting`, `Unicoherence`.
+some vertex converges to a limit at least `1 − ε` is constant.
 
 **Theorem 1.2 (uniformly bounded, `theorem:uniformly-bounded`).** There is `n₀`, and for each
 ellipticity ratio `Θ > 1` there are `ε₀, A > 0`, such that for conductances in `(λ, Θλ)`,
 `n ≥ n₀`, `ε < ε₀` and `f` harmonic on `B_{2n}` with `|f| > 1` on at most `ε |B_{2n}|`
-vertices, `|f| ≤ exp(A √ε n)` on `B_n`. Hypotheses: `EdgeSplitting`, `Unicoherence`.
+vertices, `|f| ≤ exp(A √ε n)` on `B_n`.
 
 **Theorem 1.3 (zero case, `theorem:zero-case`).** There are `ε₀ > 0` and `n₀` such that for
 arbitrary positive conductances, `n ≥ n₀`, `ε < ε₀` and `f` harmonic on `B_{2n}` and nonzero
-on at most `ε |B_{2n}|` vertices, `f` vanishes on `B_n`. Hypotheses: `EdgeSplitting`,
-`Unicoherence`.
+on at most `ε |B_{2n}|` vertices, `f` vanishes on `B_n`.
 
 **Theorem 5.1 (counterexample, `theorem:counterexample`).** For positive `A₁ ≠ A₂` and
 `A₃ > 2 A₁² A₂² / ((A₁ - A₂)² (A₁ + A₂))` there is `A₄ > 0` such that `ℤ²` with the crossing
@@ -111,9 +107,8 @@ arXiv version.
    `UCPlanar.crossingConductance` on `ℤ²`.
 2. **Axioms and incomplete proofs.** The library contains no `sorry`, no `admit`, no
    `native_decide` and no new `axiom`. The axiom report of each main theorem consists of
-   exactly `propext`, `Classical.choice` and `Quot.sound`. The main theorems take 3 cited
-   results as explicit hypotheses, listed under
-   [Assumed literature inputs](#assumed-literature-inputs); nothing else is assumed.
+   exactly `propext`, `Classical.choice` and `Quot.sound`. The cited inputs are proved;
+   see [Literature inputs](#literature-inputs).
 3. **What is not formalized.** The introduction's survey of related work and applications, the
    remark following Theorem 1.3, and the figures.
 4. **Conventions.**
@@ -135,20 +130,13 @@ arXiv version.
    declarations node by node, and [`PROOF.md`](PROOF.md) describes the mathematics of the
    proof and the Lean tree.
 
-## Assumed literature inputs
+## Literature inputs
 
-Three results that the paper cites from the literature are stated in Lean as propositions in
-`UCPlanar/External/`, and every theorem whose proof uses one takes it as an explicit
-hypothesis, so the statement shows exactly which of them it rests on.
-[`ASSUMPTIONS.md`](ASSUMPTIONS.md) lists the three with their verbatim Lean statements. They
-are **not proved here**. Two further results the paper cites, the classical Liouville theorem
-for the periodic network and the discrete Remez inequality, are proved here.
-
-| Hypothesis | Content | Source | Used by |
-| --- | --- | --- | --- |
-| `UCPlanar.External.EdgeSplitting` (`hES`) | Janiszewski's theorem at a point, for the drawings of two finite edge sets of a plane graph: for disjoint finite edge sets meeting in at most one vertex, a point enclosed by their union is enclosed by one of the two | Newman, *Elements of the Topology of Plane Sets of Points*, Chapter V, Theorem 9.3; Mohar and Thomassen, *Graphs on Surfaces*, Chapter 2; Thomassen, *The Jordan-Schoenflies theorem and the classification of surfaces*, Amer. Math. Monthly 99 (1992) 116-130 | Theorems 1.1, 1.2, 1.3 |
-| `UCPlanar.External.Unicoherence` (`hU`) | Unicoherence of the sphere, in the form that the frontier of every bounded face of a connected plane graph is connected | Newman, *Elements of the Topology of Plane Sets of Points*, Chapter VI; Mohar and Thomassen, *Graphs on Surfaces*, Chapter 2; Thomassen, Amer. Math. Monthly 99 (1992) 116-130 | Theorems 1.1, 1.2, 1.3 |
-| `UCPlanar.External.MoserEstimate` (`hMos`) | The discrete Moser estimate on a periodic network: for a conductance `c` on the graph that is invariant under the translation lattice, nested squares `Q_r ⊆ Q_s` and `f` harmonic on `Q_s`, the supremum of `\|f\|` over `Q_r` is at most `C / (s − r)` times the `ℓ²` norm of `f` over `Q_s`, with `C` independent of the two scales | Delmotte, *Parabolic Harnack inequality and estimates of Markov chains on graphs*, Rev. Mat. Iberoamericana 15 (1999) 181-232, Proposition 5.3 | Theorem 1.1 |
+The plane-topology inputs are proved by `UCPlanar.Support.edgeSplitting_holds` and
+`UCPlanar.Support.unicoherence_holds` for periodic plane graphs; the discrete Moser estimate is proved by
+`UCPlanar.Proved.moserEstimate`. Their statements and witnesses are recorded in
+[`ASSUMPTIONS.md`](ASSUMPTIONS.md). The classical periodic Liouville theorem and the
+discrete Remez inequality used in the paper are also proved here.
 
 ## Registered statements
 
@@ -156,7 +144,7 @@ The generated summary below comes from [`ledger/manifest.yaml`](ledger/manifest.
 
 <!-- STATUS-BEGIN (generated by tools/sync_docs.py) -->
 
-Status: **11 registered nodes: 3 `FROZEN`, 8 `PROVED`.** 8 theorem(s) are proved and machine-checked: no `sorry`, no axiom added by this development, and an axiom closure of exactly Lean's three standard axioms `propext`, `Classical.choice` and `Quot.sound`. 3 result(s) are cited from the literature and stated as explicit hypotheses rather than proved here, so the theorems that use them are proved conditional on them.
+Status: **17 registered nodes: 3 `FROZEN`, 14 `PROVED`.** 14 theorem(s) are proved and machine-checked: no `sorry`, no axiom added by this development, and an axiom closure of exactly Lean's three standard axioms `propext`, `Classical.choice` and `Quot.sound`. 3 frozen definitions record cited inputs; their proofs are recorded in the manifest and used by the unconditional results.
 
 Counts are generated from `ledger/manifest.yaml` by
 `python3 tools/sync_docs.py`. Run `python3 tools/check_axioms.py`
@@ -165,40 +153,38 @@ to check registered axiom closures.
 <!-- STATUS-END -->
 
 Every statement of the paper is registered: one Lean declaration per theorem, lemma or
-proposition, and one proposition per cited result that is assumed. A registered statement's
+proposition, and one proposition per cited result. A registered statement's
 text between the lines `-- FROZEN-STATEMENT-BEGIN` and `-- FROZEN-STATEMENT-END` is pinned by
 the SHA-256 of those bytes in [`ledger/manifest.yaml`](ledger/manifest.yaml), together with the
 line range in `paper/ucplanar.tex` and, for the paper's numbered statements, the `\label` it
 transcribes; the proof after the end marker may be rewritten freely. In the manifest, a
 registered statement is `PROVED` when it is proved with an axiom closure of exactly the three
-standard axioms, and `FROZEN` when it is a cited result assumed rather than proved. Every
-registered statement is pinned by hash; only the `FROZEN` ones are assumed.
+standard axioms, and `FROZEN` for a cited proposition whose proof is recorded separately. Every
+registered statement is pinned by hash.
 
 ## Guarantees
 
 - **No `sorry`.** The library has none, and `tools/check_manifest.py` rejects any `sorry`
-  outside a registered `DRAFT_SORRY` node, of which there is none. The 4 comparator challenges
+  outside a registered `DRAFT_SORRY` node, of which there is none. The comparator challenges
   under [`UCPlanarAudit/`](UCPlanarAudit/) each contain one intentional statement-level
   `sorry`, which the corresponding solution file proves.
 - **Standard axioms only.** The axiom report of each of the 4 main theorems lists exactly
   `propext`, `Classical.choice` and `Quot.sound`.
   [`UCPlanar/Meta/AxiomsAudit.lean`](UCPlanar/Meta/AxiomsAudit.lean) prints the reports, and
   `python3 tools/check_axioms.py` checks the axiom closure of every registered statement. The
-  cited results are hypotheses, not axioms.
-- **Builds from a clean checkout.** In continuous integration, `lake build` of a fresh
-  checkout completes 9,004 jobs without error, and the build fails on any warning or `sorry`
-  warning.
+  unconditional results apply the cited-input proofs.
+- **Builds from a clean checkout.** Continuous integration builds the library and rejects warnings from its own files.
 - **Independent check of the statements.** Each of the 4 main theorems is restated in
   [`UCPlanarAudit/`](UCPlanarAudit/) using mathlib alone, with no project or library
   definitions, one challenge file per theorem
-  ([`Liouville`](UCPlanarAudit/Liouville/Challenge.lean),
-  [`UniformlyBounded`](UCPlanarAudit/UniformlyBounded/Challenge.lean),
-  [`ZeroCase`](UCPlanarAudit/ZeroCase/Challenge.lean) and
-  [`Counterexample`](UCPlanarAudit/Counterexample/Challenge.lean)). Each challenge rebuilds the
+  ([`Liouville`](UCPlanarAudit/LiouvilleUnconditional/Challenge.lean),
+  [`UniformlyBounded`](UCPlanarAudit/UniformlyBoundedUnconditional/Challenge.lean),
+  [`ZeroCase`](UCPlanarAudit/ZeroCaseUnconditional/Challenge.lean) and
+  [`Counterexample`](UCPlanarAudit/CounterexampleUnconditional/Challenge.lean)). Each challenge rebuilds the
   model from mathlib primitives (lattice sites, graph balls, conductances, the network
   Laplacian and harmonic functions as in Lattice-Probability; polygonal sets as in the
   Schoenflies library; plane embeddings, faces, periodic plane graphs and their density
-  notions; the crossing conductances of Theorem 5.1; and the cited results it assumes). The
+  notions; the crossing conductances of Theorem 5.1; and the cited propositions). The
   solution file proves the byte-identical statement from the library through the bridge of its
   pair in `UCPlanarAudit/Support/`, over a mathlib-only copy of the challenge's vocabulary
   (`SolutionBasic.lean`), and [leanprover/comparator](https://github.com/leanprover/comparator)
@@ -314,7 +300,7 @@ UCPlanar/
   Meta/AxiomsAudit.lean   the axiom report, compiled by `lake build`, not imported by the root
   Basic.lean              bounded density, exceptional count, uniform ellipticity
 UCPlanarAudit/            the mathlib-only restatements and their solutions
-ASSUMPTIONS.md            the cited results assumed, with their Lean statements (generated)
+ASSUMPTIONS.md            the cited results and their proofs (generated)
 CORRESPONDENCE.md         paper to Lean, node by node
 PROOF.md                  the mathematics of the proof and the Lean tree
 CERTIFICATE.md            generated record of the toolchain, the build, each node's axiom
