@@ -1,3 +1,9 @@
+import UCPlanar.Frozen.Unconditional.LiouvilleOfPeriodic
+import UCPlanar.Frozen.Unconditional.UniformlyBounded
+import UCPlanar.Frozen.Unconditional.ZeroCase
+import UCPlanar.Frozen.Unconditional.PolynomialApproximation
+import UCPlanar.Frozen.Unconditional.ThreeBall
+import UCPlanar.Frozen.Unconditional.PeriodicLowerBound
 import UCPlanar.Proved.MoserEstimate
 
 /-!
@@ -27,3 +33,10 @@ This file is not imported by the library root; the report runs when it is built 
 #print axioms UCPlanar.Proved.polynomialApproximation
 #print axioms UCPlanar.Proved.threeBall
 #print axioms UCPlanar.Proved.periodicLowerBound
+
+#print axioms UCPlanar.Frozen.liouville_of_periodic
+#print axioms UCPlanar.Frozen.uniformlyBounded_unconditional
+#print axioms UCPlanar.Frozen.zeroCase_unconditional
+#print axioms UCPlanar.Frozen.polynomialApproximation_unconditional
+#print axioms UCPlanar.Frozen.threeBall_unconditional
+#print axioms UCPlanar.Frozen.periodicLowerBound_unconditional

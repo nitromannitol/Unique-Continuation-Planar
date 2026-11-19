@@ -1,0 +1,14 @@
+{
+  "challenge_module": "UCPlanarAudit.CounterexampleUnconditional.Challenge",
+  "solution_module": "UCPlanarAudit.CounterexampleUnconditional.Solution",
+  "theorem_names": [
+    "UCPlanarAudit.counterexample_unconditional"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
