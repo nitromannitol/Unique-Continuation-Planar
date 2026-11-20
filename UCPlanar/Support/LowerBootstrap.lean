@@ -12,7 +12,6 @@ import UCPlanar.Support.LowerBoot
 
 open scoped Classical BigOperators
 set_option autoImplicit false
-set_option maxHeartbeats 1000000
 
 namespace UCPlanar.Support.Lower
 
@@ -62,23 +61,23 @@ theorem bootstrap {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → �
     rw [hsdef]; exact h
   have hb₁s : b₁ ≤ s := by
     rw [hsdef, Nat.le_sqrt]
-    nlinarith [hN, Nat.zero_le b₁]
+    exact (sq b₁).symm.le.trans ((Nat.le_add_right _ 4).trans hN)
   have hs2 : 2 ≤ s := le_trans hb₁2 hb₁s
   have hs0 : 0 < s := by omega
   have hsR0 : (0:ℝ) < (s:ℝ) := by exact_mod_cast hs0
   have hsR1 : (1:ℝ) ≤ (s:ℝ) := by exact_mod_cast hs0
   have hsle : (s:ℝ) ≤ Real.sqrt N := by
     have h1 : ((s*s : ℕ):ℝ) ≤ ((N:ℕ):ℝ) := by exact_mod_cast hssm
-    have h2 : (s:ℝ)^2 ≤ ((N:ℕ):ℝ) := by push_cast at h1; nlinarith [h1]
-    nlinarith [Real.sq_sqrt (by positivity : (0:ℝ) ≤ ((N:ℕ):ℝ)),
-      Real.sqrt_nonneg ((N:ℕ):ℝ), hsR0]
+    have h2 : (s:ℝ)^2 ≤ ((N:ℕ):ℝ) := by push_cast at h1; rw [sq]; exact h1
+    exact Real.le_sqrt_of_sq_le h2
   have hNlt : Real.sqrt N ≤ 2*(s:ℝ) := by
     have h1 : N < (s+1)^2 := by rw [hsdef]; exact Nat.lt_succ_sqrt' N
     have h2 : ((N:ℕ):ℝ) ≤ ((s:ℝ)+1)^2 := by
       have : ((N:ℕ):ℝ) ≤ (((s+1)^2 : ℕ):ℝ) := by exact_mod_cast h1.le
-      push_cast at this ⊢; nlinarith [this]
-    nlinarith [Real.sq_sqrt (by positivity : (0:ℝ) ≤ ((N:ℕ):ℝ)),
-      Real.sqrt_nonneg ((N:ℕ):ℝ), hsR1]
+      push_cast at this; exact this
+    calc Real.sqrt N ≤ Real.sqrt (((s:ℝ)+1)^2) := Real.sqrt_le_sqrt h2
+      _ = (s:ℝ)+1 := Real.sqrt_sq (by positivity)
+      _ ≤ 2*(s:ℝ) := by linarith only [hsR1]
   have hsqrt1 : (1:ℝ) ≤ Real.sqrt N := le_trans hsR1 hsle
   -- the outer square of the orbit box
   set Sn : ℕ := b₁ * s with hSndef
@@ -88,7 +87,8 @@ theorem bootstrap {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → �
   have hSnR : (4:ℝ) ≤ (Sn:ℝ) := by exact_mod_cast hSn4
   have hSncast : (Sn:ℝ) = (b₁:ℝ)*(s:ℝ) := by rw [hSndef]; push_cast; ring
   have hSn1 : Real.sqrt N ≤ (Sn:ℝ) := by
-    rw [hSncast]; nlinarith [hNlt, hb₁R, hsR0]
+    rw [hSncast]
+    exact hNlt.trans (mul_le_mul_of_nonneg_right hb₁R hsR0.le)
   have hSn2 : Sn ≤ 2*N := by
     have h1 : b₁ * s ≤ s * s := Nat.mul_le_mul_right s hb₁s
     rw [hSndef]; omega
@@ -104,32 +104,42 @@ theorem bootstrap {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → �
     rw [hRdef, hSncast, le_div_iff₀ (by norm_num : (0:ℝ) < 3)]
     have h1 : (b₁:ℝ)*(s:ℝ)*3 ≤ (b₁:ℝ)*Real.sqrt N*3 := by
       have : (0:ℝ) ≤ (b₁:ℝ)*3 := by positivity
-      nlinarith [hsle]
+      calc (b₁:ℝ)*(s:ℝ)*3 = ((b₁:ℝ)*3)*(s:ℝ) := by ring
+        _ ≤ ((b₁:ℝ)*3)*Real.sqrt N := mul_le_mul_of_nonneg_left hsle this
+        _ = (b₁:ℝ)*Real.sqrt N*3 := by ring
     have h2 : (b₁:ℝ)*Real.sqrt N*3 = 3*(b₁:ℝ)*Real.sqrt N := by ring
-    linarith [hrb]
+    linarith only [h1, h2, hrb]
   have hR1 : (1:ℝ) ≤ R := by
     rw [hRdef, le_div_iff₀ (by norm_num : (0:ℝ) < 3)]
-    have h1 : (3:ℝ) ≤ (3*Cg+3) * Real.sqrt N := by nlinarith [hsqrt1, hCg0.le]
-    linarith [hrc]
+    have h1 : (3:ℝ) ≤ (3*Cg+3) * Real.sqrt N :=
+      calc (3:ℝ) ≤ (3*Cg+3)*1 := by linarith only [hCg0]
+        _ ≤ (3*Cg+3) * Real.sqrt N :=
+          mul_le_mul_of_nonneg_left hsqrt1 (by linarith only [hCg0])
+    linarith only [h1, hrc]
   have hRCg : Cg ≤ R := by
     rw [hRdef, le_div_iff₀ (by norm_num : (0:ℝ) < 3)]
-    have h1 : Cg*3 ≤ (3*Cg+3) * Real.sqrt N := by nlinarith [hsqrt1, hCg0.le]
-    linarith [hrc]
-  have hR0 : (0:ℝ) < R := by linarith
+    have h1 : Cg*3 ≤ (3*Cg+3) * Real.sqrt N :=
+      calc Cg*3 ≤ (3*Cg+3)*1 := by linarith only [hCg0]
+        _ ≤ (3*Cg+3) * Real.sqrt N :=
+          mul_le_mul_of_nonneg_left hsqrt1 (by linarith only [hCg0])
+    linarith only [h1, hrc]
+  have hR0 : (0:ℝ) < R := by linarith only [hR1]
   have hRlarge : 8*(s:ℝ)*Cg*C₁' ≤ R := by
     rw [hRdef, le_div_iff₀ (by norm_num : (0:ℝ) < 3)]
     have h1 : 8*(s:ℝ)*Cg*C₁'*3 ≤ 8*Real.sqrt N*Cg*C₁'*3 := by
       have h0 : (0:ℝ) ≤ 8*Cg*C₁'*3 := by positivity
-      nlinarith [hsle]
+      calc 8*(s:ℝ)*Cg*C₁'*3 = (8*Cg*C₁'*3)*(s:ℝ) := by ring
+        _ ≤ (8*Cg*C₁'*3)*Real.sqrt N := mul_le_mul_of_nonneg_left hsle h0
+        _ = 8*Real.sqrt N*Cg*C₁'*3 := by ring
     have h2 : 8*Real.sqrt N*Cg*C₁'*3 = (24*Cg*C₁')*Real.sqrt N := by ring
-    linarith [hrd]
+    linarith only [h1, h2, hrd]
   have h3R : (3:ℝ)*R = r := by rw [hRdef]; ring
   -- the increment threshold
   set δ : ℝ := 1/(8*(s:ℝ)) with hδdef
   have hδ0 : (0:ℝ) ≤ δ := by rw [hδdef]; positivity
   have hδT : 2*(s:ℝ)*δ ≤ 1/4 := by
     rw [hδdef, mul_one_div, div_le_iff₀ (by positivity)]
-    linarith
+    linarith only [hsR0]
   -- the bound on the maximum, assumed for contradiction
   have hmax : UCPlanar.supNorm (P.square (3*R)) f ≤ C₁' := by
     rw [h3R]
@@ -145,8 +155,8 @@ theorem bootstrap {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → �
       mul_le_mul_of_nonneg_left hmax (by positivity)
     have hfin : (Cg/R) * C₁' ≤ δ := by
       rw [hδdef, div_mul_eq_mul_div, div_le_div_iff₀ hR0 (by positivity)]
-      nlinarith [hRlarge]
-    linarith
+      linarith only [hRlarge]
+    linarith only [h, hstep, hfin]
   -- the orbit box lies in the square of radius `Sn`
   obtain ⟨x₀, hx₀mem, hx₀val⟩ := hx₀
   have hall : ∀ p q : ℤ, |p| ≤ (s:ℤ) → |q| ≤ (s:ℤ) →
@@ -155,7 +165,8 @@ theorem bootstrap {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → �
     have h := orbit_in_square P B hB0 hB x₀ ((s:ℕ):ℝ) hx₀mem s p q hpq hqq
     refine UCPlanar.Support.square_mono P ?_ h
     rw [hSncast]
-    nlinarith [hBb₁, hsR0]
+    have h5 : B*(s:ℝ) ≤ ((b₁:ℝ) - 2)*(s:ℝ) := mul_le_mul_of_nonneg_right hBb₁ hsR0.le
+    linarith only [h5, hsR0]
   have hallR : ∀ p q : ℤ, |p| ≤ (s:ℤ) → |q| ≤ (s:ℤ) →
       P.shift (vec p q) x₀ ∈ P.square R :=
     fun p q hp' hq' => UCPlanar.Support.square_mono P hRS (hall p q hp' hq')
@@ -164,10 +175,10 @@ theorem bootstrap {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → �
     hdens Sn hSn1 hSn2
   have hcount : ε * (((P.square (Sn:ℝ)).card : ℕ) : ℝ) < (((2*s+1)^2 : ℕ) : ℝ) := by
     have hcard : (((P.square (Sn:ℝ)).card : ℕ) : ℝ) ≤ Cup * (Sn:ℝ)^2 :=
-      hCup (Sn:ℝ) (by linarith)
+      hCup (Sn:ℝ) (by linarith only [hSnR])
     have hlt : ε * (Cup * (b₁:ℝ)^2) < 4 := by
       rw [lt_div_iff₀ (by positivity)] at hε1
-      linarith [hε1]
+      linarith only [hε1]
     have heq : ε * (Cup * (Sn:ℝ)^2) = (ε * (Cup * (b₁:ℝ)^2)) * (s:ℝ)^2 := by
       rw [hSncast]; ring
     have hεb : ε * (Cup * (Sn:ℝ)^2) < 4 * (s:ℝ)^2 := by
@@ -175,7 +186,13 @@ theorem bootstrap {V : Type*} (P : UCPlanar.PeriodicGraph V) (c : V → V → �
       exact mul_lt_mul_of_pos_right hlt (by positivity)
     have h2 : (((2*s+1)^2 : ℕ) : ℝ) = (2*(s:ℝ)+1)^2 := by push_cast; ring
     rw [h2]
-    nlinarith [hcard, hεb, hε0.le, hsR0]
+    have h3 : ε * (((P.square (Sn:ℝ)).card : ℕ) : ℝ) ≤ ε * (Cup * (Sn:ℝ)^2) :=
+      mul_le_mul_of_nonneg_left hcard hε0.le
+    have h4 : 4*(s:ℝ)^2 ≤ (2*(s:ℝ)+1)^2 := by
+      have h5 : (2*(s:ℝ)+1)^2 = 4*(s:ℝ)^2 + (4*(s:ℝ)+1) := by ring
+      rw [h5]
+      linarith only [hsR0]
+    linarith only [h3, hεb, h4]
   -- every lattice increment inside the orbit box is small
   have hrow : ∀ p q : ℤ, |p| ≤ (s:ℤ) → |p+1| ≤ (s:ℤ) → |q| ≤ (s:ℤ) →
       |f (P.shift (vec 1 0) (P.shift (vec p q) x₀)) - f (P.shift (vec p q) x₀)| ≤ δ :=
