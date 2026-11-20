@@ -14,7 +14,6 @@ import UCPlanar.Support.LowerChain
 
 open scoped Classical BigOperators
 set_option autoImplicit false
-set_option maxHeartbeats 1000000
 
 namespace UCPlanar.Support.Lower
 
@@ -93,16 +92,16 @@ theorem periodicLowerBound_main {V : Type*} (P : UCPlanar.PeriodicGraph V)
   have hsR1 : (1:ℝ) ≤ (s:ℝ) := by exact_mod_cast hs0
   have hsle : (s:ℝ) ≤ Real.sqrt N := by
     have h1 : ((s*s : ℕ):ℝ) ≤ ((N:ℕ):ℝ) := by exact_mod_cast hssm
-    have h2 : (s:ℝ)^2 ≤ ((N:ℕ):ℝ) := by push_cast at h1; nlinarith [h1]
-    nlinarith [Real.sq_sqrt (by positivity : (0:ℝ) ≤ ((N:ℕ):ℝ)),
-      Real.sqrt_nonneg ((N:ℕ):ℝ), hsR0]
+    have h2 : (s:ℝ)^2 ≤ ((N:ℕ):ℝ) := by push_cast at h1; rw [sq]; exact h1
+    exact Real.le_sqrt_of_sq_le h2
   have hNlt : Real.sqrt N ≤ 2*(s:ℝ) := by
     have h1 : N < (s+1)^2 := by rw [hsdef]; exact Nat.lt_succ_sqrt' N
     have h2 : ((N:ℕ):ℝ) ≤ ((s:ℝ)+1)^2 := by
       have h3 : ((N:ℕ):ℝ) ≤ (((s+1)^2 : ℕ):ℝ) := by exact_mod_cast h1.le
-      push_cast at h3 ⊢; nlinarith [h3]
-    nlinarith [Real.sq_sqrt (by positivity : (0:ℝ) ≤ ((N:ℕ):ℝ)),
-      Real.sqrt_nonneg ((N:ℕ):ℝ), hsR1]
+      push_cast at h3; exact h3
+    calc Real.sqrt N ≤ Real.sqrt (((s:ℝ)+1)^2) := Real.sqrt_le_sqrt h2
+      _ = (s:ℝ)+1 := Real.sqrt_sq (by positivity)
+      _ ≤ 2*(s:ℝ) := by linarith only [hsR1]
   set K₀n : ℕ := E * s with hK₀ndef
   have hK₀n0 : 0 < K₀n := by rw [hK₀ndef]; positivity
   have hK₀nN : K₀n ≤ N := by
@@ -123,7 +122,9 @@ theorem periodicLowerBound_main {V : Type*} (P : UCPlanar.PeriodicGraph V)
       exact_mod_cast h5
     have h2 : A * Real.sqrt N ≤ A * (2*(s:ℝ)) :=
       mul_le_mul_of_nonneg_left hNlt hA0.le
-    have h3 : A * (2*(s:ℝ)) ≤ (E:ℝ) * (s:ℝ) := by nlinarith [hsR0, hAE, h1]
+    have h3 : A * (2*(s:ℝ)) ≤ (E:ℝ) * (s:ℝ) :=
+      calc A * (2*(s:ℝ)) = (2*A) * (s:ℝ) := by ring
+        _ ≤ (E:ℝ) * (s:ℝ) := mul_le_mul_of_nonneg_right (hAE.trans h1) hsR0.le
     have h4 : (K₀n:ℝ) = (E:ℝ)*(s:ℝ) := by rw [hK₀ndef]; push_cast; ring
     rw [h4]; linarith
   -- the length of the ladder
@@ -164,7 +165,7 @@ theorem periodicLowerBound_main {V : Type*} (P : UCPlanar.PeriodicGraph V)
     hbootA ε hε0 hεε₁ N hNN₁ f hharm hx₀ hdens r (le_trans hK₀A hr)
   have hC₁2 : (2:ℝ) ≤ C₁ := le_max_right _ _
   have hone : ∀ r : ℝ, (K₀n:ℝ) ≤ r → 1 ≤ UCPlanar.supNorm (P.square r) f := fun r hr => by
-    linarith [hbootr r hr, hC₁2]
+    linarith only [hbootr r hr, hC₁2]
   have hbootK₀ : 2 ≤ UCPlanar.supNorm (P.square (K₀n:ℝ)) f :=
     le_trans hC₁2 (hbootr _ le_rfl)
   -- one rung of the ladder
@@ -189,13 +190,15 @@ theorem periodicLowerBound_main {V : Type*} (P : UCPlanar.PeriodicGraph V)
     have hKiR1 : (1:ℝ) ≤ (Ki:ℝ) := by exact_mod_cast hKi1
     have hKi0 : (0:ℝ) < (Ki:ℝ) := by linarith
     have hGE : G ≤ K₀n := by
-      have h1 : G ≤ E := by rw [hEdef]; omega
+      have h1 : G ≤ E := by rw [hEdef]; exact Nat.le_add_left _ _
       calc G ≤ E := h1
         _ ≤ E*s := Nat.le_mul_of_pos_right _ hs0
         _ = K₀n := hK₀ndef.symm
     have hLiLmin : Lmin + 1 ≤ Li := by
       rw [hLidef, Nat.le_div_iff_mul_le hD0]
-      calc (Lmin+1)*D ≤ 2*D*(Lmin+2) := by nlinarith [Nat.zero_le D, Nat.zero_le Lmin]
+      calc (Lmin+1)*D ≤ (2*(Lmin+2))*D :=
+            Nat.mul_le_mul_right D ((Nat.le_add_right (Lmin+1) (Lmin+3)).trans_eq (by ring))
+        _ = 2*D*(Lmin+2) := by ring
         _ = G := hGdef.symm
         _ ≤ K₀n := hGE
         _ ≤ Ki := hKi_ge
@@ -242,7 +245,7 @@ theorem periodicLowerBound_main {V : Type*} (P : UCPlanar.PeriodicGraph V)
       have h1 : ((D:ℕ):ℝ) * ((Li:ℕ):ℝ) ≤ (Ki:ℝ) := by exact_mod_cast hDLi
       have h2 : ((D:ℕ):ℝ) = 13*((k:ℝ)+1) := by rw [hDdef]; push_cast; ring
       rw [h2] at h1
-      nlinarith [hLiρ, h1, Nat.cast_nonneg (α := ℝ) k, hLipos]
+      linarith only [hLiρ, h1]
     -- the density at every small square centred at a lattice point
     have hdensLoc : ∀ a : LatticeProb.Site 2,
         squareAt P a ((Li:ℕ):ℝ) ⊆ P.square (2*(Ki:ℝ)) →
@@ -264,10 +267,13 @@ theorem periodicLowerBound_main {V : Type*} (P : UCPlanar.PeriodicGraph V)
           hCup _ (by linarith)
         have hcard2 : κ * ((Li:ℕ):ℝ)^2 ≤ (((P.square ((Li:ℕ):ℝ)).card : ℕ) : ℝ) :=
           hκ _ hLiR₁
-        have h0 : (0:ℝ) ≤ 2*(Ki:ℝ) := by linarith
-        have h1 : 2*(Ki:ℝ) ≤ 4*((D:ℕ):ℝ)*((Li:ℕ):ℝ) := by linarith [hKL]
+        have h0 : (0:ℝ) ≤ 2*(Ki:ℝ) := by linarith only [hKi0]
+        have h1 : 2*(Ki:ℝ) ≤ 4*((D:ℕ):ℝ)*((Li:ℕ):ℝ) := by linarith only [hKL]
         have hms := mul_self_le_mul_self h0 h1
-        have hsq : (2*(Ki:ℝ))^2 ≤ 16*((D:ℕ):ℝ)^2*((Li:ℕ):ℝ)^2 := by nlinarith [hms]
+        have hsq : (2*(Ki:ℝ))^2 ≤ 16*((D:ℕ):ℝ)^2*((Li:ℕ):ℝ)^2 :=
+          calc (2*(Ki:ℝ))^2 = (2*(Ki:ℝ))*(2*(Ki:ℝ)) := sq _
+            _ ≤ (4*((D:ℕ):ℝ)*((Li:ℕ):ℝ))*(4*((D:ℕ):ℝ)*((Li:ℕ):ℝ)) := hms
+            _ = 16*((D:ℕ):ℝ)^2*((Li:ℕ):ℝ)^2 := by ring
         have hA' : ε * (Cup * (2*(Ki:ℝ))^2)
             ≤ ε * (Cup * (16*((D:ℕ):ℝ)^2*((Li:ℕ):ℝ)^2)) := by
           have h2 : Cup * (2*(Ki:ℝ))^2 ≤ Cup * (16*((D:ℕ):ℝ)^2*((Li:ℕ):ℝ)^2) :=
@@ -284,7 +290,7 @@ theorem periodicLowerBound_main {V : Type*} (P : UCPlanar.PeriodicGraph V)
         have hfin2 : εtb * (κ * ((Li:ℕ):ℝ)^2)
             ≤ εtb * (((P.square ((Li:ℕ):ℝ)).card : ℕ) : ℝ) :=
           mul_le_mul_of_nonneg_left hcard2 hεtb0.le
-        linarith
+        linarith only [hfin1, hA', hB', hC', hD', hfin2]
     -- the rung
     have hprop := prop22 P c f ρ hρ0 hcentre k (by omega) c₀ C εtb C₁ hC hc₀ htb hharm
       (le_max_left _ _) (lt_of_lt_of_le (by norm_num) hC₁2)
@@ -296,11 +302,11 @@ theorem periodicLowerBound_main {V : Type*} (P : UCPlanar.PeriodicGraph V)
         mul_le_mul_of_nonneg_left hKL hc₁0.le
       have h2 : c₁*(2*((D:ℕ):ℝ)*((Li:ℕ):ℝ)) = c₀*((Li:ℕ):ℝ)/2 := by
         rw [hc₁def]; field_simp; ring
-      linarith [h1, h2]
+      linarith only [h1, h2]
     have heq1 : (2:ℝ)^(i+1)*(K₀n:ℝ) = 2*(Ki:ℝ) := by rw [hKicast]; ring
     rw [← hKicast, heq1]
     refine le_trans (min_le_min le_rfl ?_) hprop
-    linarith [hgain]
+    linarith only [hgain]
   -- the top of the ladder
   have htop : (2:ℝ)^l * (K₀n:ℝ) ≤ (N:ℝ) := by exact_mod_cast hlspec
   have hNpow : N ≤ 32^l := by
@@ -328,14 +334,15 @@ theorem periodicLowerBound_main {V : Type*} (P : UCPlanar.PeriodicGraph V)
     have h7 : N < (2^l)^5 := lt_of_mul_lt_mul_right h6 (Nat.zero_le _)
     have h8 : ((2:ℕ)^l)^5 = 32^l := by
       rw [← pow_mul, show (32:ℕ) = 2^5 by norm_num, ← pow_mul, Nat.mul_comm]
-    omega
+    rw [h8] at h7
+    exact h7.le
   have hb1 : b * (N:ℝ) ≤ Real.log 2 * 32^l := by
     have h1 : b ≤ Real.log 2 := min_le_left _ _
     have h2 : ((N:ℕ):ℝ) ≤ ((32^l : ℕ):ℝ) := by exact_mod_cast hNpow
     have h3 : ((32^l : ℕ):ℝ) = (32:ℝ)^l := by push_cast; ring
     rw [h3] at h2
     calc b*(N:ℝ) ≤ Real.log 2 * (N:ℝ) :=
-          mul_le_mul_of_nonneg_right h1 (by positivity)
+          mul_le_mul_of_nonneg_right h1 (Nat.cast_nonneg N)
       _ ≤ Real.log 2 * (32:ℝ)^l := mul_le_mul_of_nonneg_left h2 hlog2.le
   have hb2 : b * (N:ℝ) ≤ c₁ * ((2:ℝ)^(l-1)*(K₀n:ℝ)) := by
     have hpow : (2:ℝ)^(l+1) = 4*(2:ℝ)^(l-1) := by
@@ -345,9 +352,9 @@ theorem periodicLowerBound_main {V : Type*} (P : UCPlanar.PeriodicGraph V)
     have h3 : ((2^(l+1)*K₀n : ℕ):ℝ) = (2:ℝ)^(l+1)*(K₀n:ℝ) := by push_cast; ring
     rw [h3, hpow] at h2
     have h4 : b ≤ c₁/4 := min_le_right _ _
-    calc b*(N:ℝ) ≤ (c₁/4)*(N:ℝ) := mul_le_mul_of_nonneg_right h4 (by positivity)
+    calc b*(N:ℝ) ≤ (c₁/4)*(N:ℝ) := mul_le_mul_of_nonneg_right h4 (Nat.cast_nonneg N)
       _ ≤ (c₁/4)*(4*(2:ℝ)^(l-1)*(K₀n:ℝ)) :=
-          mul_le_mul_of_nonneg_left h2.le (by positivity)
+          mul_le_mul_of_nonneg_left h2.le (div_nonneg hc₁0.le (by norm_num))
       _ = c₁*((2:ℝ)^(l-1)*(K₀n:ℝ)) := by ring
   exact theoremB_abstract (fun r => UCPlanar.supNorm (P.square r) f) c₁ b (K₀n:ℝ) N l
     hK₀nR0 hc₁0 hmono hone hbootK₀ hstep htop hb1 hb2
