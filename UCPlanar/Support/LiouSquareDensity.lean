@@ -18,7 +18,6 @@ import UCPlanar.Support.ZeroAssemble
 
 open scoped Classical
 set_option autoImplicit false
-set_option maxHeartbeats 1000000
 
 namespace UCPlanar.Support
 

@@ -17,7 +17,6 @@ import UCPlanar.Support.LiouFinalGeom
 
 open scoped Classical BigOperators
 set_option autoImplicit false
-set_option maxHeartbeats 1000000
 
 namespace UCPlanar.Support.LiouFinal
 
