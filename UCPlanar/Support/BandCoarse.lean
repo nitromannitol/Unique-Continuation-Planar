@@ -19,8 +19,6 @@ theorem exceptionalCount_mono {V : Type*} (S : Finset V) (f : V → ℝ) (a b : 
   rw [Finset.mem_filter] at hx ⊢
   exact ⟨hx.1, lt_of_le_of_lt hab hx.2⟩
 
-set_option maxHeartbeats 1000000 in
-
 /-- **Step 1 of Section 4: the coarse exponential bound.**  Among the geometric bands of values
 below `K ^ (2 r)` one holds at most a constant times `ε₁ r` vertices; treating the vertices
 below that band as zeros and discarding the band, the boundary cycle of Step 3 forces linearly
@@ -96,20 +94,28 @@ theorem coarse_core {V : Type*} (Q : UCPlanar.PeriodicPlaneGraph V) (Kc r : ℕ)
     have h := hballup o (2*rr)
     have hcast : ((2*rr : ℕ) : ℝ) = 2 * (rr:ℝ) := by push_cast; ring
     rw [hcast] at h
-    have hsq : (2*(rr:ℝ)+1)^2 ≤ 9*(rr:ℝ)^2 := by nlinarith [hrrR]
+    have hsq : (2*(rr:ℝ)+1)^2 ≤ 9*(rr:ℝ)^2 := by
+      have h1 : (rr:ℝ) ≤ (rr:ℝ)^2 := by
+        rw [sq]; exact le_mul_of_one_le_right (by linarith only [hrrR]) hrrR
+      have h2 : (2*(rr:ℝ)+1)^2 = 4*(rr:ℝ)^2 + 4*(rr:ℝ) + 1 := by ring
+      rw [h2]
+      linarith only [h1, hrrR]
     have := mul_le_mul_of_nonneg_left hsq hC₂.le
-    linarith [h, this]
+    linarith only [h, this]
   set δ : ℝ := 9*C₂*ε₁*(rr:ℝ) + 1 with hδdef
   have hsmall : (Sexc.card : ℝ) < δ * rr := by
     have h1 : (Sexc.card : ℝ) ≤ ε₁ * (9 * C₂ * (rr:ℝ)^2) :=
       le_trans hSexccard (mul_le_mul_of_nonneg_left hballR hε₁0.le)
     rw [hδdef]
-    nlinarith [h1, hrrR]
+    have h2 : (9*C₂*ε₁*(rr:ℝ) + 1) * (rr:ℝ) = ε₁ * (9 * C₂ * (rr:ℝ)^2) + (rr:ℝ) := by
+      ring
+    rw [h2]
+    linarith only [h1, hrrR]
   obtain ⟨A, hA1, hAle, hband⟩ := exists_sparse_threshold Sexc f K hK1 δ rr hrr1 hsmall
   have hA0 : 0 < A := lt_of_lt_of_le one_pos hA1
   set B : ℝ := K * A with hBdef
-  have hAB : A ≤ B := by rw [hBdef]; nlinarith
-  have hABlt : A < B := by rw [hBdef]; nlinarith
+  have hAB : A ≤ B := by rw [hBdef]; exact le_mul_of_one_le_left hA0.le hK1.le
+  have hABlt : A < B := by rw [hBdef]; exact lt_mul_of_one_lt_left hA0 hK1
   clear_value B
   -- the two opposite-sign clauses
   have hopp : ∀ w : V, Q.graph.dist o w ≤ Kc*rr → |f w| ≤ A →
@@ -131,7 +137,7 @@ theorem coarse_core {V : Type*} (Q : UCPlanar.PeriodicPlaneGraph V) (Kc r : ℕ)
     have hcast : ((UCPlanar.exceptionalCount (Q.toPeriodicGraph.ball o (2*rr)) f A : ℕ) : ℝ)
         ≤ ((UCPlanar.exceptionalCount (Q.toPeriodicGraph.ball o (2*rr)) f 1 : ℕ) : ℝ) := by
       exact_mod_cast this
-    linarith [hcount]
+    linarith only [hcast, hcount]
   obtain ⟨m, hm1, hm2, hmcount⟩ := hshell o rr hrr1 hrr8 A ε₁ hε₁0.le f hcountA
   set S : Finset V := (Q.toPeriodicGraph.ball o (2*rr)).filter (fun x => A < |f x| ∧
     m ≤ Q.graph.dist o x + 2*r ∧ Q.graph.dist o x ≤ m + 2*r) with hSdef
@@ -152,10 +158,10 @@ theorem coarse_core {V : Type*} (Q : UCPlanar.PeriodicPlaneGraph V) (Kc r : ℕ)
         calc K * K ^ rr = K ^ (rr + 1) := by rw [pow_succ]; ring
           _ ≤ K ^ (2*rr) := this
       calc B = K * A := hBdef
-        _ ≤ K * K ^ rr := by nlinarith [hAle, hK0]
+        _ ≤ K * K ^ rr := mul_le_mul_of_nonneg_left hAle hK0.le
         _ ≤ K ^ (2*rr) := hKpow
     rw [hKexp] at h1
-    linarith [hbig]
+    linarith only [h1, hbig]
   obtain ⟨D, hD, hsurr⟩ := hsur c hc o m rr f A B y hA0.le hAB (Or.inr hABlt) hharm
     (fun _ w hw hfw v hv hfv => hopp w hw hfw v hv hfv)
     (fun _ w hw hfw v hv hfv => hopp' w hw hfw v hv hfv)
@@ -186,18 +192,18 @@ theorem coarse_core {V : Type*} (Q : UCPlanar.PeriodicPlaneGraph V) (Kc r : ℕ)
     intro v h1 h2
     simp only [Set.mem_setOf_eq] at h1 h2
     have := le_trans (le_abs_self (f v)) h1
-    linarith
+    linarith only [this, h2]
   have hdWN : Disjoint {x : V | |f x| ≤ A} {x : V | f x < -A} := by
     refine Set.disjoint_left.mpr ?_
     intro v h1 h2
     simp only [Set.mem_setOf_eq] at h1 h2
     have := le_trans (neg_le_abs (f v)) h1
-    linarith
+    linarith only [this, h2]
   have hdPN : Disjoint {x : V | A < f x} {x : V | f x < -A} := by
     refine Set.disjoint_left.mpr ?_
     intro v h1 h2
     simp only [Set.mem_setOf_eq] at h1 h2
-    linarith
+    linarith only [h1, h2, hA0]
   have hlower := hstep3 o m rr {x : V | |f x| ≤ A} {x : V | A < f x} {x : V | f x < -A}
     D y S hdWP hdWN hdPN hyd hm1 hSmem hsurr
   have hScard : (S.card : ℝ) ≤ Cs * ε₁ * rr := hmcount
@@ -205,22 +211,22 @@ theorem coarse_core {V : Type*} (Q : UCPlanar.PeriodicPlaneGraph V) (Kc r : ℕ)
     mul_le_mul_of_nonneg_right hScard hmult0.le
   have hDb : (D.card : ℝ) ≤ δ * mult :=
     le_trans hDcard (mul_le_mul_of_nonneg_right hBandcard.le hmult0.le)
-  have hne : (Cs + 9*C₂) * mult + 1 ≠ 0 := by linarith
+  have hne : (Cs + 9*C₂) * mult + 1 ≠ 0 := ne_of_gt (by linarith only [hT0])
   have hprod : ε₁ * ((Cs + 9*C₂) * mult + 1) = κ / 2 := by
     rw [hε₁def, ← div_div, div_mul_cancel₀ _ hne]
   have hε₁small : ε₁ * ((Cs + 9*C₂) * mult) < κ / 2 := by
     have hring : ε₁ * ((Cs + 9*C₂) * mult + 1)
         = ε₁ * ((Cs + 9*C₂) * mult) + ε₁ := by ring
-    linarith [hprod, hring, hε₁0]
+    linarith only [hprod, hring, hε₁0]
   have hlast : mult + C₀ < κ * rr / 2 := by
     have := (div_lt_iff₀ hκ).mp hrrbig
-    linarith
-  have hrrpos : (0:ℝ) < (rr:ℝ) := by linarith [hrrR]
+    linarith only [this]
+  have hrrpos : (0:ℝ) < (rr:ℝ) := by linarith only [hrrR]
   have hmix : ε₁ * ((Cs + 9*C₂) * mult) * (rr:ℝ) < (κ/2) * (rr:ℝ) :=
     mul_lt_mul_of_pos_right hε₁small hrrpos
   have hexpand : Cs * ε₁ * (rr:ℝ) * mult + δ * mult
       = ε₁ * ((Cs + 9*C₂) * mult) * (rr:ℝ) + mult := by rw [hδdef]; ring
-  linarith [hlower, hmulS, hDb, hmix, hlast, hexpand.le, hexpand.ge]
+  linarith only [hlower, hmulS, hDb, hmix, hlast, hexpand.le, hexpand.ge]
 
 /-- **The coarse exponential bound on the ball the rescaling is applied to.**  The same
 re-centring as in the zero case: the cycle of Step 3 encloses a region that can exceed its own
