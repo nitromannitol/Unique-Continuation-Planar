@@ -70,7 +70,6 @@ theorem threeBall_orbit {V : Type*} (P : UCPlanar.PeriodicGraph V)
       (polyReach_vertical_of_fit P R m J n v f (alphaJ J) δ ρ B hB0 hρ hB hv hfit
         (happ m hm) s hs)
 
-set_option maxHeartbeats 4000000 in
 /-- **The main case of the three-ball proposition**: the scale is above the threshold fixed by
 the geometry and the outer bound is above one.  The point is carried to the lattice box of one
 coset, where the reach-`2^J` inequality applies. -/
@@ -132,7 +131,7 @@ theorem threeBall_main {V : Type*} (P : UCPlanar.PeriodicGraph V) (hRemez : Reme
   have hnN : (n:ℝ) ≤ (N:ℝ) := by
     have : (N:ℝ)/(2*B) ≤ (N:ℝ) := by
       rw [div_le_iff₀ (by positivity)]
-      nlinarith [hNR, hB1]
+      exact le_mul_of_one_le_right (Nat.cast_nonneg N) (by linarith only [hB1])
     linarith
   have hhalfB : B*((N:ℝ)/(2*B)) = (N:ℝ)/2 := by field_simp
   have hBn : B*(n:ℝ) ≤ (N:ℝ)/2 := by
@@ -164,7 +163,10 @@ theorem threeBall_main {V : Type*} (P : UCPlanar.PeriodicGraph V) (hRemez : Reme
   have hreach : ∀ j, |(a j : ℝ)| ≤ (2:ℝ)^J*(n:ℝ) := by
     intro j
     have hρN : ρ ≤ (N:ℝ) := by linarith
-    have h1 : K*(2*(N:ℝ)+ρ) ≤ 3*K*(N:ℝ) := by nlinarith [hK1, hρN]
+    have h1 : K*(2*(N:ℝ)+ρ) ≤ 3*K*(N:ℝ) :=
+      calc K*(2*(N:ℝ)+ρ) ≤ K*(3*(N:ℝ)) :=
+            mul_le_mul_of_nonneg_left (by linarith only [hρN]) (by linarith only [hK1])
+        _ = 3*K*(N:ℝ) := by ring
     have h2 : 3*K*(N:ℝ) ≤ (2:ℝ)^J*(n:ℝ) := by
       have h4 : (0:ℝ) ≤ (N:ℝ)/(4*B) := by positivity
       have h3 : 12*K*B*((N:ℝ)/(4*B)) ≤ (2:ℝ)^J*(n:ℝ) := by
@@ -191,7 +193,9 @@ theorem threeBall_main {V : Type*} (P : UCPlanar.PeriodicGraph V) (hRemez : Reme
   have hδR : δ*R = ρ + B*(2:ℝ)^J*(N:ℝ) + δ*R₀ := by
     rw [hRdef]; field_simp
   have hδR₀ : (0:ℝ) < δ*R₀ := by positivity
-  have hBJ : (2:ℝ) ≤ B*(2:ℝ)^J := by nlinarith [hB1, _hpow2]
+  have hBJ : (2:ℝ) ≤ B*(2:ℝ)^J :=
+    calc (2:ℝ) = 1*2 := by norm_num
+      _ ≤ B*(2:ℝ)^J := mul_le_mul hB1 _hpow2 (by norm_num) (by linarith only [hB1])
   have hfitJ : ρ + B*((2:ℝ)^J*(n:ℝ)) ≤ δ*R := by
     rw [hδR]
     have h2 : B*((2:ℝ)^J*(n:ℝ)) = B*(2:ℝ)^J*(n:ℝ) := by ring
@@ -215,9 +219,9 @@ theorem threeBall_main {V : Type*} (P : UCPlanar.PeriodicGraph V) (hRemez : Reme
     have hR' : 3*R = 3*ρ/δ + (3*B*(2:ℝ)^J/δ)*(N:ℝ) + 3*R₀ := by
       rw [hRdef]; field_simp
     have e1 : 3*ρ/δ ≤ (3*ρ/δ)*(N:ℝ) := by
-      nlinarith [mul_nonneg hA1 (sub_nonneg.mpr hNR)]
+      exact le_mul_of_one_le_right hA1 hNR
     have e3 : 3*R₀ ≤ (3*R₀)*(N:ℝ) := by
-      nlinarith [mul_nonneg hA3 (sub_nonneg.mpr hNR)]
+      exact le_mul_of_one_le_right hA3 hNR
     have e4 : (3*ρ/δ)*(N:ℝ) + (3*B*(2:ℝ)^J/δ)*(N:ℝ) + (3*R₀)*(N:ℝ) ≤ (k:ℝ)*(N:ℝ) := by
       have h := mul_le_mul_of_nonneg_right hkk (by positivity : (0:ℝ) ≤ (N:ℝ))
       calc (3*ρ/δ)*(N:ℝ) + (3*B*(2:ℝ)^J/δ)*(N:ℝ) + (3*R₀)*(N:ℝ)
@@ -229,7 +233,9 @@ theorem threeBall_main {V : Type*} (P : UCPlanar.PeriodicGraph V) (hRemez : Reme
     have h2 : B*(2:ℝ)^J*(n:ℝ) ≤ B*(2:ℝ)^J*(N:ℝ) :=
       mul_le_mul_of_nonneg_left hnN (by positivity)
     have h3 : ρ + B*(2:ℝ)^J*(N:ℝ) ≤ (ρ + B*(2:ℝ)^J)*(N:ℝ) := by
-      nlinarith [mul_nonneg hρ0 (sub_nonneg.mpr hNR)]
+      have h5 : ρ ≤ ρ*(N:ℝ) := le_mul_of_one_le_right hρ0 hNR
+      calc ρ + B*(2:ℝ)^J*(N:ℝ) ≤ ρ*(N:ℝ) + B*(2:ℝ)^J*(N:ℝ) := by linarith only [h5]
+        _ = (ρ + B*(2:ℝ)^J)*(N:ℝ) := by ring
     have h4 : (ρ + B*(2:ℝ)^J)*(N:ℝ) ≤ (k:ℝ)*(N:ℝ) :=
       mul_le_mul_of_nonneg_right hkk2 (by positivity)
     rw [h1]
@@ -279,7 +285,10 @@ theorem threeBall_main {V : Type*} (P : UCPlanar.PeriodicGraph V) (hRemez : Reme
         congr 1
         ring
       have h7 : ((N:ℝ)/(4*B))^2 ≤ (n:ℝ)^2 := pow_le_pow_left₀ hX0 hnquarter 2
-      have h8 : (n:ℝ)^2 ≤ (1/4)*(2*(n:ℝ)+1)^2 := by nlinarith [h5]
+      have h8 : (n:ℝ)^2 ≤ (1/4)*(2*(n:ℝ)+1)^2 := by
+        have h9 : (1/4:ℝ)*(2*(n:ℝ)+1)^2 = (n:ℝ)^2 + ((n:ℝ) + 1/4) := by ring
+        rw [h9]
+        linarith only [h5]
       rw [← h6]
       linarith
     have h7 : ε * (((P.square (N:ℝ)).card : ℕ) : ℝ) ≤ ε * (C₀*(N:ℝ)^2) :=
@@ -340,7 +349,6 @@ theorem threeBall_main {V : Type*} (P : UCPlanar.PeriodicGraph V) (hRemez : Reme
     exact mul_le_mul_of_nonneg_right h2 hM0
   linarith only [hmain, hterm1, hterm2]
 
-set_option maxHeartbeats 1000000 in
 /-- **The three-ball proposition.**  The lattice inequality along every coset of the period
 lattice, the covering of the geometric square by the finitely many cosets, and the choice of the
 outer radius from the scale of the polynomial approximation. -/
