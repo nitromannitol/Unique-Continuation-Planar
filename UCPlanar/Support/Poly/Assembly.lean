@@ -8,8 +8,6 @@ import UCPlanar.Support.Poly.Change
 open scoped BigOperators Classical
 set_option autoImplicit false
 
-set_option maxHeartbeats 1000000
-
 namespace UCPlanar.Support
 
 /-- The lattice vector with coordinates `(a, b)` has those coordinates. -/
@@ -74,8 +72,14 @@ theorem polynomialApproximation_aux {V : Type*}
       have h := mul_le_mul_of_nonneg_right hδ1 (le_of_lt hC₁0)
       rw [div_mul_eq_mul_div, one_mul] at h
       have h2 : C₁ / (2*C₁) = 1/2 := by field_simp
-      linarith [h, h2.le, h2.ge]
-    nlinarith [hm, hC₁0, hR0, h1]
+      linarith only [h, h2.le, h2.ge]
+    have h3 : (m:ℝ)*C₁ ≤ (δ*R)*C₁ := mul_le_mul_of_nonneg_right hm hC₁0.le
+    have h4 : (δ*C₁)*R ≤ (1/2)*R := mul_le_mul_of_nonneg_right h1 hR0.le
+    calc ((m:ℝ) + 1) * C₁ = (m:ℝ)*C₁ + C₁ := by ring
+      _ ≤ (δ*R)*C₁ + C₁ := by linarith only [h3]
+      _ = (δ*C₁)*R + C₁ := by ring
+      _ ≤ (1/2)*R + C₁ := by linarith only [h4]
+      _ ≤ R := by linarith only [hR2C]
   obtain ⟨v', N, hN, hov', hrb⟩ :=
     UCPlanar.Support.exists_rebase P K hK0 hK v (δ*R) (by positivity)
   refine ⟨UCPlanar.Support.changeVar P v' (UCPlanar.Support.orbitPoly P f v' m),
@@ -141,14 +145,16 @@ theorem polynomialApproximation_aux {V : Type*}
       have h := mul_le_mul_of_nonneg_right hδ2 (by positivity : (0:ℝ) ≤ 1+8*B*K)
       have h2' : 1/(2*(1+8*B*K)) * (1+8*B*K) = 1/2 := by
         field_simp
-      linarith [h, h2'.le, h2'.ge]
+      linarith only [h, h2'.le, h2'.ge]
     have hA : 4*B*(N:ℝ) ≤ 8*B*K*(δ*R) + 4*B := by
       have h := mul_le_mul_of_nonneg_left hNle (by positivity : (0:ℝ) ≤ 4*B)
-      nlinarith [h]
+      exact h.trans_eq (by ring)
     have hCC : δ*R*(1+8*B*K) ≤ R/2 := by
       have h := mul_le_mul_of_nonneg_left hδR (le_of_lt hR0)
-      nlinarith [h]
-    linarith [h1, h2, h3, h4, h5, hposv', hA, hCC, hR8B]
+      calc δ*R*(1+8*B*K) = R*(δ*(1+8*B*K)) := by ring
+        _ ≤ R*(1/2) := h
+        _ = R/2 := by ring
+    linarith only [h1, h2, h3, h4, h5, hposv', hA, hCC, hR8B, hR0]
   set s : ℝ := UCPlanar.supNorm (P.square (3*R)) f with hsdef
   have hs0 : (0:ℝ) ≤ s := by
     rw [hsdef, UCPlanar.supNorm]
@@ -179,11 +185,18 @@ theorem polynomialApproximation_aux {V : Type*}
     have hδ3' : δ * (96*(K+1)*C₁) ≤ α := by
       have h := mul_le_mul_of_nonneg_right hδ3 (by positivity : (0:ℝ) ≤ 96*(K+1)*C₁)
       have h2' : α/(96*(K+1)*C₁) * (96*(K+1)*C₁) = α := by field_simp
-      linarith [h, h2'.le, h2'.ge]
+      linarith only [h, h2'.le, h2'.ge]
     have hR48' : 48*C₁ ≤ α*R := by
       rw [div_le_iff₀ hα] at hR48
-      nlinarith [hR48, hα, hR0]
-    nlinarith [haR, hbR, hNle, hδ3', hR48', hK0, hδ0, hR0, hC₁0, hB0]
+      exact hR48.trans_eq (mul_comm R α)
+    have hab4 : (a:ℝ) + b ≤ 4*(N:ℝ) := by linarith only [haR, hbR]
+    have e1 : ((a:ℝ) + b) * (6*C₁) ≤ (4*(N:ℝ)) * (6*C₁) :=
+      mul_le_mul_of_nonneg_right hab4 h6.le
+    have e2 : (N:ℝ) * (24*C₁) ≤ (2*K*(δ*R) + 1) * (24*C₁) :=
+      mul_le_mul_of_nonneg_right hNle (by linarith only [hC₁0])
+    have e3 : δ * (96*(K+1)*C₁) * R ≤ α * R := mul_le_mul_of_nonneg_right hδ3' hR0.le
+    have e4 : 0 ≤ δ * C₁ * R := mul_nonneg (mul_nonneg hδ0.le hC₁0.le) hR0.le
+    linarith only [e1, e2, e3, e4, hR48']
   have hkey := _root_.choose_mul_pow_le_of_margin a b m α C₁ R hα hα2 hC₁0 hR0 hmargin
   have hMeq : M = ((C₁/R) * ((m:ℝ) + 1)) ^ (m+1) * s := by
     rw [hMdef]
