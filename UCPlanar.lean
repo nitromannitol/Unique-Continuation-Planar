@@ -107,6 +107,8 @@ import UCPlanar.Support.BandsCover
 import UCPlanar.Support.ZeroGeom
 import UCPlanar.Support.ZeroCycle
 import UCPlanar.Support.ZeroAssemble
+import UCPlanar.Support.ZeroRemark
+import UCPlanar.Support.StepOne
 import UCPlanar.Support.BandSign
 import UCPlanar.Support.BandCoarse
 import UCPlanar.Support.Poly.Basic
@@ -153,3 +155,5 @@ import UCPlanar.Proved.Unicoherence
 import UCPlanar.Proved.EdgeSplitting
 import UCPlanar.Proved.Main
 import UCPlanar.Proved.MoserEstimate
+import UCPlanar.Proved.ZeroRemark
+import UCPlanar.Proved.StepOne

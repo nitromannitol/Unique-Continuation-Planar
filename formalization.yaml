@@ -66,9 +66,9 @@ status:
     lemma and three-ball proposition (Theorem A.1, Lemma A.2, Proposition
     A.3). Janiszewski's theorem, unicoherence and the discrete Moser estimate
     are proved and applied to obtain unconditional statements. The survey of
-    related work and applications, the remark after Theorem 1.3, the figures,
-    and Step 1 of that proof are not formalized; the theorem is proved directly
-    on the periodic plane graph. Comparator pairs use Mathlib-only vocabulary.
+    related work and applications and the figures are not formalized. The
+    remark after Theorem 1.3 and the two facts behind Step 1 of its proof are
+    proved; the theorem itself is proved directly on the periodic plane graph. Comparator pairs use Mathlib-only vocabulary.
   sorry_count: 0
   sorry_count_scope: "UCPlanar production library only"
   comparator_challenge_sorry_count: 8
@@ -205,9 +205,12 @@ fidelity:
   divergences: >-
     The Lean statements transcribe paper/ucplanar.tex, which is
     arXiv:2309.13728v2 with the corrections listed in
-    paper/CHANGES_FROM_ARXIV.md.  Step 1 of the proof of Theorem 1.3 is not
-    formalized, the statement being proved directly for the periodic plane
-    graph with the surrounding cycles supplied by the cited plane inputs.
+    paper/CHANGES_FROM_ARXIV.md.  The proof of Theorem 1.3 does not pass
+    through the reduced graph of Step 1, the statement being proved directly
+    for the periodic plane graph with the surrounding cycles supplied by the
+    plane inputs; the two facts behind Step 1 are proved separately.  The
+    remark after Theorem 1.3 asks for harmonicity on B_{Kn} for a graph
+    constant K instead of B_{2n}.
     Theorem 1.1 makes the density limit explicit, as a real number d with
     1 - epsilon <= d.  The three cited results are proved, and their statements and witnesses are
     recorded in ASSUMPTIONS.md.

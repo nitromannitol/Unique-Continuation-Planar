@@ -5,6 +5,8 @@ import UCPlanar.Frozen.Unconditional.PolynomialApproximation
 import UCPlanar.Frozen.Unconditional.ThreeBall
 import UCPlanar.Frozen.Unconditional.PeriodicLowerBound
 import UCPlanar.Proved.MoserEstimate
+import UCPlanar.Proved.ZeroRemark
+import UCPlanar.Proved.StepOne
 
 /-!
 # Axioms audit
@@ -13,7 +15,8 @@ Building this module prints the axiom dependencies of the four main theorems of
 `UCPlanar/MainTheorems.lean`.  Each must report exactly the three standard foundational axioms
 of Mathlib: `propext`, `Classical.choice`, `Quot.sound`.
 
-The unconditional forms use the proved topology and Moser estimates.
+The unconditional forms use the proved topology and Moser estimates. The remark after
+Theorem 1.3 and Step 1 of its proof are reported as well.
 
 This file is not imported by the library root; the report runs when it is built explicitly
 (`lake build UCPlanar.Meta.AxiomsAudit`), as continuous integration does on every push.
@@ -33,6 +36,10 @@ This file is not imported by the library root; the report runs when it is built 
 #print axioms UCPlanar.Proved.polynomialApproximation
 #print axioms UCPlanar.Proved.threeBall
 #print axioms UCPlanar.Proved.periodicLowerBound
+#print axioms UCPlanar.Proved.zeroCase_of_sparseShell
+#print axioms UCPlanar.Proved.eq_zero_of_sparseShells
+#print axioms UCPlanar.Proved.stepOne_cutVertex
+#print axioms UCPlanar.Proved.stepOne_twoExits
 
 #print axioms UCPlanar.Frozen.liouville_of_periodic
 #print axioms UCPlanar.Frozen.uniformlyBounded_unconditional

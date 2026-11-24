@@ -63,6 +63,20 @@ The unconditional forms are in `UCPlanar.Proved` and registered in
 
 <!-- FROZEN-SURFACE-END -->
 
+## The remark after Theorem 1.3 and Step 1 of its proof
+
+These results are proved in `UCPlanar.Proved` and are not registered frozen nodes.
+
+| Source | Lean declaration | Note |
+|---|---|---|
+| Remark after Theorem 1.3, first sentence (`ucplanar.tex:307`) | `UCPlanar.Proved.zeroCase_of_sparseShell` | The count is of the nonzero vertices of `B_{2n}` within a graph constant `R` of the sphere of radius `m`, the Lean form of the vertices counted in Step 2. Harmonicity is asked on `B_{Kn}` for a graph constant `K ≥ 2`, as in the core of the zero case. |
+| Remark after Theorem 1.3, second sentence (`ucplanar.tex:308`) | `UCPlanar.Proved.eq_zero_of_sparseShells` | Harmonic on the whole graph, with the bound for arbitrarily large `n`. |
+| Step 1 of the proof of Theorem 1.3, finite pieces attached by bridges and two-edge cuts with coinciding endpoints (`ucplanar.tex:274-278`) | `UCPlanar.Proved.stepOne_cutVertex` | Every edge leaving the finite set `K` ends at one vertex `t`; the function is constant on `K`, and harmonic on `G` with `K` deleted (`UCPlanar.Support.cutGraph P.graph K t t`). |
+| Step 1 of the proof of Theorem 1.3, two-edge cuts with distinct endpoints (`ucplanar.tex:278`) | `UCPlanar.Proved.stepOne_twoExits` | Every edge leaving `K` ends at `x₁` or `x₂ ≠ x₁`, and a walk inside `K` joins the two attaching edges. The effective conductance `UCPlanar.Support.effCond` is positive, the currents at `x₁` and `x₂` are `±C_eff (f x₂ - f x₁)`, and the function is harmonic on the reduced network `UCPlanar.Support.cutGraph` with `UCPlanar.Support.cutCond`. |
+
+The proof of Theorem 1.3 does not use the reduced graph, so the passage back from the reduced
+graph to `G` and the graph-theoretic facts that locate the pieces are not formalized.
+
 ## Cited inputs
 
 The three cited inputs below are proved by `UCPlanar.Support.edgeSplitting_holds`,

@@ -77,10 +77,18 @@ faces meeting a vertex of `B_m` at which `f` or a neighbour of it is nonzero;
 this cluster meets the chosen sphere, and the boundary cycle of the filled
 cluster carries a set `Z` of zeros to which the topological lemma applies. The
 lemma forces linearly many vertices of the cycle to be adjacent to the sphere,
-contradicting Step 2 for `ε₀` small. The Lean proof does not formalize Step 1 and proves the
-statement for the periodic plane graph directly; it keeps the two classical
-plane inputs of Step 3 as hypotheses and assembles the remaining steps in
-`ZeroAssemble`.
+contradicting Step 2 for `ε₀` small. The Lean proof of the theorem does not pass through the
+reduced graph of Step 1 and proves the statement for the periodic plane graph directly; it
+keeps the two classical plane inputs of Step 3 as hypotheses and assembles the remaining steps
+in `ZeroAssemble`. The two facts behind Step 1 are proved separately: by the maximum principle a
+harmonic function is constant on a finite piece whose outer edges all end at one vertex, and on a
+finite piece whose outer edges end at `x₁` or `x₂` a harmonic function is the affine image of the
+unit voltage, so the current entering at `x₁` is the effective conductance times
+`f(x₂) - f(x₁)` and Kirchhoff's law makes the current at `x₂` its negative; hence the function
+stays harmonic when the piece is replaced by one edge of that conductance. The remark after the
+theorem follows from Step 3 alone: the density hypothesis enters only through the count of
+Step 2, so a bound `c₀ n` on that count at one admissible radius already gives the
+contradiction.
 
 ### The uniformly bounded case
 
@@ -316,7 +324,14 @@ pigeonhole with bounded multiplicity, `ZeroShell` for the sparse boundary
 radius of Step 2, `ZeroSign` and `ZeroMax` for the maximum principle and the
 sign components, and `ZeroCycle` for the boundary cycle of Step 3 and the linear
 lower bound it forces. `ZeroAssemble` contains the core
-`UCPlanar.Support.zeroCase_core` and the assembly.
+`UCPlanar.Support.zeroCase_core` and the assembly. `ZeroRemark` runs the same core from a
+bound on the count of Step 2 at one radius, which is the remark after the theorem
+(`UCPlanar.Proved.zeroCase_of_sparseShell`, `UCPlanar.Proved.eq_zero_of_sparseShells`).
+`StepOne` proves the two facts behind Step 1 for an arbitrary connected infinite network: the
+Dirichlet problem on a finite set with arbitrary boundary values, the effective conductance
+`UCPlanar.Support.effCond` with Kirchhoff's law and its positivity, and the reduced network
+`UCPlanar.Support.cutGraph` with the conductance `UCPlanar.Support.cutCond`
+(`UCPlanar.Proved.stepOne_cutVertex`, `UCPlanar.Proved.stepOne_twoExits`).
 ### The uniformly bounded case
 
 `N-002` is proved by `UCPlanar.Support.uniformlyBounded_of_surrounding` in
@@ -387,9 +402,11 @@ The paper's Step 1 of the zero case reduces to the case where the graph is
 two-edge connected and the dual has no multiple edges, by deleting finite
 two-edge-connected components and contracting finite pieces cut off by two
 edges to a single edge of the effective conductance. The Lean development
-does not formalize that reduction and instead proves the statement for the
-periodic plane graph directly, with the surrounding cycles supplied by the cited
-plane inputs.
+proves the two facts on which that reduction rests (`StepOne`), but its proof of
+the theorem does not use the reduced graph: it proves the statement for the
+periodic plane graph directly, with the surrounding cycles supplied by the
+plane inputs. The graph-theoretic facts used only to locate the pieces are not
+formalized.
 
 ## Part C. The cited inputs
 

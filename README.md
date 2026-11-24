@@ -70,6 +70,21 @@ vertices, `|f| ≤ exp(A √ε n)` on `B_n`.
 arbitrary positive conductances, `n ≥ n₀`, `ε < ε₀` and `f` harmonic on `B_{2n}` and nonzero
 on at most `ε |B_{2n}|` vertices, `f` vanishes on `B_n`.
 
+**Remark after Theorem 1.3.** The density hypothesis may be replaced by a bound on the
+nonzero vertices near one sphere: there are graph constants `K ≥ 2`, `R`, `c₀ > 0` and `n₀`
+such that if `n ≥ n₀`, `f` is harmonic on `B_{Kn}`, and for one radius `m` with `3n ≤ 2m` and
+`m + R ≤ 2n` at most `c₀ n` vertices of `B_{2n}` within `R` of the sphere of radius `m` are
+nonzero, then `f` vanishes on `B_n` (`UCPlanar.Proved.zeroCase_of_sparseShell`). A function
+harmonic on the whole graph with such a bound for arbitrarily large `n` is identically zero
+(`UCPlanar.Proved.eq_zero_of_sparseShells`).
+
+**Step 1 of the proof of Theorem 1.3.** For arbitrary positive conductances on the periodic
+plane graph, a harmonic function is constant on a finite piece all of whose outer edges end at
+one vertex, and the piece can be deleted (`UCPlanar.Proved.stepOne_cutVertex`); a finite piece
+whose outer edges end at two vertices `x₁ ≠ x₂` and which joins them can be replaced by one edge
+from `x₁` to `x₂` of conductance its effective conductance, which is positive, and a harmonic
+function stays harmonic on the reduced network (`UCPlanar.Proved.stepOne_twoExits`).
+
 **Theorem 5.1 (counterexample, `theorem:counterexample`).** For positive `A₁ ≠ A₂` and
 `A₃ > 2 A₁² A₂² / ((A₁ - A₂)² (A₁ + A₂))` there is `A₄ > 0` such that `ℤ²` with the crossing
 conductances `𝓔(A₁, A₂, A₃, A₄)` carries a harmonic function `h` with `h(0) = 1` that is
@@ -82,7 +97,8 @@ limit in Theorem 1.1 is made explicit by `UCPlanar.PeriodicGraph.HasBoundedDensi
 This repository formalizes every theorem, lemma and proposition of the paper: Theorems 1.1,
 1.2 and 1.3, the topological lemma (Lemma 2.1), the non-planar counterexample (Theorem 5.1),
 and the exponential lower bound of the appendix with its polynomial approximation lemma and
-three-ball proposition (Theorem A.1, Lemma A.2, Proposition A.3).
+three-ball proposition (Theorem A.1, Lemma A.2, Proposition A.3). It also formalizes the remark
+after Theorem 1.3 and Step 1 of the proof of Theorem 1.3.
 
 ## Corrections to the published version
 
@@ -109,8 +125,8 @@ arXiv version.
    `native_decide` and no new `axiom`. The axiom report of each main theorem consists of
    exactly `propext`, `Classical.choice` and `Quot.sound`. The cited inputs are proved;
    see [Literature inputs](#literature-inputs).
-3. **What is not formalized.** The introduction's survey of related work and applications, the
-   remark following Theorem 1.3, and the figures.
+3. **What is not formalized.** The introduction's survey of related work and applications, and the
+   figures.
 4. **Conventions.**
    - Conductances, the Laplacian and harmonicity are those of Lattice-Probability
      (`LatticeProb.Network.IsCond`, `netLaplacian`, `HarmonicOn`). The paper's Laplacian is
@@ -120,10 +136,19 @@ arXiv version.
    - In each frozen statement whose conclusion has a real existential constant, the
      quantifier order is checked mechanically (`tools/check_constants.py`): no radius,
      function, density or conductance parameter is bound before it.
-5. **Explicit versus implicit.** The reduction in Step 1 of the zero case, which deletes and
-   contracts finite edge-connected components, is not formalized. The statement is proved
-   directly for the periodic plane graph, with the surrounding cycles supplied by the cited
-   plane inputs.
+5. **Explicit versus implicit.** The two facts on which the reduction in Step 1 of the zero
+   case rests are proved: a harmonic function is constant on a finite piece attached at one
+   vertex, and a finite piece with two exits can be replaced by one edge carrying its effective
+   conductance (`UCPlanar/Proved/StepOne.lean`). The proof of Theorem 1.3 does not pass through
+   the reduced graph: Step 3 is carried out on the periodic plane graph itself, with the
+   surrounding cycles supplied by the plane inputs, so the theorem holds for `G` without the
+   reduction. The graph-theoretic facts used only to locate the pieces (the infinite
+   two-edge-connected component, the two-edge cut behind a multiple dual edge, and its
+   finiteness by one-endedness) are therefore not formalized.
+   The remark after Theorem 1.3 asks for harmonicity on `B_{Kn}` for a graph constant `K ≥ 2`
+   instead of `B_{2n}`, for the reason given in `UCPlanar/Proved/ZeroRemark.lean`: the region
+   enclosed by the cycle of Step 3 is controlled up to a constant factor of its radius. For a
+   globally harmonic function this is no restriction.
 6. **Statements without a formal counterpart.** Every theorem, lemma and proposition of the
    paper has a registered Lean declaration. The correspondence table in
    [`CORRESPONDENCE.md`](CORRESPONDENCE.md) maps the registered statements to Lean
@@ -204,9 +229,9 @@ registered statement is pinned by hash.
 
 ## Size
 
-The library contains 171 Lean files with 25,821 physical lines, on top of mathlib,
-Lattice-Probability and schoenflies-lean. The comparator sources (16 files, 3,156 lines) are
-counted separately.
+The library (`UCPlanar.lean` and `UCPlanar/`) contains 198 Lean files with 29,089 physical
+lines, on top of mathlib, Lattice-Probability and schoenflies-lean. The comparator sources
+(`UCPlanarAudit/`, 28 files, 5,850 lines) are counted separately.
 
 ## Building
 
