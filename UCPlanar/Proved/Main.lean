@@ -9,9 +9,11 @@ The theorems of `UCPlanar.MainTheorems` assume the two cited plane-topology stat
 `UCPlanar.External.EdgeSplitting` and `UCPlanar.External.Unicoherence` for the drawing of the
 periodic plane graph.  Both are proved for every periodic plane graph in
 `UCPlanar.Proved.EdgeSplitting` and `UCPlanar.Proved.Unicoherence`, so the theorems below restate
-the main theorems without them.  The Liouville theorem keeps its remaining cited input, the
-Moser estimate `UCPlanar.External.MoserEstimate`, as a hypothesis; the exponential upper bound
-and the zero case have no cited input left.
+the main theorems without them.  The Liouville theorem below still takes the Moser estimate
+`UCPlanar.External.MoserEstimate` as a hypothesis, and
+`UCPlanar.Proved.liouville_of_periodic` (`UCPlanar/Proved/MoserEstimate.lean`) restates it with
+that estimate proved as well; the exponential upper bound and the zero case below take no cited
+input.
 -/
 
 /-- **Theorem 1.1** (`theorem:liouville`), assuming only the Moser estimate: for periodic

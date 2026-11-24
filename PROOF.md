@@ -4,8 +4,8 @@ This file describes the mathematics of *Unique continuation on planar graphs*
 (Bou-Rabee, Cooperman, Ganguly, Discrete Analysis 2025:16) and the Lean 4
 development that formalizes it. Part A states the chain of results as the paper
 proves them. Part B maps each registered statement to the Lean declarations and
-support modules that prove it. Part C lists the cited inputs, which enter as
-explicit hypotheses and are not proved here.
+support modules that prove it. Part C lists the cited inputs, which enter the
+frozen statements as explicit hypotheses and are proved in `UCPlanar/Proved/`.
 
 The pinned source is `paper/ucplanar.tex`, the text of arXiv:2309.13728v2 with
 the corrections listed in
@@ -395,18 +395,23 @@ plane inputs.
 
 Each cited input is a proposition-valued definition under `UCPlanar/External/`,
 stated in the paper's vocabulary and carried as an explicit hypothesis of the
-frozen statements that use it. None is an axiom, and none is proved here.
+frozen statements that use it. None is an axiom. Each is proved in
+`UCPlanar/Proved/`, where the theorems `UCPlanar.Proved.*` restate the frozen
+statements without them.
 
 `X-002`, `UCPlanar.External.EdgeSplitting`, transcribes Janiszewski's theorem at
 a point for the drawings of two finite edge sets of a plane graph: if the two
 drawings meet in at most one drawn vertex, a point in a bounded complementary
 component of the union of the two drawings lies in a bounded complementary
-component of one of them. It is consumed by `N-003`, `N-002` and `N-001`.
+component of one of them. It is consumed by `N-003`, `N-002` and `N-001`, and
+proved by `UCPlanar.Support.edgeSplitting_holds`
+(`UCPlanar/Proved/EdgeSplitting.lean`).
 
 `X-003`, `UCPlanar.External.Unicoherence`, transcribes unicoherence of the
 sphere in the form the face walks use: for a connected plane graph, the frontier
 of every bounded face is connected. It is consumed by `N-003`, `N-002` and
-`N-001`.
+`N-001`, and proved for the drawing of every periodic plane graph by
+`UCPlanar.Support.unicoherence_holds` (`UCPlanar/Proved/Unicoherence.lean`).
 
 The classical Liouville theorem for a periodic network, recalled at
 `ucplanar.tex:159`, is proved here, not assumed: `LiouCHeat`, `LiouKilled` and
@@ -432,7 +437,9 @@ consumes: for a conductance on the graph that is invariant under the translation
 lattice, nested squares `Q_r` and `Q_s` and a function harmonic on `Q_s`,
 each value of `f` on `Q_r` is at most `C/(s-r)` times the `ℓ²` norm of `f`
 over `Q_s`, with a constant that depends on the network but not on the two
-scales. It is consumed by `N-007`, `N-006`, `N-008` and `N-001`.
+scales. It is consumed by `N-007`, `N-006`, `N-008` and `N-001`, and proved for
+every periodic graph and every conductance by `UCPlanar.Proved.moserEstimate`
+(`UCPlanar/Proved/MoserEstimate.lean`).
 
 What is deliberately not assumed: the paper's own theorems are not hypotheses of
 one another. `N-003`, `N-002`, `N-006`, `N-007` and `N-008` are proved from the

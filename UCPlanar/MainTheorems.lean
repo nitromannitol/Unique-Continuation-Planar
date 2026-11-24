@@ -14,8 +14,10 @@ counterexample (`theorem:counterexample`).
 
 Each theorem below restates its certified counterpart in `UCPlanar/Frozen/` and is proved by
 `exact` of it, so the statements displayed in this file are the certified ones.  The
-hypotheses named `External.*` are results the paper cites without proof; they are assumed, not
-proved, and are listed with their statements in `ASSUMPTIONS.md`.
+hypotheses named `External.*` are results the paper cites without proof.  Each is proved in
+`UCPlanar/Proved/` for the graphs these theorems consider, and the theorems `UCPlanar.Proved.*`
+restate the main results without them (`UCPlanar/Proved/Main.lean` and
+`UCPlanar/Proved/MoserEstimate.lean`); `ASSUMPTIONS.md` lists their statements and proofs.
 
 * `UCPlanar.liouville`: for periodic conductances on a periodic plane graph there is `ε > 0`
   such that a harmonic function whose set `{|f| ≤ 1}` has density at least `1 - ε` in the
