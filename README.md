@@ -9,25 +9,26 @@ A Lean 4 formalization of the paper
 > [*Unique continuation on planar graphs*](https://arxiv.org/abs/2309.13728),
 > Discrete Analysis 2025:16, [doi:10.19086/da.144015](https://doi.org/10.19086/da.144015).
 
-Every theorem, lemma and proposition of the paper is proved in Lean, with no `sorry` and only the
-standard axioms. The results of plane topology and the discrete Moser estimate that the paper
-quotes are proved as well. The main theorems therefore hold in Lean with no assumption beyond the
-setting of the paper. The statements follow a corrected text of the paper, included in
-[`paper/`](paper/).
+The paper proves a Liouville theorem on periodic planar graphs with periodic edge weights: a
+harmonic function that is bounded by 1 on all but a small fraction of the graph is constant. The
+key step is a unique continuation result, proved by a topological argument about level sets in
+the plane. Every numbered result of the paper is proved in Lean, with no `sorry` and only the
+standard axioms, and so are the results that the paper quotes from other works. Nothing is assumed
+beyond the setting of the paper, whose corrected text is in [`paper/`](paper/).
 
 ## The paper
 
-A *periodic planar graph* `G` is a connected, locally finite graph drawn in the plane, with
+A *periodic planar graph* `G` is a connected, locally finite graph drawn in the plane with
 polygonal edges, so that the drawing is invariant under translation by a lattice `𝓛 ≅ ℤ²` and has
 finitely many orbits of vertices and edges. The square, hexagonal, triangular and kagome lattices
-are examples. Each edge carries a positive conductance `a`, and the Laplacian is
+are examples. Each edge carries a positive weight, the *conductance* `a`, and the Laplacian is
 `Δf(u) = Σ_{w∼u} a(u,w)(f(u) − f(w))`. A function is *harmonic* where `Δf = 0`. Let `B_n` be the
-graph-metric ball of radius `n` about a fixed vertex.
+ball of radius `n` about a fixed vertex in the graph distance.
 
 When `a` is invariant under `𝓛`, every bounded harmonic function on `G` is constant. The paper
-asks for the bound only on most of the graph. It extends to periodic planar graphs a theorem that
-Buhovsky, Logunov, Malinnikova and Sodin proved on `ℤ²` with unit conductances, by a new and
-geometric argument.
+asks for the bound only on most of the graph. Buhovsky, Logunov, Malinnikova and Sodin proved
+this on `ℤ²` with unit conductances; the paper extends it to periodic planar graphs with a new,
+geometric proof.
 
 - **Theorem 1.1 (Liouville).** If `a` is invariant under `𝓛`, there is `ε > 0` such that every
   harmonic function on `G` with `|f| ≤ 1` on a fraction at least `1 − ε` of the balls `B_n`, in the
@@ -37,8 +38,8 @@ geometric argument.
   cannot cross (Lemma 2.1).
 - **Theorem 1.3.** A harmonic function on `B_{2n}` that vanishes on most of `B_{2n}` vanishes on
   `B_n`, for any positive conductances.
-- **Theorem A.1.** A nonconstant harmonic function that is bounded on most of the graph grows at
-  least exponentially. With Theorem 1.2 this gives Theorem 1.1.
+- **Theorem A.1.** If `a` is invariant under `𝓛`, a nonconstant harmonic function that is bounded
+  on most of the graph grows at least exponentially. With Theorem 1.2 this gives Theorem 1.1.
 - **Theorem 5.1.** Planarity is needed: there are non-planar periodic conductances on `ℤ²` with a
   harmonic function supported on a diagonal.
 
@@ -60,17 +61,14 @@ function `h` with `h(0) = 1` that is nonzero exactly on the diagonal `{x₁ = x�
 
 ## The main theorems in Lean
 
-| Paper | Lean declaration |
-| --- | --- |
-| Theorem 1.1 | `UCPlanar.Proved.liouville_of_periodic` |
-| Theorem 1.2 | `UCPlanar.Proved.uniformlyBounded` |
-| Theorem 1.3 | `UCPlanar.Proved.zeroCase` |
-| Theorem 5.1 | `UCPlanar.counterexample` |
+| Paper | Lean declaration | File |
+| --- | --- | --- |
+| Theorem 1.1 | `UCPlanar.Proved.liouville_of_periodic` | [`UCPlanar/Proved/MoserEstimate.lean`](UCPlanar/Proved/MoserEstimate.lean) |
+| Theorem 1.2 | `UCPlanar.Proved.uniformlyBounded` | [`UCPlanar/Proved/Main.lean`](UCPlanar/Proved/Main.lean) |
+| Theorem 1.3 | `UCPlanar.Proved.zeroCase` | [`UCPlanar/Proved/Main.lean`](UCPlanar/Proved/Main.lean) |
+| Theorem 5.1 | `UCPlanar.counterexample` | [`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean) |
 
-The first three are in [`UCPlanar/Proved/Main.lean`](UCPlanar/Proved/Main.lean) and
-[`UCPlanar/Proved/MoserEstimate.lean`](UCPlanar/Proved/MoserEstimate.lean), and Theorem 5.1 is in
-[`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean). Their only hypotheses are the setting of
-the paper.
+Their only hypotheses are the setting of the paper.
 
 How to read the statements: a periodic plane graph is a `UCPlanar.PeriodicPlaneGraph V`;
 conductances are `LatticeProb.Network.IsCond`, and harmonicity is `LatticeProb.Network.HarmonicOn`.
@@ -86,24 +84,23 @@ negative of `LatticeProb.Network.netLaplacian`; the two have the same harmonic f
 | Theorem 1.2 | `UCPlanar.Proved.uniformlyBounded` | An exponential upper bound for a harmonic function that is large on few vertices. |
 | Theorem 1.3 | `UCPlanar.Proved.zeroCase` | A harmonic function that vanishes on most of `B_{2n}` vanishes on `B_n`. |
 | Lemma 2.1 | `UCPlanar.Frozen.topological` | Let `Z ⊆ γ` for a cycle `γ`, and `P`, `M` disjoint sets inside `γ` whose components meet `γ ∖ Z`. If face paths join each point of `Z` to both `P` and `M`, then `\|Z\| ≤ α \|γ\|` for some `α < 1`. |
+| Remark 3.1, first sentence | `UCPlanar.Proved.zeroCase_of_sparseShell` | Theorem 1.3 holds with the density hypothesis replaced by a bound on the nonzero vertices near one sphere. |
+| Remark 3.1, second sentence | `UCPlanar.Proved.eq_zero_of_sparseShells` | A function harmonic on `G` with that bound for arbitrarily large `n` is zero. |
 | Theorem 5.1 | `UCPlanar.counterexample` | Non-planar periodic conductances on `ℤ²` with a harmonic function supported on a diagonal. |
 | Theorem A.1 | `UCPlanar.Proved.periodicLowerBound` | A harmonic function bounded on most of every scale from `√N` to `2N`, and at least `2` somewhere in `Q_{√N}`, exceeds `exp(bN)` on `Q_N`. |
 | Lemma A.2 | `UCPlanar.Proved.polynomialApproximation` | A harmonic function on `Q_{3R}` is approximated on each lattice orbit by a polynomial of low degree. |
 | Proposition A.3 | `UCPlanar.Proved.threeBall` | The three-ball bound `\|f\| ≤ C √M + C exp(−c₀ N) M` on `Q_{2N}`. |
 
-Two further statements of the paper are proved:
+Here `Q_N` is the square `{max(|x|, |y|) ≤ N}` of the plane. Step 1 of the proof of Theorem 1.3
+rests on two facts, which are proved as well. A harmonic function is constant on a finite piece
+attached at one vertex (`UCPlanar.Proved.stepOne_cutVertex`). A finite piece with two exits can be
+replaced by one edge carrying its effective conductance (`UCPlanar.Proved.stepOne_twoExits`).
 
-- **The remark after Theorem 1.3.** The density hypothesis may be replaced by a bound on the
-  nonzero vertices near one sphere (`UCPlanar.Proved.zeroCase_of_sparseShell`). A function harmonic
-  on the whole graph with such a bound for arbitrarily large `n` is zero
-  (`UCPlanar.Proved.eq_zero_of_sparseShells`).
-- **Step 1 of the proof of Theorem 1.3.** A harmonic function is constant on a finite piece attached
-  at one vertex (`UCPlanar.Proved.stepOne_cutVertex`). A finite piece with two exits can be replaced
-  by one edge carrying its effective conductance (`UCPlanar.Proved.stepOne_twoExits`).
-
-The paper quotes Janiszewski's theorem, the unicoherence of the sphere and a discrete Moser
-estimate. They are proved here, as are the classical Liouville theorem for periodic conductances
-and the discrete Remez inequality that the paper uses.
+The proofs use three results from other works: Janiszewski's theorem and the unicoherence of the
+sphere, two facts of plane topology, and a discrete Moser estimate (Delmotte 1999, Proposition
+5.3). All three are proved in Lean, in the form the paper uses. So are the classical Liouville
+theorem for periodic conductances and the discrete Remez inequality (Buhovsky, Logunov,
+Malinnikova and Sodin, Corollary 2.2).
 
 ## Corrections
 
@@ -112,7 +109,7 @@ The Lean statements follow [`paper/ucplanar.tex`](paper/ucplanar.tex), the text 
 [`paper/CHANGES_FROM_ARXIV.md`](paper/CHANGES_FROM_ARXIV.md) lists the 30 changes, each with its
 reason; `diff -u paper/ucplanar-arxiv.tex paper/ucplanar.tex` consists of exactly these changes.
 
-- **Statements.** The abstract and the classical Liouville theorem now assume periodic
+- **Statements.** The corrected abstract and the recalled Liouville theorem assume periodic
   conductances, without which they are false. The definition of a periodic planar graph adds the
   hypotheses that the arguments use: connectedness, finitely many orbits, a proper drawing and
   bounded faces. Appendix A assumes periodic conductances throughout, as its proofs use.
@@ -121,8 +118,8 @@ reason; `diff -u paper/ucplanar-arxiv.tex paper/ucplanar.tex` consists of exactl
 - **Theorem 5.1** asks `h(0) = 1`, so that the zero function is excluded. **Theorem A.1** and
   **Proposition A.3** assume harmonicity, and Proposition A.3 an outer square `Q_{kN}` with
   `k ≥ 4` in place of `Q_{4N}`.
-- **The remark after Theorem 1.3.** The printed contour statement is false; the corrected remark
-  bounds the nonzero vertices near one sphere.
+- **Remark 3.1.** The printed statement about contours is false; the corrected remark bounds the
+  nonzero vertices near one sphere.
 - The other changes correct proofs and one figure caption.
 
 ## Scope
@@ -135,51 +132,46 @@ reason; `diff -u paper/ucplanar-arxiv.tex paper/ucplanar.tex` consists of exactl
 - **Conductances.** In Theorem 1.1 the conductance is invariant under the translations, and `ε`
   depends on it. In Theorem 1.2 the conductances are uniformly elliptic with ratio `Θ`, and the
   constants depend on `Θ` but not on `λ`. Theorem 1.3 holds for any positive conductances.
-- **Order of the constants.** In each registered statement with a real existential constant, no
-  radius, function, density or conductance is bound before it; `tools/check_constants.py` checks
-  this.
-- **Step 1 of Theorem 1.3.** The proof of Theorem 1.3 works on `G` itself, without the reduced
+- **Constants.** In every statement, each real constant is chosen before the radii, the functions
+  and the densities, so it is a genuine constant; `tools/check_constants.py` checks this.
+- **Step 1 of Theorem 1.3.** The Lean proof of Theorem 1.3 works on `G` itself, without the reduced
   graph of Step 1, so the facts used only to locate the pieces of Step 1 are not formalized.
-- **The remark after Theorem 1.3** asks for harmonicity on `B_{Kn}` for a graph constant `K ≥ 2` in
-  place of `B_{2n}`; [`UCPlanar/Proved/ZeroRemark.lean`](UCPlanar/Proved/ZeroRemark.lean) gives the
-  reason. For a function harmonic on all of `G` this is no restriction.
+- **Remark 3.1** asks for harmonicity on `B_{Kn}` for a graph constant `K ≥ 2` in place of
+  `B_{2n}`; [`UCPlanar/Proved/ZeroRemark.lean`](UCPlanar/Proved/ZeroRemark.lean) gives the reason.
+  For a function harmonic on all of `G` this is no restriction.
 - **Not formalized.** The survey of related work and applications in the introduction, and the
   figures.
 
 ## Checking the proofs
 
-- **No `sorry`, no `admit`, no `native_decide`, no new `axiom`.** `tools/check_manifest.py` rejects
-  any `axiom`, `admit` or `sorryAx` token and any `sorry` in the library. Each comparator challenge
-  under [`UCPlanarAudit/`](UCPlanarAudit/) contains one intentional `sorry` at the statement, which
-  the matching solution proves.
+- **No `sorry`, no `admit`, no new `axiom`.** `tools/check_manifest.py` rejects any `axiom`, `admit`
+  or `sorryAx` token and any `sorry` in the library. Each comparator challenge under
+  [`UCPlanarAudit/`](UCPlanarAudit/) contains one intentional `sorry` at the statement, which the
+  matching solution proves.
 - **Standard axioms only.** [`UCPlanar/Meta/AxiomsAudit.lean`](UCPlanar/Meta/AxiomsAudit.lean)
   prints the axioms of the main theorems and of the other results, and `tools/check_axioms.py`
-  checks that the axiom closure of every registered statement is `propext`, `Classical.choice` and
-  `Quot.sound`.
-- **Registered statements.** Every statement is pinned by the SHA-256 of its text in
-  [`ledger/manifest.yaml`](ledger/manifest.yaml), with the line range and `\label` it transcribes
-  in `paper/ucplanar.tex`. [`CORRESPONDENCE.md`](CORRESPONDENCE.md) maps them to the paper, and
+  checks that every declaration listed in [`ledger/manifest.yaml`](ledger/manifest.yaml) depends
+  only on `propext`, `Classical.choice` and `Quot.sound`.
+- **Pinned statements.** The manifest pins the text of each statement by its SHA-256 hash, with
+  the line range and `\label` of `paper/ucplanar.tex` that it transcribes.
+  [`CORRESPONDENCE.md`](CORRESPONDENCE.md) maps the statements to the paper, and
   [`PROOF.md`](PROOF.md) describes the mathematics of the proof and the Lean tree.
 - **Independent check of the statements.** Each main theorem has a comparator pair in
   `UCPlanarAudit/<Name>Unconditional/`. A `Challenge.lean` restates the theorem with mathlib alone,
   rebuilding every definition it uses, and a `Solution.lean` proves it from the library.
   [leanprover/comparator](https://github.com/leanprover/comparator) checks that the statement is
-  proved, with only the standard axioms, through independent implementations of the Lean kernel.
-  Four older pairs restate the forms of [`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean),
+  proved, with only the standard axioms, through two independent implementations of the Lean
+  kernel. Four further pairs restate the forms in [`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean),
   which take the quoted results as hypotheses. See [`UCPlanarAudit/README.md`](UCPlanarAudit/README.md).
 - **Continuous integration.** The **CI** workflow builds the library without warnings, builds the
-  axiom audit and checks the registered statements. The **Comparator audit** workflow runs the
-  comparator on the eight pairs.
+  axiom audit and checks the pinned statements against their hashes. The **Comparator audit**
+  workflow runs the comparator on the eight pairs.
 - **The paper is part of the repository.** `paper/ucplanar.tex` has SHA-256
   `0a97204bffb598a59580eb3fc8537af56ab4eb79f76900086cdadc9b6b00b311`.
 
 <!-- STATUS-BEGIN (generated by tools/sync_docs.py) -->
 
-Status: **17 registered nodes: 3 `FROZEN`, 14 `PROVED`.** 14 theorem(s) are proved and machine-checked: no `sorry`, no axiom added by this development, and an axiom closure of exactly Lean's three standard axioms `propext`, `Classical.choice` and `Quot.sound`. 3 frozen definitions record cited inputs; their proofs are recorded in the manifest and used by the unconditional results.
-
-Counts are generated from `ledger/manifest.yaml` by
-`python3 tools/sync_docs.py`. Run `python3 tools/check_axioms.py`
-to check registered axiom closures.
+The manifest `ledger/manifest.yaml` pins the text of 17 statements: 14 theorems and 3 results quoted from other works. Every theorem is proved. Every quoted result is proved in Lean, by the declaration that the manifest names. This paragraph is generated from the manifest by `python3 tools/sync_docs.py`.
 
 <!-- STATUS-END -->
 
@@ -214,13 +206,13 @@ The checkers in `tools/` need Python 3 and PyYAML (`pip install pyyaml`):
 
 | command | what it checks |
 |---|---|
-| `python3 tools/check_manifest.py` | every registered statement matches its recorded SHA-256 and declaration name, and no `axiom`, `admit`, `sorryAx` or `sorry` occurs in the source; needs neither Lake nor network |
-| `python3 tools/check_axioms.py` | the axiom closure of every registered statement is `propext`, `Classical.choice` and `Quot.sound` |
-| `python3 tools/check_constants.py` | in each registered statement, no radius, function, density or conductance is bound before a real existential constant |
+| `python3 tools/check_manifest.py` | every pinned statement matches its recorded SHA-256 and declaration name, and no `axiom`, `admit`, `sorryAx` or `sorry` occurs in the source; needs neither Lake nor network |
+| `python3 tools/check_axioms.py` | every pinned statement depends only on `propext`, `Classical.choice` and `Quot.sound` |
+| `python3 tools/check_constants.py` | in every pinned statement, each real constant is chosen before the radii, functions and densities |
 | `python3 tools/check_warnings.py` | `lake build UCPlanar` succeeds with no warning other than the Lake notice about the mathlib URL |
+| `python3 tools/sync_docs.py` | the generated paragraph of this file and the generated table of `CORRESPONDENCE.md` agree with the manifest |
 
-`tools/` also holds generators for `ASSUMPTIONS.md`, `CERTIFICATE.md` and the generated tables of
-this file and `CORRESPONDENCE.md`. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for further notes.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for further notes.
 
 ## Running the comparators
 
@@ -245,7 +237,7 @@ UCPlanar.lean             the root module, importing the whole library
 UCPlanar/
   Proved/                 the main theorems and the other results, with every quoted result proved
   MainTheorems.lean       the main theorems in the forms that take the quoted results as hypotheses
-  Frozen/                 the registered statements, one per file
+  Frozen/                 the pinned statements of the numbered results, one per file
   External/               the statements of the quoted results
   Support/                definitions and lemmas: periodic and plane graphs, the topological step,
                           polynomial approximation, the three-ball and exponential bounds, the
@@ -258,21 +250,22 @@ UCPlanarAudit/            the mathlib-only restatements and their solutions
 ASSUMPTIONS.md            the quoted results and their proofs (generated)
 CORRESPONDENCE.md         paper to Lean, statement by statement
 PROOF.md                  the mathematics of the proof and the Lean tree
-CERTIFICATE.md            generated record of the toolchain, the build, each statement's axiom
-                          closure and hash
-ledger/manifest.yaml      one row per registered statement: hash, paper source, state
+CERTIFICATE.md            generated record of the toolchain, the build, and each statement's axioms
+                          and hash
+ledger/manifest.yaml      one entry per pinned statement: hash, place in the paper, proof
 paper/                    ucplanar.tex, the corrected text; CHANGES_FROM_ARXIV.md; ucplanar-arxiv.tex,
                           the unmodified arXiv source, with arxiv/ holding its class files,
                           bibliography and figures
-tools/                    the checkers and generators listed under Building
+tools/                    the checkers listed under Building, and the generators of ASSUMPTIONS.md,
+                          CERTIFICATE.md and the generated parts of this file and CORRESPONDENCE.md
 formalization.yaml        models, tooling, cost, status and review (mathlib-initiative v0.4)
 ```
 
 ## How this was built
 
-The Lean code was written with AI assistance, using models from Anthropic (Claude) and
-DeepSeek, under the direction of the author. Every proof is checked by the Lean kernel. The
-models, tooling, cost and review status are disclosed in [`formalization.yaml`](formalization.yaml),
+The Lean code was written with AI assistance, using models from Anthropic (Claude) and DeepSeek,
+under the direction of Ahmed Bou-Rabee. Every proof is checked by the Lean kernel. The models,
+tooling, cost and review status are recorded in [`formalization.yaml`](formalization.yaml),
 following the [mathlib-initiative](https://github.com/mathlib-initiative/formalization.yaml)
 standard.
 

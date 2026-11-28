@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import re
 import sys
-from collections import Counter
 from pathlib import Path
 
 try:
@@ -52,30 +51,41 @@ def surface_table(nodes: list[dict]) -> str:
     return "\n".join(rows)
 
 
+def plural(k: int, word: str) -> str:
+    return f"{k} {word}" + ("" if k == 1 else "s")
+
+
 def status_block(nodes: list[dict]) -> str:
-    counts = Counter(n["state"] for n in nodes)
-    parts = ", ".join(f"{counts[s]} `{s}`" for s in sorted(counts))
-    draft = [n["id"] for n in nodes if n["state"] == "DRAFT_SORRY"]
-    sealed = counts["SEALED"] + counts["PROVED"]
+    """One plain paragraph: what the manifest pins and what is proved."""
     if not nodes:
-        body = "No declarations have been registered."
-    else:
-        body = (f"{sealed} theorem(s) are proved and machine-checked: no `sorry`, no "
-                f"axiom added by this development, and an axiom closure of exactly "
-                f"Lean's three standard axioms `propext`, `Classical.choice` and "
-                f"`Quot.sound`.")
-        if counts["FROZEN"]:
-            body += (f" {counts['FROZEN']} frozen definitions record cited inputs; "
-                     f"their proofs are recorded in the manifest and used by the "
-                     f"unconditional results.")
-        if draft:
-            body += " Still open: " + ", ".join(f"`{i}`" for i in draft) + "."
-    detail = f": {parts}" if parts else ""
-    return (
-        f"Status: **{len(nodes)} registered nodes{detail}.** {body}\n\n"
-        "Counts are generated from `ledger/manifest.yaml` by\n"
-        "`python3 tools/sync_docs.py`. Run `python3 tools/check_axioms.py`\n"
-        "to check registered axiom closures.")
+        return ("The manifest `ledger/manifest.yaml` pins no statement yet. This paragraph is "
+                "generated from it by `python3 tools/sync_docs.py`.")
+    theorems = [n for n in nodes if n["kind"] == "theorem"]
+    quoted = [n for n in nodes if n["kind"] != "theorem"]
+    proved = [n for n in theorems if n["state"] in ("PROVED", "SEALED")]
+    unproved = [n["id"] for n in theorems if n["state"] not in ("PROVED", "SEALED")]
+    discharged = [n for n in quoted if n.get("proved_by")]
+    assumed = [n["id"] for n in quoted if not n.get("proved_by")]
+
+    text = (f"The manifest `ledger/manifest.yaml` pins the text of "
+            f"{plural(len(nodes), 'statement')}: {plural(len(theorems), 'theorem')}")
+    if quoted:
+        text += f" and {plural(len(quoted), 'result')} quoted from other works"
+    text += "."
+    if theorems:
+        if unproved:
+            text += (f" {len(proved)} of the theorems are proved; not yet proved: "
+                     + ", ".join(f"`{i}`" for i in unproved) + ".")
+        else:
+            text += " Every theorem is proved." if len(theorems) > 1 else " The theorem is proved."
+    if quoted:
+        if assumed:
+            text += (f" {len(discharged)} of the quoted results are proved in Lean; the others "
+                     "are hypotheses: " + ", ".join(f"`{i}`" for i in assumed) + ".")
+        else:
+            text += (" Every quoted result is proved in Lean, by the declaration that the "
+                     "manifest names.")
+    return text + " This paragraph is generated from the manifest by `python3 tools/sync_docs.py`."
 
 
 def splice(text: str, begin: str, end: str, body: str) -> str:
