@@ -1,171 +1,177 @@
 # Unique continuation on planar graphs
 
-A machine-checked **Lean 4** formalization of the paper
-
-> Ahmed Bou-Rabee, William Cooperman and Shirshendu Ganguly,
-> *Unique continuation on planar graphs*,
-> Discrete Analysis 2025:16, [doi:10.19086/da.144015](https://doi.org/10.19086/da.144015);
-> [arXiv:2309.13728](https://arxiv.org/abs/2309.13728).
-
-The paper's source and the list of its differences from the arXiv version are included under
-[`paper/`](paper/). The 4 main theorems of the paper are formalized and proved, in the form in
-which the corrected text in [`paper/`](paper/) states them;
-[`paper/CHANGES_FROM_ARXIV.md`](paper/CHANGES_FROM_ARXIV.md) lists every difference from the
-arXiv version. The cited topology and Moser inputs are proved, and the main results
-are available without them as hypotheses; see [Literature inputs](#literature-inputs).
-
-The development is built on [mathlib](https://github.com/leanprover-community/mathlib4) and on
-two public libraries:
-[Lattice-Probability](https://github.com/nitromannitol/Lattice-Probability) (`LatticeProb`), a
-library of lattice probability and potential theory, and the Schoenflies library
-[`schoenflies-lean`](https://github.com/alonamaloh/schoenflies-lean), which supplies the planar
-Jordan and crosscut theorems.
-
 [![CI](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/build.yml)
 [![Comparator audit](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/comparator.yml/badge.svg?branch=main)](https://github.com/nitromannitol/Unique-Continuation-Planar/actions/workflows/comparator.yml)
 
-## What is proved
+A Lean 4 formalization of the paper
 
-A periodic planar graph `G = (V, E)` is drawn in the plane so that the drawing is invariant
-under translation by a rank-two lattice `𝓛`, with finitely many vertex orbits. Each edge
-carries a positive conductance `a`, and the Laplacian is `Δf(u) = Σ_{w∼u} a(u,w)(f(u) − f(w))`.
-The classical Liouville theorem says that, when `a` is `𝓛`-invariant, a bounded harmonic
-function on `G` is constant. Theorem 1.1 of the paper asks for the bound only on most of the
-graph: if `a` is `𝓛`-invariant, there is `ε = ε(a) > 0` such that every `f` with `Δf = 0` on
-`G` and
+> Ahmed Bou-Rabee, William Cooperman and Shirshendu Ganguly,
+> [*Unique continuation on planar graphs*](https://arxiv.org/abs/2309.13728),
+> Discrete Analysis 2025:16, [doi:10.19086/da.144015](https://doi.org/10.19086/da.144015).
 
-    lim_{n→∞} |{|f| ≤ 1} ∩ B_n| / |B_n|  ≥  1 − ε
+Every theorem, lemma and proposition of the paper is proved in Lean, with no `sorry` and only the
+standard axioms. The results of plane topology and the discrete Moser estimate that the paper
+quotes are proved as well. The main theorems therefore hold in Lean with no assumption beyond the
+setting of the paper. The statements follow a corrected text of the paper, included in
+[`paper/`](paper/).
 
-is constant, where `B_n` is the graph-metric ball of radius `n` about a fixed origin. The proof
-sets an exponential upper bound (Theorem 1.2), which rests on a topological property of the
-level sets of planar harmonic functions, against an exponential lower bound (Theorem A.1 of
-the appendix). Theorem 1.3 is the same argument for a function that vanishes on most of a ball,
-and Theorem 5.1 shows that planarity is needed: it gives non-planar periodic conductances on
-`ℤ²` with a harmonic function supported on a diagonal. The model is stated precisely in
-[Standing assumptions and scope](#standing-assumptions-and-scope).
+## The paper
 
-The unconditional main results are in [`UCPlanar/Proved/MoserEstimate.lean`](UCPlanar/Proved/MoserEstimate.lean),
-[`UCPlanar/Proved/Main.lean`](UCPlanar/Proved/Main.lean), and
-[`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean). The older frozen forms retain
-explicit cited inputs; the ledger also registers the unconditional forms.
+A *periodic planar graph* `G` is a connected, locally finite graph drawn in the plane, with
+polygonal edges, so that the drawing is invariant under translation by a lattice `𝓛 ≅ ℤ²` and has
+finitely many orbits of vertices and edges. The square, hexagonal, triangular and kagome lattices
+are examples. Each edge carries a positive conductance `a`, and the Laplacian is
+`Δf(u) = Σ_{w∼u} a(u,w)(f(u) − f(w))`. A function is *harmonic* where `Δf = 0`. Let `B_n` be the
+graph-metric ball of radius `n` about a fixed vertex.
+
+When `a` is invariant under `𝓛`, every bounded harmonic function on `G` is constant. The paper
+asks for the bound only on most of the graph. It extends to periodic planar graphs a theorem that
+Buhovsky, Logunov, Malinnikova and Sodin proved on `ℤ²` with unit conductances, by a new and
+geometric argument.
+
+- **Theorem 1.1 (Liouville).** If `a` is invariant under `𝓛`, there is `ε > 0` such that every
+  harmonic function on `G` with `|f| ≤ 1` on a fraction at least `1 − ε` of the balls `B_n`, in the
+  limit, is constant.
+- **Theorem 1.2.** A harmonic function on `B_{2n}` with `|f| > 1` on few vertices is at most
+  `exp(A √ε n)` on `B_n`. The proof uses that, in the plane, the sets `{f > 0}` and `{f < 0}`
+  cannot cross (Lemma 2.1).
+- **Theorem 1.3.** A harmonic function on `B_{2n}` that vanishes on most of `B_{2n}` vanishes on
+  `B_n`, for any positive conductances.
+- **Theorem A.1.** A nonconstant harmonic function that is bounded on most of the graph grows at
+  least exponentially. With Theorem 1.2 this gives Theorem 1.1.
+- **Theorem 5.1.** Planarity is needed: there are non-planar periodic conductances on `ℤ²` with a
+  harmonic function supported on a diagonal.
+
+Precisely:
+
+**Theorem 1.1.** Let `a` be invariant under `𝓛`. There is `ε = ε(a) > 0` such that every `f` with
+`Δf = 0` on `G` and `lim_{n→∞} |{|f| ≤ 1} ∩ B_n| / |B_n| ≥ 1 − ε` is constant.
+
+**Theorem 1.2.** There is `n₀`, and for each ratio `Θ > 1` there are `ε₀, A > 0`, such that for
+conductances in `(λ, Θλ)`, `n ≥ n₀`, `ε < ε₀` and `f` harmonic on `B_{2n}` with `|f| > 1` on at most
+`ε |B_{2n}|` vertices, `|f| ≤ exp(A √ε n)` on `B_n`.
+
+**Theorem 1.3.** There are `ε₀ > 0` and `n₀` such that for any positive conductances, `n ≥ n₀`,
+`ε < ε₀` and `f` harmonic on `B_{2n}` and nonzero on at most `ε |B_{2n}|` vertices, `f = 0` on `B_n`.
+
+**Theorem 5.1.** For positive `A₁ ≠ A₂` and `A₃ > 2 A₁² A₂² / ((A₁ − A₂)² (A₁ + A₂))` there is
+`A₄ > 0` such that `ℤ²` with the crossing conductances `𝓔(A₁, A₂, A₃, A₄)` carries a harmonic
+function `h` with `h(0) = 1` that is nonzero exactly on the diagonal `{x₁ = x₂}`.
+
+## The main theorems in Lean
+
+| Paper | Lean declaration |
+| --- | --- |
+| Theorem 1.1 | `UCPlanar.Proved.liouville_of_periodic` |
+| Theorem 1.2 | `UCPlanar.Proved.uniformlyBounded` |
+| Theorem 1.3 | `UCPlanar.Proved.zeroCase` |
+| Theorem 5.1 | `UCPlanar.counterexample` |
+
+The first three are in [`UCPlanar/Proved/Main.lean`](UCPlanar/Proved/Main.lean) and
+[`UCPlanar/Proved/MoserEstimate.lean`](UCPlanar/Proved/MoserEstimate.lean), and Theorem 5.1 is in
+[`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean). Their only hypotheses are the setting of
+the paper.
+
+How to read the statements: a periodic plane graph is a `UCPlanar.PeriodicPlaneGraph V`;
+conductances are `LatticeProb.Network.IsCond`, and harmonicity is `LatticeProb.Network.HarmonicOn`.
+The limit in Theorem 1.1 is made explicit by `UCPlanar.PeriodicGraph.HasBoundedDensity`: the
+density of `{|f| ≤ 1}` in `B_n` converges to a number at least `1 − ε`. The paper's Laplacian is the
+negative of `LatticeProb.Network.netLaplacian`; the two have the same harmonic functions.
+
+## All numbered results
 
 | Paper | Lean declaration | Content |
 | --- | --- | --- |
-| Theorem 1.1 (label `theorem:liouville`) | `UCPlanar.Proved.liouville_of_periodic` | a harmonic function with density at least `1 − ε` of `{\|f\| ≤ 1}` in the balls is constant |
-| Theorem 1.2 (label `theorem:uniformly-bounded`) | `UCPlanar.Proved.uniformlyBounded` | exponential upper bound on a harmonic function that is large on few vertices |
-| Theorem 1.3 (label `theorem:zero-case`) | `UCPlanar.Proved.zeroCase` | a harmonic function that vanishes on most of a ball vanishes on the half ball |
-| Theorem 5.1 (label `theorem:counterexample`) | `UCPlanar.counterexample` | non-planar periodic conductances on `ℤ²` with a harmonic function supported on a diagonal |
+| Theorem 1.1 | `UCPlanar.Proved.liouville_of_periodic` | A harmonic function with `\|f\| ≤ 1` on a density at least `1 − ε` of the balls is constant. |
+| Theorem 1.2 | `UCPlanar.Proved.uniformlyBounded` | An exponential upper bound for a harmonic function that is large on few vertices. |
+| Theorem 1.3 | `UCPlanar.Proved.zeroCase` | A harmonic function that vanishes on most of `B_{2n}` vanishes on `B_n`. |
+| Lemma 2.1 | `UCPlanar.Frozen.topological` | Let `Z ⊆ γ` for a cycle `γ`, and `P`, `M` disjoint sets inside `γ` whose components meet `γ ∖ Z`. If face paths join each point of `Z` to both `P` and `M`, then `\|Z\| ≤ α \|γ\|` for some `α < 1`. |
+| Theorem 5.1 | `UCPlanar.counterexample` | Non-planar periodic conductances on `ℤ²` with a harmonic function supported on a diagonal. |
+| Theorem A.1 | `UCPlanar.Proved.periodicLowerBound` | A harmonic function bounded on most of every scale from `√N` to `2N`, and at least `2` somewhere in `Q_{√N}`, exceeds `exp(bN)` on `Q_N`. |
+| Lemma A.2 | `UCPlanar.Proved.polynomialApproximation` | A harmonic function on `Q_{3R}` is approximated on each lattice orbit by a polynomial of low degree. |
+| Proposition A.3 | `UCPlanar.Proved.threeBall` | The three-ball bound `\|f\| ≤ C √M + C exp(−c₀ N) M` on `Q_{2N}`. |
 
-**Theorem 1.1 (Liouville, `theorem:liouville`).** For a periodic plane graph `P` and a
-conductance `c` invariant under the translation lattice, there is `ε > 0` such that every
-function harmonic on the whole graph whose density of `{|f| ≤ 1}` in the balls `B_n` about
-some vertex converges to a limit at least `1 − ε` is constant.
+Two further statements of the paper are proved:
 
-**Theorem 1.2 (uniformly bounded, `theorem:uniformly-bounded`).** There is `n₀`, and for each
-ellipticity ratio `Θ > 1` there are `ε₀, A > 0`, such that for conductances in `(λ, Θλ)`,
-`n ≥ n₀`, `ε < ε₀` and `f` harmonic on `B_{2n}` with `|f| > 1` on at most `ε |B_{2n}|`
-vertices, `|f| ≤ exp(A √ε n)` on `B_n`.
+- **The remark after Theorem 1.3.** The density hypothesis may be replaced by a bound on the
+  nonzero vertices near one sphere (`UCPlanar.Proved.zeroCase_of_sparseShell`). A function harmonic
+  on the whole graph with such a bound for arbitrarily large `n` is zero
+  (`UCPlanar.Proved.eq_zero_of_sparseShells`).
+- **Step 1 of the proof of Theorem 1.3.** A harmonic function is constant on a finite piece attached
+  at one vertex (`UCPlanar.Proved.stepOne_cutVertex`). A finite piece with two exits can be replaced
+  by one edge carrying its effective conductance (`UCPlanar.Proved.stepOne_twoExits`).
 
-**Theorem 1.3 (zero case, `theorem:zero-case`).** There are `ε₀ > 0` and `n₀` such that for
-arbitrary positive conductances, `n ≥ n₀`, `ε < ε₀` and `f` harmonic on `B_{2n}` and nonzero
-on at most `ε |B_{2n}|` vertices, `f` vanishes on `B_n`.
+The paper quotes Janiszewski's theorem, the unicoherence of the sphere and a discrete Moser
+estimate. They are proved here, as are the classical Liouville theorem for periodic conductances
+and the discrete Remez inequality that the paper uses.
 
-**Remark after Theorem 1.3.** The density hypothesis may be replaced by a bound on the
-nonzero vertices near one sphere: there are graph constants `K ≥ 2`, `R`, `c₀ > 0` and `n₀`
-such that if `n ≥ n₀`, `f` is harmonic on `B_{Kn}`, and for one radius `m` with `3n ≤ 2m` and
-`m + R ≤ 2n` at most `c₀ n` vertices of `B_{2n}` within `R` of the sphere of radius `m` are
-nonzero, then `f` vanishes on `B_n` (`UCPlanar.Proved.zeroCase_of_sparseShell`). A function
-harmonic on the whole graph with such a bound for arbitrarily large `n` is identically zero
-(`UCPlanar.Proved.eq_zero_of_sparseShells`).
+## Corrections
 
-**Step 1 of the proof of Theorem 1.3.** For arbitrary positive conductances on the periodic
-plane graph, a harmonic function is constant on a finite piece all of whose outer edges end at
-one vertex, and the piece can be deleted (`UCPlanar.Proved.stepOne_cutVertex`); a finite piece
-whose outer edges end at two vertices `x₁ ≠ x₂` and which joins them can be replaced by one edge
-from `x₁` to `x₂` of conductance its effective conductance, which is positive, and a harmonic
-function stays harmonic on the reduced network (`UCPlanar.Proved.stepOne_twoExits`).
+The Lean statements follow [`paper/ucplanar.tex`](paper/ucplanar.tex), the text of
+[arXiv:2309.13728v2](https://arxiv.org/abs/2309.13728v2) with corrections.
+[`paper/CHANGES_FROM_ARXIV.md`](paper/CHANGES_FROM_ARXIV.md) lists the 30 changes, each with its
+reason; `diff -u paper/ucplanar-arxiv.tex paper/ucplanar.tex` consists of exactly these changes.
 
-**Theorem 5.1 (counterexample, `theorem:counterexample`).** For positive `A₁ ≠ A₂` and
-`A₃ > 2 A₁² A₂² / ((A₁ - A₂)² (A₁ + A₂))` there is `A₄ > 0` such that `ℤ²` with the crossing
-conductances `𝓔(A₁, A₂, A₃, A₄)` carries a harmonic function `h` with `h(0) = 1` that is
-nonzero exactly on the diagonal `{x₁ = x₂}`. No hypotheses.
+- **Statements.** The abstract and the classical Liouville theorem now assume periodic
+  conductances, without which they are false. The definition of a periodic planar graph adds the
+  hypotheses that the arguments use: connectedness, finitely many orbits, a proper drawing and
+  bounded faces. Appendix A assumes periodic conductances throughout, as its proofs use.
+- **Lemma 2.1.** The region of hypothesis (2) is the bounded component of the plane minus `γ`. The
+  constant depends on the maximum degree as well as on the face size.
+- **Theorem 5.1** asks `h(0) = 1`, so that the zero function is excluded. **Theorem A.1** and
+  **Proposition A.3** assume harmonicity, and Proposition A.3 an outer square `Q_{kN}` with
+  `k ≥ 4` in place of `Q_{4N}`.
+- **The remark after Theorem 1.3.** The printed contour statement is false; the corrected remark
+  bounds the nonzero vertices near one sphere.
+- The other changes correct proofs and one figure caption.
 
-In Lean, the periodic plane graph is a structure `UCPlanar.PeriodicPlaneGraph V`, conductances
-are `LatticeProb.Network.IsCond`, harmonicity is `LatticeProb.Network.HarmonicOn`, and the
-limit in Theorem 1.1 is made explicit by `UCPlanar.PeriodicGraph.HasBoundedDensity`.
+## Scope
 
-This repository formalizes every theorem, lemma and proposition of the paper: Theorems 1.1,
-1.2 and 1.3, the topological lemma (Lemma 2.1), the non-planar counterexample (Theorem 5.1),
-and the exponential lower bound of the appendix with its polynomial approximation lemma and
-three-ball proposition (Theorem A.1, Lemma A.2, Proposition A.3). It also formalizes the remark
-after Theorem 1.3 and Step 1 of the proof of Theorem 1.3.
+- **Every periodic plane graph.** Theorems 1.1 to 1.3 hold for every
+  `P : UCPlanar.PeriodicPlaneGraph V` ([`UCPlanar/Support/Periodic.lean`](UCPlanar/Support/Periodic.lean)):
+  a connected, locally finite graph with a rank-two translation action and finitely many vertex
+  orbits, drawn in the plane with noncrossing polygonal edges, with uniform bounds on the size and
+  diameter of a face. Faces are the components of the complement of the drawing.
+- **Conductances.** In Theorem 1.1 the conductance is invariant under the translations, and `ε`
+  depends on it. In Theorem 1.2 the conductances are uniformly elliptic with ratio `Θ`, and the
+  constants depend on `Θ` but not on `λ`. Theorem 1.3 holds for any positive conductances.
+- **Order of the constants.** In each registered statement with a real existential constant, no
+  radius, function, density or conductance is bound before it; `tools/check_constants.py` checks
+  this.
+- **Step 1 of Theorem 1.3.** The proof of Theorem 1.3 works on `G` itself, without the reduced
+  graph of Step 1, so the facts used only to locate the pieces of Step 1 are not formalized.
+- **The remark after Theorem 1.3** asks for harmonicity on `B_{Kn}` for a graph constant `K ≥ 2` in
+  place of `B_{2n}`; [`UCPlanar/Proved/ZeroRemark.lean`](UCPlanar/Proved/ZeroRemark.lean) gives the
+  reason. For a function harmonic on all of `G` this is no restriction.
+- **Not formalized.** The survey of related work and applications in the introduction, and the
+  figures.
 
-## Corrections to the published version
+## Checking the proofs
 
-The formalization follows `paper/ucplanar.tex`, a corrected text of the paper: it is
-[arXiv:2309.13728v2](https://arxiv.org/abs/2309.13728v2) with corrections, and the Lean
-statements transcribe the corrected text.
-[`paper/CHANGES_FROM_ARXIV.md`](paper/CHANGES_FROM_ARXIV.md) lists every difference from the
-arXiv version.
-
-## Standing assumptions and scope
-
-1. **Every theorem is about every periodic plane graph.** Theorems 1.1 to 1.3 hold for every
-   `P : UCPlanar.PeriodicPlaneGraph V` (`UCPlanar/Support/Periodic.lean`): a connected,
-   locally finite graph with a proper coordinate realization, a rank-two translation action
-   and finitely many vertex orbits, drawn in the plane with noncrossing polygonal edge arcs,
-   translation invariant, with uniform bounds on the size and the diameter of a face. Faces
-   are the connected components of the complement of the drawing. Theorem 1.1 holds for every
-   conductance `c` that is a conductance of `P.graph` and invariant under the translations, and
-   its `ε` depends on `c`. In Theorem 1.2 the conductances are uniformly elliptic with
-   ratio `Θ`, and the constants depend on `Θ` and not on `λ`; Theorem 1.3 holds for arbitrary
-   positive conductances. Theorem 5.1 is about the explicit conductances
-   `UCPlanar.crossingConductance` on `ℤ²`.
-2. **Axioms and incomplete proofs.** The library contains no `sorry`, no `admit`, no
-   `native_decide` and no new `axiom`. The axiom report of each main theorem consists of
-   exactly `propext`, `Classical.choice` and `Quot.sound`. The cited inputs are proved;
-   see [Literature inputs](#literature-inputs).
-3. **What is not formalized.** The introduction's survey of related work and applications, and the
-   figures.
-4. **Conventions.**
-   - Conductances, the Laplacian and harmonicity are those of Lattice-Probability
-     (`LatticeProb.Network.IsCond`, `netLaplacian`, `HarmonicOn`). The paper's Laplacian is
-     the negative of `netLaplacian`; their zero equations agree.
-   - The Lean statement of Theorem 1.1 makes the limit explicit: the density of `{|f| ≤ 1}`
-     in `B_n` converges to a real number `d` with `1 − ε ≤ d`.
-   - In each frozen statement whose conclusion has a real existential constant, the
-     quantifier order is checked mechanically (`tools/check_constants.py`): no radius,
-     function, density or conductance parameter is bound before it.
-5. **Explicit versus implicit.** The two facts on which the reduction in Step 1 of the zero
-   case rests are proved: a harmonic function is constant on a finite piece attached at one
-   vertex, and a finite piece with two exits can be replaced by one edge carrying its effective
-   conductance (`UCPlanar/Proved/StepOne.lean`). The proof of Theorem 1.3 does not pass through
-   the reduced graph: Step 3 is carried out on the periodic plane graph itself, with the
-   surrounding cycles supplied by the plane inputs, so the theorem holds for `G` without the
-   reduction. The graph-theoretic facts used only to locate the pieces (the infinite
-   two-edge-connected component, the two-edge cut behind a multiple dual edge, and its
-   finiteness by one-endedness) are therefore not formalized.
-   The remark after Theorem 1.3 asks for harmonicity on `B_{Kn}` for a graph constant `K ≥ 2`
-   instead of `B_{2n}`, for the reason given in `UCPlanar/Proved/ZeroRemark.lean`: the region
-   enclosed by the cycle of Step 3 is controlled up to a constant factor of its radius. For a
-   globally harmonic function this is no restriction.
-6. **Statements without a formal counterpart.** Every theorem, lemma and proposition of the
-   paper has a registered Lean declaration. The correspondence table in
-   [`CORRESPONDENCE.md`](CORRESPONDENCE.md) maps the registered statements to Lean
-   declarations node by node, and [`PROOF.md`](PROOF.md) describes the mathematics of the
-   proof and the Lean tree.
-
-## Literature inputs
-
-The plane-topology inputs are proved by `UCPlanar.Support.edgeSplitting_holds` and
-`UCPlanar.Support.unicoherence_holds` for periodic plane graphs; the discrete Moser estimate is proved by
-`UCPlanar.Proved.moserEstimate`. Their statements and witnesses are recorded in
-[`ASSUMPTIONS.md`](ASSUMPTIONS.md). The classical periodic Liouville theorem and the
-discrete Remez inequality used in the paper are also proved here.
-
-## Registered statements
-
-The generated summary below comes from [`ledger/manifest.yaml`](ledger/manifest.yaml).
+- **No `sorry`, no `admit`, no `native_decide`, no new `axiom`.** `tools/check_manifest.py` rejects
+  any `axiom`, `admit` or `sorryAx` token and any `sorry` in the library. Each comparator challenge
+  under [`UCPlanarAudit/`](UCPlanarAudit/) contains one intentional `sorry` at the statement, which
+  the matching solution proves.
+- **Standard axioms only.** [`UCPlanar/Meta/AxiomsAudit.lean`](UCPlanar/Meta/AxiomsAudit.lean)
+  prints the axioms of the main theorems and of the other results, and `tools/check_axioms.py`
+  checks that the axiom closure of every registered statement is `propext`, `Classical.choice` and
+  `Quot.sound`.
+- **Registered statements.** Every statement is pinned by the SHA-256 of its text in
+  [`ledger/manifest.yaml`](ledger/manifest.yaml), with the line range and `\label` it transcribes
+  in `paper/ucplanar.tex`. [`CORRESPONDENCE.md`](CORRESPONDENCE.md) maps them to the paper, and
+  [`PROOF.md`](PROOF.md) describes the mathematics of the proof and the Lean tree.
+- **Independent check of the statements.** Each main theorem has a comparator pair in
+  `UCPlanarAudit/<Name>Unconditional/`. A `Challenge.lean` restates the theorem with mathlib alone,
+  rebuilding every definition it uses, and a `Solution.lean` proves it from the library.
+  [leanprover/comparator](https://github.com/leanprover/comparator) checks that the statement is
+  proved, with only the standard axioms, through independent implementations of the Lean kernel.
+  Four older pairs restate the forms of [`UCPlanar/MainTheorems.lean`](UCPlanar/MainTheorems.lean),
+  which take the quoted results as hypotheses. See [`UCPlanarAudit/README.md`](UCPlanarAudit/README.md).
+- **Continuous integration.** The **CI** workflow builds the library without warnings, builds the
+  axiom audit and checks the registered statements. The **Comparator audit** workflow runs the
+  comparator on the eight pairs.
+- **The paper is part of the repository.** `paper/ucplanar.tex` has SHA-256
+  `0a97204bffb598a59580eb3fc8537af56ab4eb79f76900086cdadc9b6b00b311`.
 
 <!-- STATUS-BEGIN (generated by tools/sync_docs.py) -->
 
@@ -177,61 +183,8 @@ to check registered axiom closures.
 
 <!-- STATUS-END -->
 
-Every statement of the paper is registered: one Lean declaration per theorem, lemma or
-proposition, and one proposition per cited result. A registered statement's
-text between the lines `-- FROZEN-STATEMENT-BEGIN` and `-- FROZEN-STATEMENT-END` is pinned by
-the SHA-256 of those bytes in [`ledger/manifest.yaml`](ledger/manifest.yaml), together with the
-line range in `paper/ucplanar.tex` and, for the paper's numbered statements, the `\label` it
-transcribes; the proof after the end marker may be rewritten freely. In the manifest, a
-registered statement is `PROVED` when it is proved with an axiom closure of exactly the three
-standard axioms, and `FROZEN` for a cited proposition whose proof is recorded separately. Every
-registered statement is pinned by hash.
-
-## Guarantees
-
-- **No `sorry`.** The library has none, and `tools/check_manifest.py` rejects any `sorry`
-  outside a registered `DRAFT_SORRY` node, of which there is none. The comparator challenges
-  under [`UCPlanarAudit/`](UCPlanarAudit/) each contain one intentional statement-level
-  `sorry`, which the corresponding solution file proves.
-- **Standard axioms only.** The axiom report of each of the 4 main theorems lists exactly
-  `propext`, `Classical.choice` and `Quot.sound`.
-  [`UCPlanar/Meta/AxiomsAudit.lean`](UCPlanar/Meta/AxiomsAudit.lean) prints the reports, and
-  `python3 tools/check_axioms.py` checks the axiom closure of every registered statement. The
-  unconditional results apply the cited-input proofs.
-- **Builds from a clean checkout.** Continuous integration builds the library and rejects warnings from its own files.
-- **Independent check of the statements.** Each of the 4 main theorems is restated in
-  [`UCPlanarAudit/`](UCPlanarAudit/) using mathlib alone, with no project or library
-  definitions, one challenge file per theorem
-  ([`Liouville`](UCPlanarAudit/LiouvilleUnconditional/Challenge.lean),
-  [`UniformlyBounded`](UCPlanarAudit/UniformlyBoundedUnconditional/Challenge.lean),
-  [`ZeroCase`](UCPlanarAudit/ZeroCaseUnconditional/Challenge.lean) and
-  [`Counterexample`](UCPlanarAudit/CounterexampleUnconditional/Challenge.lean)). Each challenge rebuilds the
-  model from mathlib primitives (lattice sites, graph balls, conductances, the network
-  Laplacian and harmonic functions as in Lattice-Probability; polygonal sets as in the
-  Schoenflies library; plane embeddings, faces, periodic plane graphs and their density
-  notions; the crossing conductances of Theorem 5.1; and the cited propositions). The
-  solution file proves the byte-identical statement from the library through the bridge of its
-  pair in `UCPlanarAudit/Support/`, over a mathlib-only copy of the challenge's vocabulary
-  (`SolutionBasic.lean`), and [leanprover/comparator](https://github.com/leanprover/comparator)
-  checks that the statement is proved, with only the three standard axioms, through
-  independent implementations of the Lean kernel. See
-  [`UCPlanarAudit/README.md`](UCPlanarAudit/README.md) and
-  [`UCPlanarAudit/COMPARATOR_RUNS.md`](UCPlanarAudit/COMPARATOR_RUNS.md).
-- **Pinned toolchain and dependencies.** Lean `v4.32.0`; mathlib at revision
-  `81a5d257c8e410db227a6665ed08f64fea08e997`, Lattice-Probability at commit
-  `9d44b4d4670df393bb86ac5a4e042f215001cddf` and schoenflies-lean at commit
-  `05a43d29cde026618777db3d4e4316204ccca237`, recorded in [`lean-toolchain`](lean-toolchain),
-  [`lakefile.lean`](lakefile.lean) and [`lake-manifest.json`](lake-manifest.json) (see
-  [Building](#building)).
-- **The paper is part of the repository.** The statement map refers to the version in
-  [`paper/`](paper/), pinned to the SHA-256
-  `0a97204bffb598a59580eb3fc8537af56ab4eb79f76900086cdadc9b6b00b311` of `paper/ucplanar.tex`.
-
-## Size
-
-The library (`UCPlanar.lean` and `UCPlanar/`) contains 198 Lean files with 29,089 physical
-lines, on top of mathlib, Lattice-Probability and schoenflies-lean. The comparator sources
-(`UCPlanarAudit/`, 28 files, 5,850 lines) are counted separately.
+The library (`UCPlanar.lean` and `UCPlanar/`) contains 198 Lean files with 29,089 lines, built on
+mathlib, Lattice-Probability and schoenflies-lean.
 
 ## Building
 
@@ -239,108 +192,80 @@ Install [elan](https://github.com/leanprover/elan). The toolchain is pinned in
 [`lean-toolchain`](lean-toolchain), and Lake fetches the dependencies.
 
 ```bash
-lake exe cache get   # prebuilt mathlib
-lake build
+lake exe cache get                     # prebuilt mathlib
+lake build                             # the library
+lake build UCPlanar.Meta.AxiomsAudit   # the axiom reports
+lake build UCPlanarAudit               # the comparator challenges and solutions
 ```
 
-The 2 source dependencies, Lattice-Probability and schoenflies-lean, have no prebuilt cache, so
-the first build compiles them as well as the library. `import UCPlanar` loads the whole
-development, and `import UCPlanar.MainTheorems` loads the main theorems and what they use.
+Lattice-Probability and schoenflies-lean have no prebuilt cache, so the first build compiles them
+as well as the library. `import UCPlanar` loads the whole development. The dependencies are public
+repositories, pinned in [`lake-manifest.json`](lake-manifest.json):
 
-The dependencies are public repositories, pinned to exact commits in
-[`lake-manifest.json`](lake-manifest.json):
-
-- mathlib: `https://github.com/leanprover-community/mathlib4` at
+- Lean `v4.32.0`; mathlib: `https://github.com/leanprover-community/mathlib4` at
   `81a5d257c8e410db227a6665ed08f64fea08e997`.
 - Lattice-Probability: `https://github.com/nitromannitol/Lattice-Probability` at
   `9d44b4d4670df393bb86ac5a4e042f215001cddf`.
 - schoenflies-lean: `https://github.com/alonamaloh/schoenflies-lean` at
-  `05a43d29cde026618777db3d4e4316204ccca237`.
+  `05a43d29cde026618777db3d4e4316204ccca237`, which supplies the planar Jordan and crosscut
+  theorems.
 
-To reproduce the axiom reports and build the comparator libraries:
+The checkers in `tools/` need Python 3 and PyYAML (`pip install pyyaml`):
 
-```bash
-lake build UCPlanar.Meta.AxiomsAudit   # print the axioms of the four main theorems
-lake build UCPlanarAudit               # the comparator challenges and solutions
-```
-
-The checkers in `tools/` need Python 3 and PyYAML (`pip install pyyaml`).
-
-| command | what it guarantees |
+| command | what it checks |
 |---|---|
-| `python3 tools/check_manifest.py` | every frozen statement's bytes match its recorded SHA-256 and declaration name, every file under `UCPlanar/Frozen/` belongs to exactly one node, no `axiom`, `admit` or `sorryAx` token occurs in the source tree, and `sorry` occurs only in nodes in state `DRAFT_SORRY` (none is); needs neither Lake nor network |
-| `python3 tools/check_axioms.py` | runs `#print axioms` on every registered export; each closure contains only `propext`, `Classical.choice` and `Quot.sound` |
-| `python3 tools/check_constants.py` | in each frozen statement whose conclusion has a real existential constant, no radius, function, density or conductance parameter is bound before it |
-| `python3 tools/check_warnings.py` | runs `lake build UCPlanar` and fails if the build fails or emits any warning other than the Lake notice about the mathlib URL and the `sorry` warnings expected for `DRAFT_SORRY` nodes (none is registered) |
+| `python3 tools/check_manifest.py` | every registered statement matches its recorded SHA-256 and declaration name, and no `axiom`, `admit`, `sorryAx` or `sorry` occurs in the source; needs neither Lake nor network |
+| `python3 tools/check_axioms.py` | the axiom closure of every registered statement is `propext`, `Classical.choice` and `Quot.sound` |
+| `python3 tools/check_constants.py` | in each registered statement, no radius, function, density or conductance is bound before a real existential constant |
+| `python3 tools/check_warnings.py` | `lake build UCPlanar` succeeds with no warning other than the Lake notice about the mathlib URL |
 
-Also in `tools/`: `paper_anchors.py` checks that the line ranges in the manifest match the
-paper's `\label`s (`--fix` repairs them); `sync_docs.py` checks (`--write` regenerates) the
-status block of this file and the registered-statements table of `CORRESPONDENCE.md`;
-`assumptions.py` regenerates `ASSUMPTIONS.md` (`--check` verifies it is current);
-`certificate.py` regenerates `CERTIFICATE.md` (`--check` compares it with the file on disk);
-`freeze.py` registers or refreshes a node in the manifest. See
-[`CONTRIBUTING.md`](CONTRIBUTING.md) for further building notes.
+`tools/` also holds generators for `ASSUMPTIONS.md`, `CERTIFICATE.md` and the generated tables of
+this file and `CORRESPONDENCE.md`. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for further notes.
 
 ## Running the comparators
 
-Each comparator pair has a configuration `UCPlanarAudit/<Pair>/comparator.json`, for `<Pair>`
-one of `Liouville`, `UniformlyBounded`, `ZeroCase` and `Counterexample`, that permits exactly
-`propext`, `Classical.choice` and `Quot.sound` and enables the independent nanoda kernel. The
-comparator checks that the solution proves the challenge statement, compares their dependency
-closures, and replays the proof with the Lean and NanoDa kernels.
-
-To run one pair locally, build `leanprover/comparator`, `lean4export`, `landrun` and
-`nanoda_lib` at the revisions pinned in
+Each comparator pair has a configuration `UCPlanarAudit/<Pair>/comparator.json` that permits
+exactly `propext`, `Classical.choice` and `Quot.sound` and enables the nanoda kernel. Build
+`leanprover/comparator`, `lean4export`, `landrun` and `nanoda_lib` at the revisions pinned in
 [`.github/workflows/comparator.yml`](.github/workflows/comparator.yml) (also recorded in
-[`UCPlanarAudit/COMPARATOR_RUNS.md`](UCPlanarAudit/COMPARATOR_RUNS.md)), and from the
-repository root run:
+[`UCPlanarAudit/COMPARATOR_RUNS.md`](UCPlanarAudit/COMPARATOR_RUNS.md)), and from the repository
+root run
 
 ```bash
 COMPARATOR_LANDRUN=<landrun> COMPARATOR_LEAN4EXPORT=<lean4export> COMPARATOR_NANODA=<nanoda_bin> \
   lake env <comparator>/.lake/build/bin/comparator UCPlanarAudit/<Pair>/comparator.json
 ```
 
-A pair passes when the comparator prints `Your solution is okay!`. The comparator workflow
-runs the four pairs one after the other in a single job on GitHub-hosted runners.
-
-There are two continuous-integration workflows: **CI** builds the library, builds the axiom
-audit and checks the frozen statements; **Comparator audit** checks all 4 challenge/solution
-pairs. Both run on pushes to `main` that change Lean files, `tools/`, `paper/`, `ledger/`,
-`formalization.yaml` or the build configuration, and can be started manually from the
-[Actions page](https://github.com/nitromannitol/Unique-Continuation-Planar/actions). See
-[`CONTRIBUTING.md`](CONTRIBUTING.md) for build conventions.
+A pair passes when the comparator prints `Your solution is okay!`.
 
 ## Repository layout
 
 ```text
 UCPlanar.lean             the root module, importing the whole library
 UCPlanar/
-  MainTheorems.lean       the main theorems, stated in full
-  Frozen/                 the certified statement surface, one frozen statement per file
-  External/               the three cited results, each a frozen Prop
-  Support/                the definitions and lemmas the frozen statements are proved from:
-                          periodic and plane graphs, the topological step, polynomial
-                          approximation (Poly/), the three-ball and exponential bounds,
-                          the Liouville step, the counterexample, the discrete Remez inequality
+  Proved/                 the main theorems and the other results, with every quoted result proved
+  MainTheorems.lean       the main theorems in the forms that take the quoted results as hypotheses
+  Frozen/                 the registered statements, one per file
+  External/               the statements of the quoted results
+  Support/                definitions and lemmas: periodic and plane graphs, the topological step,
+                          polynomial approximation, the three-ball and exponential bounds, the
+                          Liouville step, the counterexample, the discrete Remez inequality
+  Vendored/               plane-topology modules copied from Lattice-Probability, some adapted from
+                          Leonardo Bonanno's formalizations; each header names its source
   Meta/AxiomsAudit.lean   the axiom report, compiled by `lake build`, not imported by the root
   Basic.lean              bounded density, exceptional count, uniform ellipticity
 UCPlanarAudit/            the mathlib-only restatements and their solutions
-ASSUMPTIONS.md            the cited results and their proofs (generated)
-CORRESPONDENCE.md         paper to Lean, node by node
+ASSUMPTIONS.md            the quoted results and their proofs (generated)
+CORRESPONDENCE.md         paper to Lean, statement by statement
 PROOF.md                  the mathematics of the proof and the Lean tree
-CERTIFICATE.md            generated record of the toolchain, the build, each node's axiom
-                          closure and the SHA-256 of each frozen statement
+CERTIFICATE.md            generated record of the toolchain, the build, each statement's axiom
+                          closure and hash
 ledger/manifest.yaml      one row per registered statement: hash, paper source, state
-paper/                    ucplanar.tex, the paper pinned by the SHA-256 in
-                          ledger/manifest.yaml; CHANGES_FROM_ARXIV.md, every difference between
-                          it and arXiv:2309.13728v2; ucplanar-arxiv.tex, the unmodified arXiv
-                          source, with arxiv/ holding its class files, bibliography and figures
+paper/                    ucplanar.tex, the corrected text; CHANGES_FROM_ARXIV.md; ucplanar-arxiv.tex,
+                          the unmodified arXiv source, with arxiv/ holding its class files,
+                          bibliography and figures
 tools/                    the checkers and generators listed under Building
-.github/workflows/        the CI build and the comparator audit
 formalization.yaml        models, tooling, cost, status and review (mathlib-initiative v0.4)
-CITATION.cff              citation metadata
-CONTRIBUTING.md           building notes and the elaboration policy for new files
-lakefile.lean, lake-manifest.json, lean-toolchain   the pinned build
 ```
 
 ## How this was built
